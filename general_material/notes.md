@@ -7,4 +7,4 @@
 # LINKS
 * <a href="https://wiki.archlinux.org/title/Xilinx_Vivado#Vitis_HLS_no_response_or_only_splash_screen_visible">Vitis HLS no response or only splash screen visible</a>
 * <a href="https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842141/FreeRTOS">Xilinx: FreeRTOS</a>
-</a>
+* <a href="https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html">PYNQ Z2 Product Page</a>
