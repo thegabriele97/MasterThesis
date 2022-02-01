@@ -282,6 +282,29 @@
 
 /******************************************************************/
 
+/* Definitions for driver UARTLITE */
+#define XPAR_XUARTLITE_NUM_INSTANCES 1U
+
+/* Definitions for peripheral MDM_1 */
+#define XPAR_MDM_1_DEVICE_ID 0U
+#define XPAR_MDM_1_BASEADDR 0x43400000U
+#define XPAR_MDM_1_HIGHADDR 0x43400FFFU
+#define XPAR_MDM_1_BAUDRATE 0U
+#define XPAR_MDM_1_USE_PARITY 0U
+#define XPAR_MDM_1_ODD_PARITY 0U
+#define XPAR_MDM_1_DATA_BITS 0U
+
+/* Canonical definitions for peripheral MDM_1 */
+#define XPAR_UARTLITE_0_DEVICE_ID 0U
+#define XPAR_UARTLITE_0_BASEADDR 0x43400000U
+#define XPAR_UARTLITE_0_HIGHADDR 0x43400FFFU
+#define XPAR_UARTLITE_0_BAUDRATE 0U
+#define XPAR_UARTLITE_0_USE_PARITY 0U
+#define XPAR_UARTLITE_0_ODD_PARITY 0U
+#define XPAR_UARTLITE_0_DATA_BITS 0U
+
+
+/******************************************************************/
 /* Definitions for driver XADCPS */
 #define XPAR_XADCPS_NUM_INSTANCES 1
 

@@ -65,3 +65,6 @@ platform generate -domains
 catch {platform remove design_1_wrapper_1_freertos_test1}
 platform write
 platform active {design_1_wrapper}
+platform generate
+platform generate
+platform generate

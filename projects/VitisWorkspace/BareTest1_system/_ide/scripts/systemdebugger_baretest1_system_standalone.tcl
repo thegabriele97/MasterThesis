@@ -14,7 +14,7 @@ targets -set -nocase -filter {name =~"APU*"}
 rst -system
 after 3000
 targets -set -filter {jtag_cable_name =~ "Xilinx TUL 1234-tulA" && level==0 && jtag_device_ctx=="jsn-TUL-1234-tulA-23727093-0"}
-fpga -file /home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace/BareTest1/_ide/bitstream/design_1_wrapper.bit
+fpga -file /home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace/BareTest1/_ide/bitstream/download.bit
 targets -set -nocase -filter {name =~"APU*"}
 loadhw -hw /home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace/design_1_wrapper/export/design_1_wrapper/hw/design_1_wrapper.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
 configparams force-mem-access 1
@@ -26,5 +26,4 @@ configparams mdm-detect-bscan-mask 2
 targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
 dow /home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace/BareTest1/Debug/BareTest1.elf
 configparams force-mem-access 0
-targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
-con
+bpadd -addr &main

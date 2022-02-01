@@ -51,3 +51,6 @@ platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFP
 platform generate -domains 
 platform generate -domains standalone_microblaze_0 
 platform active {top}
+platform generate
+platform generate
+platform generate

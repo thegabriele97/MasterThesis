@@ -12,6 +12,8 @@ int main() {
 	while(1) {
 		XGpio_DiscreteWrite(&gpio0, 1, 0x1);
 		for (int i = 0; i < 10e6; i++);
+
+		a++;
 		print("Wee!\r\n");
 
 		XGpio_DiscreteWrite(&gpio0, 1, 0x0);
