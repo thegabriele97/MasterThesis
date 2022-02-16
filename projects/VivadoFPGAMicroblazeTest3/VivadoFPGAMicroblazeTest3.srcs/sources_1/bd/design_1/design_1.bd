@@ -296,6 +296,9 @@
           "C_DEBUG_ENABLED": {
             "value": "1"
           },
+          "C_DIV_ZERO_EXCEPTION": {
+            "value": "1"
+          },
           "C_D_AXI": {
             "value": "1"
           },
@@ -305,10 +308,16 @@
           "C_I_LMB": {
             "value": "1"
           },
+          "C_USE_DIV": {
+            "value": "1"
+          },
           "C_USE_MSR_INSTR": {
             "value": "0"
           },
           "C_USE_PCMP_INSTR": {
+            "value": "1"
+          },
+          "G_USE_EXCEPTIONS": {
             "value": "1"
           }
         },

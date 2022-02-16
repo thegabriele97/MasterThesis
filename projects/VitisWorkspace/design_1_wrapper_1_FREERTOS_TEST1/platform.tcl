@@ -49,3 +49,19 @@ platform generate -domains freertos10_xilinx_microblaze_0
 catch {platform remove design_1_wrapper_1_FREERTOS_TEST2}
 platform clean
 platform generate
+platform active {design_1_wrapper_1_FREERTOS_TEST1}
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFPGAMicroblazeTest3/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFPGAMicroblazeTest3/design_1_wrapper.xsa}
+platform generate -domains 
+platform clean
+platform generate
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFPGAMicroblazeTest3/design_1_wrapper.xsa}
+platform generate -domains 
+platform write
+platform generate
+platform generate -domains freertos10_xilinx_microblaze_0 
+platform generate -domains freertos10_xilinx_microblaze_0 
+platform generate -domains freertos10_xilinx_microblaze_0 
+platform generate -domains freertos10_xilinx_microblaze_0 
+platform generate
