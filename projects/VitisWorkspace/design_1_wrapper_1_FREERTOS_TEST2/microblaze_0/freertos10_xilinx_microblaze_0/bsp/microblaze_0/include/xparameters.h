@@ -474,6 +474,17 @@
 
 /******************************************************************/
 
+/* Definitions for driver BEACON_WATCHDOG */
+#define XPAR_BEACON_WATCHDOG_NUM_INSTANCES 1
+
+/* Definitions for peripheral BEACON_WATCHDOG_0 */
+#define XPAR_BEACON_WATCHDOG_0_DEVICE_ID 0
+#define XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR 0x43C00000
+#define XPAR_BEACON_WATCHDOG_0_S00_AXI_HIGHADDR 0x43C0FFFF
+
+
+/******************************************************************/
+
 /* Definitions for driver BRAM */
 #define XPAR_XBRAM_NUM_INSTANCES 2U
 
@@ -579,7 +590,7 @@
 
 /******************************************************************/
 
-#define XPAR_INTC_MAX_NUM_INTR_INPUTS 1
+#define XPAR_INTC_MAX_NUM_INTR_INPUTS 2
 #define XPAR_XINTC_HAS_IPR 1
 #define XPAR_XINTC_HAS_SIE 1
 #define XPAR_XINTC_HAS_CIE 1
@@ -591,10 +602,10 @@
 #define XPAR_AXI_INTC_0_DEVICE_ID 0
 #define XPAR_AXI_INTC_0_BASEADDR 0x41800000
 #define XPAR_AXI_INTC_0_HIGHADDR 0x4180FFFF
-#define XPAR_AXI_INTC_0_KIND_OF_INTR 0xFFFFFFFE
+#define XPAR_AXI_INTC_0_KIND_OF_INTR 0xFFFFFFFC
 #define XPAR_AXI_INTC_0_HAS_FAST 0
 #define XPAR_AXI_INTC_0_IVAR_RESET_VALUE 0x0000000000000010
-#define XPAR_AXI_INTC_0_NUM_INTR_INPUTS 1
+#define XPAR_AXI_INTC_0_NUM_INTR_INPUTS 2
 #define XPAR_AXI_INTC_0_NUM_SW_INTR 0
 #define XPAR_AXI_INTC_0_ADDR_WIDTH 32
 
@@ -607,6 +618,8 @@
 #define XPAR_AXI_INTC_0_TYPE 0U
 #define XPAR_AXI_TIMER_0_INTERRUPT_MASK 0X000001U
 #define XPAR_AXI_INTC_0_AXI_TIMER_0_INTERRUPT_INTR 0U
+#define XPAR_AXI_TIMER_1_INTERRUPT_MASK 0X000002U
+#define XPAR_AXI_INTC_0_AXI_TIMER_1_INTERRUPT_INTR 1U
 
 /******************************************************************/
 
@@ -614,26 +627,34 @@
 #define XPAR_INTC_0_DEVICE_ID XPAR_AXI_INTC_0_DEVICE_ID
 #define XPAR_INTC_0_BASEADDR 0x41800000U
 #define XPAR_INTC_0_HIGHADDR 0x4180FFFFU
-#define XPAR_INTC_0_KIND_OF_INTR 0xFFFFFFFEU
+#define XPAR_INTC_0_KIND_OF_INTR 0xFFFFFFFCU
 #define XPAR_INTC_0_HAS_FAST 0U
 #define XPAR_INTC_0_IVAR_RESET_VALUE 0x0000000000000010U
-#define XPAR_INTC_0_NUM_INTR_INPUTS 1U
+#define XPAR_INTC_0_NUM_INTR_INPUTS 2U
 #define XPAR_INTC_0_NUM_SW_INTR 0U
 #define XPAR_INTC_0_ADDR_WIDTH 32U
 #define XPAR_INTC_0_INTC_TYPE 0U
 
 #define XPAR_INTC_0_TMRCTR_0_VEC_ID XPAR_AXI_INTC_0_AXI_TIMER_0_INTERRUPT_INTR
+#define XPAR_INTC_0_TMRCTR_1_VEC_ID XPAR_AXI_INTC_0_AXI_TIMER_1_INTERRUPT_INTR
 
 /******************************************************************/
 
 /* Definitions for driver TMRCTR */
-#define XPAR_XTMRCTR_NUM_INSTANCES 1U
+#define XPAR_XTMRCTR_NUM_INSTANCES 2U
 
 /* Definitions for peripheral AXI_TIMER_0 */
 #define XPAR_AXI_TIMER_0_DEVICE_ID 0U
 #define XPAR_AXI_TIMER_0_BASEADDR 0x42800000U
 #define XPAR_AXI_TIMER_0_HIGHADDR 0x4280FFFFU
 #define XPAR_AXI_TIMER_0_CLOCK_FREQ_HZ  50000000U
+
+
+/* Definitions for peripheral AXI_TIMER_1 */
+#define XPAR_AXI_TIMER_1_DEVICE_ID 1U
+#define XPAR_AXI_TIMER_1_BASEADDR 0x42810000U
+#define XPAR_AXI_TIMER_1_HIGHADDR 0x4281FFFFU
+#define XPAR_AXI_TIMER_1_CLOCK_FREQ_HZ  50000000U
 
 
 /******************************************************************/
@@ -643,6 +664,11 @@
 #define XPAR_TMRCTR_0_BASEADDR 0x42800000U
 #define XPAR_TMRCTR_0_HIGHADDR 0x4280FFFFU
 #define XPAR_TMRCTR_0_CLOCK_FREQ_HZ XPAR_AXI_TIMER_0_CLOCK_FREQ_HZ
+/* Canonical definitions for peripheral AXI_TIMER_1 */
+#define XPAR_TMRCTR_1_DEVICE_ID 1U
+#define XPAR_TMRCTR_1_BASEADDR 0x42810000U
+#define XPAR_TMRCTR_1_HIGHADDR 0x4281FFFFU
+#define XPAR_TMRCTR_1_CLOCK_FREQ_HZ XPAR_AXI_TIMER_1_CLOCK_FREQ_HZ
 
 /******************************************************************/
 

@@ -7,15 +7,18 @@
 
 #include "xil_printf.h"
 #include "xparameters.h"
+#include "xtmrctr.h"
+#include "beacon_watchdog.h"
 
+//#define ENABLE_ELAPS_PRINT
 #define WITH_COMPARE
 /***********************/
 /* ENABLE ONE OF THESE */
 /*---------------------*/
-//#define WITH_GRPEVT
+#define WITH_GRPEVT
 //#define WITH_TASKNOT
 //#define WITH_QUEUE
-#define WITH_SEM
+//#define WITH_SEM
 /*---------------------*/
 /* ENABLE ONE OF THESE */
 /***********************/
@@ -40,6 +43,7 @@ struct ctx_s {
 
 TASK(taskMat, args);
 TASK(taskComparator, args);
+TASK(taskBeacon, args);
 
 static struct ctx_s tctx;
 static struct ctx_s tres;
@@ -55,6 +59,16 @@ static TaskHandle_t htaskMat1;
 static TaskHandle_t htaskMat2;
 #endif
 static TaskHandle_t htaskComparator;
+static TaskHandle_t htaskBeacon;
+
+static uint32_t rets[30];
+static uint8_t rets_cnt = 0;
+//static uint32_t tss[6];
+static XTmrCtr htimer1;
+#ifdef ENABLE_ELAPS_PRINT
+static u32 xStart;
+static u32 xEnd;
+#endif
 
 #ifdef WITH_GRPEVT
 static EventGroupHandle_t hEvtGrp1;
@@ -64,11 +78,39 @@ static QueueHandle_t hQueue1;
 static SemaphoreHandle_t hSem1;
 #endif
 
+//void ISRTimer1(void *ptr) {
+//	unsigned long ulCSR;
+//
+//	rets[rets_cnt++] = mfgpr(R14);
+//
+//	ulCSR = XTmrCtr_GetControlStatusReg(XPAR_TMRCTR_1_BASEADDR, 1);
+//	XTmrCtr_SetControlStatusReg(XPAR_TMRCTR_1_BASEADDR, 1, ulCSR);
+//
+//}
 
 int main(void) {
 	int i;
+//	volatile u32 watchdog_out;
+//	u32 *watchdog_ptr;
 
 	xil_printf("Hello from FreeRTOS running on a Microblaze core!\r\n");
+
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
+//	watchdog_ptr = (u32 *)XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR;
+//	watchdog_ptr[2] = XPAR_CPU_M_AXI_DP_FREQ_HZ;
+
+//	BEACON_WATCHDOG_mWriteReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET, XPAR_CPU_M_AXI_DP_FREQ_HZ);
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET);
+//
+//	watchdog_ptr[0] |= 0x1;
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG0_OFFSET);
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
+
+//	BEACON_WATCHDOG_mWriteReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET, XPAR_CPU_M_AXI_DP_FREQ_HZ);
+//
+//	BEACON_WATCHDOG_mWriteReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG0_OFFSET, 0x8888);
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
 
 	for (i = 0; i < N*N; i++) {
 		tctx.mat1[i / N][i % N] = tctx.mat2[i / N][i % N] = i;
@@ -87,23 +129,72 @@ int main(void) {
 	xTaskCreate(taskMat, "taskMat2", configMINIMAL_STACK_SIZE, (void *)1, tskIDLE_PRIORITY + 2, &htaskMat2);
 #endif
 	xTaskCreate(taskComparator, "taskComparator", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &htaskComparator);
+	xTaskCreate(taskBeacon, "taskBeacon", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, &htaskBeacon);
 
 
 	/* Start the tasks and timer running. */
+	XTmrCtr_Initialize(&htimer1, XPAR_AXI_TIMER_1_DEVICE_ID);
+
+//	vPortEnableInterrupt(XPAR_INTC_0_TMRCTR_1_VEC_ID);
+//	xPortInstallInterruptHandler(XPAR_INTC_0_TMRCTR_1_VEC_ID, ISRTimer1, NULL);
+//	XTmrCtr_SetResetValue(&htimer1, 1, 10000);
+//	XTmrCtr_SetOptions(&htimer1, 1, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+//	XTmrCtr_SetHandler(&htimer1, (void *)ISRTimer1, NULL);
+
+	XTmrCtr_SetResetValue(&htimer1, 0, 0x0); // Setting Timer0[1] reset value at 0x0 (init value when timer is resetted or started)
+	XTmrCtr_SetOptions(&htimer1, 0, XTC_AUTO_RELOAD_OPTION); // Ensure that Timer0[1] always counts even when overflows
+	XTmrCtr_Start(&htimer1, 0);
+	XTmrCtr_Start(&htimer1, 1);
+#ifdef ENABLE_ELAPS_PRINT
+	xStart = XTmrCtr_GetValue(&htimer1, 0);
+#endif
+
 	vTaskStartScheduler();
 
 	// Should not be executed because Tasks are running
 	while(4 > 3);
 }
 
+TASK(taskBeacon, args) {
+	volatile u32 watchdog_out;
+	u32 *watchdog_ptr;
+
+	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
+	watchdog_ptr = (u32 *)XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR;
+
+	watchdog_ptr[2] = XPAR_CPU_M_AXI_DP_FREQ_HZ;
+	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET);
+
+	watchdog_ptr[0] |= 0x1;
+	vTaskDelay(pdMS_TO_TICKS(500));
+
+	while (watchdog_ptr[1] == 0x1) {
+		vTaskDelay(pdMS_TO_TICKS(1000));
+		watchdog_ptr[0] ^= 0x2; // Toggling STB
+//		xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), watchdog_ptr[0] >> 1, watchdog_ptr[1]);
+	}
+
+	xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), watchdog_ptr[0] >> 1, watchdog_ptr[1]);
+
+//	BEACON_WATCHDOG_mWriteReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET, XPAR_CPU_M_AXI_DP_FREQ_HZ);
+
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG0_OFFSET);
+//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
+
+}
+
 TASK(taskMat, args) {
-	int i, j, k;
+	int i, j, k, idx;
+	int (*rptr)[N][N];
 #ifdef WITH_QUEUE
 	int mask;
 #endif
 
-	int idx = (int)args;
-	int (*rptr)[N][N] = !idx ? &tres.mat1 : &tres.mat2;
+//	tss[(int)args] = XTmrCtr_GetValue(&htimer1, 0);
+
+	idx = (int)args;
+	rptr = !idx ? &tres.mat1 : &tres.mat2;
 
 	for (i = 0; i < N; i++) {
 		for (j = 0; j < N; j++) {
@@ -125,6 +216,7 @@ TASK(taskMat, args) {
 	xSemaphoreGive(hSem1);
 #endif
 
+//	tss[2 + (int)args] = XTmrCtr_GetValue(&htimer1, 0);
 	while (1) {
 		vTaskDelay(portMAX_DELAY);
 	}
@@ -141,6 +233,8 @@ TASK(taskComparator, args) {
 #ifdef WITH_QUEUE
 	uint32_t pvbuf;
 #endif
+
+//	tss[4] = XTmrCtr_GetValue(&htimer1, 0);
 
 	while (1) {
 #ifdef WITH_GRPEVT
@@ -160,6 +254,15 @@ TASK(taskComparator, args) {
 		}
 #endif
 
+#ifdef ENABLE_ELAPS_PRINT
+		taskENTER_CRITICAL();
+		{
+			xEnd = XTmrCtr_GetValue(&htimer1, 0);
+			xil_printf("start %6d - end %6d - diff %6d\r\n", xStart, xEnd, xEnd - xStart);
+		}
+		taskEXIT_CRITICAL();
+#endif
+
 #ifdef WITH_COMPARE
 		for (i = 0, cmp_ok = pdTRUE; i < N*N; i++) {
 			if (tres.mat1[i /N][i % N] != tres.mat2[i /N][i % N]) {
@@ -168,6 +271,23 @@ TASK(taskComparator, args) {
 			}
 		}
 #endif
+
+		taskENTER_CRITICAL();
+		{
+			XTmrCtr_Stop(&htimer1, 1);
+			for (i = 0; i < rets_cnt; i++) {
+				xil_printf("%02d] R14 0x%08x\r\n", i, rets[i]);
+			}
+		}
+		taskEXIT_CRITICAL();
+
+//		tss[5] = XTmrCtr_GetValue(&htimer1, 0);
+//		taskENTER_CRITICAL();
+//		{
+//			for (i = 0; i < 6; i++)
+//				xil_printf(" - %d %d\r\n", i, (int)tss[i]);
+//		}
+//		taskEXIT_CRITICAL();
 
 		xil_printf("%s\r\n", cmp_ok ? "OK" : "NO");
 

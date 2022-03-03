@@ -1,0 +1,10 @@
+
+Execution Time with different sync methods:
+    System @ 50 MHz
+
+        TASK METHOD           CC
+    - Task Notifications:   215535
+    - Group Events:         215562
+    - Counting Semaphore:   215655
+    - Queue:                215885
+

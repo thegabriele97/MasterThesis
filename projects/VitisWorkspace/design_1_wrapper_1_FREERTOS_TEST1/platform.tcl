@@ -65,3 +65,9 @@ platform generate -domains freertos10_xilinx_microblaze_0
 platform generate -domains freertos10_xilinx_microblaze_0 
 platform generate -domains freertos10_xilinx_microblaze_0 
 platform generate
+platform generate
+platform clean
+platform generate
+platform generate
+platform generate
+platform generate
