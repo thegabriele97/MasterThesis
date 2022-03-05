@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xAAEA74F79217DC89",
+      "boundary_crc": "0xD379427E1260230C",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../VivadoFPGAMicroblazeTest3.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -58,6 +58,48 @@
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:gpio:1.0",
         "vlnv": "xilinx.com:interface:gpio_rtl:1.0"
+      }
+    },
+    "ports": {
+      "status_started": {
+        "type": "data",
+        "direction": "O",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
+      },
+      "status_error": {
+        "type": "data",
+        "direction": "O",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
+      },
+      "control_start": {
+        "type": "data",
+        "direction": "O",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
+      },
+      "control_stb": {
+        "type": "data",
+        "direction": "O",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
       }
     },
     "components": {
@@ -1592,6 +1634,30 @@
         "ports": [
           "axi_timer_1/interrupt",
           "xlconcat_0/In1"
+        ]
+      },
+      "beacon_watchdog_0_control_start": {
+        "ports": [
+          "beacon_watchdog_0/CONTROL_START",
+          "control_start"
+        ]
+      },
+      "beacon_watchdog_0_control_stb": {
+        "ports": [
+          "beacon_watchdog_0/CONTROL_STB",
+          "control_stb"
+        ]
+      },
+      "beacon_watchdog_0_status_error": {
+        "ports": [
+          "beacon_watchdog_0/STATUS_ERROR",
+          "status_error"
+        ]
+      },
+      "beacon_watchdog_0_status_started": {
+        "ports": [
+          "beacon_watchdog_0/STATUS_STARTED",
+          "status_started"
         ]
       },
       "mdm_1_debug_sys_rst": {

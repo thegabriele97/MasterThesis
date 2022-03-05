@@ -1,7 +1,7 @@
 //Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
-//Date        : Thu Mar  3 16:52:29 2022
+//Date        : Fri Mar  4 19:57:23 2022
 //Host        : pop-os running 64-bit Pop!_OS 21.10
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -15,16 +15,24 @@ module design_1
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
+    control_start,
+    control_stb,
     gpio_rtl_0_tri_i,
     gpio_rtl_0_tri_o,
-    gpio_rtl_0_tri_t);
+    gpio_rtl_0_tri_t,
+    status_error,
+    status_started);
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO MIO" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME FIXED_IO, CAN_DEBUG false" *) inout [53:0]FIXED_IO_mio;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_CLK" *) inout FIXED_IO_ps_clk;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB" *) inout FIXED_IO_ps_porb;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB" *) inout FIXED_IO_ps_srstb;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.CONTROL_START DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.CONTROL_START, LAYERED_METADATA undef" *) output control_start;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.CONTROL_STB DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.CONTROL_STB, LAYERED_METADATA undef" *) output control_stb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_I" *) input [1:0]gpio_rtl_0_tri_i;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_O" *) output [1:0]gpio_rtl_0_tri_o;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_T" *) output [1:0]gpio_rtl_0_tri_t;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.STATUS_ERROR DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.STATUS_ERROR, LAYERED_METADATA undef" *) output status_error;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.STATUS_STARTED DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.STATUS_STARTED, LAYERED_METADATA undef" *) output status_started;
 
   wire [1:0]axi_gpio_0_GPIO_TRI_I;
   wire [1:0]axi_gpio_0_GPIO_TRI_O;
@@ -32,6 +40,10 @@ module design_1
   wire axi_intc_0_interrupt_INTERRUPT;
   wire axi_timer_0_interrupt;
   wire axi_timer_1_interrupt;
+  wire beacon_watchdog_0_control_start;
+  wire beacon_watchdog_0_control_stb;
+  wire beacon_watchdog_0_status_error;
+  wire beacon_watchdog_0_status_started;
   wire mdm_1_debug_sys_rst;
   wire microblaze_0_Clk;
   wire [31:0]microblaze_0_M_AXI_DP_ARADDR;
@@ -234,8 +246,12 @@ module design_1
   wire [1:0]xlconcat_0_dout;
 
   assign axi_gpio_0_GPIO_TRI_I = gpio_rtl_0_tri_i[1:0];
+  assign control_start = beacon_watchdog_0_control_start;
+  assign control_stb = beacon_watchdog_0_control_stb;
   assign gpio_rtl_0_tri_o[1:0] = axi_gpio_0_GPIO_TRI_O;
   assign gpio_rtl_0_tri_t[1:0] = axi_gpio_0_GPIO_TRI_T;
+  assign status_error = beacon_watchdog_0_status_error;
+  assign status_started = beacon_watchdog_0_status_started;
   design_1_axi_gpio_0_0 axi_gpio_0
        (.gpio_io_i(axi_gpio_0_GPIO_TRI_I),
         .gpio_io_o(axi_gpio_0_GPIO_TRI_O),
@@ -330,7 +346,11 @@ module design_1
         .s_axi_wstrb(ps7_0_axi_periph_M04_AXI_WSTRB),
         .s_axi_wvalid(ps7_0_axi_periph_M04_AXI_WVALID));
   design_1_beacon_watchdog_0_0 beacon_watchdog_0
-       (.s00_axi_aclk(microblaze_0_Clk),
+       (.CONTROL_START(beacon_watchdog_0_control_start),
+        .CONTROL_STB(beacon_watchdog_0_control_stb),
+        .STATUS_ERROR(beacon_watchdog_0_status_error),
+        .STATUS_STARTED(beacon_watchdog_0_status_started),
+        .s00_axi_aclk(microblaze_0_Clk),
         .s00_axi_araddr(ps7_0_axi_periph_M05_AXI_ARADDR[3:0]),
         .s00_axi_aresetn(rst_ps7_0_50M_peripheral_aresetn),
         .s00_axi_arprot(ps7_0_axi_periph_M05_AXI_ARPROT),

@@ -16,6 +16,11 @@
 	(
 		// Users to add ports here
 
+		// Status ports
+		output wire STATUS_STARTED,
+		output wire STATUS_ERROR,
+		output wire CONTROL_START,
+		output wire CONTROL_STB,
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -48,6 +53,10 @@
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
 		.C_S_AXI_ADDR_WIDTH(C_S00_AXI_ADDR_WIDTH)
 	) beacon_watchdog_v1_0_S00_AXI_inst (
+		.U_STATUS_STARTED(STATUS_STARTED),
+		.U_STATUS_ERROR(STATUS_ERROR),
+		.U_CONTROL_START(CONTROL_START),
+		.U_CONTROL_STB(CONTROL_STB),
 		.S_AXI_ACLK(s00_axi_aclk),
 		.S_AXI_ARESETN(s00_axi_aresetn),
 		.S_AXI_AWADDR(s00_axi_awaddr),

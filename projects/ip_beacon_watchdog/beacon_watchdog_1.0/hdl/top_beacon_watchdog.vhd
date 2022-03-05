@@ -66,31 +66,40 @@ begin
 
                 if START = '1' then
                     next_cnt <= (others => '0');
-                    next_state <= S_CHECK_0;
+
+                    if STB = '0' then
+                        next_state <= S_CHECK_1;
+                    elsif STB = '1' then
+                        next_state <= S_CHECK_0;
+                    else
+                        next_state <= S_DOOMED;
+                    end if;
                 end if;
 
             when S_CHECK_0 =>
-                
-                if curr_cnt = curr_timeout then
-                    next_cnt <= (others => '0');
 
-                    next_state <= S_CHECK_1;
+                if unsigned(curr_cnt) < unsigned(curr_timeout) then
+                    if STB = '0' then
+                        next_cnt <= (others => '0') ;
+                        next_state <= S_CHECK_1;
+                    end if;
+                else
                     if STB /= '0' then
                         next_state <= S_DOOMED;
                     end if;
-
                 end if;
             
             when S_CHECK_1 =>
 
-                if curr_cnt = curr_timeout then
-                    next_cnt <= (others => '0');
-
-                    next_state <= S_CHECK_0;
+                if unsigned(curr_cnt) < unsigned(curr_timeout) then
+                    if STB = '1' then
+                        next_cnt <= (others => '0') ;
+                        next_state <= S_CHECK_0;
+                    end if;
+                else
                     if STB /= '1' then
                         next_state <= S_DOOMED;
                     end if;
-
                 end if;
 
             when S_DOOMED =>

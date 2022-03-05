@@ -74,9 +74,16 @@ begin
 
         rst <= '0';
 
-        din <= x"00000014";
+        din <= x"00000005";
         start <= '1';
+        stb <= '0';
         wait for 1 ns;
+
+        wait for 2 ns;
+        stb <= '1';
+
+        wait for 3 ns;
+        stb <= '0';
 
         wait;
         

@@ -246,6 +246,10 @@ proc create_root_design { parentCell } {
 
 
   # Create ports
+  set control_start [ create_bd_port -dir O -type data control_start ]
+  set control_stb [ create_bd_port -dir O -type data control_stb ]
+  set status_error [ create_bd_port -dir O -type data status_error ]
+  set status_started [ create_bd_port -dir O -type data status_started ]
 
   # Create instance: axi_gpio_0, and set properties
   set axi_gpio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0 ]
@@ -404,6 +408,10 @@ proc create_root_design { parentCell } {
   # Create port connections
   connect_bd_net -net axi_timer_0_interrupt [get_bd_pins axi_timer_0/interrupt] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net axi_timer_1_interrupt [get_bd_pins axi_timer_1/interrupt] [get_bd_pins xlconcat_0/In1]
+  connect_bd_net -net beacon_watchdog_0_control_start [get_bd_ports control_start] [get_bd_pins beacon_watchdog_0/CONTROL_START]
+  connect_bd_net -net beacon_watchdog_0_control_stb [get_bd_ports control_stb] [get_bd_pins beacon_watchdog_0/CONTROL_STB]
+  connect_bd_net -net beacon_watchdog_0_status_error [get_bd_ports status_error] [get_bd_pins beacon_watchdog_0/STATUS_ERROR]
+  connect_bd_net -net beacon_watchdog_0_status_started [get_bd_ports status_started] [get_bd_pins beacon_watchdog_0/STATUS_STARTED]
   connect_bd_net -net mdm_1_debug_sys_rst [get_bd_pins mdm_1/Debug_SYS_Rst] [get_bd_pins rst_ps7_0_50M/mb_debug_sys_rst]
   connect_bd_net -net microblaze_0_Clk [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_timer_0/s_axi_aclk] [get_bd_pins axi_timer_1/s_axi_aclk] [get_bd_pins beacon_watchdog_0/s00_axi_aclk] [get_bd_pins mdm_1/S_AXI_ACLK] [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/M05_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins ps7_0_axi_periph/S01_ACLK] [get_bd_pins rst_ps7_0_50M/slowest_sync_clk]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_50M/ext_reset_in]

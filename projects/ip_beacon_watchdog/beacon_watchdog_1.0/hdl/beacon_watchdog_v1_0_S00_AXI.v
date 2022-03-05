@@ -16,6 +16,12 @@
 	(
 		// Users to add ports here
 
+		// Status ports
+		output wire U_STATUS_STARTED,
+		output wire U_STATUS_ERROR,
+		output wire U_CONTROL_START,
+		output wire U_CONTROL_STB,
+
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -398,6 +404,11 @@
 	end    
 
 	// Add user logic here
+
+	assign U_CONTROL_START = slv_reg0[0];
+	assign U_CONTROL_STB = slv_reg0[1];
+	assign U_STATUS_STARTED = beacon_out_reg1[0];
+	assign U_STATUS_ERROR = beacon_out_reg1[1];
 
 	wire beacon_in_rst;
 	wire[C_S_AXI_DATA_WIDTH-1:0] beacon_out_reg1; // read value when address 0x1

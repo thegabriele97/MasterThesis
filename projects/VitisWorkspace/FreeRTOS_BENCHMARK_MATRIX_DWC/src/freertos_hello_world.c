@@ -166,15 +166,16 @@ TASK(taskBeacon, args) {
 	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET);
 
 	watchdog_ptr[0] |= 0x1;
-	vTaskDelay(pdMS_TO_TICKS(500));
 
 	while (watchdog_ptr[1] == 0x1) {
-		vTaskDelay(pdMS_TO_TICKS(1000));
+		vTaskDelay(pdMS_TO_TICKS(500));
 		watchdog_ptr[0] ^= 0x2; // Toggling STB
-//		xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), watchdog_ptr[0] >> 1, watchdog_ptr[1]);
+		xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), watchdog_ptr[0] >> 1, watchdog_ptr[1]);
 	}
 
 	xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), watchdog_ptr[0] >> 1, watchdog_ptr[1]);
+
+	while (1);
 
 //	BEACON_WATCHDOG_mWriteReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET, XPAR_CPU_M_AXI_DP_FREQ_HZ);
 

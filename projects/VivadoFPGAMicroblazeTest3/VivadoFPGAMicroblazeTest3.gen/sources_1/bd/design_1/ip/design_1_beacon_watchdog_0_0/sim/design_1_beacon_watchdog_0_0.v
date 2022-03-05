@@ -48,12 +48,16 @@
 
 
 // IP VLNV: gabriele97:gabriele97.polito:beacon_watchdog:1.0
-// IP Revision: 4
+// IP Revision: 8
 
 `timescale 1ns/1ps
 
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_beacon_watchdog_0_0 (
+  STATUS_STARTED,
+  STATUS_ERROR,
+  CONTROL_START,
+  CONTROL_STB,
   s00_axi_aclk,
   s00_axi_aresetn,
   s00_axi_awaddr,
@@ -77,6 +81,10 @@ module design_1_beacon_watchdog_0_0 (
   s00_axi_rready
 );
 
+output wire STATUS_STARTED;
+output wire STATUS_ERROR;
+output wire CONTROL_START;
+output wire CONTROL_STB;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 5e+07, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK" *)
 input wire s00_axi_aclk;
@@ -128,6 +136,10 @@ input wire s00_axi_rready;
     .C_S00_AXI_DATA_WIDTH(32),  // Width of S_AXI data bus
     .C_S00_AXI_ADDR_WIDTH(4)  // Width of S_AXI address bus
   ) inst (
+    .STATUS_STARTED(STATUS_STARTED),
+    .STATUS_ERROR(STATUS_ERROR),
+    .CONTROL_START(CONTROL_START),
+    .CONTROL_STB(CONTROL_STB),
     .s00_axi_aclk(s00_axi_aclk),
     .s00_axi_aresetn(s00_axi_aresetn),
     .s00_axi_awaddr(s00_axi_awaddr),
