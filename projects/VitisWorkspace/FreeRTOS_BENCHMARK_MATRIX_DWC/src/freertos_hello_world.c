@@ -41,6 +41,25 @@ struct ctx_s {
 	int mat2[N][N];
 };
 
+typedef struct {
+	union {
+		u32 *baseAddress;
+		struct regs_structure {
+			union {
+				u32 U32VALUE;
+				struct {
+					u32     START : 01;
+					u32       STB : 01;
+					u32 _reserved : 30;
+				} FIELDS;
+			} CONTROLREG;
+			u32     STATUSREG;
+			u32       DATAREG;
+			u32 TOGGLERATEREG;
+		} *registers;
+	};
+} GBcnCtrl;
+
 TASK(taskMat, args);
 TASK(taskComparator, args);
 TASK(taskBeacon, args);
@@ -87,6 +106,78 @@ static SemaphoreHandle_t hSem1;
 //	XTmrCtr_SetControlStatusReg(XPAR_TMRCTR_1_BASEADDR, 1, ulCSR);
 //
 //}
+
+/*****************************************************************************/
+/**
+* Initializes a specific beacon watchdog instance/driver. Initialize fields of
+* the GBcnCtrl structure. If the peripheral is already
+* running then it is not initialized.
+*
+*
+* @param	InstancePtr is a pointer to the GBcnCtrl instance.
+* @param	DevBaseAddr is the unique id of the device controlled by this
+*		GBcnCtrl component.
+*
+* @return
+*		- XST_SUCCESS if initialization was successful
+*		- XST_FAILURE otherwise
+*
+* @note		None.
+*
+******************************************************************************/
+XStatus GBcnCtrl_Initialize(GBcnCtrl *InstancePtr, u32 DevBaseAddr) {
+
+	Xil_AssertNonvoid(InstancePtr != NULL);
+
+	InstancePtr->baseAddress = (u32 *)DevBaseAddr;
+	return (InstancePtr->registers->STATUSREG & 0x1) ? XST_FAILURE : XST_SUCCESS;
+}
+
+/*****************************************************************************/
+/**
+*
+* Set the timeout value for the specified beacon watchdog. This is the value
+* that is loaded into the DATAREG register before the peripheral is started.
+* If the toggle rate is higher than the timeout, the watchdog will expire
+* and the ERROR signal is raised.
+*
+* @param	InstancePtr  is a pointer to the GBcnCtrl instance.
+* @param	TimeoutValue is the value of the watchdog timeout.
+*
+* @return	None.
+*
+* @note		None.
+*
+******************************************************************************/
+void GBcnCtrl_SetTimeoutValue(GBcnCtrl *InstancePtr, u32 TimeoutValue) {
+
+	Xil_AssertVoid(InstancePtr != NULL);
+	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
+
+	InstancePtr->registers->DATAREG = TimeoutValue;
+}
+
+/*****************************************************************************/
+/**
+*
+* Starts the specified beacon watchdog of the device such that it starts running.
+* The value loaded inside the DATAREG register is loaded internally and set as
+* timeout for the watchdog.
+*
+* @param	InstancePtr is a pointer to the GBcnCtrl instance.
+*
+* @return	None.
+*
+* @note		None.
+*
+******************************************************************************/
+void GBcnCtrl_Start(GBcnCtrl *InstancePtr) {
+
+	Xil_AssertVoid(InstancePtr != NULL);
+	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
+
+	InstancePtr->registers->CONTROLREG.FIELDS.START = 1;
+}
 
 int main(void) {
 	int i;
@@ -156,24 +247,25 @@ int main(void) {
 }
 
 TASK(taskBeacon, args) {
-	volatile u32 watchdog_out;
-	u32 *watchdog_ptr;
+	GBcnCtrl hBeacon;
 
-	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
-	watchdog_ptr = (u32 *)XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR;
-
-	watchdog_ptr[2] = XPAR_CPU_M_AXI_DP_FREQ_HZ;
-	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET);
-
-	watchdog_ptr[0] |= 0x1;
-
-	while (watchdog_ptr[1] == 0x1) {
-		vTaskDelay(pdMS_TO_TICKS(500));
-		watchdog_ptr[0] ^= 0x2; // Toggling STB
-		xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), watchdog_ptr[0] >> 1, watchdog_ptr[1]);
+	if (GBcnCtrl_Initialize(&hBeacon, XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR) != XST_SUCCESS) {
+		xil_printf("Error!\r\n");
+		while (1);
 	}
 
-	xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), watchdog_ptr[0] >> 1, watchdog_ptr[1]);
+	vTaskDelay(pdMS_TO_TICKS(1000));
+
+	GBcnCtrl_SetTimeoutValue(&hBeacon, XPAR_CPU_M_AXI_DP_FREQ_HZ);
+	GBcnCtrl_Start(&hBeacon);
+
+	while (hBeacon.registers->STATUSREG == 0x1) {
+		vTaskDelay(pdMS_TO_TICKS(20));
+		hBeacon.registers->CONTROLREG.U32VALUE ^= 0x2; // Toggling STB
+		xil_printf("%10d - %10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), hBeacon.registers->TOGGLERATEREG, hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
+	}
+
+	xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
 
 	while (1);
 
@@ -238,6 +330,7 @@ TASK(taskComparator, args) {
 //	tss[4] = XTmrCtr_GetValue(&htimer1, 0);
 
 	while (1) {
+
 #ifdef WITH_GRPEVT
 		xEventGroupWaitBits(hEvtGrp1, waitMask, pdTRUE, pdTRUE, portMAX_DELAY);
 #elif defined(WITH_TASKNOT)

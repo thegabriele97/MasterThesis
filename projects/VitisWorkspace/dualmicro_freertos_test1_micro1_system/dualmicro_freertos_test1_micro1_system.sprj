@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<systemproject:SystemProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" xmlns:systemproject="http://www.xilinx.com/systemproject" name="dualmicro_freertos_test1_micro1_system" platform="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace/design_dualmicro_microblaze1/export/design_dualmicro_microblaze1/design_dualmicro_microblaze1.xpfm" platformUID="xilinx:::0.0(custom)" sysConfig="design_dualmicro_microblaze1" runtime="cpp" rootFSLocation="" linuxImage="" sysroot="">
+  <configuration name="Debug" id="com.xilinx.sdx.system.managedbuilder.debugConfiguration.642684201">
+    <configBuildOptions xsi:type="systemproject:SystemOptions">
+      <applications name="dualmicro_freertos_test1_micro1" domainName="freertos10_xilinx_microblaze_1" domainPrettyName="freertos10_xilinx_microblaze_1" appBuildConfig="Debug"/>
+      <options xsi:type="sdkproject:SdkOptions" generateSdCard="true"/>
+    </configBuildOptions>
+    <lastBuildOptions xsi:type="systemproject:SystemOptions">
+      <applications name="dualmicro_freertos_test1_micro1" domainName="freertos10_xilinx_microblaze_1" domainPrettyName="freertos10_xilinx_microblaze_1" appBuildConfig="Debug"/>
+      <options xsi:type="sdkproject:SdkOptions" generateSdCard="true"/>
+    </lastBuildOptions>
+  </configuration>
+  <configuration name="Release" id="com.xilinx.sdx.system.managedbuilder.releaseConfiguration.823938598">
+    <configBuildOptions xsi:type="systemproject:SystemOptions">
+      <applications name="dualmicro_freertos_test1_micro1" domainName="freertos10_xilinx_microblaze_1" domainPrettyName="freertos10_xilinx_microblaze_1" appBuildConfig="Release"/>
+      <options xsi:type="sdkproject:SdkOptions" generateSdCard="true"/>
+    </configBuildOptions>
+  </configuration>
+</systemproject:SystemProject>

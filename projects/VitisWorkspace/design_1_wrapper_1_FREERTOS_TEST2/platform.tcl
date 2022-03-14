@@ -89,3 +89,11 @@ platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFP
 platform generate -domains 
 platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFPGAMicroblazeTest3/design_1_wrapper.xsa}
 platform generate -domains 
+platform generate
+platform active {design_1_wrapper_1_FREERTOS_TEST2}
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFPGAMicroblazeTest3/design_1_wrapper.xsa}
+platform generate
+platform generate
+platform active {design_1_wrapper_1_FREERTOS_TEST2}
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/VivadoFPGAMicroblazeTest3/design_1_wrapper.xsa}
+platform generate -domains 

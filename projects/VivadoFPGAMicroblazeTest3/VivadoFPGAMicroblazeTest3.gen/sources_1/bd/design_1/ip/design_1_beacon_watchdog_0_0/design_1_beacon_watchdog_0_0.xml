@@ -590,11 +590,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Mar 04 18:57:24 UTC 2022</spirit:value>
+            <spirit:value>Mon Mar 14 09:47:33 UTC 2022</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:0348017c</spirit:value>
+            <spirit:value>9:add1c0ee</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -605,7 +605,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:0348017c</spirit:value>
+            <spirit:value>9:add1c0ee</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -621,11 +621,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Mar 04 18:57:24 UTC 2022</spirit:value>
+            <spirit:value>Mon Mar 14 09:47:33 UTC 2022</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:0348017c</spirit:value>
+            <spirit:value>9:add1c0ee</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -641,11 +641,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Mar 04 18:57:24 UTC 2022</spirit:value>
+            <spirit:value>Mon Mar 14 09:47:33 UTC 2022</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:3d5b2fdf</spirit:value>
+            <spirit:value>9:e2302192</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -661,11 +661,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Mar 04 18:57:24 UTC 2022</spirit:value>
+            <spirit:value>Mon Mar 14 09:47:33 UTC 2022</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:3d5b2fdf</spirit:value>
+            <spirit:value>9:e2302192</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -679,11 +679,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Mar 04 18:57:24 UTC 2022</spirit:value>
+            <spirit:value>Mon Mar 14 09:47:33 UTC 2022</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:0348017c</spirit:value>
+            <spirit:value>9:add1c0ee</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -697,11 +697,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Mar 04 18:58:14 UTC 2022</spirit:value>
+            <spirit:value>Mon Mar 14 09:48:34 UTC 2022</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:0348017c</spirit:value>
+            <spirit:value>9:add1c0ee</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1104,15 +1104,15 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogsynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/83ae/hdl/beacon_watchdog_v1_0_S00_AXI.v</spirit:name>
+        <spirit:name>../../ipshared/a5eb/hdl/beacon_watchdog_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/83ae/hdl/top_beacon_watchdog.vhd</spirit:name>
+        <spirit:name>../../ipshared/a5eb/hdl/top_beacon_watchdog.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/83ae/hdl/beacon_watchdog_v1_0.v</spirit:name>
+        <spirit:name>../../ipshared/a5eb/hdl/beacon_watchdog_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1127,15 +1127,15 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/83ae/hdl/beacon_watchdog_v1_0_S00_AXI.v</spirit:name>
+        <spirit:name>../../ipshared/a5eb/hdl/beacon_watchdog_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/83ae/hdl/top_beacon_watchdog.vhd</spirit:name>
+        <spirit:name>../../ipshared/a5eb/hdl/top_beacon_watchdog.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/83ae/hdl/beacon_watchdog_v1_0.v</spirit:name>
+        <spirit:name>../../ipshared/a5eb/hdl/beacon_watchdog_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1271,7 +1271,7 @@
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:displayName>beacon_watchdog_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>8</xilinx:coreRevision>
+      <xilinx:coreRevision>12</xilinx:coreRevision>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.df@11d52f37_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@38bcb02a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
@@ -1417,6 +1417,73 @@
         <xilinx:tag xilinx:name="ui.data.coregen.df@1e817bd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@210643f5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@12ac940e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@edcb6e7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@646fba04_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4dc78522_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c580bc8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@61bcbfa1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@560f14b3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6717d307_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@36645ad1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14a90c11_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1dd66324_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@608cc647_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7dd10b86_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@db91638_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@351b9d45_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@58635206_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@74d7ad16_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@115ea8bd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@24d9eb2d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a33e461_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@707764fc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@67f47d3a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2ec4c267_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@416d39e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@69b51cf_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1cea6ef_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@30e48375_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7c11ee14_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ef483c4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@72c9a1a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@439357a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@46085a9e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2b159f54_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a7f173b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4036aca7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c2638c2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@79cda21e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@381fdb99_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@245ddc9b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f0e6245_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2b77a181_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@488b0882_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c4afa18_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@349759ad_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ab7791a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@dc7836b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@77bc6577_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3e7906aa_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@640d4707_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@58a069c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f87d292_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3bc17595_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@63bcf5f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7942f3f0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1274c61c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d14a2db_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@29c8acaa_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@733ab3a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4a0d96d2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@11e64596_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@500a4874_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7c9875a9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1bf666a1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18f484ad_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3c1fc810_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@9f8416a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@153de090_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@e72aafc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
       </xilinx:tags>
       <xilinx:configElementInfos>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.ADDR_WIDTH" xilinx:valueSource="auto" xilinx:valuePermission="bd"/>
@@ -1464,7 +1531,7 @@
       <xilinx:xilinxVersion>2021.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="7a63f3fc"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="ed1368d5"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="de83e91d"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="de611be2"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="8f625d1f"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="6992ea72"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="c118f382"/>

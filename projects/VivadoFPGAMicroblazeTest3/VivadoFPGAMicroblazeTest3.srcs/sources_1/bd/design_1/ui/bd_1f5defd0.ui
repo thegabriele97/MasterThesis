@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"0.717936",
-   "Default View_TopLeft":"1206,-283",
+   "Default View_TopLeft":"185,-286",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
@@ -25,6 +25,10 @@ preplace inst xlconcat_0 -pg 1 -lvl 2 -x 160 -y 510 -defaultsOSRD
 preplace inst beacon_watchdog_0 -pg 1 -lvl 6 -x 1650 -y 10 -defaultsOSRD
 preplace netloc axi_timer_0_interrupt 1 1 6 -190 730 NJ 730 NJ 730 NJ 730 N 730 1820
 preplace netloc axi_timer_1_interrupt 1 1 5 -180 720 N 720 NJ 720 N 720 1490
+preplace netloc beacon_watchdog_0_control_start 1 6 1 1810 -140n
+preplace netloc beacon_watchdog_0_control_stb 1 6 1 1820 40n
+preplace netloc beacon_watchdog_0_status_error 1 6 1 1830 -20n
+preplace netloc beacon_watchdog_0_status_started 1 6 1 1820 -50n
 preplace netloc mdm_1_debug_sys_rst 1 0 2 -590 70 -190
 preplace netloc microblaze_0_Clk 1 0 6 -570 230 N 230 290 40 840 560 1180 380 1480
 preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 4 -570 480 -180 440 270 460 820J
@@ -32,10 +36,6 @@ preplace netloc rst_ps7_0_50M_bus_struct_reset 1 1 3 NJ 360 260 500 N
 preplace netloc rst_ps7_0_50M_mb_reset 1 1 2 -190 220 N
 preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 0 6 -580 490 -190 350 280 470 870 570 1200 400 1500
 preplace netloc xlconcat_0_dout 1 2 1 290 400n
-preplace netloc beacon_watchdog_0_status_started 1 6 1 1820 -50n
-preplace netloc beacon_watchdog_0_status_error 1 6 1 1830 -20n
-preplace netloc beacon_watchdog_0_control_start 1 6 1 1810 -140n
-preplace netloc beacon_watchdog_0_control_stb 1 6 1 1820 40n
 preplace netloc axi_gpio_0_GPIO 1 6 1 1810 180n
 preplace netloc axi_intc_0_interrupt 1 2 2 300 100 810
 preplace netloc microblaze_0_M_AXI_DP 1 3 1 860 -20n

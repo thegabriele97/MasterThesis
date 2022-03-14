@@ -1,9 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Mar  4 19:57:24 2022" VIVADOVERSION="2021.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Mar 14 10:47:34 2022" VIVADOVERSION="2021.1">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z020" NAME="design_1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
+    <PORT DIR="O" NAME="status_started" SIGIS="data" SIGNAME="beacon_watchdog_0_STATUS_STARTED">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="STATUS_STARTED"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="status_error" SIGIS="data" SIGNAME="beacon_watchdog_0_STATUS_ERROR">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="STATUS_ERROR"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="control_start" SIGIS="data" SIGNAME="beacon_watchdog_0_CONTROL_START">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="CONTROL_START"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="control_stb" SIGIS="data" SIGNAME="beacon_watchdog_0_CONTROL_STB">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="CONTROL_STB"/>
+      </CONNECTIONS>
+    </PORT>
     <PORT DIR="I" LEFT="1" NAME="gpio_rtl_0_tri_i" RIGHT="0" SIGIS="undef" SIGNAME="axi_gpio_0_gpio_io_i">
       <CONNECTIONS>
         <CONNECTION INSTANCE="axi_gpio_0" PORT="gpio_io_i"/>
@@ -37,26 +57,6 @@
     <PORT DIR="IO" NAME="FIXED_IO_ps_porb" SIGIS="undef" SIGNAME="processing_system7_0_PS_PORB">
       <CONNECTIONS>
         <CONNECTION INSTANCE="processing_system7_0" PORT="PS_PORB"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="status_started" SIGIS="data" SIGNAME="beacon_watchdog_0_STATUS_STARTED">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="STATUS_STARTED"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="status_error" SIGIS="data" SIGNAME="beacon_watchdog_0_STATUS_ERROR">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="STATUS_ERROR"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="control_start" SIGIS="data" SIGNAME="beacon_watchdog_0_CONTROL_START">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="CONTROL_START"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="control_stb" SIGIS="data" SIGNAME="beacon_watchdog_0_CONTROL_STB">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="beacon_watchdog_0" PORT="CONTROL_STB"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -5540,7 +5540,7 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
-    <MODULE COREREVISION="8" FULLNAME="/beacon_watchdog_0" HWVERSION="1.0" INSTANCE="beacon_watchdog_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="beacon_watchdog" VLNV="gabriele97:gabriele97.polito:beacon_watchdog:1.0">
+    <MODULE COREREVISION="12" FULLNAME="/beacon_watchdog_0" HWVERSION="1.0" INSTANCE="beacon_watchdog_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="beacon_watchdog" VLNV="gabriele97:gabriele97.polito:beacon_watchdog:1.0">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
         <ADDRESSBLOCK ACCESS="" INTERFACE="S00_AXI" NAME="S00_AXI_reg" RANGE="4096" USAGE="register"/>

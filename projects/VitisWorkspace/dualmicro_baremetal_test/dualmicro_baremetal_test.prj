@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="dualmicro_baremetal_test" location="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace/dualmicro_baremetal_test" platform="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace/design_1_wrapper_1/export/design_1_wrapper_1/design_1_wrapper_1.xpfm" platformUID="xilinx:::0.0(custom)" systemProject="dualmicro_baremetal_test_system" sysConfig="design_1_wrapper_1" runtime="cpp" cpu="standalone_microblaze_0" cpuInstance="microblaze_0" os="standalone" mssSignature="c353296722cfe7f02078b12bf0efd053">
+  <configuration name="Debug" id="xilinx.gnu.mb.exe.debug.1916568809">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.mb.exe.release.1976686584" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>

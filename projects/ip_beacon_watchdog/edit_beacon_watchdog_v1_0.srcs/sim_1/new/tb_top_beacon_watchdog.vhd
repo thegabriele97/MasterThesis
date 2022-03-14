@@ -85,6 +85,9 @@ begin
         wait for 3 ns;
         stb <= '0';
 
+        wait for 1 ns;
+        stb <= '1';
+
         wait;
         
     end process;
