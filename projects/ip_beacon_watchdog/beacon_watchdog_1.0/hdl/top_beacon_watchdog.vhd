@@ -84,11 +84,13 @@ begin
                 if unsigned(curr_cnt) < unsigned(curr_timeout) then
                     if STB = '0' then
                         next_cnt <= (others => '0');
+                        next_timeout <= DATAIN;
                         next_state <= S_CHECK_1;
                     end if;
                 else
                     next_cnt <= (others => '0') ;
                     next_state <= S_CHECK_1;
+                    next_timeout <= DATAIN;
                     if STB /= '0' then
                         next_state <= S_DOOMED;
                     end if;
@@ -100,10 +102,12 @@ begin
                     if STB = '1' then
                         next_cnt <= (others => '0');
                         next_state <= S_CHECK_0;
+                        next_timeout <= DATAIN;
                     end if;
                 else
                     next_cnt <= (others => '0');
                     next_state <= S_CHECK_0;
+                    next_timeout <= DATAIN;
                     if STB /= '1' then
                         next_state <= S_DOOMED;
                     end if;

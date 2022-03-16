@@ -35,7 +35,8 @@ XStatus GBcnCtrl_Initialize(GBcnCtrl *InstancePtr, u32 DevBaseAddr) {
 /**
 *
 * Set the timeout value for the specified beacon watchdog. This is the value
-* that is loaded into the DATAREG register before the peripheral is started.
+* that is loaded into the DATAREG register before the peripheral is started,
+* or when a toggle happens (updating the value).
 * If the toggle rate is higher than the timeout, the watchdog will expire
 * and the ERROR signal is raised.
 *
