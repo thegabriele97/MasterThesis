@@ -53,7 +53,14 @@ typedef struct {
 					u32 _reserved : 30;
 				} FIELDS;
 			} CONTROLREG;
-			u32     STATUSREG;
+			union {
+				u32 U32VALUE;
+				struct {
+					u32   STARTED : 01;
+					u32     ERROR : 01;
+					u32 _reserved : 30;
+				} FIELDS;
+			} STATUSREG;
 			u32       DATAREG;
 			u32 TOGGLERATEREG;
 		} *registers;
@@ -130,7 +137,7 @@ XStatus GBcnCtrl_Initialize(GBcnCtrl *InstancePtr, u32 DevBaseAddr) {
 	Xil_AssertNonvoid(InstancePtr != NULL);
 
 	InstancePtr->baseAddress = (u32 *)DevBaseAddr;
-	return (InstancePtr->registers->STATUSREG & 0x1) ? XST_FAILURE : XST_SUCCESS;
+	return (InstancePtr->registers->STATUSREG.FIELDS.STARTED) ? XST_FAILURE : XST_SUCCESS;
 }
 
 /*****************************************************************************/
@@ -177,6 +184,67 @@ void GBcnCtrl_Start(GBcnCtrl *InstancePtr) {
 	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
 
 	InstancePtr->registers->CONTROLREG.FIELDS.START = 1;
+}
+
+/*****************************************************************************/
+/**
+*
+* Toggles the specified beacon watchdog such that the watchdog doesn't expire.
+*
+* @param	InstancePtr is a pointer to the GBcnCtrl instance.
+*
+* @return	None.
+*
+* @note		None.
+*
+******************************************************************************/
+void GBcnCtrl_Toggle(GBcnCtrl *InstancePtr) {
+
+	Xil_AssertVoid(InstancePtr != NULL);
+	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
+
+	InstancePtr->registers->CONTROLREG.FIELDS.STB ^= 1;
+}
+
+/*****************************************************************************/
+/**
+*
+* Returns the toggle rate computed by the specified beacon watchdog.
+*
+* @param	InstancePtr is a pointer to the GBcnCtrl instance.
+*
+* @return	None.
+*
+* @note		None.
+*
+******************************************************************************/
+u32 GBcnCtrl_GetToggleRate(GBcnCtrl *InstancePtr) {
+
+	Xil_AssertVoid(InstancePtr != NULL);
+	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
+
+	return InstancePtr->registers->TOGGLERATEREG;
+}
+
+/*****************************************************************************/
+/**
+*
+* Checks if the specified beacon watchdog of the device has expired. If yes,
+* means that the CPU stopped toggling the STB bit at the right rate.
+*
+* @param	InstancePtr is a pointer to the GBcnCtrl instance.
+*
+* @return	TRUE if the watchdog has expired, and FALSE otherwise.
+*
+* @note		None.
+*
+******************************************************************************/
+u32 GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr) {
+
+	Xil_AssertVoid(InstancePtr != NULL);
+	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
+
+	return InstancePtr->registers->STATUSREG.FIELDS.ERROR;
 }
 
 int main(void) {
@@ -259,22 +327,15 @@ TASK(taskBeacon, args) {
 	GBcnCtrl_SetTimeoutValue(&hBeacon, XPAR_CPU_M_AXI_DP_FREQ_HZ);
 	GBcnCtrl_Start(&hBeacon);
 
-	while (hBeacon.registers->STATUSREG == 0x1) {
+	while (!GBcnCtrl_IsExpired(&hBeacon)) {
 		vTaskDelay(pdMS_TO_TICKS(20));
-		hBeacon.registers->CONTROLREG.U32VALUE ^= 0x2; // Toggling STB
-		xil_printf("%10d - %10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), hBeacon.registers->TOGGLERATEREG, hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
+		GBcnCtrl_Toggle(&hBeacon);
+		xil_printf("%10d - %10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), GBcnCtrl_GetToggleRate(&hBeacon), hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
 	}
 
-	xil_printf("%10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
+	xil_printf("%10d - %10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), GBcnCtrl_GetToggleRate(&hBeacon), hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
 
 	while (1);
-
-//	BEACON_WATCHDOG_mWriteReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET, XPAR_CPU_M_AXI_DP_FREQ_HZ);
-
-//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
-//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG0_OFFSET);
-//	watchdog_out = BEACON_WATCHDOG_mReadReg(XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR, BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET);
-
 }
 
 TASK(taskMat, args) {
