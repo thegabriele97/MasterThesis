@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="ublazeanalyzer_mb1" location="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace2/ublazeanalyzer_mb1" platform="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace2/hw_ublazeanalyzer/export/hw_ublazeanalyzer/hw_ublazeanalyzer.xpfm" platformUID="xilinx:::0.0(custom)" systemProject="ublazeanalyzer_mb0_system" sysConfig="hw_ublazeanalyzer" runtime="C/C++" cpu="standalone_microblaze_1" cpuInstance="microblaze_1" os="standalone" mssSignature="cf71418a8ad4881eb3d7d7b21bf8a9e9">
+  <configuration name="Debug" id="xilinx.gnu.mb.exe.debug.2115964499">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.mb.exe.release.757034018" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>
