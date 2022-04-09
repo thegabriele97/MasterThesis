@@ -272,6 +272,9 @@ proc create_root_design { parentCell } {
 
   # Create instance: beacon_watchdog_0, and set properties
   set beacon_watchdog_0 [ create_bd_cell -type ip -vlnv gabriele97:gabriele97.polito:beacon_watchdog:1.0 beacon_watchdog_0 ]
+  set_property -dict [ list \
+   CONFIG.C_S00_AXI_ADDR_WIDTH {12} \
+ ] $beacon_watchdog_0
 
   # Create instance: mdm_1, and set properties
   set mdm_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mdm:3.2 mdm_1 ]

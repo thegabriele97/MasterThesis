@@ -1,7 +1,7 @@
 //Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
-//Date        : Thu Mar 17 10:20:03 2022
+//Date        : Sat Apr  9 10:40:26 2022
 //Host        : pop-os running 64-bit Pop!_OS 21.10
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -351,12 +351,12 @@ module design_1
         .STATUS_ERROR(beacon_watchdog_0_status_error),
         .STATUS_STARTED(beacon_watchdog_0_status_started),
         .s00_axi_aclk(microblaze_0_Clk),
-        .s00_axi_araddr(ps7_0_axi_periph_M05_AXI_ARADDR[3:0]),
+        .s00_axi_araddr(ps7_0_axi_periph_M05_AXI_ARADDR[11:0]),
         .s00_axi_aresetn(rst_ps7_0_50M_peripheral_aresetn),
         .s00_axi_arprot(ps7_0_axi_periph_M05_AXI_ARPROT),
         .s00_axi_arready(ps7_0_axi_periph_M05_AXI_ARREADY),
         .s00_axi_arvalid(ps7_0_axi_periph_M05_AXI_ARVALID),
-        .s00_axi_awaddr(ps7_0_axi_periph_M05_AXI_AWADDR[3:0]),
+        .s00_axi_awaddr(ps7_0_axi_periph_M05_AXI_AWADDR[11:0]),
         .s00_axi_awprot(ps7_0_axi_periph_M05_AXI_AWPROT),
         .s00_axi_awready(ps7_0_axi_periph_M05_AXI_AWREADY),
         .s00_axi_awvalid(ps7_0_axi_periph_M05_AXI_AWVALID),

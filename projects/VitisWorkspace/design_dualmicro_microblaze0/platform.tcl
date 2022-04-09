@@ -76,3 +76,6 @@ platform generate
 catch {platform remove design_dualmicro}
 platform generate
 platform generate
+platform generate
+platform clean
+platform generate

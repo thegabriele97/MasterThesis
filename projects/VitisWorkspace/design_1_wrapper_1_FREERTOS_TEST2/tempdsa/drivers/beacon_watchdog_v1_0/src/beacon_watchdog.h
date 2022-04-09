@@ -7,73 +7,63 @@
 #include "xil_types.h"
 #include "xstatus.h"
 
-#define BEACON_WATCHDOG_S00_AXI_SLV_REG0_OFFSET 0
-#define BEACON_WATCHDOG_S00_AXI_SLV_REG1_OFFSET 4
-#define BEACON_WATCHDOG_S00_AXI_SLV_REG2_OFFSET 8
-#define BEACON_WATCHDOG_S00_AXI_SLV_REG3_OFFSET 12
-
 
 /**************************** Type Definitions *****************************/
-/**
- *
- * Write a value to a BEACON_WATCHDOG register. A 32 bit write is performed.
- * If the component is implemented in a smaller width, only the least
- * significant data is written.
- *
- * @param   BaseAddress is the base address of the BEACON_WATCHDOGdevice.
- * @param   RegOffset is the register offset from the base to write to.
- * @param   Data is the data written to the register.
- *
- * @return  None.
- *
- * @note
- * C-style signature:
- * 	void BEACON_WATCHDOG_mWriteReg(u32 BaseAddress, unsigned RegOffset, u32 Data)
- *
- */
-#define BEACON_WATCHDOG_mWriteReg(BaseAddress, RegOffset, Data) \
-  	Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
 
 /**
- *
- * Read a value from a BEACON_WATCHDOG register. A 32 bit read is performed.
- * If the component is implemented in a smaller width, only the least
- * significant data is read from the register. The most significant data
- * will be read as 0.
- *
- * @param   BaseAddress is the base address of the BEACON_WATCHDOG device.
- * @param   RegOffset is the register offset from the base to write to.
- *
- * @return  Data is the data from the register.
- *
- * @note
- * C-style signature:
- * 	u32 BEACON_WATCHDOG_mReadReg(u32 BaseAddress, unsigned RegOffset)
- *
+ * The GBcnCtrl driver instance data. The user is required to allocate a
+ * variable of this type for every beacon watchdog device in the system. A
+ * pointer to a variable of this type is then passed to the driver API
+ * functions.
  */
-#define BEACON_WATCHDOG_mReadReg(BaseAddress, RegOffset) \
-    Xil_In32((BaseAddress) + (RegOffset))
 
-/************************** Function Prototypes ****************************/
-/**
- *
- * Run a self-test on the driver/device. Note this may be a destructive test if
- * resets of the device are performed.
- *
- * If the hardware system is not built correctly, this function may never
- * return to the caller.
- *
- * @param   baseaddr_p is the base address of the BEACON_WATCHDOG instance to be worked on.
- *
- * @return
- *
- *    - XST_SUCCESS   if all self-test code passed
- *    - XST_FAILURE   if any self-test code failed
- *
- * @note    Caching must be turned off for this function to work.
- * @note    Self test may fail if data memory and device are not on the same bus.
- *
- */
-XStatus BEACON_WATCHDOG_Reg_SelfTest(void * baseaddr_p);
+typedef union {
+	u32 U32VALUE;
+	struct f {
+		u32     START : 01;
+		u32       STB : 01;
+		u32 _reserved : 30;
+	} FIELDS;
+} union_ctrlreg_t;
+
+typedef union {
+	u32 U32VALUE;
+	struct {
+		u32   STARTED : 01;
+		u32     ERROR : 01;
+		u32 _reserved : 30;
+	} FIELDS;
+} union_statreg_t;
+
+typedef struct {
+	union_ctrlreg_t CONTROLREG;
+	union_statreg_t STATUSREG;
+	u32       		DATAREG;
+	u32 			TOGGLERATEREG;
+} watchdog_module_t;
+
+typedef struct {
+	union {
+		u32 *baseAddress;
+		watchdog_module_t *module;
+		struct {
+			watchdog_module_t module0;
+			watchdog_module_t module1;
+			watchdog_module_t module2;
+		} *modules;
+	};
+} GBcnCtrl;
+
+
+/************************** Function Prototypes ******************************/
+
+/* Required functions, in file beacon_watchdog.c */
+
+XStatus GBcnCtrl_Initialize(GBcnCtrl *InstancePtr, u32 DevBaseAddr);
+void GBcnCtrl_SetTimeoutValue(GBcnCtrl *InstancePtr, u32 TimeoutValue);
+void GBcnCtrl_Start(GBcnCtrl *InstancePtr);
+void GBcnCtrl_Toggle(GBcnCtrl *InstancePtr);
+u32 GBcnCtrl_GetToggleRate(GBcnCtrl *InstancePtr);
+int GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr);
 
 #endif // BEACON_WATCHDOG_H

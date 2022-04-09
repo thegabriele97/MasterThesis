@@ -24,11 +24,14 @@
 *
 ******************************************************************************/
 XStatus GBcnCtrl_Initialize(GBcnCtrl *InstancePtr, u32 DevBaseAddr) {
+	int started;
 
 	Xil_AssertNonvoid(InstancePtr != NULL);
 
 	InstancePtr->baseAddress = (u32 *)DevBaseAddr;
-	return (InstancePtr->registers->STATUSREG.FIELDS.STARTED) ? XST_FAILURE : XST_SUCCESS;
+	started = InstancePtr->module[0]->STATUSREG.FIELDS.STARTED;
+
+	return started ? XST_FAILURE : XST_SUCCESS;
 }
 
 /*****************************************************************************/
@@ -53,7 +56,7 @@ void GBcnCtrl_SetTimeoutValue(GBcnCtrl *InstancePtr, u32 TimeoutValue) {
 	Xil_AssertVoid(InstancePtr != NULL);
 	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
 
-	InstancePtr->registers->DATAREG = TimeoutValue;
+	InstancePtr->module[0]->DATAREG = TimeoutValue;
 }
 
 /*****************************************************************************/
@@ -75,7 +78,7 @@ void GBcnCtrl_Start(GBcnCtrl *InstancePtr) {
 	Xil_AssertVoid(InstancePtr != NULL);
 	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
 
-	InstancePtr->registers->CONTROLREG.FIELDS.START = 1;
+	InstancePtr->module[0]->CONTROLREG.FIELDS.START = 1;
 }
 
 /*****************************************************************************/
@@ -95,7 +98,7 @@ void GBcnCtrl_Toggle(GBcnCtrl *InstancePtr) {
 	Xil_AssertVoid(InstancePtr != NULL);
 	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
 
-	InstancePtr->registers->CONTROLREG.FIELDS.STB ^= 1;
+	InstancePtr->module[0]->CONTROLREG.FIELDS.STB ^= 1;
 }
 
 /*****************************************************************************/
@@ -115,7 +118,7 @@ u32 GBcnCtrl_GetToggleRate(GBcnCtrl *InstancePtr) {
 	Xil_AssertVoid(InstancePtr != NULL);
 	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
 
-	return InstancePtr->registers->TOGGLERATEREG;
+	return InstancePtr->module[0]->TOGGLERATEREG;
 }
 
 /*****************************************************************************/
@@ -136,5 +139,5 @@ int GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr) {
 	Xil_AssertVoid(InstancePtr != NULL);
 	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
 
-	return InstancePtr->registers->STATUSREG.FIELDS.ERROR;
+	return InstancePtr->module[0]->STATUSREG.FIELDS.ERROR;
 }

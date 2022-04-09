@@ -41,32 +41,6 @@ struct ctx_s {
 	int mat2[N][N];
 };
 
-typedef struct {
-	union {
-		u32 *baseAddress;
-		struct regs_structure {
-			union {
-				u32 U32VALUE;
-				struct {
-					u32     START : 01;
-					u32       STB : 01;
-					u32 _reserved : 30;
-				} FIELDS;
-			} CONTROLREG;
-			union {
-				u32 U32VALUE;
-				struct {
-					u32   STARTED : 01;
-					u32     ERROR : 01;
-					u32 _reserved : 30;
-				} FIELDS;
-			} STATUSREG;
-			u32       DATAREG;
-			u32 TOGGLERATEREG;
-		} *registers;
-	};
-} GBcnCtrl;
-
 TASK(taskMat, args);
 TASK(taskComparator, args);
 TASK(taskBeacon, args);
@@ -113,139 +87,6 @@ static SemaphoreHandle_t hSem1;
 //	XTmrCtr_SetControlStatusReg(XPAR_TMRCTR_1_BASEADDR, 1, ulCSR);
 //
 //}
-
-/*****************************************************************************/
-/**
-* Initializes a specific beacon watchdog instance/driver. Initialize fields of
-* the GBcnCtrl structure. If the peripheral is already
-* running then it is not initialized.
-*
-*
-* @param	InstancePtr is a pointer to the GBcnCtrl instance.
-* @param	DevBaseAddr is the unique id of the device controlled by this
-*		GBcnCtrl component.
-*
-* @return
-*		- XST_SUCCESS if initialization was successful
-*		- XST_FAILURE otherwise
-*
-* @note		None.
-*
-******************************************************************************/
-XStatus GBcnCtrl_Initialize(GBcnCtrl *InstancePtr, u32 DevBaseAddr) {
-
-	Xil_AssertNonvoid(InstancePtr != NULL);
-
-	InstancePtr->baseAddress = (u32 *)DevBaseAddr;
-	return (InstancePtr->registers->STATUSREG.FIELDS.STARTED) ? XST_FAILURE : XST_SUCCESS;
-}
-
-/*****************************************************************************/
-/**
-*
-* Set the timeout value for the specified beacon watchdog. This is the value
-* that is loaded into the DATAREG register before the peripheral is started.
-* If the toggle rate is higher than the timeout, the watchdog will expire
-* and the ERROR signal is raised.
-*
-* @param	InstancePtr  is a pointer to the GBcnCtrl instance.
-* @param	TimeoutValue is the value of the watchdog timeout.
-*
-* @return	None.
-*
-* @note		None.
-*
-******************************************************************************/
-void GBcnCtrl_SetTimeoutValue(GBcnCtrl *InstancePtr, u32 TimeoutValue) {
-
-	Xil_AssertVoid(InstancePtr != NULL);
-	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
-
-	InstancePtr->registers->DATAREG = TimeoutValue;
-}
-
-/*****************************************************************************/
-/**
-*
-* Starts the specified beacon watchdog of the device such that it starts running.
-* The value loaded inside the DATAREG register is loaded internally and set as
-* timeout for the watchdog.
-*
-* @param	InstancePtr is a pointer to the GBcnCtrl instance.
-*
-* @return	None.
-*
-* @note		None.
-*
-******************************************************************************/
-void GBcnCtrl_Start(GBcnCtrl *InstancePtr) {
-
-	Xil_AssertVoid(InstancePtr != NULL);
-	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
-
-	InstancePtr->registers->CONTROLREG.FIELDS.START = 1;
-}
-
-/*****************************************************************************/
-/**
-*
-* Toggles the specified beacon watchdog such that the watchdog doesn't expire.
-*
-* @param	InstancePtr is a pointer to the GBcnCtrl instance.
-*
-* @return	None.
-*
-* @note		None.
-*
-******************************************************************************/
-void GBcnCtrl_Toggle(GBcnCtrl *InstancePtr) {
-
-	Xil_AssertVoid(InstancePtr != NULL);
-	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
-
-	InstancePtr->registers->CONTROLREG.FIELDS.STB ^= 1;
-}
-
-/*****************************************************************************/
-/**
-*
-* Returns the toggle rate computed by the specified beacon watchdog.
-*
-* @param	InstancePtr is a pointer to the GBcnCtrl instance.
-*
-* @return	None.
-*
-* @note		None.
-*
-******************************************************************************/
-u32 GBcnCtrl_GetToggleRate(GBcnCtrl *InstancePtr) {
-
-	Xil_AssertVoid(InstancePtr != NULL);
-	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
-
-	return InstancePtr->registers->TOGGLERATEREG;
-}
-
-/*****************************************************************************/
-/**
-*
-* Checks if the specified beacon watchdog of the device has expired. If yes,
-* means that the CPU stopped toggling the STB bit at the right rate.
-*
-* @param	InstancePtr is a pointer to the GBcnCtrl instance.
-*
-* @return	TRUE if the watchdog has expired, and FALSE otherwise.
-*
-* @note		None.
-*
-******************************************************************************/
-u32 GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr) {
-
-	Xil_AssertVoid(InstancePtr != NULL);
-	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
-
-	return InstancePtr->registers->STATUSREG.FIELDS.ERROR;
-}
 
 int main(void) {
 	int i;
@@ -317,10 +158,28 @@ int main(void) {
 TASK(taskBeacon, args) {
 	GBcnCtrl hBeacon;
 
+	hBeacon.baseAddress = (u32 *)XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR;
+
+//	*(hBeacon.baseAddress + 2) = XPAR_CPU_CORE_CLOCK_FREQ_HZ * 5;
+//	*(hBeacon.baseAddress + 6) = XPAR_CPU_CORE_CLOCK_FREQ_HZ * 5;
+//	*(hBeacon.baseAddress + 10) = XPAR_CPU_CORE_CLOCK_FREQ_HZ * 5;
+//	*(hBeacon.baseAddress + 0) = 0x1;
+//	*(hBeacon.baseAddress + 4) = 0x1;
+//	*(hBeacon.baseAddress + 8) = 0x1;
+
+
+//	hBeacon.modules->module0.DATAREG = XPAR_CPU_CORE_CLOCK_FREQ_HZ * 5;
+//	hBeacon.modules->module0.CONTROLREG.FIELDS.START = 1;
+//	hBeacon.modules->module1.DATAREG = XPAR_CPU_CORE_CLOCK_FREQ_HZ * 5;
+//	hBeacon.modules->module1.CONTROLREG.FIELDS.START = 1;
+//	hBeacon.modules->module2.DATAREG = XPAR_CPU_CORE_CLOCK_FREQ_HZ * 5;
+//	hBeacon.modules->module2.CONTROLREG.FIELDS.START = 1;
+
 	if (GBcnCtrl_Initialize(&hBeacon, XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR) != XST_SUCCESS) {
 		xil_printf("Error!\r\n");
 		while (1);
 	}
+
 
 	vTaskDelay(pdMS_TO_TICKS(1000));
 
@@ -328,12 +187,12 @@ TASK(taskBeacon, args) {
 	GBcnCtrl_Start(&hBeacon);
 
 	while (!GBcnCtrl_IsExpired(&hBeacon)) {
-		vTaskDelay(pdMS_TO_TICKS(20));
+		vTaskDelay(pdMS_TO_TICKS(900));
 		GBcnCtrl_Toggle(&hBeacon);
-		xil_printf("%10d - %10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), GBcnCtrl_GetToggleRate(&hBeacon), hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
+		xil_printf("%10d - %10d] STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), GBcnCtrl_GetToggleRate(&hBeacon), GBcnCtrl_IsExpired(&hBeacon));
 	}
 
-	xil_printf("%10d - %10d] STB %d, STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), GBcnCtrl_GetToggleRate(&hBeacon), hBeacon.registers->CONTROLREG.U32VALUE >> 1, hBeacon.registers->STATUSREG);
+	xil_printf("%10d - %10d] STATUS %d\r\n", XTmrCtr_GetValue(&htimer1, 0), GBcnCtrl_GetToggleRate(&hBeacon), GBcnCtrl_IsExpired(&hBeacon));
 
 	while (1);
 }

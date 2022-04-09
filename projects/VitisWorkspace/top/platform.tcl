@@ -64,3 +64,7 @@ platform generate
 platform generate
 platform generate
 platform generate
+platform generate
+platform clean
+platform generate
+platform generate -domains standalone_microblaze_0 

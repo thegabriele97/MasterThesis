@@ -16,29 +16,42 @@
  * pointer to a variable of this type is then passed to the driver API
  * functions.
  */
+
+typedef union {
+	u32 U32VALUE;
+	struct f {
+		u32     START : 01;
+		u32       STB : 01;
+		u32 _reserved : 30;
+	} FIELDS;
+} union_ctrlreg_t;
+
+typedef union {
+	u32 U32VALUE;
+	struct {
+		u32   STARTED : 01;
+		u32     ERROR : 01;
+		u32 _reserved : 30;
+	} FIELDS;
+} union_statreg_t;
+
+typedef struct {
+	union_ctrlreg_t CONTROLREG;
+	union_statreg_t STATUSREG;
+	u32       		DATAREG;
+	u32 			TOGGLERATEREG;
+} watchdog_module_t;
+
 typedef struct {
 	union {
 		u32 *baseAddress;
-		struct regs_structure {
-			union {
-				u32 U32VALUE;
-				struct {
-					u32     START : 01;
-					u32       STB : 01;
-					u32 _reserved : 30;
-				} FIELDS;
-			} CONTROLREG;
-			union {
-				u32 U32VALUE;
-				struct {
-					u32   STARTED : 01;
-					u32     ERROR : 01;
-					u32 _reserved : 30;
-				} FIELDS;
-			} STATUSREG;
-			u32       DATAREG;
-			u32 TOGGLERATEREG;
-		} *registers;
+		watchdog_module_t *module[4];
+		struct {
+			watchdog_module_t *module0;
+			watchdog_module_t *module1;
+			watchdog_module_t *module2;
+			watchdog_module_t *module3;
+		} *modules;
 	};
 } GBcnCtrl;
 

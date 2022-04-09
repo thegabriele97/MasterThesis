@@ -1,10 +1,10 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
--- Date        : Mon Jan 31 11:41:52 2022
+-- Date        : Mon Jan 31 11:41:51 2022
 -- Host        : pop-os running 64-bit Pop!_OS 21.04
--- Command     : write_vhdl -force -mode funcsim
---               /home/gabriele97/Repos/MasterThesis/projects/VivadoFPGAMicroblazeTest3/VivadoFPGAMicroblazeTest3.gen/sources_1/bd/design_1/ip/design_1_ilmb_v10_0/design_1_ilmb_v10_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top design_1_ilmb_v10_0 -prefix
+--               design_1_ilmb_v10_0_ design_1_ilmb_v10_0_sim_netlist.vhdl
 -- Design      : design_1_ilmb_v10_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -52,8 +52,6 @@ entity design_1_ilmb_v10_0_lmb_v10 is
   attribute C_LMB_NUM_SLAVES of design_1_ilmb_v10_0_lmb_v10 : entity is 1;
   attribute C_LMB_PROTOCOL : integer;
   attribute C_LMB_PROTOCOL of design_1_ilmb_v10_0_lmb_v10 : entity is 0;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_ilmb_v10_0_lmb_v10 : entity is "lmb_v10";
 end design_1_ilmb_v10_0_lmb_v10;
 
 architecture STRUCTURE of design_1_ilmb_v10_0_lmb_v10 is
