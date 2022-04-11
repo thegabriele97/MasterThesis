@@ -65,5 +65,6 @@ void GBcnCtrl_Start(GBcnCtrl *InstancePtr);
 void GBcnCtrl_Toggle(GBcnCtrl *InstancePtr);
 u32 GBcnCtrl_GetToggleRate(GBcnCtrl *InstancePtr);
 int GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr);
+int GBcnCtrl_IsStarted(GBcnCtrl *InstancePtr);
 
 #endif // BEACON_WATCHDOG_H

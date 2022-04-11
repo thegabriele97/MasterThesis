@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xD379427E1260230C",
+      "boundary_crc": "0xD8B2CDECD71CDB96",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../VivadoFPGAMicroblazeTest3.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -64,6 +64,8 @@
       "status_started": {
         "type": "data",
         "direction": "O",
+        "left": "2",
+        "right": "0",
         "parameters": {
           "LAYERED_METADATA": {
             "value": "undef",
@@ -74,6 +76,8 @@
       "status_error": {
         "type": "data",
         "direction": "O",
+        "left": "2",
+        "right": "0",
         "parameters": {
           "LAYERED_METADATA": {
             "value": "undef",
@@ -84,6 +88,8 @@
       "control_start": {
         "type": "data",
         "direction": "O",
+        "left": "2",
+        "right": "0",
         "parameters": {
           "LAYERED_METADATA": {
             "value": "undef",
@@ -94,6 +100,8 @@
       "control_stb": {
         "type": "data",
         "direction": "O",
+        "left": "2",
+        "right": "0",
         "parameters": {
           "LAYERED_METADATA": {
             "value": "undef",

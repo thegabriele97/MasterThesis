@@ -17,10 +17,10 @@
 		// Users to add ports here
 
 		// Status ports
-		output wire STATUS_STARTED,
-		output wire STATUS_ERROR,
-		output wire CONTROL_START,
-		output wire CONTROL_STB,
+		output wire[3-1:0] STATUS_STARTED,
+		output wire[3-1:0] STATUS_ERROR,
+		output wire[3-1:0] CONTROL_START,
+		output wire[3-1:0] CONTROL_STB,
 		// User ports ends
 		// Do not modify the ports beyond this line
 

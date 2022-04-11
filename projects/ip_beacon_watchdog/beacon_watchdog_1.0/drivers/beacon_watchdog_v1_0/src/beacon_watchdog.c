@@ -149,3 +149,23 @@ int GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr) {
 
 	return InstancePtr->module[0].STATUSREG.FIELDS.ERROR | InstancePtr->module[1].STATUSREG.FIELDS.ERROR | InstancePtr->module[2].STATUSREG.FIELDS.ERROR;
 }
+
+/*****************************************************************************/
+/**
+*
+* Checks if the specified beacon watchdog of the device is started.
+*
+* @param	InstancePtr is a pointer to the GBcnCtrl instance.
+*
+* @return	TRUE if the watchdog is started, and FALSE otherwise.
+*
+* @note		None.
+*
+******************************************************************************/
+int GBcnCtrl_IsStarted(GBcnCtrl *InstancePtr) {
+
+	Xil_AssertVoid(InstancePtr != NULL);
+	Xil_AssertVoid(InstancePtr->baseAddress != NULL);
+
+	return InstancePtr->module[0].STATUSREG.FIELDS.STARTED && InstancePtr->module[1].STATUSREG.FIELDS.STARTED && InstancePtr->module[2].STATUSREG.FIELDS.STARTED;
+}

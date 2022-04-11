@@ -1,7 +1,7 @@
 //Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
-//Date        : Sat Apr  9 10:40:26 2022
+//Date        : Mon Apr 11 15:09:18 2022
 //Host        : pop-os running 64-bit Pop!_OS 21.10
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -26,13 +26,13 @@ module design_1
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_CLK" *) inout FIXED_IO_ps_clk;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB" *) inout FIXED_IO_ps_porb;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB" *) inout FIXED_IO_ps_srstb;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.CONTROL_START DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.CONTROL_START, LAYERED_METADATA undef" *) output control_start;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.CONTROL_STB DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.CONTROL_STB, LAYERED_METADATA undef" *) output control_stb;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.CONTROL_START DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.CONTROL_START, LAYERED_METADATA undef" *) output [2:0]control_start;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.CONTROL_STB DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.CONTROL_STB, LAYERED_METADATA undef" *) output [2:0]control_stb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_I" *) input [1:0]gpio_rtl_0_tri_i;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_O" *) output [1:0]gpio_rtl_0_tri_o;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_T" *) output [1:0]gpio_rtl_0_tri_t;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.STATUS_ERROR DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.STATUS_ERROR, LAYERED_METADATA undef" *) output status_error;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.STATUS_STARTED DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.STATUS_STARTED, LAYERED_METADATA undef" *) output status_started;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.STATUS_ERROR DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.STATUS_ERROR, LAYERED_METADATA undef" *) output [2:0]status_error;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.STATUS_STARTED DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.STATUS_STARTED, LAYERED_METADATA undef" *) output [2:0]status_started;
 
   wire [1:0]axi_gpio_0_GPIO_TRI_I;
   wire [1:0]axi_gpio_0_GPIO_TRI_O;
@@ -40,10 +40,10 @@ module design_1
   wire axi_intc_0_interrupt_INTERRUPT;
   wire axi_timer_0_interrupt;
   wire axi_timer_1_interrupt;
-  wire beacon_watchdog_0_control_start;
-  wire beacon_watchdog_0_control_stb;
-  wire beacon_watchdog_0_status_error;
-  wire beacon_watchdog_0_status_started;
+  wire [2:0]beacon_watchdog_0_control_start;
+  wire [2:0]beacon_watchdog_0_control_stb;
+  wire [2:0]beacon_watchdog_0_status_error;
+  wire [2:0]beacon_watchdog_0_status_started;
   wire mdm_1_debug_sys_rst;
   wire microblaze_0_Clk;
   wire [31:0]microblaze_0_M_AXI_DP_ARADDR;
@@ -246,12 +246,12 @@ module design_1
   wire [1:0]xlconcat_0_dout;
 
   assign axi_gpio_0_GPIO_TRI_I = gpio_rtl_0_tri_i[1:0];
-  assign control_start = beacon_watchdog_0_control_start;
-  assign control_stb = beacon_watchdog_0_control_stb;
+  assign control_start[2:0] = beacon_watchdog_0_control_start;
+  assign control_stb[2:0] = beacon_watchdog_0_control_stb;
   assign gpio_rtl_0_tri_o[1:0] = axi_gpio_0_GPIO_TRI_O;
   assign gpio_rtl_0_tri_t[1:0] = axi_gpio_0_GPIO_TRI_T;
-  assign status_error = beacon_watchdog_0_status_error;
-  assign status_started = beacon_watchdog_0_status_started;
+  assign status_error[2:0] = beacon_watchdog_0_status_error;
+  assign status_started[2:0] = beacon_watchdog_0_status_started;
   design_1_axi_gpio_0_0 axi_gpio_0
        (.gpio_io_i(axi_gpio_0_GPIO_TRI_I),
         .gpio_io_o(axi_gpio_0_GPIO_TRI_O),

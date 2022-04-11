@@ -246,10 +246,10 @@ proc create_root_design { parentCell } {
 
 
   # Create ports
-  set control_start [ create_bd_port -dir O -type data control_start ]
-  set control_stb [ create_bd_port -dir O -type data control_stb ]
-  set status_error [ create_bd_port -dir O -type data status_error ]
-  set status_started [ create_bd_port -dir O -type data status_started ]
+  set control_start [ create_bd_port -dir O -from 2 -to 0 -type data control_start ]
+  set control_stb [ create_bd_port -dir O -from 2 -to 0 -type data control_stb ]
+  set status_error [ create_bd_port -dir O -from 2 -to 0 -type data status_error ]
+  set status_started [ create_bd_port -dir O -from 2 -to 0 -type data status_started ]
 
   # Create instance: axi_gpio_0, and set properties
   set axi_gpio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0 ]

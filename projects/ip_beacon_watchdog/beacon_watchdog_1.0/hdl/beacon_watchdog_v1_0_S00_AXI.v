@@ -5,6 +5,9 @@
 	(
 		// Users to add parameters here
 
+		// Number of redundant watchdogs
+		parameter integer NUM_WATCHDOGS 		= 3,
+
 		// User parameters ends
 		// Do not modify the parameters beyond this line
 
@@ -17,10 +20,10 @@
 		// Users to add ports here
 
 		// Status ports
-		output wire U_STATUS_STARTED,
-		output wire U_STATUS_ERROR,
-		output wire U_CONTROL_START,
-		output wire U_CONTROL_STB,
+		output wire[NUM_WATCHDOGS-1:0] U_STATUS_STARTED,
+		output wire[NUM_WATCHDOGS-1:0] U_STATUS_ERROR,
+		output wire[NUM_WATCHDOGS-1:0] U_CONTROL_START,
+		output wire[NUM_WATCHDOGS-1:0] U_CONTROL_STB,
 
 		// User ports ends
 		// Do not modify the ports beyond this line
@@ -424,11 +427,6 @@
 		end
 	endgenerate
 
-	// assign U_CONTROL_START = tmr_regs[0][0];
-	// assign U_CONTROL_STB = tmr_regs[0][0][1];
-	// assign U_STATUS_STARTED = notmr_regs[1][1][1];
-	// assign U_STATUS_ERROR = notmr_regs[1][2][1];
-
     generate
 		for (idx = 0; idx < 3; idx = idx + 1) begin
 		    assign notmr_regs[0][idx] = slv_reg0[idx];
@@ -469,25 +467,34 @@
 		end
 	endgenerate
 
-	voter voter_control_start (
-		.VALUE({tmr_regs[0][0][0], tmr_regs[0][1][0], tmr_regs[0][2][0]}),
-		.VALID(U_CONTROL_START)
-	);
+	generate
+		for (idx = 0; idx < 3; idx = idx + 1) begin
+			assign U_CONTROL_START[idx] = notmr_regs[0][idx][0];
+			assign U_CONTROL_STB[idx] = notmr_regs[0][idx][1];
+			assign U_STATUS_STARTED[idx] = notmr_regs[1][idx][0];
+			assign U_STATUS_ERROR[idx] = notmr_regs[1][idx][1];
+		end
+	endgenerate
 
-	voter voter_control_stb (
-		.VALUE({tmr_regs[0][0][1], tmr_regs[0][1][1], tmr_regs[0][2][1]}),
-		.VALID(U_CONTROL_STB)
-	);
+	// voter voter_control_start (
+	// 	.VALUE({tmr_regs[0][0][0], tmr_regs[0][1][0], tmr_regs[0][2][0]}),
+	// 	.VALID(U_CONTROL_START)
+	// );
 
-	voter voter_status_started (
-		.VALUE({tmr_regs[1][0][0], tmr_regs[1][1][0], tmr_regs[1][2][0]}),
-		.VALID(U_STATUS_STARTED)
-	);
+	// voter voter_control_stb (
+	// 	.VALUE({tmr_regs[0][0][1], tmr_regs[0][1][1], tmr_regs[0][2][1]}),
+	// 	.VALID(U_CONTROL_STB)
+	// );
 
-	voter voter_status_error (
-		.VALUE({tmr_regs[1][0][1], tmr_regs[1][1][1], tmr_regs[1][2][1]}),
-		.VALID(U_STATUS_ERROR)
-	);
+	// voter voter_status_started (
+	// 	.VALUE({tmr_regs[1][0][0], tmr_regs[1][1][0], tmr_regs[1][2][0]}),
+	// 	.VALID(U_STATUS_STARTED)
+	// );
+
+	// voter voter_status_error (
+	// 	.VALUE({tmr_regs[1][0][1], tmr_regs[1][1][1], tmr_regs[1][2][1]}),
+	// 	.VALID(U_STATUS_ERROR)
+	// );
 
 	// User logic ends
 

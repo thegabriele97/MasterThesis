@@ -48,7 +48,7 @@
 
 
 // IP VLNV: gabriele97:gabriele97.polito:beacon_watchdog:1.0
-// IP Revision: 28
+// IP Revision: 30
 
 (* X_CORE_INFO = "beacon_watchdog_v1_0,Vivado 2021.1" *)
 (* CHECK_LICENSE_TYPE = "design_1_beacon_watchdog_0_0,beacon_watchdog_v1_0,{}" *)
@@ -81,10 +81,10 @@ module design_1_beacon_watchdog_0_0 (
   s00_axi_rready
 );
 
-output wire STATUS_STARTED;
-output wire STATUS_ERROR;
-output wire CONTROL_START;
-output wire CONTROL_STB;
+output wire [2 : 0] STATUS_STARTED;
+output wire [2 : 0] STATUS_ERROR;
+output wire [2 : 0] CONTROL_START;
+output wire [2 : 0] CONTROL_STB;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 5e+07, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK" *)
 input wire s00_axi_aclk;

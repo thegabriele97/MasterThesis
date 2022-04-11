@@ -45,12 +45,11 @@ typedef struct {
 typedef struct {
 	union {
 		u32 *baseAddress;
-		watchdog_module_t *module[4];
+		watchdog_module_t *module;
 		struct {
-			watchdog_module_t *module0;
-			watchdog_module_t *module1;
-			watchdog_module_t *module2;
-			watchdog_module_t *module3;
+			watchdog_module_t module0;
+			watchdog_module_t module1;
+			watchdog_module_t module2;
 		} *modules;
 	};
 } GBcnCtrl;
@@ -66,5 +65,6 @@ void GBcnCtrl_Start(GBcnCtrl *InstancePtr);
 void GBcnCtrl_Toggle(GBcnCtrl *InstancePtr);
 u32 GBcnCtrl_GetToggleRate(GBcnCtrl *InstancePtr);
 int GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr);
+int GBcnCtrl_IsStarted(GBcnCtrl *InstancePtr);
 
 #endif // BEACON_WATCHDOG_H
