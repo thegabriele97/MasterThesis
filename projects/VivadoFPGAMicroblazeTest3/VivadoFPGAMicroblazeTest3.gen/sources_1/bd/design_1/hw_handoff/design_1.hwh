@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Apr 11 15:09:20 2022" VIVADOVERSION="2021.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Apr 11 15:43:34 2022" VIVADOVERSION="2021.1">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z020" NAME="design_1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -5540,7 +5540,7 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
-    <MODULE COREREVISION="30" FULLNAME="/beacon_watchdog_0" HWVERSION="1.0" INSTANCE="beacon_watchdog_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="beacon_watchdog" VLNV="gabriele97:gabriele97.polito:beacon_watchdog:1.0">
+    <MODULE COREREVISION="31" FULLNAME="/beacon_watchdog_0" HWVERSION="1.0" INSTANCE="beacon_watchdog_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="beacon_watchdog" VLNV="gabriele97:gabriele97.polito:beacon_watchdog:1.0">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
         <ADDRESSBLOCK ACCESS="" INTERFACE="S00_AXI" NAME="S00_AXI_reg" RANGE="4096" USAGE="register"/>

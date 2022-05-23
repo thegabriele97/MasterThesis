@@ -1,0 +1,80 @@
+{
+   "ActiveEmotionalView":"Color Coded",
+   "Color Coded_ExpandedHierarchyInLayout":"",
+   "Color Coded_Layout":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port FIXED_IO -pg 1 -lvl 6 -x 2330 -y 80 -defaultsOSRD
+preplace port uart_rtl_0 -pg 1 -lvl 6 -x 2330 -y 380 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 1 -x 120 -y 100 -defaultsOSRD
+preplace inst microblaze_0 -pg 1 -lvl 2 -x 630 -y 660 -defaultsOSRD
+preplace inst microblaze_0_local_memory -pg 1 -lvl 2 -x 630 -y 470 -defaultsOSRD
+preplace inst microblaze_0_axi_intc -pg 1 -lvl 4 -x 1780 -y 770 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 4 -x 1780 -y 580 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 120 -y -130 -defaultsOSRD
+preplace inst smartconnect_0 -pg 1 -lvl 3 -x 1380 -y 750 -defaultsOSRD
+preplace inst beacon_watchdog_0 -pg 1 -lvl 4 -x 1780 -y 950 -defaultsOSRD
+preplace inst axi_timer_0 -pg 1 -lvl 4 -x 1780 -y 1130 -defaultsOSRD
+preplace inst smartconnect_1 -pg 1 -lvl 3 -x 1380 -y 1460 -defaultsOSRD
+preplace inst microblaze_1 -pg 1 -lvl 2 -x 630 -y 1420 -defaultsOSRD
+preplace inst microblaze_1_local_memory -pg 1 -lvl 2 -x 630 -y 1240 -defaultsOSRD
+preplace inst microblaze_1_axi_intc -pg 1 -lvl 4 -x 1780 -y 1350 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 4 -x 1780 -y 1560 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 5 -x 2190 -y 960 -defaultsOSRD
+preplace inst axi_uartlite_0 -pg 1 -lvl 4 -x 1780 -y 390 -defaultsOSRD
+preplace netloc axi_gpio_0_ip2intc_irpt 1 3 2 1610 1480 1950
+preplace netloc axi_timer_0_interrupt 1 3 2 1600 1470 1960
+preplace netloc beacon_watchdog_0_CONTROL_START 1 4 1 1960 960n
+preplace netloc beacon_watchdog_0_CONTROL_STB 1 4 1 1970 980n
+preplace netloc beacon_watchdog_0_STATUS_ERROR 1 4 1 1970 940n
+preplace netloc beacon_watchdog_0_STATUS_STARTED 1 4 1 1960 920n
+preplace netloc mdm_1_debug_sys_rst 1 0 5 -90 0 N 0 N 0 N 0 1970
+preplace netloc microblaze_1_Clk 1 0 4 -100 10 330 770 920 850 1580
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 -90 -230 320J
+preplace netloc rst_ps7_0_50M_bus_struct_reset 1 1 1 350 -150n
+preplace netloc rst_ps7_0_50M_mb_reset 1 1 3 340 1510 930J 1380 1540J
+preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 1 3 N -90 910 410 1560
+preplace netloc xlconcat_0_dout 1 4 2 N 1560 2300
+preplace netloc axi_uartlite_0_UART 1 4 2 NJ 380 NJ
+preplace netloc microblaze_0_M_AXI_DP 1 2 1 880 680n
+preplace netloc microblaze_0_debug 1 1 4 360 360 NJ 360 1600J 470 1950
+preplace netloc microblaze_0_dlmb_1 1 1 2 370 370 880
+preplace netloc microblaze_0_ilmb_1 1 1 2 380 380 870
+preplace netloc microblaze_0_interrupt 1 1 4 380 550 890J 490 NJ 490 1960
+preplace netloc microblaze_1_M_AXI_DP 1 2 1 N 1440
+preplace netloc microblaze_1_debug 1 1 4 370 1320 930J 1240 NJ 1240 1950
+preplace netloc microblaze_1_dlmb_1 1 1 2 370 1140 890J
+preplace netloc microblaze_1_ilmb_1 1 1 2 380 1150 870
+preplace netloc microblaze_1_interrupt 1 1 4 380 1330 NJ 1330 1550J 1460 1950
+preplace netloc processing_system7_0_FIXED_IO 1 1 5 NJ 70 NJ 70 NJ 70 N 70 2300
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 2 NJ 90 900
+preplace netloc smartconnect_0_M00_AXI 1 3 1 1540 560n
+preplace netloc smartconnect_0_M01_AXI 1 3 1 1570 720n
+preplace netloc smartconnect_0_M02_AXI 1 3 1 1590 750n
+preplace netloc smartconnect_0_M03_AXI 1 3 1 1570 770n
+preplace netloc smartconnect_0_M04_AXI 1 3 1 1520 370n
+preplace netloc smartconnect_1_M00_AXI 1 2 2 930 860 1520
+preplace netloc smartconnect_1_M01_AXI 1 3 1 1530 1300n
+preplace netloc smartconnect_1_M02_AXI 1 3 1 1520 1480n
+levelinfo -pg 1 -120 120 630 1380 1780 2190 2330
+pagesize -pg 1 -db -bbox -sgen -120 -270 2450 1750
+",
+   "Color Coded_ScaleFactor":"0.529252",
+   "Color Coded_TopLeft":"-17,402",
+   "Default View_ScaleFactor":"0.69738",
+   "Default View_TopLeft":"1,-892",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 1 -x -30 -y -210 -defaultsOSRD
+preplace inst microblaze_0 -pg 1 -lvl 2 -x 570 -y -180 -defaultsOSRD
+levelinfo -pg 1 -270 -30 570 810
+pagesize -pg 1 -db -bbox -sgen -270 -610 810 200
+"
+}
+{
+   "da_axi4_cnt":"1",
+   "da_board_cnt":"1",
+   "da_clkrst_cnt":"4",
+   "da_mb_cnt":"2",
+   "da_ps7_cnt":"1"
+}

@@ -48,7 +48,7 @@
 
 
 // IP VLNV: gabriele97:gabriele97.polito:beacon_watchdog:1.0
-// IP Revision: 30
+// IP Revision: 31
 
 `timescale 1ns/1ps
 

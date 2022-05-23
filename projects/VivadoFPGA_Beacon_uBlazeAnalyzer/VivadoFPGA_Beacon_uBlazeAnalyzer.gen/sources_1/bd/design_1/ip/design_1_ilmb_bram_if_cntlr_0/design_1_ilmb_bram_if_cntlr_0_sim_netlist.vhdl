@@ -1,7 +1,7 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
--- Date        : Thu Mar 24 15:15:30 2022
+-- Date        : Mon Apr 11 20:22:26 2022
 -- Host        : pop-os running 64-bit Pop!_OS 21.10
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/gabriele97/Repos/MasterThesis/projects/VivadoFPGA_Beacon_uBlazeAnalyzer/VivadoFPGA_Beacon_uBlazeAnalyzer.gen/sources_1/bd/design_1/ip/design_1_ilmb_bram_if_cntlr_0/design_1_ilmb_bram_if_cntlr_0_sim_netlist.vhdl
@@ -113,7 +113,7 @@ entity design_1_ilmb_bram_if_cntlr_0_lmb_bram_if_cntlr is
   attribute C_FAULT_INJECT : integer;
   attribute C_FAULT_INJECT of design_1_ilmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is 0;
   attribute C_HIGHADDR : string;
-  attribute C_HIGHADDR of design_1_ilmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is "64'b0000000000000000000000000000000000000000000000001111111111111111";
+  attribute C_HIGHADDR of design_1_ilmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is "64'b0000000000000000000000000000000000000000000000000001111111111111";
   attribute C_INTERCONNECT : integer;
   attribute C_INTERCONNECT of design_1_ilmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is 0;
   attribute C_LMB_AWIDTH : integer;
@@ -506,7 +506,7 @@ architecture STRUCTURE of design_1_ilmb_bram_if_cntlr_0 is
   attribute C_FAULT_INJECT : integer;
   attribute C_FAULT_INJECT of U0 : label is 0;
   attribute C_HIGHADDR : string;
-  attribute C_HIGHADDR of U0 : label is "64'b0000000000000000000000000000000000000000000000001111111111111111";
+  attribute C_HIGHADDR of U0 : label is "64'b0000000000000000000000000000000000000000000000000001111111111111";
   attribute C_INTERCONNECT : integer;
   attribute C_INTERCONNECT of U0 : label is 0;
   attribute C_LMB_AWIDTH : integer;
@@ -542,7 +542,7 @@ architecture STRUCTURE of design_1_ilmb_bram_if_cntlr_0 is
   attribute x_interface_info of BRAM_EN_A : signal is "xilinx.com:interface:bram:1.0 BRAM_PORT EN";
   attribute x_interface_info of BRAM_Rst_A : signal is "xilinx.com:interface:bram:1.0 BRAM_PORT RST";
   attribute x_interface_parameter : string;
-  attribute x_interface_parameter of BRAM_Rst_A : signal is "XIL_INTERFACENAME BRAM_PORT, MEM_SIZE 65536, MASTER_TYPE BRAM_CTRL, MEM_WIDTH 32, MEM_ECC NONE, READ_LATENCY 1";
+  attribute x_interface_parameter of BRAM_Rst_A : signal is "XIL_INTERFACENAME BRAM_PORT, MEM_SIZE 8192, MASTER_TYPE BRAM_CTRL, MEM_WIDTH 32, MEM_ECC NONE, READ_LATENCY 1";
   attribute x_interface_info of LMB_AddrStrobe : signal is "xilinx.com:interface:lmb:1.0 SLMB ADDRSTROBE";
   attribute x_interface_info of LMB_Clk : signal is "xilinx.com:signal:clock:1.0 CLK.LMB_Clk CLK";
   attribute x_interface_parameter of LMB_Clk : signal is "XIL_INTERFACENAME CLK.LMB_Clk, ASSOCIATED_BUSIF SLMB:SLMB1:SLMB2:SLMB3, ASSOCIATED_RESET LMB_Rst, FREQ_HZ 50000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0";

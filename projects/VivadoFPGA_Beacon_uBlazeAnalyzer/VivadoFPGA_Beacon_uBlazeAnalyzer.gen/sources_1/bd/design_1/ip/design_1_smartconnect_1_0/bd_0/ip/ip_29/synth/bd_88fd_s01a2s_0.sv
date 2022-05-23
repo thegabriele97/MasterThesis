@@ -52,8 +52,8 @@
 
 (* X_CORE_INFO = "sc_axi2sc_v1_0_7_top,Vivado 2021.1" *)
 (* CHECK_LICENSE_TYPE = "bd_88fd_s01a2s_0,sc_axi2sc_v1_0_7_top,{}" *)
-(* CORE_GENERATION_INFO = "bd_88fd_s01a2s_0,sc_axi2sc_v1_0_7_top,{x_ipProduct=Vivado 2021.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=sc_axi2sc,x_ipVersion=1.0,x_ipCoreRevision=7,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_AXI_ADDR_WIDTH=32,C_AXI_ID_WIDTH=5,C_AXI_RDATA_WIDTH=32,C_AXI_WDATA_WIDTH=32,C_SC_ADDR_WIDTH=32,C_SC_ID_WIDTH=5,C_SC_RDATA_WIDTH=32,C_SC_WDATA_WIDTH=32,C_SC_RUSER_BITS_PER_BYTE=0,C_SC_WUSER_BITS_PER_BYTE=0,C_SC_ARUSER_WIDTH=0,C_SC_AWUSER_WIDTH=0,C_SC_BUSER_WIDTH=0,C_MSC_ROUTE_WIDTH=6,C_SSC_ROUTE_WI\
-DTH=4,C_AWPAYLD_WIDTH=151,C_ARPAYLD_WIDTH=151,C_WPAYLD_WIDTH=57,C_RPAYLD_WIDTH=58,C_BPAYLD_WIDTH=12}" *)
+(* CORE_GENERATION_INFO = "bd_88fd_s01a2s_0,sc_axi2sc_v1_0_7_top,{x_ipProduct=Vivado 2021.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=sc_axi2sc,x_ipVersion=1.0,x_ipCoreRevision=7,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_AXI_ADDR_WIDTH=32,C_AXI_ID_WIDTH=5,C_AXI_RDATA_WIDTH=32,C_AXI_WDATA_WIDTH=32,C_SC_ADDR_WIDTH=32,C_SC_ID_WIDTH=5,C_SC_RDATA_WIDTH=32,C_SC_WDATA_WIDTH=32,C_SC_RUSER_BITS_PER_BYTE=0,C_SC_WUSER_BITS_PER_BYTE=0,C_SC_ARUSER_WIDTH=114,C_SC_AWUSER_WIDTH=114,C_SC_BUSER_WIDTH=114,C_MSC_ROUTE_WIDTH=7,C_SSC_RO\
+UTE_WIDTH=5,C_AWPAYLD_WIDTH=265,C_ARPAYLD_WIDTH=265,C_WPAYLD_WIDTH=58,C_RPAYLD_WIDTH=59,C_BPAYLD_WIDTH=126}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module bd_88fd_s01a2s_0 (
   aclk,
@@ -134,7 +134,7 @@ input wire s_sc_r_send;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC_R RECV" *)
 output wire s_sc_r_recv;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC_R PAYLD" *)
-input wire [57 : 0] s_sc_r_payld;
+input wire [58 : 0] s_sc_r_payld;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC_B REQ" *)
 input wire s_sc_b_req;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC_B INFO" *)
@@ -144,7 +144,7 @@ input wire s_sc_b_send;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC_B RECV" *)
 output wire s_sc_b_recv;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC_B PAYLD" *)
-input wire [11 : 0] s_sc_b_payld;
+input wire [125 : 0] s_sc_b_payld;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AR REQ" *)
 output wire m_sc_ar_req;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AR INFO" *)
@@ -154,7 +154,7 @@ output wire m_sc_ar_send;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AR RECV" *)
 input wire m_sc_ar_recv;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AR PAYLD" *)
-output wire [150 : 0] m_sc_ar_payld;
+output wire [264 : 0] m_sc_ar_payld;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AW REQ" *)
 output wire m_sc_aw_req;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AW INFO" *)
@@ -164,7 +164,7 @@ output wire m_sc_aw_send;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AW RECV" *)
 input wire m_sc_aw_recv;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_AW PAYLD" *)
-output wire [150 : 0] m_sc_aw_payld;
+output wire [264 : 0] m_sc_aw_payld;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_W REQ" *)
 output wire m_sc_w_req;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_W INFO" *)
@@ -174,7 +174,7 @@ output wire m_sc_w_send;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_W RECV" *)
 input wire m_sc_w_recv;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC_W PAYLD" *)
-output wire [56 : 0] m_sc_w_payld;
+output wire [57 : 0] m_sc_w_payld;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI AWID" *)
 input wire [4 : 0] s_axi_awid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI AWADDR" *)
@@ -265,16 +265,16 @@ input wire s_axi_rready;
     .C_SC_WDATA_WIDTH(32),
     .C_SC_RUSER_BITS_PER_BYTE(0),
     .C_SC_WUSER_BITS_PER_BYTE(0),
-    .C_SC_ARUSER_WIDTH(0),
-    .C_SC_AWUSER_WIDTH(0),
-    .C_SC_BUSER_WIDTH(0),
-    .C_MSC_ROUTE_WIDTH(6),
-    .C_SSC_ROUTE_WIDTH(4),
-    .C_AWPAYLD_WIDTH(151),
-    .C_ARPAYLD_WIDTH(151),
-    .C_WPAYLD_WIDTH(57),
-    .C_RPAYLD_WIDTH(58),
-    .C_BPAYLD_WIDTH(12)
+    .C_SC_ARUSER_WIDTH(114),
+    .C_SC_AWUSER_WIDTH(114),
+    .C_SC_BUSER_WIDTH(114),
+    .C_MSC_ROUTE_WIDTH(7),
+    .C_SSC_ROUTE_WIDTH(5),
+    .C_AWPAYLD_WIDTH(265),
+    .C_ARPAYLD_WIDTH(265),
+    .C_WPAYLD_WIDTH(58),
+    .C_RPAYLD_WIDTH(59),
+    .C_BPAYLD_WIDTH(126)
   ) inst (
     .aclk(aclk),
     .s_sc_r_req(s_sc_r_req),

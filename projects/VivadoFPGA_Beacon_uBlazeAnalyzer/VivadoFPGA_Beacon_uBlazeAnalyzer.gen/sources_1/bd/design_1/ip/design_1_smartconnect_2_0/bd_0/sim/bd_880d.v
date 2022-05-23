@@ -6,7 +6,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "bd_880d,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=bd_880d,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=58,numReposBlks=47,numNonXlnxBlks=0,numHierBlks=11,maxHierDepth=2,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=SBD,synth_mode=Global}" *) (* HW_HANDOFF = "design_1_smartconnect_2_0.hwdef" *) 
+(* CORE_GENERATION_INFO = "bd_880d,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=bd_880d,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=58,numReposBlks=47,numNonXlnxBlks=0,numHierBlks=11,maxHierDepth=2,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=SBD,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "design_1_smartconnect_2_0.hwdef" *) 
 module bd_880d
    (M00_AXI_araddr,
     M00_AXI_arprot,

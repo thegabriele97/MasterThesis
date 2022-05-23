@@ -80,15 +80,15 @@ input wire s_sc_aclk;
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 aresetn RST" *)
 input wire s_sc_aresetn;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC REQ" *)
-input wire [1 : 0] s_sc_req;
+input wire [2 : 0] s_sc_req;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC INFO" *)
-input wire [1 : 0] s_sc_info;
+input wire [2 : 0] s_sc_info;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC SEND" *)
-input wire [1 : 0] s_sc_send;
+input wire [2 : 0] s_sc_send;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC RECV" *)
-output wire [1 : 0] s_sc_recv;
+output wire [2 : 0] s_sc_recv;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 S_SC PAYLD" *)
-input wire [150 : 0] s_sc_payld;
+input wire [264 : 0] s_sc_payld;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME m_sc_aclk, ASSOCIATED_BUSIF M_SC, ASSOCIATED_RESET m_sc_aresetn, ASSOCIATED_CLKEN m_sc_aclken, FREQ_HZ 50000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 m_sc_aclk CLK" *)
 input wire m_sc_aclk;
@@ -96,15 +96,15 @@ input wire m_sc_aclk;
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 m_sc_aresetn RST" *)
 input wire m_sc_aresetn;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC RECV" *)
-input wire [3 : 0] m_sc_recv;
+input wire [4 : 0] m_sc_recv;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC SEND" *)
-output wire [3 : 0] m_sc_send;
+output wire [4 : 0] m_sc_send;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC REQ" *)
-output wire [3 : 0] m_sc_req;
+output wire [4 : 0] m_sc_req;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC INFO" *)
-output wire [3 : 0] m_sc_info;
+output wire [4 : 0] m_sc_info;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sc:1.0 M_SC PAYLD" *)
-output wire [150 : 0] m_sc_payld;
+output wire [264 : 0] m_sc_payld;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS_ARB TVALID" *)
 output wire m_axis_arb_tvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS_ARB TREADY" *)
@@ -122,19 +122,19 @@ output wire [15 : 0] m_axis_arb_tdata;
     .C_FIFO_OUTPUT_REG(1),
     .C_ENABLE_PIPELINING(8'H01),
     .C_SYNCHRONIZATION_STAGES(3),
-    .C_NUM_SI(2),
-    .C_NUM_MI(4),
+    .C_NUM_SI(3),
+    .C_NUM_MI(5),
     .C_CHANNEL(3),
-    .C_PAYLD_WIDTH(151),
-    .C_S_NUM_BYTES_ARRAY(64'H0000000400000004),
-    .C_M_NUM_BYTES_ARRAY(128'H00000004000000040000000400000004),
-    .C_PRIORITY_ARB_ARRAY(16'H0000),
+    .C_PAYLD_WIDTH(265),
+    .C_S_NUM_BYTES_ARRAY(96'H000000040000000400000004),
+    .C_M_NUM_BYTES_ARRAY(160'H0000000400000004000000040000000400000004),
+    .C_PRIORITY_ARB_ARRAY(3'B000),
     .C_USER_BITS_PER_BYTE(0),
     .C_ARBITER_MODE(1),
-    .C_SC_ROUTE_WIDTH(6),
+    .C_SC_ROUTE_WIDTH(7),
     .C_ID_WIDTH(5),
     .C_ADDR_WIDTH(32),
-    .C_USER_WIDTH(0),
+    .C_USER_WIDTH(114),
     .C_MAX_PAYLD_BYTES(4),
     .C_S_PIPELINE(0),
     .C_M_PIPELINE(0),

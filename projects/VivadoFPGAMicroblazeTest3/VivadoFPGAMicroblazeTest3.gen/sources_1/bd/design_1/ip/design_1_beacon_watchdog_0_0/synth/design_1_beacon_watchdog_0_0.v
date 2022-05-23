@@ -48,7 +48,7 @@
 
 
 // IP VLNV: gabriele97:gabriele97.polito:beacon_watchdog:1.0
-// IP Revision: 30
+// IP Revision: 31
 
 (* X_CORE_INFO = "beacon_watchdog_v1_0,Vivado 2021.1" *)
 (* CHECK_LICENSE_TYPE = "design_1_beacon_watchdog_0_0,beacon_watchdog_v1_0,{}" *)

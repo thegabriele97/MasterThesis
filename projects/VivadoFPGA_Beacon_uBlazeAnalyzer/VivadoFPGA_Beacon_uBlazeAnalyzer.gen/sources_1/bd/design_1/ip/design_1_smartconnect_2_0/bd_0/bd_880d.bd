@@ -2431,7 +2431,7 @@
                 "value": "1"
               },
               "NUM_SEG": {
-                "value": "3"
+                "value": "7"
               },
               "NUM_WRITE_OUTSTANDING": {
                 "value": "1"
@@ -2485,7 +2485,7 @@
                 "value": "1"
               },
               "SEG002_BASE_ADDR": {
-                "value": "0x0000000041400000"
+                "value": "0x0000000041800000"
               },
               "SEG002_SECURE_READ": {
                 "value": "0"
@@ -2497,12 +2497,96 @@
                 "value": "0b0000000000000000000000000000000000000000000000000000000000000010"
               },
               "SEG002_SIZE": {
-                "value": "12"
+                "value": "16"
               },
               "SEG002_SUPPORTS_READ": {
                 "value": "1"
               },
               "SEG002_SUPPORTS_WRITE": {
+                "value": "1"
+              },
+              "SEG003_BASE_ADDR": {
+                "value": "0x0000000042800000"
+              },
+              "SEG003_SECURE_READ": {
+                "value": "0"
+              },
+              "SEG003_SECURE_WRITE": {
+                "value": "0"
+              },
+              "SEG003_SEP_ROUTE": {
+                "value": "0b0000000000000000000000000000000000000000000000000000000000000110"
+              },
+              "SEG003_SIZE": {
+                "value": "16"
+              },
+              "SEG003_SUPPORTS_READ": {
+                "value": "1"
+              },
+              "SEG003_SUPPORTS_WRITE": {
+                "value": "1"
+              },
+              "SEG004_BASE_ADDR": {
+                "value": "0x0000000042C00000"
+              },
+              "SEG004_SECURE_READ": {
+                "value": "0"
+              },
+              "SEG004_SECURE_WRITE": {
+                "value": "0"
+              },
+              "SEG004_SEP_ROUTE": {
+                "value": "0b0000000000000000000000000000000000000000000000000000000000010010"
+              },
+              "SEG004_SIZE": {
+                "value": "16"
+              },
+              "SEG004_SUPPORTS_READ": {
+                "value": "1"
+              },
+              "SEG004_SUPPORTS_WRITE": {
+                "value": "1"
+              },
+              "SEG005_BASE_ADDR": {
+                "value": "0x0000000043400000"
+              },
+              "SEG005_SECURE_READ": {
+                "value": "0"
+              },
+              "SEG005_SECURE_WRITE": {
+                "value": "0"
+              },
+              "SEG005_SEP_ROUTE": {
+                "value": "0b0000000000000000000000000000000000000000000000000000000000001110"
+              },
+              "SEG005_SIZE": {
+                "value": "12"
+              },
+              "SEG005_SUPPORTS_READ": {
+                "value": "1"
+              },
+              "SEG005_SUPPORTS_WRITE": {
+                "value": "1"
+              },
+              "SEG006_BASE_ADDR": {
+                "value": "0x0000000043C00000"
+              },
+              "SEG006_SECURE_READ": {
+                "value": "0"
+              },
+              "SEG006_SECURE_WRITE": {
+                "value": "0"
+              },
+              "SEG006_SEP_ROUTE": {
+                "value": "0b0000000000000000000000000000000000000000000000000000000000001010"
+              },
+              "SEG006_SIZE": {
+                "value": "16"
+              },
+              "SEG006_SUPPORTS_READ": {
+                "value": "1"
+              },
+              "SEG006_SUPPORTS_WRITE": {
                 "value": "1"
               },
               "SINGLE_ISSUING": {
@@ -2544,7 +2628,7 @@
                 "value": "0"
               },
               "MEP_IDENTIFIER": {
-                "value": "4"
+                "value": "3"
               },
               "MEP_IDENTIFIER_WIDTH": {
                 "value": "3"
@@ -2568,7 +2652,7 @@
                 "value": "READ_WRITE"
               },
               "SEP_ROUTE_WIDTH": {
-                "value": "3"
+                "value": "5"
               },
               "SINGLE_ISSUING": {
                 "value": "1"
@@ -2660,7 +2744,7 @@
                 "value": "1"
               },
               "NUM_SEG": {
-                "value": "3"
+                "value": "7"
               },
               "NUM_WRITE_OUTSTANDING": {
                 "value": "1"
@@ -2702,6 +2786,42 @@
                 "value": "32"
               },
               "SEP002_WDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP003_PROTOCOL": {
+                "value": "AXI4LITE"
+              },
+              "SEP003_RDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP003_WDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP004_PROTOCOL": {
+                "value": "AXI4LITE"
+              },
+              "SEP004_RDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP004_WDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP005_PROTOCOL": {
+                "value": "AXI4LITE"
+              },
+              "SEP005_RDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP005_WDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP006_PROTOCOL": {
+                "value": "AXI4LITE"
+              },
+              "SEP006_RDATA_WIDTH": {
+                "value": "32"
+              },
+              "SEP006_WDATA_WIDTH": {
                 "value": "32"
               },
               "SINGLE_ISSUING": {
@@ -4871,10 +4991,10 @@
                 "value": "0b101"
               },
               "SSC003_ROUTE": {
-                "value": "0b101"
+                "value": "0b111"
               },
               "SSC004_ROUTE": {
-                "value": "0b111"
+                "value": "0b101"
               },
               "SSC005_ROUTE": {
                 "value": "0b101"
@@ -6017,10 +6137,10 @@
                 "value": "0b101"
               },
               "SSC003_ROUTE": {
-                "value": "0b101"
+                "value": "0b111"
               },
               "SSC004_ROUTE": {
-                "value": "0b111"
+                "value": "0b101"
               },
               "SSC005_ROUTE": {
                 "value": "0b101"
@@ -7187,10 +7307,10 @@
                 "value": "0b101"
               },
               "SSC003_ROUTE": {
-                "value": "0b101"
+                "value": "0b111"
               },
               "SSC004_ROUTE": {
-                "value": "0b111"
+                "value": "0b101"
               },
               "SSC005_ROUTE": {
                 "value": "0b101"
