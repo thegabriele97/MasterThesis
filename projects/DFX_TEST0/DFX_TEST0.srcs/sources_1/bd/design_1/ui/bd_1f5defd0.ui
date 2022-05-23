@@ -1,0 +1,81 @@
+{
+   "ActiveEmotionalView":"Color Coded",
+   "Color Coded_ExpandedHierarchyInLayout":"",
+   "Color Coded_Layout":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port GPIO_LEDS -pg 1 -lvl 8 -x 3220 -y 660 -defaultsOSRD
+preplace port ICAP -pg 1 -lvl 8 -x 3220 -y 810 -defaultsOSRD
+preplace port CNT_MOD_M03_AXI -pg 1 -lvl 8 -x 3220 -y 330 -defaultsOSRD
+preplace port DDR -pg 1 -lvl 8 -x 3220 -y -780 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 8 -x 3220 -y -760 -defaultsOSRD
+preplace port port-id_CLK_PER -pg 1 -lvl 8 -x 3220 -y -640 -defaultsOSRD
+preplace port port-id_DFX_trigger -pg 1 -lvl 0 -x -150 -y 940 -defaultsOSRD
+preplace portBus ARESTN_PER -pg 1 -lvl 8 -x 3220 -y -420 -defaultsOSRD
+preplace inst microblaze_0 -pg 1 -lvl 1 -x 170 -y -10 -defaultsOSRD
+preplace inst microblaze_0_local_memory -pg 1 -lvl 2 -x 710 -y 10 -defaultsOSRD
+preplace inst microblaze_0_axi_periph -pg 1 -lvl 2 -x 710 -y 600 -defaultsOSRD
+preplace inst microblaze_0_axi_intc -pg 1 -lvl 5 -x 2055 -y 450 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 5 -x 2055 -y 250 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 170 -y -460 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 5 -x 2055 -y 660 -defaultsOSRD
+preplace inst dfx_decoupler_0 -pg 1 -lvl 7 -x 3030 -y 340 -defaultsOSRD
+preplace inst dfx_controller_0 -pg 1 -lvl 5 -x 2055 -y 920 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 1 -x 170 -y -740 -defaultsOSRD
+preplace inst axi_bram_ctrl_0 -pg 1 -lvl 5 -x 2055 -y -100 -defaultsOSRD
+preplace inst axi_bram_ctrl_0_bram -pg 1 -lvl 6 -x 2500 -y -100 -defaultsOSRD
+preplace inst smartconnect_0 -pg 1 -lvl 3 -x 1060 -y 1090 -defaultsOSRD
+preplace netloc dfx_controller_0_vsm_VS_0_rm_decouple 1 5 2 2350 350 N
+preplace netloc dfx_controller_0_vsm_VS_0_rm_reset 1 5 3 2340 -420 N -420 NJ
+preplace netloc mdm_1_Interrupt 1 4 2 1470 170 2290
+preplace netloc mdm_1_debug_sys_rst 1 0 6 -100 -350 N -350 N -350 N -350 N -350 2330
+preplace netloc microblaze_0_Clk 1 0 8 -130 -630 440 920 880 920 N 920 1430 -640 N -640 N -640 N
+preplace netloc rst_ps7_0_50M_bus_struct_reset 1 1 1 460 -480n
+preplace netloc rst_ps7_0_50M_mb_reset 1 0 5 -120 -360 430J -360 NJ -360 N -360 1460
+preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 1 4 420 890 860 950 N 950 1440
+preplace netloc DFX_trigger_1 1 0 5 N 940 NJ 940 NJ 940 N 940 1420
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 -120 -620 420
+preplace netloc dfx_controller_0_vsm_VS_0_rm_shutdown_req 1 4 2 1470 790 2290
+preplace netloc axi_gpio_0_GPIO 1 5 3 N 660 N 660 N
+preplace netloc dfx_controller_0_ICAP 1 5 3 2360 810 N 810 NJ
+preplace netloc dfx_decoupler_0_rp_CNTMOD_B2R 1 7 1 N 330
+preplace netloc microblaze_0_axi_dp 1 1 1 410 10n
+preplace netloc microblaze_0_axi_periph_M02_AXI 1 2 3 N 570 N 570 1460
+preplace netloc microblaze_0_axi_periph_M03_AXI 1 2 5 890 330 N 330 N 330 NJ 330 N
+preplace netloc microblaze_0_axi_periph_M04_AXI 1 2 3 N 610 N 610 1420
+preplace netloc microblaze_0_debug 1 0 6 -100 100 NJ 100 NJ 100 N 100 N 100 2300
+preplace netloc microblaze_0_dlmb_1 1 1 1 450 -30n
+preplace netloc microblaze_0_ilmb_1 1 1 1 430 -10n
+preplace netloc microblaze_0_intc_axi 1 2 3 NJ 530 N 530 1450
+preplace netloc microblaze_0_interrupt 1 0 6 -110 90 NJ 90 NJ 90 N 90 N 90 2320
+preplace netloc microblaze_0_mdm_axi 1 2 3 870 230 N 230 N
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 470 -740n
+preplace netloc processing_system7_0_DDR 1 1 7 NJ -780 NJ -780 N -780 N -780 NJ -780 N -780 NJ
+preplace netloc processing_system7_0_FIXED_IO 1 1 7 NJ -760 NJ -760 N -760 N -760 NJ -760 N -760 NJ
+preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 5 1 NJ -100
+preplace netloc microblaze_0_axi_periph_M05_AXI 1 2 3 880 -120 N -120 N
+preplace netloc smartconnect_0_M00_AXI 1 0 4 -120 -850 NJ -850 NJ -850 1200
+preplace netloc microblaze_0_axi_periph_M06_AXI 1 2 1 870 650n
+preplace netloc dfx_controller_0_M_AXI_MEM 1 2 4 900 160 NJ 160 N 160 2310
+preplace netloc microblaze_0_axi_periph_M07_AXI 1 0 3 -130 -860 NJ -860 860
+levelinfo -pg 1 -150 170 710 1060 1400 2055 2500 3030 3220
+pagesize -pg 1 -db -bbox -sgen -290 -1100 3410 1710
+",
+   "Color Coded_ScaleFactor":"0.617394",
+   "Color Coded_TopLeft":"-373,-719",
+   "Default View_ScaleFactor":"0.557009",
+   "Default View_TopLeft":"0,-645",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+levelinfo -pg 1 0 10
+pagesize -pg 1 -db -bbox -sgen 0 0 10 10
+"
+}
+{
+   "da_axi4_cnt":"15",
+   "da_board_cnt":"5",
+   "da_bram_cntlr_cnt":"5",
+   "da_clkrst_cnt":"1",
+   "da_mb_cnt":"2",
+   "da_ps7_cnt":"3"
+}
