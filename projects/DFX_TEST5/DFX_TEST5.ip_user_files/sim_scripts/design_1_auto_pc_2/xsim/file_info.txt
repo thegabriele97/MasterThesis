@@ -1,0 +1,2 @@
+design_1_auto_pc_2.v,verilog,xil_defaultlib,../../../../../DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/ip/design_1_auto_pc_2/sim/design_1_auto_pc_2.v,incdir="$ref_dir/../../../ipstatic/ipshared/ec67/hdl"incdir="../../../../../DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/ipshared/ec67/hdl"
+glbl.v,Verilog,xil_defaultlib,glbl.v

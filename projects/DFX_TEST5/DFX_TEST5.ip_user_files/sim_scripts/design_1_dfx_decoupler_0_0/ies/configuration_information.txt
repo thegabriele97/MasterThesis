@@ -1,0 +1,487 @@
+Core Configuration Properties
+=============================
+CONFIG.HAS_AXI_LITE                                  0
+CONFIG.HAS_AXIS_CONTROL                              0
+CONFIG.HAS_AXIS_STATUS                               0
+CONFIG.HAS_SIGNAL_CONTROL                            1
+CONFIG.HAS_SIGNAL_STATUS                             0
+CONFIG.ALWAYS_HAVE_AXI_CLK                           0
+CONFIG.INTF.DBG.VLNV                                 xilinx.com:interface:mbdebug_rtl:3.0
+CONFIG.INTF.DBG.MODE                                 master
+CONFIG.INTF.DBG.CDC_STAGES                           0
+CONFIG.INTF.DBG.SIGNAL.CLK.PRESENT                   1
+CONFIG.INTF.DBG.SIGNAL.CLK.DECOUPLED                 1
+CONFIG.INTF.DBG.SIGNAL.CLK.DECOUPLED_VALUE           0x0
+CONFIG.INTF.DBG.SIGNAL.CLK.WIDTH                     1
+CONFIG.INTF.DBG.SIGNAL.CLK.DIRECTION                 s
+CONFIG.INTF.DBG.SIGNAL.CLK.RESOURCE                  infer
+CONFIG.INTF.DBG.SIGNAL.CLK.MANAGEMENT                auto
+CONFIG.INTF.DBG.SIGNAL.TDI.PRESENT                   1
+CONFIG.INTF.DBG.SIGNAL.TDI.DECOUPLED                 1
+CONFIG.INTF.DBG.SIGNAL.TDI.DECOUPLED_VALUE           0x0
+CONFIG.INTF.DBG.SIGNAL.TDI.WIDTH                     1
+CONFIG.INTF.DBG.SIGNAL.TDI.DIRECTION                 s
+CONFIG.INTF.DBG.SIGNAL.TDI.RESOURCE                  infer
+CONFIG.INTF.DBG.SIGNAL.TDI.MANAGEMENT                auto
+CONFIG.INTF.DBG.SIGNAL.TDO.PRESENT                   1
+CONFIG.INTF.DBG.SIGNAL.TDO.DECOUPLED                 1
+CONFIG.INTF.DBG.SIGNAL.TDO.DECOUPLED_VALUE           0x0
+CONFIG.INTF.DBG.SIGNAL.TDO.WIDTH                     1
+CONFIG.INTF.DBG.SIGNAL.TDO.DIRECTION                 s
+CONFIG.INTF.DBG.SIGNAL.TDO.RESOURCE                  infer
+CONFIG.INTF.DBG.SIGNAL.TDO.MANAGEMENT                auto
+CONFIG.INTF.DBG.SIGNAL.REG_EN.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.REG_EN.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.REG_EN.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.REG_EN.WIDTH                  8
+CONFIG.INTF.DBG.SIGNAL.REG_EN.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.REG_EN.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.REG_EN.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.SHIFT.PRESENT                 1
+CONFIG.INTF.DBG.SIGNAL.SHIFT.DECOUPLED               1
+CONFIG.INTF.DBG.SIGNAL.SHIFT.DECOUPLED_VALUE         0x0
+CONFIG.INTF.DBG.SIGNAL.SHIFT.WIDTH                   1
+CONFIG.INTF.DBG.SIGNAL.SHIFT.DIRECTION               s
+CONFIG.INTF.DBG.SIGNAL.SHIFT.RESOURCE                infer
+CONFIG.INTF.DBG.SIGNAL.SHIFT.MANAGEMENT              auto
+CONFIG.INTF.DBG.SIGNAL.CAPTURE.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.CAPTURE.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.CAPTURE.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.CAPTURE.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.CAPTURE.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.CAPTURE.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.CAPTURE.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.UPDATE.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.UPDATE.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.UPDATE.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.UPDATE.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.UPDATE.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.UPDATE.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.UPDATE.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.RST.PRESENT                   1
+CONFIG.INTF.DBG.SIGNAL.RST.DECOUPLED                 1
+CONFIG.INTF.DBG.SIGNAL.RST.DECOUPLED_VALUE           0x0
+CONFIG.INTF.DBG.SIGNAL.RST.WIDTH                     1
+CONFIG.INTF.DBG.SIGNAL.RST.DIRECTION                 s
+CONFIG.INTF.DBG.SIGNAL.RST.RESOURCE                  infer
+CONFIG.INTF.DBG.SIGNAL.RST.MANAGEMENT                auto
+CONFIG.INTF.DBG.SIGNAL.TRIG_IN.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.TRIG_IN.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.TRIG_IN.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.TRIG_IN.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.TRIG_IN.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.TRIG_IN.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.TRIG_IN.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.PRESENT           1
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.DECOUPLED         1
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.DECOUPLED_VALUE   0x0
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.WIDTH             1
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.DIRECTION         s
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.RESOURCE          infer
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.MANAGEMENT        auto
+CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.PRESENT              1
+CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.DECOUPLED            1
+CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.DECOUPLED_VALUE      0x0
+CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.WIDTH                1
+CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.DIRECTION            s
+CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.RESOURCE             infer
+CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.MANAGEMENT           auto
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.PRESENT          1
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.DECOUPLED        1
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.DECOUPLED_VALUE  0x0
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.WIDTH            1
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.DIRECTION        s
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.RESOURCE         infer
+CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.MANAGEMENT       auto
+CONFIG.INTF.DBG.SIGNAL.TRCLK.PRESENT                 1
+CONFIG.INTF.DBG.SIGNAL.TRCLK.DECOUPLED               1
+CONFIG.INTF.DBG.SIGNAL.TRCLK.DECOUPLED_VALUE         0x0
+CONFIG.INTF.DBG.SIGNAL.TRCLK.WIDTH                   1
+CONFIG.INTF.DBG.SIGNAL.TRCLK.DIRECTION               s
+CONFIG.INTF.DBG.SIGNAL.TRCLK.RESOURCE                infer
+CONFIG.INTF.DBG.SIGNAL.TRCLK.MANAGEMENT              auto
+CONFIG.INTF.DBG.SIGNAL.TRDATA.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.TRDATA.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.TRDATA.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.TRDATA.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.TRDATA.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.TRDATA.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.TRDATA.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.TRREADY.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.TRREADY.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.TRREADY.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.TRREADY.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.TRREADY.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.TRREADY.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.TRREADY.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.TRVALID.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.TRVALID.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.TRVALID.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.TRVALID.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.TRVALID.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.TRVALID.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.TRVALID.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.AWADDR.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.AWADDR.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.AWADDR.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.AWADDR.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.AWADDR.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.AWADDR.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.AWADDR.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.AWVALID.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.AWVALID.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.AWVALID.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.AWVALID.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.AWVALID.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.AWVALID.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.AWVALID.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.AWREADY.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.AWREADY.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.AWREADY.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.AWREADY.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.AWREADY.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.AWREADY.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.AWREADY.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.WDATA.PRESENT                 1
+CONFIG.INTF.DBG.SIGNAL.WDATA.DECOUPLED               1
+CONFIG.INTF.DBG.SIGNAL.WDATA.DECOUPLED_VALUE         0x0
+CONFIG.INTF.DBG.SIGNAL.WDATA.WIDTH                   1
+CONFIG.INTF.DBG.SIGNAL.WDATA.DIRECTION               s
+CONFIG.INTF.DBG.SIGNAL.WDATA.RESOURCE                infer
+CONFIG.INTF.DBG.SIGNAL.WDATA.MANAGEMENT              auto
+CONFIG.INTF.DBG.SIGNAL.WVALID.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.WVALID.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.WVALID.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.WVALID.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.WVALID.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.WVALID.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.WVALID.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.WREADY.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.WREADY.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.WREADY.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.WREADY.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.WREADY.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.WREADY.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.WREADY.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.BRESP.PRESENT                 1
+CONFIG.INTF.DBG.SIGNAL.BRESP.DECOUPLED               1
+CONFIG.INTF.DBG.SIGNAL.BRESP.DECOUPLED_VALUE         0x0
+CONFIG.INTF.DBG.SIGNAL.BRESP.WIDTH                   1
+CONFIG.INTF.DBG.SIGNAL.BRESP.DIRECTION               s
+CONFIG.INTF.DBG.SIGNAL.BRESP.RESOURCE                infer
+CONFIG.INTF.DBG.SIGNAL.BRESP.MANAGEMENT              auto
+CONFIG.INTF.DBG.SIGNAL.BVALID.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.BVALID.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.BVALID.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.BVALID.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.BVALID.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.BVALID.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.BVALID.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.BREADY.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.BREADY.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.BREADY.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.BREADY.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.BREADY.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.BREADY.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.BREADY.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.ARADDR.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.ARADDR.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.ARADDR.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.ARADDR.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.ARADDR.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.ARADDR.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.ARADDR.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.ARVALID.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.ARVALID.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.ARVALID.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.ARVALID.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.ARVALID.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.ARVALID.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.ARVALID.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.ARREADY.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.ARREADY.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.ARREADY.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.ARREADY.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.ARREADY.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.ARREADY.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.ARREADY.MANAGEMENT            auto
+CONFIG.INTF.DBG.SIGNAL.RDATA.PRESENT                 1
+CONFIG.INTF.DBG.SIGNAL.RDATA.DECOUPLED               1
+CONFIG.INTF.DBG.SIGNAL.RDATA.DECOUPLED_VALUE         0x0
+CONFIG.INTF.DBG.SIGNAL.RDATA.WIDTH                   1
+CONFIG.INTF.DBG.SIGNAL.RDATA.DIRECTION               s
+CONFIG.INTF.DBG.SIGNAL.RDATA.RESOURCE                infer
+CONFIG.INTF.DBG.SIGNAL.RDATA.MANAGEMENT              auto
+CONFIG.INTF.DBG.SIGNAL.RRESP.PRESENT                 1
+CONFIG.INTF.DBG.SIGNAL.RRESP.DECOUPLED               1
+CONFIG.INTF.DBG.SIGNAL.RRESP.DECOUPLED_VALUE         0x0
+CONFIG.INTF.DBG.SIGNAL.RRESP.WIDTH                   1
+CONFIG.INTF.DBG.SIGNAL.RRESP.DIRECTION               s
+CONFIG.INTF.DBG.SIGNAL.RRESP.RESOURCE                infer
+CONFIG.INTF.DBG.SIGNAL.RRESP.MANAGEMENT              auto
+CONFIG.INTF.DBG.SIGNAL.RVALID.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.RVALID.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.RVALID.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.RVALID.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.RVALID.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.RVALID.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.RVALID.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.RREADY.PRESENT                1
+CONFIG.INTF.DBG.SIGNAL.RREADY.DECOUPLED              1
+CONFIG.INTF.DBG.SIGNAL.RREADY.DECOUPLED_VALUE        0x0
+CONFIG.INTF.DBG.SIGNAL.RREADY.WIDTH                  1
+CONFIG.INTF.DBG.SIGNAL.RREADY.DIRECTION              s
+CONFIG.INTF.DBG.SIGNAL.RREADY.RESOURCE               infer
+CONFIG.INTF.DBG.SIGNAL.RREADY.MANAGEMENT             auto
+CONFIG.INTF.DBG.SIGNAL.DISABLE.PRESENT               1
+CONFIG.INTF.DBG.SIGNAL.DISABLE.DECOUPLED             1
+CONFIG.INTF.DBG.SIGNAL.DISABLE.DECOUPLED_VALUE       0x0
+CONFIG.INTF.DBG.SIGNAL.DISABLE.WIDTH                 1
+CONFIG.INTF.DBG.SIGNAL.DISABLE.DIRECTION             s
+CONFIG.INTF.DBG.SIGNAL.DISABLE.RESOURCE              infer
+CONFIG.INTF.DBG.SIGNAL.DISABLE.MANAGEMENT            auto
+
+
+dfx_decoupler_v1_0::set_property -dict [list \
+                               CONFIG.HAS_AXI_LITE                                  0 \
+                               CONFIG.HAS_AXIS_CONTROL                              0 \
+                               CONFIG.HAS_AXIS_STATUS                               0 \
+                               CONFIG.HAS_SIGNAL_CONTROL                            1 \
+                               CONFIG.HAS_SIGNAL_STATUS                             0 \
+                               CONFIG.ALWAYS_HAVE_AXI_CLK                           0 \
+                               CONFIG.INTF.DBG.VLNV                                 xilinx.com:interface:mbdebug_rtl:3.0 \
+                               CONFIG.INTF.DBG.MODE                                 master \
+                               CONFIG.INTF.DBG.CDC_STAGES                           0 \
+                               CONFIG.INTF.DBG.SIGNAL.CLK.PRESENT                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.CLK.DECOUPLED                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.CLK.DECOUPLED_VALUE           0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.CLK.WIDTH                     1 \
+                               CONFIG.INTF.DBG.SIGNAL.CLK.DIRECTION                 s \
+                               CONFIG.INTF.DBG.SIGNAL.CLK.RESOURCE                  infer \
+                               CONFIG.INTF.DBG.SIGNAL.CLK.MANAGEMENT                auto \
+                               CONFIG.INTF.DBG.SIGNAL.TDI.PRESENT                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.TDI.DECOUPLED                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.TDI.DECOUPLED_VALUE           0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TDI.WIDTH                     1 \
+                               CONFIG.INTF.DBG.SIGNAL.TDI.DIRECTION                 s \
+                               CONFIG.INTF.DBG.SIGNAL.TDI.RESOURCE                  infer \
+                               CONFIG.INTF.DBG.SIGNAL.TDI.MANAGEMENT                auto \
+                               CONFIG.INTF.DBG.SIGNAL.TDO.PRESENT                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.TDO.DECOUPLED                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.TDO.DECOUPLED_VALUE           0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TDO.WIDTH                     1 \
+                               CONFIG.INTF.DBG.SIGNAL.TDO.DIRECTION                 s \
+                               CONFIG.INTF.DBG.SIGNAL.TDO.RESOURCE                  infer \
+                               CONFIG.INTF.DBG.SIGNAL.TDO.MANAGEMENT                auto \
+                               CONFIG.INTF.DBG.SIGNAL.REG_EN.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.REG_EN.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.REG_EN.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.REG_EN.WIDTH                  8 \
+                               CONFIG.INTF.DBG.SIGNAL.REG_EN.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.REG_EN.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.REG_EN.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.SHIFT.PRESENT                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.SHIFT.DECOUPLED               1 \
+                               CONFIG.INTF.DBG.SIGNAL.SHIFT.DECOUPLED_VALUE         0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.SHIFT.WIDTH                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.SHIFT.DIRECTION               s \
+                               CONFIG.INTF.DBG.SIGNAL.SHIFT.RESOURCE                infer \
+                               CONFIG.INTF.DBG.SIGNAL.SHIFT.MANAGEMENT              auto \
+                               CONFIG.INTF.DBG.SIGNAL.CAPTURE.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.CAPTURE.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.CAPTURE.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.CAPTURE.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.CAPTURE.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.CAPTURE.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.CAPTURE.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.UPDATE.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.UPDATE.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.UPDATE.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.UPDATE.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.UPDATE.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.UPDATE.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.UPDATE.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.RST.PRESENT                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.RST.DECOUPLED                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.RST.DECOUPLED_VALUE           0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.RST.WIDTH                     1 \
+                               CONFIG.INTF.DBG.SIGNAL.RST.DIRECTION                 s \
+                               CONFIG.INTF.DBG.SIGNAL.RST.RESOURCE                  infer \
+                               CONFIG.INTF.DBG.SIGNAL.RST.MANAGEMENT                auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_IN.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_IN.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_IN.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_IN.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_IN.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_IN.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_IN.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.PRESENT           1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.DECOUPLED         1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.DECOUPLED_VALUE   0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.WIDTH             1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.DIRECTION         s \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.RESOURCE          infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_IN.MANAGEMENT        auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.PRESENT              1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.DECOUPLED            1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.DECOUPLED_VALUE      0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.WIDTH                1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.DIRECTION            s \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.RESOURCE             infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_OUT.MANAGEMENT           auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.PRESENT          1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.DECOUPLED        1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.DECOUPLED_VALUE  0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.WIDTH            1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.DIRECTION        s \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.RESOURCE         infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRIG_ACK_OUT.MANAGEMENT       auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRCLK.PRESENT                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRCLK.DECOUPLED               1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRCLK.DECOUPLED_VALUE         0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRCLK.WIDTH                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRCLK.DIRECTION               s \
+                               CONFIG.INTF.DBG.SIGNAL.TRCLK.RESOURCE                infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRCLK.MANAGEMENT              auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRDATA.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRDATA.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRDATA.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRDATA.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRDATA.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.TRDATA.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRDATA.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRREADY.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRREADY.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRREADY.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRREADY.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRREADY.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.TRREADY.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRREADY.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.TRVALID.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRVALID.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRVALID.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.TRVALID.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.TRVALID.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.TRVALID.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.TRVALID.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.AWADDR.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWADDR.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWADDR.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.AWADDR.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWADDR.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.AWADDR.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.AWADDR.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.AWVALID.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWVALID.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWVALID.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.AWVALID.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWVALID.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.AWVALID.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.AWVALID.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.AWREADY.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWREADY.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWREADY.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.AWREADY.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.AWREADY.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.AWREADY.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.AWREADY.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.WDATA.PRESENT                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.WDATA.DECOUPLED               1 \
+                               CONFIG.INTF.DBG.SIGNAL.WDATA.DECOUPLED_VALUE         0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.WDATA.WIDTH                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.WDATA.DIRECTION               s \
+                               CONFIG.INTF.DBG.SIGNAL.WDATA.RESOURCE                infer \
+                               CONFIG.INTF.DBG.SIGNAL.WDATA.MANAGEMENT              auto \
+                               CONFIG.INTF.DBG.SIGNAL.WVALID.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.WVALID.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.WVALID.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.WVALID.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.WVALID.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.WVALID.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.WVALID.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.WREADY.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.WREADY.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.WREADY.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.WREADY.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.WREADY.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.WREADY.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.WREADY.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.BRESP.PRESENT                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.BRESP.DECOUPLED               1 \
+                               CONFIG.INTF.DBG.SIGNAL.BRESP.DECOUPLED_VALUE         0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.BRESP.WIDTH                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.BRESP.DIRECTION               s \
+                               CONFIG.INTF.DBG.SIGNAL.BRESP.RESOURCE                infer \
+                               CONFIG.INTF.DBG.SIGNAL.BRESP.MANAGEMENT              auto \
+                               CONFIG.INTF.DBG.SIGNAL.BVALID.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.BVALID.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.BVALID.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.BVALID.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.BVALID.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.BVALID.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.BVALID.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.BREADY.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.BREADY.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.BREADY.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.BREADY.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.BREADY.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.BREADY.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.BREADY.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.ARADDR.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARADDR.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARADDR.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.ARADDR.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARADDR.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.ARADDR.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.ARADDR.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.ARVALID.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARVALID.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARVALID.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.ARVALID.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARVALID.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.ARVALID.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.ARVALID.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.ARREADY.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARREADY.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARREADY.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.ARREADY.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.ARREADY.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.ARREADY.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.ARREADY.MANAGEMENT            auto \
+                               CONFIG.INTF.DBG.SIGNAL.RDATA.PRESENT                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.RDATA.DECOUPLED               1 \
+                               CONFIG.INTF.DBG.SIGNAL.RDATA.DECOUPLED_VALUE         0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.RDATA.WIDTH                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.RDATA.DIRECTION               s \
+                               CONFIG.INTF.DBG.SIGNAL.RDATA.RESOURCE                infer \
+                               CONFIG.INTF.DBG.SIGNAL.RDATA.MANAGEMENT              auto \
+                               CONFIG.INTF.DBG.SIGNAL.RRESP.PRESENT                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.RRESP.DECOUPLED               1 \
+                               CONFIG.INTF.DBG.SIGNAL.RRESP.DECOUPLED_VALUE         0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.RRESP.WIDTH                   1 \
+                               CONFIG.INTF.DBG.SIGNAL.RRESP.DIRECTION               s \
+                               CONFIG.INTF.DBG.SIGNAL.RRESP.RESOURCE                infer \
+                               CONFIG.INTF.DBG.SIGNAL.RRESP.MANAGEMENT              auto \
+                               CONFIG.INTF.DBG.SIGNAL.RVALID.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.RVALID.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.RVALID.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.RVALID.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.RVALID.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.RVALID.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.RVALID.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.RREADY.PRESENT                1 \
+                               CONFIG.INTF.DBG.SIGNAL.RREADY.DECOUPLED              1 \
+                               CONFIG.INTF.DBG.SIGNAL.RREADY.DECOUPLED_VALUE        0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.RREADY.WIDTH                  1 \
+                               CONFIG.INTF.DBG.SIGNAL.RREADY.DIRECTION              s \
+                               CONFIG.INTF.DBG.SIGNAL.RREADY.RESOURCE               infer \
+                               CONFIG.INTF.DBG.SIGNAL.RREADY.MANAGEMENT             auto \
+                               CONFIG.INTF.DBG.SIGNAL.DISABLE.PRESENT               1 \
+                               CONFIG.INTF.DBG.SIGNAL.DISABLE.DECOUPLED             1 \
+                               CONFIG.INTF.DBG.SIGNAL.DISABLE.DECOUPLED_VALUE       0x0 \
+                               CONFIG.INTF.DBG.SIGNAL.DISABLE.WIDTH                 1 \
+                               CONFIG.INTF.DBG.SIGNAL.DISABLE.DIRECTION             s \
+                               CONFIG.INTF.DBG.SIGNAL.DISABLE.RESOURCE              infer \
+                               CONFIG.INTF.DBG.SIGNAL.DISABLE.MANAGEMENT            auto \
+] [get_ips design_1_dfx_decoupler_0_0]
+

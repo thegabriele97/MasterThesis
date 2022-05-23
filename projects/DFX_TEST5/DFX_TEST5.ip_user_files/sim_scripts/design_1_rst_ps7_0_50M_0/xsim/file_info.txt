@@ -1,0 +1,2 @@
+design_1_rst_ps7_0_50M_0.vhd,vhdl,xil_defaultlib,../../../../../DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/sim/design_1_rst_ps7_0_50M_0.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v

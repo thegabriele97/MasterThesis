@@ -1,0 +1,6 @@
+verilog xil_defaultlib --include "/mnt/Volume/PopOSFiles/Vivado/Vivado/2021.1/data/xilinx_vip/include" --include "../../../../../DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/ipshared/ec67/hdl" \
+"../../../../../DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/ip/design_1_xbar_0/sim/design_1_xbar_0.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

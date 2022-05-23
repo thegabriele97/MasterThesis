@@ -1,0 +1,11 @@
+===================================
+Configuration Memory information
+===================================
+File Format        BIN
+Interface          SMAPX32
+Size               512K
+Start Address      0x00000000
+End Address        0x0007FFFF
+
+Addr1         Addr2         Date                    File(s)
+0x00000000    0x0005F2AF    May 13 17:13:43 2022    ./Repos/MasterThesis/projects/DFX_TEST5/DFX_TEST5.runs/impl_1/microblaze_0_instance_ublaze_wrapper_partial.bit
