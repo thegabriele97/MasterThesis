@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="asd" location="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace_DFX/asd" platform="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace_DFX/DFX_HW/export/DFX_HW/DFX_HW.xpfm" platformUID="xilinx:::0.0(custom)" systemProject="DFXTest_Bare_system" sysConfig="DFX_HW" runtime="cpp" cpu="standalone_ps7_cortexa9_0" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="c56fa58c856d25f5423849d9291644c6">
+  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.251182057">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.1395104984" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>

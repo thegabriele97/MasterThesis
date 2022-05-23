@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="testddrmem" location="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace_DFX/testddrmem" platform="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace_DFX/DFX3_HW/export/DFX3_HW/DFX3_HW.xpfm" platformUID="xilinx:pynq-z2::0.0(custom)" systemProject="testddrmem_system" sysConfig="DFX3_HW" runtime="cpp" cpu="standalone_ps7_cortexa9_0" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="a84e573d6342bb60d14d3b86c0cb2ef7">
+  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.1544119192">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.1575200925" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="zynq_dram_test"/>
+</sdkproject:SdkProject>

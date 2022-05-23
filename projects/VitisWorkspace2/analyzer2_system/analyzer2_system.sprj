@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<systemproject:SystemProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" xmlns:systemproject="http://www.xilinx.com/systemproject" name="analyzer2_system" platform="/home/gabriele97/Repos/MasterThesis/projects/VitisWorkspace2/uBlaze_Analyzer2_hw/export/uBlaze_Analyzer2_hw/uBlaze_Analyzer2_hw.xpfm" platformUID="xilinx:::0.0(custom)" sysConfig="uBlaze_Analyzer2_hw" runtime="cpp" rootFSLocation="" linuxImage="" sysroot="">
+  <configuration name="Debug" id="com.xilinx.sdx.system.managedbuilder.debugConfiguration.341885219">
+    <configBuildOptions xsi:type="systemproject:SystemOptions">
+      <applications name="TestBed_App" domainName="freertos10_xilinx_microblaze_0" domainPrettyName="freertos10_xilinx_microblaze_0" appBuildConfig="Debug"/>
+      <applications name="TestBed_Analyzer" domainName="standalone_microblaze_1" domainPrettyName="standalone_microblaze_1" appBuildConfig="Debug"/>
+      <options xsi:type="sdkproject:SdkOptions" generateSdCard="true"/>
+    </configBuildOptions>
+    <lastBuildOptions xsi:type="systemproject:SystemOptions">
+      <applications name="TestBed_App" domainName="freertos10_xilinx_microblaze_0" domainPrettyName="freertos10_xilinx_microblaze_0" appBuildConfig="Debug"/>
+      <applications name="TestBed_Analyzer" domainName="standalone_microblaze_1" domainPrettyName="standalone_microblaze_1" appBuildConfig="Debug"/>
+      <options xsi:type="sdkproject:SdkOptions" generateSdCard="true"/>
+    </lastBuildOptions>
+  </configuration>
+  <configuration name="Release" id="com.xilinx.sdx.system.managedbuilder.releaseConfiguration.2114430991">
+    <configBuildOptions xsi:type="systemproject:SystemOptions">
+      <applications name="TestBed_App" domainName="freertos10_xilinx_microblaze_0" domainPrettyName="freertos10_xilinx_microblaze_0" appBuildConfig="Release"/>
+      <applications name="TestBed_Analyzer" domainName="standalone_microblaze_1" domainPrettyName="standalone_microblaze_1" appBuildConfig="Release"/>
+      <options xsi:type="sdkproject:SdkOptions" generateSdCard="true"/>
+    </configBuildOptions>
+  </configuration>
+</systemproject:SystemProject>
