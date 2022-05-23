@@ -1,0 +1,2 @@
+microblaze_0.vhd,vhdl,xil_defaultlib,../../../../DFX_TEST3.gen/sources_1/ip/microblaze_0/sim/microblaze_0.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v
