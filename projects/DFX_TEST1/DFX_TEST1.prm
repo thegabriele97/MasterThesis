@@ -1,0 +1,11 @@
+===================================
+Configuration Memory information
+===================================
+File Format        BIN
+Interface          SMAPX32
+Size               128M
+Start Address      0x00000000
+End Address        0x07FFFFFF
+
+Addr1         Addr2         Date                    File(s)
+0x00000000    0x0001CAC7    Apr 23 23:12:15 2022    /home/gabriele97/Repos/MasterThesis/projects/DFX_TEST1/DFX_TEST1.runs/child_0_impl_1/cnt_mod4_CNT_MOD16_WRAPPER_partial.bit

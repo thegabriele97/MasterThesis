@@ -1,0 +1,4 @@
+CNT_MOD16_v1_0_S00_AXI.v,verilog,xil_defaultlib,../../../../DFX_TEST1.gen/sources_1/ip/CNT_MOD16_0/hdl/CNT_MOD16_v1_0_S00_AXI.v,
+CNT_MOD16_v1_0.v,verilog,xil_defaultlib,../../../../DFX_TEST1.gen/sources_1/ip/CNT_MOD16_0/hdl/CNT_MOD16_v1_0.v,
+CNT_MOD16_0.v,verilog,xil_defaultlib,../../../../DFX_TEST1.gen/sources_1/ip/CNT_MOD16_0/sim/CNT_MOD16_0.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v

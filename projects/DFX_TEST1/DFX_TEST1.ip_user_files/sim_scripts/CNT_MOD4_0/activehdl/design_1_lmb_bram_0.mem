@@ -1,0 +1,16 @@
+// Mem file initialization records.
+//
+// SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+// Vivado v2021.1 (64-bit)
+// Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+// Created on Friday April 22, 2022 - 04:18:56 pm, from:
+//
+//     Map file     - /home/gabriele97/Repos/MasterThesis/projects/DFX_TEST1/DFX_TEST1.gen/sources_1/bd/design_1/design_1.bmm
+//     Data file(s) - /home/gabriele97/Repos/MasterThesis/projects/DFX_TEST1/DFX_TEST1.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_0/data/mb_bootloop_le.elf
+//
+// Address space 'bd_design_1_i_microblaze_0.bd_design_1_i_microblaze_0_local_memory_lmb_bram_32K_2_ADDR_SPACE', bit lane [31:0].
+//
+// Bus width = 32 bits, number of bus blocks = 1.
+
+@00000000
+    B8000000

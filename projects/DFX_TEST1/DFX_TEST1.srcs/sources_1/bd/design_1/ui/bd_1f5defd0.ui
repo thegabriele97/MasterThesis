@@ -1,0 +1,99 @@
+{
+   "ActiveEmotionalView":"Color Coded",
+   "Color Coded_ExpandedHierarchyInLayout":"",
+   "Color Coded_Layout":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -lvl 9 -x 3820 -y -90 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 9 -x 3820 -y -60 -defaultsOSRD
+preplace port rp_CNTMOD_B2R -pg 1 -lvl 9 -x 3820 -y 580 -defaultsOSRD
+preplace port ICAP -pg 1 -lvl 9 -x 3820 -y 770 -defaultsOSRD
+preplace port port-id_CLK -pg 1 -lvl 9 -x 3820 -y 260 -defaultsOSRD
+preplace port port-id_VS0_reset -pg 1 -lvl 9 -x 3820 -y 810 -defaultsOSRD
+preplace port port-id_VS0_error -pg 1 -lvl 9 -x 3820 -y 830 -defaultsOSRD
+preplace port port-id_ICAP_DBG_CSIB -pg 1 -lvl 0 -x -20 -y 1190 -defaultsOSRD
+preplace port port-id_ICAP_DBG_RDWRB -pg 1 -lvl 0 -x -20 -y 1220 -defaultsOSRD
+preplace portBus VS0_trigger -pg 1 -lvl 0 -x -20 -y 860 -defaultsOSRD
+preplace portBus ICAP_DBG_I -pg 1 -lvl 0 -x -20 -y 1110 -defaultsOSRD
+preplace portBus ICAP_DBG_O -pg 1 -lvl 0 -x -20 -y 1140 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 2 -x 680 -y 100 -defaultsOSRD
+preplace inst microblaze_0 -pg 1 -lvl 2 -x 680 -y 370 -defaultsOSRD
+preplace inst microblaze_0_local_memory -pg 1 -lvl 3 -x 1100 -y 380 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 5 -x 1900 -y -30 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 200 -y 300 -defaultsOSRD
+preplace inst smartconnect_0 -pg 1 -lvl 4 -x 1390 -y 570 -defaultsOSRD
+preplace inst smartconnect_1 -pg 1 -lvl 4 -x 1390 -y 120 -defaultsOSRD
+preplace inst dfx_decoupler_0 -pg 1 -lvl 8 -x 3620 -y 590 -defaultsOSRD
+preplace inst dfx_controller_0 -pg 1 -lvl 5 -x 1900 -y 840 -defaultsOSRD
+preplace inst ila_0 -pg 1 -lvl 6 -x 2330 -y 1070 -defaultsOSRD
+preplace inst ila_1 -pg 1 -lvl 7 -x 3290 -y 1120 -defaultsOSRD
+preplace inst smartconnect_4 -pg 1 -lvl 6 -x 2330 -y 550 -defaultsOSRD
+preplace netloc ICAP_DBG_CSIB_1 1 0 7 0J 1150 NJ 1150 NJ 1150 NJ 1150 NJ 1150 NJ 1150 NJ
+preplace netloc ICAP_DBG_I_1 1 0 7 10J 1000 NJ 1000 NJ 1000 NJ 1000 NJ 1000 NJ 1000 2470J
+preplace netloc ICAP_DBG_O_1 1 0 7 NJ 1140 NJ 1140 NJ 1140 NJ 1140 NJ 1140 NJ 1140 2470J
+preplace netloc ICAP_DBG_RDWRB_1 1 0 7 10J 1170 NJ 1170 NJ 1170 NJ 1170 NJ 1170 NJ 1170 NJ
+preplace netloc VS0_trigger_1 1 0 5 0 880 NJ 880 NJ 880 NJ 880 NJ
+preplace netloc dfx_controller_0_vsm_VS_0_event_error 1 5 4 2180 830 NJ 830 N 830 N
+preplace netloc dfx_controller_0_vsm_VS_0_rm_decouple 1 5 3 2140 750 NJ 750 3390
+preplace netloc dfx_controller_0_vsm_VS_0_rm_reset 1 5 4 2160 810 NJ 810 N 810 N
+preplace netloc dfx_controller_0_vsm_VS_0_rm_shutdown_req 1 4 2 1580 710 2130
+preplace netloc mdm_1_debug_sys_rst 1 0 6 10 400 390 270 N 270 NJ 270 N 270 2130
+preplace netloc microblaze_0_Clk 1 0 9 0 190 420 -10 940 130 1220 210 1560 560 2150 760 2480 260 N 260 N
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 3 10 200 N 200 920J
+preplace netloc rst_ps7_0_50M_bus_struct_reset 1 1 2 380 460 930
+preplace netloc rst_ps7_0_50M_mb_reset 1 1 1 400 260n
+preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 1 5 410J 280 N 280 1230J 220 1570 580 N
+preplace netloc dfx_controller_0_ICAP 1 5 4 N 770 NJ 770 N 770 N
+preplace netloc dfx_controller_0_M_AXI_MEM 1 5 1 2170 520n
+preplace netloc dfx_decoupler_0_rp_CNTMOD_B2R 1 8 1 N 580
+preplace netloc ila_0_TRIG_OUT 1 6 1 N 1070
+preplace netloc microblaze_0_M_AXI_DP 1 2 2 930 290 1210
+preplace netloc microblaze_0_debug 1 1 5 430 -130 N -130 N -130 N -130 2130
+preplace netloc microblaze_0_dlmb_1 1 2 1 N 350
+preplace netloc microblaze_0_ilmb_1 1 2 1 N 370
+preplace netloc processing_system7_0_DDR 1 2 7 920 -120 NJ -120 N -120 2170 -90 N -90 N -90 N
+preplace netloc processing_system7_0_FIXED_IO 1 2 7 930 -110 NJ -110 N -110 2140 -60 N -60 N -60 N
+preplace netloc processing_system7_0_M_AXI_GP0 1 2 2 N 100 1220
+preplace netloc smartconnect_0_M00_AXI 1 4 4 1550J 460 NJ 460 NJ 460 3390
+preplace netloc smartconnect_0_M01_AXI 1 4 1 1540 560n
+preplace netloc smartconnect_0_M02_AXI 1 3 2 1230 30 1530
+preplace netloc smartconnect_0_M03_AXI 1 4 2 1580 540 NJ
+preplace netloc smartconnect_1_M00_AXI 1 4 1 1540 -50n
+preplace netloc smartconnect_4_M00_AXI 1 1 6 440 0 NJ 0 NJ 0 1550J 50 NJ 50 2470
+levelinfo -pg 1 -20 200 680 1100 1390 1900 2330 3290 3620 3820
+pagesize -pg 1 -db -bbox -sgen -210 -300 4000 1980
+",
+   "Color Coded_ScaleFactor":"0.717938",
+   "Color Coded_TopLeft":"781,-42",
+   "Default View_ScaleFactor":"0.861404",
+   "Default View_TopLeft":"277,-153",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -lvl 5 -x 1210 -y -40 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 5 -x 1210 -y 0 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 2 -x 280 -y 30 -defaultsOSRD
+preplace inst microblaze_0 -pg 1 -lvl 2 -x 280 -y 280 -defaultsOSRD
+preplace inst microblaze_0_local_memory -pg 1 -lvl 3 -x 680 -y 290 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 4 -x 980 -y 280 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x -440 -y 280 -defaultsOSRD
+preplace netloc microblaze_0_Clk 1 0 3 -630 380 -240 370 530
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 3 -640 130 N 130 520J
+preplace netloc rst_ps7_0_50M_mb_reset 1 1 1 -250 240n
+preplace netloc rst_ps7_0_50M_bus_struct_reset 1 1 2 -260 190 520
+preplace netloc mdm_1_debug_sys_rst 1 0 5 -620 390 N 390 N 390 NJ 390 1130
+preplace netloc microblaze_0_dlmb_1 1 2 1 N 260
+preplace netloc microblaze_0_ilmb_1 1 2 1 N 280
+preplace netloc microblaze_0_debug 1 1 4 -240 180 N 180 N 180 1130
+preplace netloc processing_system7_0_DDR 1 2 3 530 -40 NJ -40 NJ
+preplace netloc processing_system7_0_FIXED_IO 1 2 3 530 0 NJ 0 NJ
+levelinfo -pg 1 -660 -440 280 680 980 1210
+pagesize -pg 1 -db -bbox -sgen -660 -400 1330 510
+"
+}
+{
+   "da_axi4_cnt":"3",
+   "da_bram_cntlr_cnt":"1",
+   "da_clkrst_cnt":"2",
+   "da_mb_cnt":"1",
+   "da_ps7_cnt":"1"
+}
