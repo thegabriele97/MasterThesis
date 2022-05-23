@@ -1,0 +1,5 @@
+vhdl xil_defaultlib  \
+"../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_decoupler_1_0/dfx_decoupler_design_1_dfx_decoupler_1_0.vhd" \
+"../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_decoupler_1_0/sim/design_1_dfx_decoupler_1_0.vhd" \
+
+nosort

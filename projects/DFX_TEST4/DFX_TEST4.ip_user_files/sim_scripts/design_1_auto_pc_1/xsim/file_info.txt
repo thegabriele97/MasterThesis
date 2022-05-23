@@ -1,0 +1,2 @@
+design_1_auto_pc_1.v,verilog,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_auto_pc_1/sim/design_1_auto_pc_1.v,incdir="$ref_dir/../../../ipstatic/ipshared/ec67/hdl"incdir="../../../ipstatic/ipshared/ec67/hdl"
+glbl.v,Verilog,xil_defaultlib,glbl.v

@@ -1,0 +1,7 @@
+dfx_controller_design_1_dfx_controller_0_0_table_pkg.vhd,vhdl,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_controller_0_0/dfx_controller_design_1_dfx_controller_0_0_table_pkg.vhd,
+dfx_controller_design_1_dfx_controller_0_0_vsm_VS_0.vhd,vhdl,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_controller_0_0/dfx_controller_design_1_dfx_controller_0_0_vsm_VS_0.vhd,
+dfx_controller_design_1_dfx_controller_0_0_fetch.vhd,vhdl,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_controller_0_0/dfx_controller_design_1_dfx_controller_0_0_fetch.vhd,
+dfx_controller_design_1_dfx_controller_0_0_icap_if_0.vhd,vhdl,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_controller_0_0/dfx_controller_design_1_dfx_controller_0_0_icap_if_0.vhd,
+dfx_controller_design_1_dfx_controller_0_0.vhd,vhdl,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_controller_0_0/dfx_controller_design_1_dfx_controller_0_0.vhd,
+design_1_dfx_controller_0_0.vhd,vhdl,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_dfx_controller_0_0/sim/design_1_dfx_controller_0_0.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v

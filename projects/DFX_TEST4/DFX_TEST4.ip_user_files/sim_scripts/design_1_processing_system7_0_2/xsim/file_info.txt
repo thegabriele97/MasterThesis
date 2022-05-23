@@ -1,0 +1,2 @@
+design_1_processing_system7_0_2.v,verilog,xil_defaultlib,../../../../DFX_TEST4.gen/sources_1/ip/design_1_processing_system7_0_2/sim/design_1_processing_system7_0_2.v,incdir="$ref_dir/../../../ipstatic/ipshared/ec67/hdl"incdir="$ref_dir/../../../ipstatic/ipshared/f42d/hdl"incdir="../../../ipstatic/ipshared/ec67/hdl"incdir="../../../ipstatic/ipshared/f42d/hdl"
+glbl.v,Verilog,xil_defaultlib,glbl.v
