@@ -1,0 +1,316 @@
+2021.1:
+ * Version 11.0 (Rev. 6)
+ * General: Added reset on flip-flops, no functional changes
+ * General: Avoid address segment warning
+ * General: Renamed "Resources" to "Resource Estimates" in the configuration dialog to distinguish it from "Resources" provided by Vivado
+
+2020.3:
+ * Version 11.0 (Rev. 5)
+ * Bug Fix: Ensure that long immediate values are always valid. Versions that have this issue: 11.0 (Rev. 3, 4). Can only occur with 64-bit mode when using an immediate value greater than 40 bits directly preceded by a long M_AXI_DP interface access.
+
+2020.2.2:
+ * Version 11.0 (Rev. 4)
+ * No changes
+
+2020.2.1:
+ * Version 11.0 (Rev. 4)
+ * No changes
+
+2020.2:
+ * Version 11.0 (Rev. 4)
+ * Bug Fix: Ensure that wdc.clear instruction takes entire cache address into account.  Versions that have this issue: 10.0, 11.0, 11.0 (Rev. 1, 2, 3). Can only occur with the frequency optimized 8-stage pipeline when data cache is enabled.
+ * Other: Show user modified settings for the selected predefined configuration in the Vivado configuration dialog
+ * Other: Prevent selecting ACE bus interface together with other invalid parameters in the Vivado configuration dialog
+
+2020.1.1:
+ * Version 11.0 (Rev. 3)
+ * No changes
+
+2020.1:
+ * Version 11.0 (Rev. 3)
+ * Feature Enhancement: Added fault tolerant support for frequency optimized pipeline
+ * Feature Enhancement: Improved webtalk statistics to report selected preset or template
+ * Other: Refined DRC metadata by de-scoping waivers to only apply to IP core. No functional changes.
+
+2019.2.2:
+ * Version 11.0 (Rev. 2)
+ * No changes
+
+2019.2.1:
+ * Version 11.0 (Rev. 2)
+ * No changes
+
+2019.2:
+ * Version 11.0 (Rev. 2)
+ * Bug Fix: Ensure that swapb and swaph instruction result is correct. Versions that have this issue: 11.0, 11.0 (Rev. 1). Can only occur with area optimization when reorder instructions are enabled and pattern compare instructions are not enabled.
+ * Bug Fix: Do not generate underflow for corner case double multiplication 2.225073858507202e-308 * 0.9999999999999998. Versions that have this issue: 11.0, 11.0 (Rev. 1). Can only occur with 64-bit mode when floating point is enabled.
+ * Bug Fix: Calculate address parameters greater than 32 bits correctly on Windows. Versions that have this issue: 9.6, 10.0, 11.0, 11.0 (Rev. 1). Can only occur with extended address enabled on Windows Operating System.
+ * Feature Enhancement: Added additional 64-bit immediate arithmetic and logic instructions
+ * Other: Versal ACAP Series architecture support added
+ * Other: Added reset on all flip-flops, no functional changes
+ * Other: Changed default value of parameters C_ICACHE_ALWAYS_USED and C_DCACHE_ALWAYS_USED to 1
+ * Other: Corrected Vivado configuration dialog branch target cache size tooltip, choices and Block RAM count
+
+2019.1.3:
+ * Version 11.0 (Rev. 1)
+ * No changes
+
+2019.1.2:
+ * Version 11.0 (Rev. 1)
+ * No changes
+
+2019.1.1:
+ * Version 11.0 (Rev. 1)
+ * No changes
+
+2019.1:
+ * Version 11.0 (Rev. 1)
+ * Bug Fix: Avoid synthesis error for instruction victim cache. Versions that have this issue: 7.30.a - 11.0. Can only occur with area or performance optimization when instruction victim cache is enabled, and instruction cache and external memory sizes are equal.
+ * Other: Supported devices and production status are now determined automatically, to simplify support for future devices
+ * Other: Updated waivers to add tag. No functional changes.
+ * Other: Improved compatibility of 64-bit mode instructions
+
+2018.3.1:
+ * Version 11.0
+ * No changes
+
+2018.3:
+ * Version 11.0
+ * Bug Fix: Output Extended Debug Trace PC when exception occurs correctly. Versions that have this issue: 10.0. Can only occur with area optimization when extended debug trace is enabled.
+ * Bug Fix: Prevent intermittent loss of Extended Debug Trace data after processor debug halt. Versions that have this issue: 10.0. Can only occur when external debug trace is enabled.
+ * Bug Fix: Write SLR and SHR correctly independent of previous instruction behavior. Versions that have this issue: 10.0. Can only occur with frequency optimization when stack protection is enabled.
+ * Feature Enhancement: Updated with 64-bit mode
+ * Other: Output Extended Debug Trace initial PC after start from first executing instruction instead of current PC
+ * Other: Added AXI bus interface property HAS_LOCK
+
+2018.2:
+ * Version 10.0 (Rev. 7)
+ * Bug Fix: Handle Ext_NM_BRK exception independent of whether Ext_BRK is connected or not. Versions that have this issue: 7.10.a-10.0. Can only occur with performance optimization when Ext_BRK is not connected.
+ * Other: Added support for Virtex UltraScale+ 58g devices
+ * Other: Updated HDL to avoid lint errors. No functional change.
+
+2018.1:
+ * Version 10.0 (Rev. 6)
+ * General: Add waivers to suppress reported invalid DRC and CDC violations
+
+2017.4:
+ * Version 10.0 (Rev. 5)
+ * Bug Fix: Prevent potential spurious software breakpoints. Versions that have this issue: 10.0. Can only occur with frequency optimization when debugging with software breakpoints.
+ * Bug Fix: Ensure that DZO bit in MSR is not inadvertently cleared. Versions that have this issue: 10.0. Can only occur with frequency optimization when using integer divide.
+ * Other: Generate warning if no cacheable memory is available when caches are enabled.
+ * Other: Add additional constraints for debug external trace.
+
+2017.3:
+ * Version 10.0 (Rev. 4)
+ * Bug Fix: Corrected victim cache address size computation causing synthesis error. Versions that have this issue: 10.0. Can only occur with performance optimization when using instruction victim cache with extended address and MMU virtual mode enabled.
+ * Bug Fix: Ensure that a write is not attempted when the outstanding number of writes on M_AXI_DC has reached the maximum value 31. Can only occur with data cache enabled when writing to the cacheable address range.
+ * Feature Enhancement: Include preset configurations for microcontroller, real-time, and application
+ * Feature Enhancement: Add extended debug event trace
+ * Feature Enhancement: Add support for XPM memory
+ * Other: Added support for XA Zynq UltraScale+ and XA Spartan-7 devices
+
+2017.2:
+ * Version 10.0 (Rev. 3)
+ * General: Improve cache warning messages to avoid duplication
+ * General: Provide parameter to select asynchronous reset for debug external trace
+
+2017.1:
+ * Version 10.0 (Rev. 2)
+ * Bug Fix: Prevent inadvertent setting of the MSR Break In Progress (BIP) flag when a software breakpoint occurs. Versions that have this issue: 10.0. Can only occur with the frequency optimized 8-stage pipeline when using software breakpoints in the debugger.
+ * Feature Enhancement: Support extended address using MMU physical address extension (PAE)
+ * Feature Enhancement: Allow setting external program trace buffer size
+ * Other: Added support for Zynq UltraScale+ RFSOC and Virtex UltraScale+ HBM devices
+ * Other: Updated logotype
+ * Other: Simplified decoding of extended debug program trace
+
+2016.4:
+ * Version 10.0 (Rev. 1)
+ * General: Modify HDL to avoid tool warnings, no functional changes
+
+2016.3:
+ * Version 10.0
+ * Port Change: Added parallel debug access signals
+ * Bug Fix: Do not fetch instructions for sleep reset mode. Versions that have this issue: 9.4, 9.5, 9.6. Can only occur when debug is disabled and using Reset_Mode.
+ * Bug Fix: Ensure that interrupts do not interfere with debug stepping. Versions that have this issue: 9.3, 9.4, 9.5, 9.6.
+ * Feature Enhancement: Updated with frequency optimized 8-stage pipeline
+ * Feature Enhancement: Provide parallel synchronous debug access
+ * Feature Enhancement: Included additional MSR reset value parameter choices
+ * Feature Enhancement: Added additional AXI bus interface properties
+ * Feature Enhancement: Automatically adjust boot loop ELF to match Vector Base Address
+ * Other: Added support for Spartan-7 devices
+
+2016.2:
+ * Version 9.6 (Rev. 1)
+ * Added AXI bus interface property HAS_BURST
+
+2016.1:
+ * Version 9.6
+ * Added support for extended address
+ * Improved sleep functionality
+ * Enhanced support for AXI-4 access permissions
+ * Support for Virtex UltraScale devices at Production status
+
+2015.4.2:
+ * Version 9.5 (Rev. 3)
+ * No changes
+
+2015.4.1:
+ * Version 9.5 (Rev. 3)
+ * No changes
+
+2015.4:
+ * Version 9.5 (Rev. 3)
+ * Improved automatic assignment of cache addresses to select largest address segment
+
+2015.3:
+ * Version 9.5 (Rev. 2)
+ * Updated family names for additional Ultrascale devices
+ * Added LMB and AXI monitor interfaces to simplify lockstep slave bus interface connection
+ * Improved lockstep handling to hide slave processors from ELF file association
+ * Enhanced detection of lockstep master from a lockstep slave processor
+ * Corrected debug single-step behavior with branch target cache enabled. Versions that have this issue: 9.0, 9.1, 9.2, 9.3, 9.4, 9.5. Can only occur when BTC is enabled.
+ * Updated automatic setting of External Trace to avoid validation error when MDM is not found. Versions that have this issue: 9.4, 9.5. Can only occur when Extended Debug is enabled.
+ * Reduced warnings in synthesis
+ * IP revision number added to HDL module, library, and include file names, to support designs with both locked and upgraded IP instances
+
+2015.2.1:
+ * Version 9.5 (Rev. 1)
+ * No changes
+
+2015.2:
+ * Version 9.5 (Rev. 1)
+ * Prevent instruction cache stream from fetching an incorrect cache line, occurring in rare cases with many outstanding read accesses. Versions that have this issue: 9.0, 9.1, 9.2, 9.3, 9.4, 9.5. Can only occur when instruction cache stream is enabled.
+
+2015.1:
+ * Version 9.5
+ * Added support for 16 word cache lines
+ * Added support for optional imprecise ECC exceptions to improve QoR
+ * Improved detection of lockstep master for DRC in lockstep slave
+ * Added support for additional Ultrascale devices
+ * Enabled out-of-context clock frequency setting by adding FREQ_HZ parameter to clock interface
+ * Set outstanding reads to 1 for AXI cache interfaces when the data width is 128 bits, 256 bits or 512 bits
+ * Ensure that distributed RAM is not used when C_AVOID_PRIMITIVES is set to 2 or 3. Versions that have this issue: 9.0, 9.1, 9.2, 9.3, 9.4.
+ * If parameters C_DCACHE_ALWAYS_USED and C_ICACHE_ALWAYS_USED are not set, use peripheral AXI interfaces for memory accesses within the cacheable address range when caches are disabled. Versions that have this issue: 9.0, 9.1, 9.2, 9.3, 9.4.
+ * Fixed behavioral simulation stall due to uninitialized internal debug signal. Versions that have this issue: 9.4. Can only occur when debug and area optimization are not enabled.
+ * Set debug status correctly for sleep after reset. Versions that have this issue: 9.4. Can only occur when debug is enabled and using Reset_Mode.
+
+2014.4.1:
+ * Version 9.4 (Rev. 1)
+ * No changes
+
+2014.4:
+ * Version 9.4 (Rev. 1)
+ * Added parameters to control synchronization primitives, no functional changes
+ * Removed warnings for Block RAM instantiations, no functional changes
+ * Encrypted source files are concatenated together to reduce the number of files and to reduce simulator compile time
+
+2014.3:
+ * Version 9.4
+ * Added debug enhancement: External Program Trace
+ * Set default value of parameter C_EDGE_IS_POSITIVE to 1
+ * Corrected issue causing exception in return instruction delay slot to be ignored in rare cases. Versions that have this issue: 9.3. Can only occur when branch target cache is enabled.
+ * Avoid stall for multiple outstanding data cache write accesses followed by a single access occuring in rare cases. Versions that have this issue: 9.3. Can only occur when data cache is enabled.
+ * Also allow reading SLR and SHR registers when the FPU is not enabled. Versions that have this issue: 9.3, 9.2, 9.1, 9.0, 8.50.c, 8.50.b, 8.50.a, 8.40.b, 8.40.a, 8.30.a, 8.20.b, 8.20.a, 8.10.d, 8.10.c, 8.10.b, 8.10.a. Can only occur when stack protection and area optimization is enabled and the FPU is not enabled.
+
+2014.2:
+ * Version 9.3 (Rev. 1)
+ * Internal change management process enhancements, no functional changes
+
+2014.1:
+ * Version 9.3
+ * Added debug enhancements: Program Trace, Performance Monitoring, Non-intrusive Profiling and Cross Trigger support
+ * Updated OOC constraints to include debug clocks
+ * Removed unused code and signals to improve coverage metrics
+ * Fixed issue causing an incorrect vector for External Non-maskable Break. Versions that have this issue: 9.2, 9.1, 9.0, 8.50.c, 8.50.b, 8.50.a, 8.40.b, 8.40.a, 8.30.a, 8.20.b, 8.20.a, 8.10.d, 8.10.c, 8.10.b, 8.10.a, 8.00.b, 8.00.a, 7.30.b, 7.30.a, 7.20.d, 7.20.c, 7.20.b, 7.20.a, 7.10.d, 7.10.c, 7.10.b, 7.10.a, 7.00.b, 7.00.a. Can only occur when area optimization is enabled.
+ * Ensure that AXI4-Stream get instructions with exceptions never write to the destination register. Versions that have this issue: 9.2, 9.1, 9.0, 8.50.c, 8.50.b, 8.50.a, 8.40.b, 8.40.a, 8.30.a. Can only occur when area optimization is enabled.
+ * Internal device family name change, no functional changes
+ * Removed unused WebTalk core generation information, no functional changes
+
+2013.4:
+ * Version 9.2 (Rev. 1)
+ * Improved automatic assignment of cache addresses
+
+2013.3:
+ * Version 9.2
+ * Vivado-only core, with no functional changes compared to EDK version 8.50.c
+ * Fixed issues causing an Instruction Bus Exception on a branch instruction to be handled incorrectly. Versions that have this issue: 9.1, 9.0, 8.40.b, 8.40.a, 8.30.a, 8.20.b, 8.20.a, 8.10.d, 8.10.c, 8.10.b, 8.10.a, 8.00.b, 8.00.a, 7.30.b, 7.30.a, 7.20.d, 7.20.c, 7.20.b, 7.20.a, 7.10.d, 7.10.c, 7.10.b, 7.10.a, 7.00.b, 7.00.a. Can only occur when area optimization is enabled, and either instruction bus exception or fault tolerance is enabled.
+ * Avoid rare issue that can cause loss of coherency. Versions that have this issue: 8.50.b, 8.50.a. Can only occur when coherency is enabled by setting C_INTERCONNECT = 3.
+ * Support for Automotive Artix-7, Automotive Zynq,  Defense Grade Artix-7, and Defense Grade Zynq devices at Production status
+ * Reduced warnings in synthesis and simulation
+
+2013.2:
+ * Version 9.1
+ * Vivado-only core, with no functional changes compared to EDK version 8.50.b
+ * Avoid stall for Stack Protection Violation exception caused by a cache miss memory access. Versions that have this issue: 9.0, 8.40.b, 8.40.a, 8.30.a, 8.20.b, 8.20.a, 8.10.d, 8.10.c, 8.10.b, 8.10.a. Can only occur when stack protection and area optimization are enabled, and write-back data cache is not used.
+ * Prevent spurious write to SHR and SLR in rare cases when exception occurs. Versions that have this issue: v8.50.a, v8.40.b, v8.40.a, v8.30.a, v8.20.b, v8.20.a, v8.10.d, v8.10.c, v8.10.b, v8.10.a. Can only occur when stack protection and area optimization are enabled.
+
+2013.1:
+ * Version 9.0
+ * Vivado-only core, with no functional changes from EDK version 8.50.a
+ * Cache coherency based on AXI Coherency Extension (ACE)
+ * Fixed issue with swapb for area version when C_USE_PCMP_INSTR = 0. Versions that have this issue: 8.40.b, 8.40.a, 8.30.a.
+
+2012.4:
+ * Version 8.40.b
+ * No changes
+
+2012.3:
+ * Version 8.40.b
+ * Relocatable base vectors
+ * Wizard mode in the Vivado configuration dialog
+ * Removed support for qvirtex7l and virtex7l
+ * Avoid timing issues due to unused flip-flops connecting clock to data. Version that has this issue: 8.40.a.
+ * Ensure that memory barrier waits for adjacent data cache access in all cases. Version that has this issue: 8.40.a.
+
+2012.2:
+ * Version 8.40.a
+ * Native Vivado release
+ * Sleep mode for power reduction
+ * Remove inadvertent dependence on C_USE_PCMP_INSTR for byte and halfword swap instructions, which can only occur when area optimization is not enabled. Version that has this issue: v8.30.a.
+ * The changelog for previous MicroBlaze versions can be found in Answer Record 46824 (http://www.xilinx.com/support/answers/46824.htm)
+
+(c) Copyright 2002 - 2021 Xilinx, Inc. All rights reserved.
+
+This file contains confidential and proprietary information
+of Xilinx, Inc. and is protected under U.S. and
+international copyright and other intellectual property
+laws.
+
+DISCLAIMER
+This disclaimer is not a license and does not grant any
+rights to the materials distributed herewith. Except as
+otherwise provided in a valid license issued to you by
+Xilinx, and to the maximum extent permitted by applicable
+law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND
+WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES
+AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-
+INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and
+(2) Xilinx shall not be liable (whether in contract or tort,
+including negligence, or under any other theory of
+liability) for any loss or damage of any kind or nature
+related to, arising under or in connection with these
+materials, including for any direct, or any indirect,
+special, incidental, or consequential loss or damage
+(including loss of data, profits, goodwill, or any type of
+loss or damage suffered as a result of any action brought
+by a third party) even if such damage or loss was
+reasonably foreseeable or Xilinx had been advised of the
+possibility of the same.
+
+CRITICAL APPLICATIONS
+Xilinx products are not designed or intended to be fail-
+safe, or for use in any application requiring fail-safe
+performance, such as life-support or safety devices or
+systems, Class III medical devices, nuclear facilities,
+applications related to the deployment of airbags, or any
+other applications that could lead to death, personal
+injury, or severe property or environmental damage
+(individually and collectively, "Critical
+Applications"). Customer assumes the sole risk and
+liability of any use of Xilinx products in Critical
+Applications, subject only to applicable laws and
+regulations governing limitations on product liability.
+
+THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
+PART OF THIS FILE AT ALL TIMES.
