@@ -5,12 +5,7 @@ import sys
 from EntityContainer import EntityContainer
 from helpme import parse_vhd
 
-if __name__ == '__main__':
-    
-    if len(sys.argv) == 1:
-        print('Usage: {} <vhd file>'.format(sys.argv[0]))
-        sys.exit(1)
-
+def strangethings(file, replace_result = False):
     # emoji ok string
     emoji_ok = '\U0001F44C'
     # emoji error string
@@ -40,8 +35,8 @@ if __name__ == '__main__':
     regex6 = r'\s*([a-zA-Z0-9_]+)\s*:\s*([a-zA-Z0-9_]+)'
     
 
-    print(f"{emoji_right_finder_hand} Reading VHDL descsription from {sys.argv[1]}")
-    entitylist = parse_vhd(sys.argv[1], emoji_ok, emoji_error, regex1, regex2)
+    print(f"{emoji_right_finder_hand} Reading VHDL descsription from {file}")
+    entitylist = parse_vhd(file, emoji_ok, emoji_error, regex1, regex2)
     print(f'{emoji_white_heavy_check_mark} Found {len(entitylist)} entities')
     print()
 
@@ -202,7 +197,7 @@ if __name__ == '__main__':
     print()
     print(f'{emoji_alien_monster} Saving the magic') 
 
-    if os.path.exists(f'{df}/top.vhd'):
+    if not replace_result and os.path.exists(f'{df}/top.vhd'):
         print(f"{emoji_error} ERROR: top.vhd already exists")
         exit(2)
 
@@ -210,3 +205,13 @@ if __name__ == '__main__':
         entitylist[entity].save(f'{df}/top.vhd', append=True)
         print(f'{emoji_ok} Entity {entity} saved in {df}/top.vhd')
 
+    return (newtop.get_instance_of(ublaze_wrapper.name)[0], f'{df}/top.vhd', f'{df}/{ublaze_wrapper.name}.vhd', ublaze_wrapper.name, newtop.name)
+
+
+if __name__ == '__main__':
+    
+    if len(sys.argv) == 1:
+        print('Usage: {} <vhd file>'.format(sys.argv[0]))
+        sys.exit(1)
+
+    strangethings(sys.argv[1])

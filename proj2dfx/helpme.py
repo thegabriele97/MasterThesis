@@ -1,6 +1,38 @@
 from EntityContainer import *
 import sys
 
+class Emoji:
+    # emoji ok string
+    emoji_ok = '\U0001F44C'
+    # emoji error string
+    emoji_error = '\U0001F44E'
+    # emoji warning string
+    emoji_warning = '\U0001F44D'
+    # emoji right finder hand string
+    emoji_right_finder_hand = '\U0001F449'
+    # emoji white heavy check mark string
+    emoji_white_heavy_check_mark = '\U00002705'
+    # emoji alien monster string
+    emoji_alien_monster = '\U0001F47E'
+
+def is_it_correct_prompt(message: str, what: str, check_correctness_function: callable) -> str:
+    """
+    Prompt the user for a yes/no answer and return the answer if no, otherwise return None.
+    """
+
+    res = input(f"{message}. Is it correct? (Y/n)")
+    if res.lower() != 'y' and len(res) > 0:
+        while True:
+            res = input(F"    Please, enter the correct {what}: ")
+            if not check_correctness_function(res):
+                print(f"    {Emoji.emoji_error} Error: {res} not valid")
+                continue
+
+            return res
+
+    return None
+
+
 def parse_vhd(file, emoji_ok, emoji_error, regx_entity, regx_arch) -> dict[str, EntityContainer]:
     """
     Parse a VHDL file and return a list of EntityContainers
@@ -69,3 +101,4 @@ def parse_vhd(file, emoji_ok, emoji_error, regx_entity, regx_arch) -> dict[str, 
                     sys.exit(1)
 
     return entitylist
+
