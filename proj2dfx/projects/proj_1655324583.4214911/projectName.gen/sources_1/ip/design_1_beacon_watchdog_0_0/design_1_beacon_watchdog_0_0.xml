@@ -1,0 +1,1972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spirit:vendor>gabriele97</spirit:vendor>
+  <spirit:library>customized_ip</spirit:library>
+  <spirit:name>design_1_beacon_watchdog_0_0</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:busInterfaces>
+    <spirit:busInterface>
+      <spirit:name>S00_AXI</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm_rtl" spirit:version="1.0"/>
+      <spirit:slave>
+        <spirit:memoryMapRef spirit:memoryMapRef="S00_AXI"/>
+      </spirit:slave>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>AWADDR</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_awaddr</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>AWPROT</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_awprot</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>AWVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_awvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>AWREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_awready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>WDATA</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_wdata</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>WSTRB</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_wstrb</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>WVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_wvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>WREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_wready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>BRESP</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_bresp</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>BVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_bvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>BREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_bready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARADDR</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_araddr</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARPROT</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_arprot</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_arvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_arready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RDATA</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_rdata</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RRESP</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_rresp</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_rvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_rready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>WIZ_DATA_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:id="BUSIFPARAM_VALUE.S00_AXI.WIZ_DATA_WIDTH" spirit:choiceRef="choice_list_6fc15197">32</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>WIZ_NUM_REG</spirit:name>
+          <spirit:value spirit:format="long" spirit:id="BUSIFPARAM_VALUE.S00_AXI.WIZ_NUM_REG" spirit:minimum="4" spirit:maximum="512" spirit:rangeType="long">4</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>SUPPORTS_NARROW_BURST</spirit:name>
+          <spirit:value spirit:format="long" spirit:id="BUSIFPARAM_VALUE.S00_AXI.SUPPORTS_NARROW_BURST" spirit:choiceRef="choice_pairs_ce1226b1">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>DATA_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.DATA_WIDTH">32</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>PROTOCOL</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.PROTOCOL">AXI4LITE</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.FREQ_HZ">50000000</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ID_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.ID_WIDTH">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ADDR_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.ADDR_WIDTH">12</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>AWUSER_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.AWUSER_WIDTH">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ARUSER_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.ARUSER_WIDTH">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>WUSER_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.WUSER_WIDTH">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>RUSER_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.RUSER_WIDTH">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>BUSER_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.BUSER_WIDTH">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>READ_WRITE_MODE</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.READ_WRITE_MODE">READ_WRITE</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_BURST</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_BURST">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_LOCK</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_LOCK">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_PROT</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_PROT">1</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_CACHE</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_CACHE">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_QOS</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_QOS">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_REGION</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_REGION">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_WSTRB</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_WSTRB">1</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_BRESP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_BRESP">1</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>HAS_RRESP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.HAS_RRESP">1</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>NUM_READ_OUTSTANDING</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.NUM_READ_OUTSTANDING">2</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>NUM_WRITE_OUTSTANDING</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.NUM_WRITE_OUTSTANDING">2</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>MAX_BURST_LENGTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.MAX_BURST_LENGTH">1</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>PHASE</spirit:name>
+          <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.PHASE">0.0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>CLK_DOMAIN</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.CLK_DOMAIN">design_1_processing_system7_0_2_FCLK_CLK0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>NUM_READ_THREADS</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.NUM_READ_THREADS">1</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>NUM_WRITE_THREADS</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.NUM_WRITE_THREADS">1</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>RUSER_BITS_PER_BYTE</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.RUSER_BITS_PER_BYTE">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>WUSER_BITS_PER_BYTE</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI.WUSER_BITS_PER_BYTE">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.S00_AXI.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>S00_AXI_RST</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_aresetn</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>POLARITY</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.S00_AXI_RST.POLARITY" spirit:choiceRef="choice_list_9d8b0d81">ACTIVE_LOW</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.S00_AXI_RST.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>S00_AXI_CLK</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>CLK</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s00_axi_aclk</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.S00_AXI_CLK.ASSOCIATED_BUSIF">S00_AXI</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_RESET</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.S00_AXI_CLK.ASSOCIATED_RESET">s00_axi_aresetn</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI_CLK.FREQ_HZ">50000000</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>FREQ_TOLERANCE_HZ</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI_CLK.FREQ_TOLERANCE_HZ">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>PHASE</spirit:name>
+          <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI_CLK.PHASE">0.0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>CLK_DOMAIN</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S00_AXI_CLK.CLK_DOMAIN">design_1_processing_system7_0_2_FCLK_CLK0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.S00_AXI_CLK.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+  </spirit:busInterfaces>
+  <spirit:memoryMaps>
+    <spirit:memoryMap>
+      <spirit:name>S00_AXI</spirit:name>
+      <spirit:addressBlock>
+        <spirit:name>S00_AXI_reg</spirit:name>
+        <spirit:baseAddress spirit:format="long" spirit:resolve="user">0</spirit:baseAddress>
+        <spirit:range spirit:format="long">4096</spirit:range>
+        <spirit:width spirit:format="long">32</spirit:width>
+        <spirit:usage>register</spirit:usage>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>OFFSET_BASE_PARAM</spirit:name>
+            <spirit:value spirit:id="ADDRBLOCKPARAM_VALUE.S00_AXI.S00_AXI_REG.OFFSET_BASE_PARAM">C_S00_AXI_BASEADDR</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>OFFSET_HIGH_PARAM</spirit:name>
+            <spirit:value spirit:id="ADDRBLOCKPARAM_VALUE.S00_AXI.S00_AXI_REG.OFFSET_HIGH_PARAM">C_S00_AXI_HIGHADDR</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:addressBlock>
+    </spirit:memoryMap>
+  </spirit:memoryMaps>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>xilinx_verilogsynthesis</spirit:name>
+        <spirit:displayName>Verilog Synthesis</spirit:displayName>
+        <spirit:envIdentifier>verilogSource:vivado.xilinx.com:synthesis</spirit:envIdentifier>
+        <spirit:language>verilog</spirit:language>
+        <spirit:modelName>beacon_watchdog_v1_0</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_verilogsynthesis_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Wed Jun 15 14:10:03 UTC 2022</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:03279b32</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_synthesisconstraints</spirit:name>
+        <spirit:displayName>Synthesis Constraints</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:synthesis.constraints</spirit:envIdentifier>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:03279b32</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_verilogsynthesiswrapper</spirit:name>
+        <spirit:displayName>Verilog Synthesis Wrapper</spirit:displayName>
+        <spirit:envIdentifier>verilogSource:vivado.xilinx.com:synthesis.wrapper</spirit:envIdentifier>
+        <spirit:language>verilog</spirit:language>
+        <spirit:modelName>design_1_beacon_watchdog_0_0</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_verilogsynthesiswrapper_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Wed Jun 15 14:10:03 UTC 2022</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:03279b32</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_verilogbehavioralsimulation</spirit:name>
+        <spirit:displayName>Verilog Simulation</spirit:displayName>
+        <spirit:envIdentifier>verilogSource:vivado.xilinx.com:simulation</spirit:envIdentifier>
+        <spirit:language>verilog</spirit:language>
+        <spirit:modelName>beacon_watchdog_v1_0</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_verilogbehavioralsimulation_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Wed Jun 15 14:10:03 UTC 2022</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:f30ec263</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_verilogsimulationwrapper</spirit:name>
+        <spirit:displayName>Verilog Simulation Wrapper</spirit:displayName>
+        <spirit:envIdentifier>verilogSource:vivado.xilinx.com:simulation.wrapper</spirit:envIdentifier>
+        <spirit:language>verilog</spirit:language>
+        <spirit:modelName>design_1_beacon_watchdog_0_0</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_verilogsimulationwrapper_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Wed Jun 15 14:10:03 UTC 2022</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:f30ec263</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_softwaredriver</spirit:name>
+        <spirit:displayName>Software Driver</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:sw.driver</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_softwaredriver_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Wed Jun 15 14:10:03 UTC 2022</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:03279b32</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_externalfiles</spirit:name>
+        <spirit:displayName>External Files</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:external.files</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_externalfiles_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Wed Jun 15 14:16:30 UTC 2022</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:03279b32</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+    </spirit:views>
+    <spirit:ports>
+      <spirit:port>
+        <spirit:name>STATUS_STARTED</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">2</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>STATUS_ERROR</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">2</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>CONTROL_START</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">2</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>CONTROL_STB</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">2</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_aclk</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_aresetn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_awaddr</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_S00_AXI_ADDR_WIDTH&apos;)) - 1)">11</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_awprot</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">2</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_awvalid</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_awready</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_wdata</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_S00_AXI_DATA_WIDTH&apos;)) - 1)">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_wstrb</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_S00_AXI_DATA_WIDTH&apos;)) / 8) - 1)">3</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_wvalid</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_wready</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_bresp</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">1</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_bvalid</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_bready</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_araddr</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_S00_AXI_ADDR_WIDTH&apos;)) - 1)">11</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_arprot</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">2</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_arvalid</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_arready</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_rdata</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_S00_AXI_DATA_WIDTH&apos;)) - 1)">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_rresp</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">1</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_rvalid</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>s00_axi_rready</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+    </spirit:ports>
+    <spirit:modelParameters>
+      <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
+        <spirit:name>C_S00_AXI_DATA_WIDTH</spirit:name>
+        <spirit:displayName>C S00 AXI DATA WIDTH</spirit:displayName>
+        <spirit:description>Width of S_AXI data bus</spirit:description>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_S00_AXI_DATA_WIDTH" spirit:order="3" spirit:rangeType="long">32</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>C_S00_AXI_ADDR_WIDTH</spirit:name>
+        <spirit:displayName>C S00 AXI ADDR WIDTH</spirit:displayName>
+        <spirit:description>Width of S_AXI address bus</spirit:description>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_S00_AXI_ADDR_WIDTH" spirit:order="4" spirit:rangeType="long">12</spirit:value>
+      </spirit:modelParameter>
+    </spirit:modelParameters>
+  </spirit:model>
+  <spirit:choices>
+    <spirit:choice>
+      <spirit:name>choice_list_6fc15197</spirit:name>
+      <spirit:enumeration>32</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_9d8b0d81</spirit:name>
+      <spirit:enumeration>ACTIVE_HIGH</spirit:enumeration>
+      <spirit:enumeration>ACTIVE_LOW</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_pairs_ce1226b1</spirit:name>
+      <spirit:enumeration spirit:text="true">1</spirit:enumeration>
+      <spirit:enumeration spirit:text="false">0</spirit:enumeration>
+    </spirit:choice>
+  </spirit:choices>
+  <spirit:fileSets>
+    <spirit:fileSet>
+      <spirit:name>xilinx_verilogsynthesis_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/beacon_watchdog_v1_0_S00_AXI.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/top_beacon_watchdog.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/voter.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/voter_bus.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/beacon_watchdog_v1_0.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_verilogsynthesiswrapper_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>synth/design_1_beacon_watchdog_0_0.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_verilogbehavioralsimulation_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/beacon_watchdog_v1_0_S00_AXI.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/top_beacon_watchdog.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/voter.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/voter_bus.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../ipshared/9c4f/hdl/beacon_watchdog_v1_0.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_verilogsimulationwrapper_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>sim/design_1_beacon_watchdog_0_0.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_softwaredriver_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>drivers/beacon_watchdog_v1_0/data/beacon_watchdog.mdd</spirit:name>
+        <spirit:userFileType>mdd</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>drivers/beacon_watchdog_v1_0/data/beacon_watchdog.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>drivers/beacon_watchdog_v1_0/src/Makefile</spirit:name>
+        <spirit:userFileType>driver_src</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>UltraBeaconWatchdog/drivers/beacon_watchdog_v1_0/src/beacon_watchdog.h</spirit:name>
+        <spirit:fileType>cSource</spirit:fileType>
+        <spirit:logicalName>UltraBeaconWatchdog</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>UltraBeaconWatchdog/drivers/beacon_watchdog_v1_0/src/beacon_watchdog.c</spirit:name>
+        <spirit:fileType>cSource</spirit:fileType>
+        <spirit:logicalName>UltraBeaconWatchdog</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>drivers/beacon_watchdog_v1_0/src/beacon_watchdog_selftest.c</spirit:name>
+        <spirit:fileType>cSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_externalfiles_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>design_1_beacon_watchdog_0_0.dcp</spirit:name>
+        <spirit:userFileType>dcp</spirit:userFileType>
+        <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>design_1_beacon_watchdog_0_0_stub.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_synth_blackbox_stub</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>design_1_beacon_watchdog_0_0_stub.vhdl</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_synth_blackbox_stub</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>design_1_beacon_watchdog_0_0_sim_netlist.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>design_1_beacon_watchdog_0_0_sim_netlist.vhdl</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+  </spirit:fileSets>
+  <spirit:description>A watchdog that expires when notice that the CPU is not working anymore through a beacon</spirit:description>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>C_S00_AXI_DATA_WIDTH</spirit:name>
+      <spirit:displayName>C S00 AXI DATA WIDTH</spirit:displayName>
+      <spirit:description>Width of S_AXI data bus</spirit:description>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_S00_AXI_DATA_WIDTH" spirit:choiceRef="choice_list_6fc15197" spirit:order="3">32</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_S00_AXI_DATA_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_S00_AXI_ADDR_WIDTH</spirit:name>
+      <spirit:displayName>C S00 AXI ADDR WIDTH</spirit:displayName>
+      <spirit:description>Width of S_AXI address bus</spirit:description>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_S00_AXI_ADDR_WIDTH" spirit:order="4">12</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_S00_AXI_ADDR_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_S00_AXI_BASEADDR</spirit:name>
+      <spirit:displayName>C S00 AXI BASEADDR</spirit:displayName>
+      <spirit:value spirit:format="bitString" spirit:resolve="user" spirit:id="PARAM_VALUE.C_S00_AXI_BASEADDR" spirit:order="5" spirit:bitStringLength="32">0xFFFFFFFF</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_S00_AXI_BASEADDR">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_S00_AXI_HIGHADDR</spirit:name>
+      <spirit:displayName>C S00 AXI HIGHADDR</spirit:displayName>
+      <spirit:value spirit:format="bitString" spirit:resolve="user" spirit:id="PARAM_VALUE.C_S00_AXI_HIGHADDR" spirit:order="6" spirit:bitStringLength="32">0x00000000</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_S00_AXI_HIGHADDR">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Component_Name</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">design_1_beacon_watchdog_0_0</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:vendorExtensions>
+    <xilinx:coreExtensions>
+      <xilinx:displayName>beacon_watchdog_v1.0</xilinx:displayName>
+      <xilinx:coreRevision>31</xilinx:coreRevision>
+      <xilinx:tags>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@11d52f37_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@38bcb02a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d94d6ea_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7f77aff4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@46f0a2f9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@67028b4d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18d71402_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d845647_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6f3f8621_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@71f68700_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ec0faff_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d07b08e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@220aa8d8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1fc37c2f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3cf8253_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1b423a18_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@33ca4f6e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@63d54274_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5b16f024_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d45230d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@23841fd5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6f2b19ea_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@64ca17e3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1c547416_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3b42f2dc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4fd12b2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@103b1374_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@551ab9b1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2aef7353_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c39fde1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@67371374_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6927209b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@68eec15_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@19e94661_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@73c15647_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@fb9a53c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18c51287_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@61064ec_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@72f9194a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@524b9ac3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@61514e32_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6417fafc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a115382_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@21c7d0a6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@64bee62a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@720986f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@47f2768_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2e9dbd2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@47355b09_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@384b65f8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@bd8bbfd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@d34e6bc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@77b3f2a7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2e3f0977_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c4cd23b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7c46213c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@99acaa1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@20bb68b2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1b4c1d77_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@31d79b9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@288f4406_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@434504bb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1ee7300_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a32174f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2fc5c139_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4964ba0e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@33590331_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ec93beb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50a2f9e9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@690fb454_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6cb764e4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1694658d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5e9199c5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@394506a8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@700def51_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7863f417_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@577d886d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@84719b6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1ce73ead_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@56cdbf8c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@533b5da3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1b091a6d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@61a51548_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@70ace312_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7b3a4293_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7705f3c6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@39a6ea53_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3b5b029e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@527dd82b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@62530ce3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@76a02208_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@40f1cc81_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6f972d17_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ef806d1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@78a35e56_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2e5e68e7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ea2abd6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5a9d0501_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@327930b3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4e93dc1c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@e233016_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7b137bf8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@126b141f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3cd84a80_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@54ae3064_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d04151e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@43c58a2b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2429af66_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50c7e8f9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4dc3bde9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5e19f038_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7542e793_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18178998_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6e297d6f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3e6e96e9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7b2af13_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4cf71710_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5f694d45_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d4d9aab_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@48754774_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f63fb94_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5069e336_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14e539fe_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@443d99a7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14eeba1f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@64edd465_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@774d5497_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@698da836_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6a0cfa85_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c5dad05_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@37c741c7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@583f0d9b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1dee389f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@414eabef_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1f340509_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@dc23261_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2b89f0ef_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@51a7fb07_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2ad18e85_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1925781c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@760161b6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1e817bd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@210643f5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@12ac940e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@edcb6e7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@646fba04_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4dc78522_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c580bc8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@61bcbfa1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@560f14b3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6717d307_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@36645ad1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14a90c11_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1dd66324_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@608cc647_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7dd10b86_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@db91638_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@351b9d45_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@58635206_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@74d7ad16_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@115ea8bd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@24d9eb2d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a33e461_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@707764fc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@67f47d3a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2ec4c267_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@416d39e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@69b51cf_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1cea6ef_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@30e48375_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7c11ee14_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ef483c4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@72c9a1a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@439357a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@46085a9e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2b159f54_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a7f173b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4036aca7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c2638c2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@79cda21e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@381fdb99_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@245ddc9b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f0e6245_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2b77a181_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@488b0882_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c4afa18_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@349759ad_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ab7791a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@dc7836b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@77bc6577_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3e7906aa_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@640d4707_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@58a069c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f87d292_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3bc17595_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@63bcf5f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7942f3f0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1274c61c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d14a2db_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@29c8acaa_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@733ab3a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4a0d96d2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@11e64596_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@500a4874_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7c9875a9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1bf666a1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18f484ad_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3c1fc810_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@9f8416a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@153de090_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@e72aafc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ced7d82_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2acfd524_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4b08b57_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5bbeb970_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d284136_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@13cf7831_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@37aa33_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@55a2bfe0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6e92a79c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@759571c2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5eac3c56_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@63d8abfd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6a42ba13_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a42528f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5c3f65a0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7086c372_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7f643dc7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7e520579_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1b10b86c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@129a2bc6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d742782_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3fe97dd5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@22c0c3a6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@596aba71_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7b2db3b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ed74dad_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6b1c875b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3442f1d4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@15214f06_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4e53cca5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@738dcf02_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@49e0b26c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1f4b5b17_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@41940908_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d5fcb68_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@13927d36_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5888206d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@624f4f00_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@320c592e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2c05f845_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5e7caa33_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2a4816c6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a8009d4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2ef9e60a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3f8ae367_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ae9f406_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@57b2f900_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@319b098e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@294a99d4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@20e13d9a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1b13292b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d84ddb7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@557ad61e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@584a5b15_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4a8b8439_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@22f65062_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@674dd98_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1df7d546_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5f13d12c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@159acf2a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@16f98ebb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@401ba3c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@23ab4ca9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@43a954f5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@32318b44_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7bae841e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@46db168a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7cd89817_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@350db977_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5e1af752_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f05292b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@64b7a034_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@75237c56_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6d0e934d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@16ae416a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@20685a4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6e30cde4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@708ec585_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3c3edb6d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@fff2d96_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d55eadb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@13e1ee58_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18125c76_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@68263a7c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@66d13299_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@26caab29_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c4da8c2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3c3ef6d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@52a2ed3e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5377ab10_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@456221cf_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6f9838ee_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4dcc3566_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@41ec8d60_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a742eb4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d7dffdd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c73a39f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1f5401fb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c75e8a3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@445c3749_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@48fcab66_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ff7e6e0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@54003410_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6ff2a181_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@48202305_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3b7565e2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c42e7fc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a293ee2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7af6d3e5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@10d4a354_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4f5e121f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4524b988_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a12374b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@63277224_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@30fdee18_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4b425d82_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1030112c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3c25a923_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@b09444c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3cef7b00_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ebbfa69_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@55bc371b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@29682215_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7dbafaa5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@55d2a55b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@292fe8e4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@33fdfca_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@285e231c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@57fc9f7e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@480a1f18_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@79b25a21_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@484cb2aa_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6e41428e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@a4755a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@19ffed07_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4075e8b8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d72533_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@71fd92fc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18e45e04_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@62124cf0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1ad4e589_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@700e1a2d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7bc79c6f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4a2a6741_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14ef6190_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d11fcd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4243fe6e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d437ff5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5359a610_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5bcb1188_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@61d03f92_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@60cf6beb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@8173797_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14c90ec9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1c57ee2d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@28b6a83f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@72bd06da_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5e3b3f8d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7fe5de03_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@163d28a7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@29829c51_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3281d409_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5b3c6ce7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a5c3666_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@718af049_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f13d00d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@128ee353_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@53089fc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@127cc2f7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@92e8c63_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@797d04d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7fe731c5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@78d107b4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@36b5823a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5419538c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2401f13_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4e151063_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@757a9183_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7e07141a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@513b1820_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@11a09ea0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@33b67287_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@437aa862_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4092031d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1bbf59a3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2adbb252_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@70c03622_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4a759fd2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3349837_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@101acc69_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@195df08a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@27a4ab15_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@32ba8c0b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@73aa3e7d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@314b3631_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6a7ecc4d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5a029599_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7830ab34_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@dc5a980_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@188885d0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ec25005_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@46b289f1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1d9a8dc8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7ca53869_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2ed594cf_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@783b99b2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@74cfbb31_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@80d051f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@176ff935_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6def6613_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@101545a8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18614138_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@787dae0b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@20cc412d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@db5ebcb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@58e4fe2b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7ea171d9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@46318a7c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4a4786b1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c3604d8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@16dc8fee_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3ec0e4b2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4cdd075a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@62347b10_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@f43a10b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6df640b2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1945c8a3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@dc8ddec_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@766c0c0b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5103fcda_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@38ece3d7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@508a1d82_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6fe5de77_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@12187c67_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@8f9606_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@bcb0756_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@e5c793f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@553f5fe4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5e42d8a8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7382cc67_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1890f1c5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5df16f35_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@71c0c625_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a207b54_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@21f1db3e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@616807ab_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@17bc73c5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@85d4afe_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@73378a8e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5f48a105_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@404c9600_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@ff56a3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6e09ffcb_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@44c5784e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@12838691_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@627e6f16_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@65cc783e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5560cb37_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@76b4bfb6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@168b3634_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ee882ae_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6aaf1d7c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1b66b3b7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5b035b29_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50aa9441_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@477bb4b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@60e84075_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@c13ffc6_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6045e25d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@54ee2557_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7747e786_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@356d7cdd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4b116c7c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@64858e21_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@a275b3f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@79b2c90b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1225608f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@209e482_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@b69f475_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@106f7024_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3200b126_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@31af8573_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50f9f5db_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c8ff8a9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5820d787_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4f300216_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@61e92847_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@28ed9b7a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1e0867db_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@66dae465_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7bd09447_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d89bb04_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@192eb57b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@647f536_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@39f3c7ac_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4686d748_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@391d9e78_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2835eab7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c57e5ca_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@ba1ac35_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4efd5211_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@66b2468b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@18636e27_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6c5255d4_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7806014e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@934c94_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@47892f19_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@530b9304_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@41ee0595_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c01ebce_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@45a5384e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2ff0e58_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d37e0a8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2a13c172_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3995bdbe_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2fc3f0f1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3bdb43af_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@19d97a44_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1dde000c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@275013d7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7c290235_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@be77b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6593538b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6ddb63ba_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@27e8940a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5bf4109f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7fbfb7bd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6e241b40_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@129d50f2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@136fb18b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@331b9df0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5986a2c1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6fc2d52_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a0b38d5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@42b3ca11_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5372249c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@f156b7c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5b851b64_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6e2fb579_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1e75557d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1ec0d6e9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4e660e07_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a39e5f3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@12967ea1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2e214284_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2e7913c5_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6cc04d41_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@12e5c39c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2b6585ef_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@26e0ffac_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@23be7433_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2bb01fe8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@37aae90a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@26536997_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@28481ae1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5dc1e7ac_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1369c415_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6222b1b8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@726fbe8a_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@29d797d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@23fecd71_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3ed72006_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@15ce2747_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@31eafba0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@41db9ff2_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@fa0135b_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@71a511bc_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@22e3ea8_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1435e167_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@42b3835d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@677bae6c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@340cf8e0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50210b16_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d06774f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3c98c6b0_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@17d8206d_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5fdcc7d3_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1c535f84_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2fb1c28f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@224180f9_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@754e1185_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5f0f933e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1172ad99_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7e84f617_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4c103f33_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2cdd4252_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@410f6b7c_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1e5d4bf7_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@286ff730_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d8003dd_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a8540df_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@76335584_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@274a1f0f_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@51592e77_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@31c54937_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@73df011e_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@328660d1_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7b498d42_ARCHIVE_LOCATION">/home/gabriele97/Repos/MasterThesis/projects/ip_beacon_watchdog/beacon_watchdog_1.0</xilinx:tag>
+      </xilinx:tags>
+      <xilinx:configElementInfos>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.ADDR_WIDTH" xilinx:valueSource="auto" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.ARUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.AWUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.BUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.CLK_DOMAIN" xilinx:valueSource="default_prop" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.DATA_WIDTH" xilinx:valueSource="auto" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.FREQ_HZ" xilinx:valueSource="user_prop" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_BRESP" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_BURST" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_CACHE" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_LOCK" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_PROT" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_QOS" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_REGION" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_RRESP" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.HAS_WSTRB" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.ID_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.MAX_BURST_LENGTH" xilinx:valueSource="ip_propagated" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.NUM_READ_OUTSTANDING" xilinx:valueSource="ip_propagated" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.NUM_READ_THREADS" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.NUM_WRITE_OUTSTANDING" xilinx:valueSource="ip_propagated" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.NUM_WRITE_THREADS" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.PHASE" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.PROTOCOL" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.READ_WRITE_MODE" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.RUSER_BITS_PER_BYTE" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.RUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.SUPPORTS_NARROW_BURST" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.WIZ_DATA_WIDTH" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.WIZ_NUM_REG" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.WUSER_BITS_PER_BYTE" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.WUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI_CLK.ASSOCIATED_BUSIF" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI_CLK.ASSOCIATED_RESET" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI_CLK.CLK_DOMAIN" xilinx:valueSource="default_prop" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI_CLK.FREQ_HZ" xilinx:valueSource="user_prop" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI_CLK.FREQ_TOLERANCE_HZ" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI_CLK.PHASE" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI_RST.POLARITY" xilinx:valuePermission="bd"/>
+      </xilinx:configElementInfos>
+    </xilinx:coreExtensions>
+    <xilinx:packagingInfo>
+      <xilinx:xilinxVersion>2021.1</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="7a63f3fc"/>
+      <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="ed1368d5"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="f750ebd0"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="1331328c"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="8285e736"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="17e3be7c"/>
+    </xilinx:packagingInfo>
+  </spirit:vendorExtensions>
+</spirit:component>

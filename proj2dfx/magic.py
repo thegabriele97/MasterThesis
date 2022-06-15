@@ -165,7 +165,9 @@ if __name__ == '__main__':
     # print(f"{Emoji.emoji_ok} UBlaze wrapper file: {ublaze_wrapper_file}")
     # print(f"{Emoji.emoji_ok} Constraints file: {constraints_file}")
 
-    os.system(f"vivado -mode batch -source {os.path.join(os.path.dirname(__file__), 'create_proj.tcl')} -tclargs {vivado_project_path} {vivado_partnum} {top_vhd_file} {ublaze_wrapper_file} {constraints_file} {ublaze_0_instance_name} {ublaze_wrapper_name} {len(xci_files)} {' '.join(xci_files)}")
+    bs_fname = f"{top_name}_bs.bit"
+    bs_path = os.path.join(vivado_project_path, bs_fname)
+    os.system(f"vivado -mode batch -source {os.path.join(os.path.dirname(__file__), 'create_proj.tcl')} -tclargs {vivado_project_path} {vivado_partnum} {top_vhd_file} {ublaze_wrapper_file} {constraints_file} {ublaze_0_instance_name} {ublaze_wrapper_name} {bs_path} {len(xci_files)} {' '.join(xci_files)}")
 
     # listing all files in the project path
     files = [f for f in os.listdir(vivado_project_path) if genericpath.isdir(os.path.join(vivado_project_path, f))]
@@ -248,23 +250,39 @@ if __name__ == '__main__':
     shutil.copy2(mmifile, os.path.join(xsa_output_path, f"{top_name}.mmi"))
     print(f"{Emoji.emoji_ok} Copied {top_name}.mmi to {os.path.relpath(xsa_output_path, os.getcwd())}/")
 
-    newxsa_path = os.path.join(vivado_project_path, f"{top_name}_dfx.xsa")
-    with zipfile.ZipFile(newxsa_path, 'w') as zipObj:
-        # Iterate over all the files in directory
-        for folderName, subfolders, filenames in os.walk(xsa_output_path):
-            for filename in filenames:
-                #create complete filepath of file in directory
-                filePath = os.path.join(folderName, filename)
-                # Add file to zip
-                zipObj.write(filePath, os.path.basename(filePath))
+    newxsa_fname = f"{top_name}_DFX"
+    newxsa_path = os.path.join(vivado_project_path, f"{newxsa_fname}.xsa")
+    shutil.make_archive(newxsa_path, 'zip', root_dir=xsa_output_path)
+    shutil.move(f"{newxsa_path}.zip", newxsa_path)
 
     print(f"{Emoji.emoji_ok} XSA file created!")
 
     print()
     print(f"{Emoji.emoji_right_finder_hand} Looking at the partial bitstream...")
 
-    # pbs_path = os.path.join(runs_path, f'{ublaze_0_instance_name}_{ublaze_wrapper_name}_partial.bit')
-    pbs_path = "/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1655214927.220985/projectName.runs/impl_1/microblaze_0_instance_ublaze_wrapper_partial.bit"
+    bs_fname_noext = "".join(bs_fname.split(".")[0:-1])
+    bs_base_dir = os.path.dirname(bs_path)
+    bs_name_bit = bs_fname
+    bs_name_bin = f"{bs_fname_noext}.bin"
+    pbs_name_bit = None
+    pbs_name_bin = None
+
+    # looking for other .bit files
+    for f in os.listdir(bs_base_dir):
+        if f.startswith(f"{bs_fname_noext}_") and f.endswith("_partial.bit"):
+            pbs_name_bit = f
+
+        elif f.startswith(f"{bs_fname_noext}_") and f.endswith("_partial.bin"):
+            pbs_name_bin = f
+
+    if pbs_name_bit is None or pbs_name_bin is None:
+        print(f"{Emoji.emoji_error} Couldn't find the partial bitstream. Did Vivado run correctly 'till write_bitstream step?")
+        exit(1)
+
+    pbs_path = os.path.join(bs_base_dir, pbs_name_bin)
+    pbs_bin_path = pbs_path
+    pbs_bit_path = os.path.join(bs_base_dir, pbs_name_bit)
+    # pbs_path = "/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1655214927.220985/projectName.runs/impl_1/microblaze_0_instance_ublaze_wrapper_partial.bit"
 
     is_aligned = True
     actual, nextt = None, None

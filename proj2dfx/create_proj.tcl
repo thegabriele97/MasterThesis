@@ -1,6 +1,6 @@
 # Checking if the format is correct
 if { $argc < 8 } {
-    puts "Usage: [lindex argv 0] <projpath> <part_number> <top> <wrapper> <constraints> <ublaze_inst_name> <ublaze_wrapper_name> <n_xci> <xci_...>" 
+    puts "Usage: [lindex argv 0] <projpath> <part_number> <top> <wrapper> <constraints> <ublaze_inst_name> <ublaze_wrapper_name> <bitstream_name> <n_xci> <xci_...> " 
     exit 1
 }
 
@@ -34,7 +34,7 @@ update_compile_order -fileset sources_1
 # puts
 # puts
 
-set xcis [lrange $argv 8 [expr [lindex $argv 7] + 8]]
+set xcis [lrange $argv 9 [expr [lindex $argv 8] + 9]]
 foreach var $xcis {
     add_files -norecurse -scan_for_includes $var
     import_files -norecurse $var
@@ -69,6 +69,10 @@ wait_on_run impl_1
 launch_runs impl_1 -to_step write_bitstream -jobs 4
 wait_on_run impl_1
 
+open_run impl_1
+write_bitstream -bin_file [lindex $argv 7] -force
 
+# source [get_property REPOSITORY [get_ipdefs *dfx_controller:1.0]]/xilinx/dfx_controller_v1_0/tcl/api.tcl
+# dfx_controller_v1_0::format_bin_for_icap
 
 # start_gui
