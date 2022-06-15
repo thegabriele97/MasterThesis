@@ -11,7 +11,8 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/synth/design_1.vhd"]
+            // "args": ["/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/synth/design_1.vhd"]
+            "args": ["/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST3_UBLAZE"]
         }
     ]
 }

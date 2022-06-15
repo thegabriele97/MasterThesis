@@ -197,7 +197,8 @@ if __name__ == '__main__':
     newcontent = []
     with open(os.path.join(xsa_output_path, "sysdef.xml"), 'r') as f:
         for line in f.readlines():
-            if "FULL_BIT" in line:
+            # if "FULL_BIT" in line:
+            if "BIT" in line:
                 # line = f'<File Type="FULL_BIT" Name="{top_name}.bit"/>'
                 line = f'<File Type="BIT" Name="{top_name}.bit" src_db="temp.hdf">'
                 print(f"{Emoji.emoji_ok} Replaced BIT field in xsa.xml with {top_name}.bit")
@@ -258,16 +259,122 @@ if __name__ == '__main__':
                 zipObj.write(filePath, os.path.basename(filePath))
 
     print(f"{Emoji.emoji_ok} XSA file created!")
+
+    print()
+    print(f"{Emoji.emoji_right_finder_hand} Looking at the partial bitstream...")
+
+    # pbs_path = os.path.join(runs_path, f'{ublaze_0_instance_name}_{ublaze_wrapper_name}_partial.bit')
+    pbs_path = "/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1655214927.220985/projectName.runs/impl_1/microblaze_0_instance_ublaze_wrapper_partial.bit"
+
+    is_aligned = True
+    actual, nextt = None, None
+    with open(pbs_path, 'rb') as f:
+
+        target = b'\xaa\x99\x55\x66'
+        while is_aligned:
+            data = f.read(4)
+            if not data:
+                break
+
+            # print(f"Working on 0x{''.join('{:02x}'.format(x) for x in data)} \t {data}")
+
+            if data == target:
+                break
+
+            for i in range(1, 4):
+
+                mask = int.from_bytes(b'\xff\xff\xff\xff', byteorder='big') >> (8*i)
+                ndat = int.from_bytes(data, byteorder='big') & mask
+
+                # mask_b = mask.to_bytes((mask.bit_length() + 7) // 8, 'big')
+                # ndat_b = ndat.to_bytes((ndat.bit_length() + 7) // 8, 'big')
+                # print(f"  [{i}] Comparing with 0x{''.join('{:02x}'.format(x) for x in mask_b)}")
+                # print(f"  |-> Resulting in 0x{''.join('{:02x}'.format(x) for x in ndat_b)}")
+
+                ntar = int.from_bytes(target, byteorder='big') >> (8*i)
+                # ntar_b = ntar.to_bytes((ntar.bit_length() + 7) // 8, 'big')
+                # print(f"  |-> Targeting 0x{''.join('{:02x}'.format(x) for x in ntar_b)}")
+
+                if ndat == ntar:
+                    is_aligned = False
+                    actual = data
+                    nextt = f.read(4)
+                    break
+
+    if is_aligned:
+        print(f"{Emoji.emoji_ok} Partial Bitstream seems to be aligned!")
+    else:
+        act_str = f"{''.join('{:02x}'.format(x) for x in actual)}"
+        nxt_str = f"{''.join('{:02x}'.format(x) for x in nextt)}"
+        print(f"{Emoji.emoji_right_finder_hand} Partial Bitstream is not aligned: SYNC 0x{act_str} 0x{nxt_str}. It will be aligned!")
+
+    new_pbs_path = pbs_path
+
+    if not is_aligned:
+        print(f"{Emoji.emoji_right_finder_hand} Going to align the partial bitstream...")
+        new_pbs_path = os.path.join(vivado_project_path, f"{ublaze_0_instance_name}_{ublaze_wrapper_name}_partial_aligned_finally.bit")
+
+        result = []
+        with open(pbs_path, 'rb') as f:
+
+            while True:
+                data0 = f.read(4)
+                if not data0:
+                    break
+
+                # print(f"Working on 0x{''.join('{:02x}'.format(x) for x in data0)} \t {data0}")
+
+                data1 = None
+                if data0 == actual:
+                    data1 = f.read(4)
+
+                if data0 == actual and data1 == nextt:
+                    # print(f"{Emoji.emoji_ok} Found misalignment!")
+                    data0_int = int.from_bytes(data0, byteorder='big')
+                    data1_int = int.from_bytes(data1, byteorder='big')
+
+                    data0_int = (data0_int << 8) & 0xffffffff                   ## 0xffaa9955 -> 0xaa995500
+                    data0_int |= (data1_int & 0xff000000) >> 24                 ## 0xaa995500 -> 0xaa995566
+
+                    data1_int = (data1_int << 8) & 0xffffffff                   ## 0x66200000 -> 0x20000000
+                    data1_int |= int.from_bytes(f.read(1), byteorder='big')     ## 0x20000000 -> 0x20000000
+
+                    # print(f"{Emoji.emoji_ok} Aligned 0x{''.join('{:02x}'.format(x) for x in data0)} 0x{''.join('{:02x}'.format(x) for x in data1)}")
+
+                    data0_int_b = data0_int.to_bytes((data0_int.bit_length() + 7) // 8, 'big')
+                    data1_int_b = data1_int.to_bytes((data1_int.bit_length() + 7) // 8, 'big')
+                    result.append(data0_int_b)
+                    result.append(data1_int_b)
+
+                    # print(f"{Emoji.emoji_ok} Aligned 0x{''.join('{:02x}'.format(x) for x in data0_int_b)} 0x{''.join('{:02x}'.format(x) for x in data1_int_b)}")
+                    data1 = None
+
+                else:
+                    result.append(data0)
+
+        with open(new_pbs_path, 'wb') as f:
+            for data in result:
+                f.write(data)
+
+        print(f"{Emoji.emoji_ok} Aligned partial bitstream created!")
+
+    pbs_path_rel = os.path.relpath(new_pbs_path, os.getcwd())
+
     print()
     print()
 
     print(f"{Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5}")
-    print(f"{Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} FINISHED!  {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5}")
+    print(f"{Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5}")
+    print(f"{Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5}  FINISHED! {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5}")
+    print(f"{Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5}")
     print(f"{Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5} {Emoji.emoji_alien_monster*5}")
 
     print()
     print(f"{Emoji.emoji_ok} You can find the Vivado project at {os.path.relpath(vivado_project_path, os.getcwd())}")
     print(f"{Emoji.emoji_ok} XSA file created at {os.path.relpath(newxsa_path, os.getcwd())}. Use it to generate a Vitis HW Platform.")
-    print(f"{Emoji.emoji_ok} The Partial Bitstream is at {os.path.relpath(os.path.join(runs_path, f'{ublaze_0_instance_name}_{ublaze_wrapper_name}_partial.bit'), os.getcwd())}")
+    print(f"{Emoji.emoji_ok} The Partial Bitstream is at {pbs_path_rel}")
+    print()
+
+    print(f"{Emoji.emoji_bye} Bye!")
     print()
     

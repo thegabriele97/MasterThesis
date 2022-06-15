@@ -14,6 +14,8 @@ class Emoji:
     emoji_white_heavy_check_mark = '\U00002705'
     # emoji alien monster string
     emoji_alien_monster = '\U0001F47E'
+    # emoji bye
+    emoji_bye = '\U0001F44B'
 
 def is_it_correct_prompt(message: str, what: str, check_correctness_function: callable) -> str:
     """
