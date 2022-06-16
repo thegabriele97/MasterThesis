@@ -1,11 +1,11 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
--- Date        : Thu May 12 17:25:07 2022
+-- Date        : Tue Jun 14 13:20:12 2022
 -- Host        : pop-os running 64-bit Pop!_OS 21.10
 -- Command     : write_vhdl -force -mode synth_stub -rename_top design_1_auto_ds_0 -prefix
---               design_1_auto_ds_0_ design_1_auto_ds_2_stub.vhdl
--- Design      : design_1_auto_ds_2
+--               design_1_auto_ds_0_ design_1_auto_ds_0_stub.vhdl
+-- Design      : design_1_auto_ds_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1
 -- --------------------------------------------------------------------------------

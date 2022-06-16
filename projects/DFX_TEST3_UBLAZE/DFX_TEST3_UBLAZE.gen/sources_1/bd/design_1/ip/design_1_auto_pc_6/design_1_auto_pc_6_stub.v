@@ -1,11 +1,11 @@
 // Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
-// Date        : Wed May 11 17:34:17 2022
+// Date        : Tue Jun 14 13:19:25 2022
 // Host        : pop-os running 64-bit Pop!_OS 21.10
 // Command     : write_verilog -force -mode synth_stub -rename_top design_1_auto_pc_6 -prefix
-//               design_1_auto_pc_6_ design_1_auto_pc_4_stub.v
-// Design      : design_1_auto_pc_4
+//               design_1_auto_pc_6_ design_1_auto_pc_6_stub.v
+// Design      : design_1_auto_pc_6
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z020clg400-1
 // --------------------------------------------------------------------------------

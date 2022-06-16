@@ -82,3 +82,9 @@ bsp write
 bsp reload
 catch {bsp regenerate}
 platform generate -domains standalone_microblaze_0 
+platform active {asdwqae_hw}
+domain active {standalone_ps7_cortexa9_0}
+bsp reload
+bsp reload
+platform active {asdwqae_hw}
+platform generate

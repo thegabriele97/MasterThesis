@@ -1,7 +1,7 @@
 --Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
---Date        : Sun May 22 10:14:06 2022
+--Date        : Tue Jun 14 14:34:40 2022
 --Host        : pop-os running 64-bit Pop!_OS 21.10
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -50,6 +50,8 @@ architecture STRUCTURE of design_1_wrapper is
   port (
     vsm_VS_0_hw_triggers : in STD_LOGIC_VECTOR ( 0 to 0 );
     gpio_rtl_0_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    uart_rtl_0_rxd : in STD_LOGIC;
+    uart_rtl_0_txd : out STD_LOGIC;
     ICAP_csib : out STD_LOGIC;
     ICAP_i : out STD_LOGIC_VECTOR ( 31 downto 0 );
     ICAP_o : in STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -74,9 +76,7 @@ architecture STRUCTURE of design_1_wrapper is
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
-    FIXED_IO_ps_porb : inout STD_LOGIC;
-    uart_rtl_0_rxd : in STD_LOGIC;
-    uart_rtl_0_txd : out STD_LOGIC
+    FIXED_IO_ps_porb : inout STD_LOGIC
   );
   end component design_1;
 begin

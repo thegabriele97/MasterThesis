@@ -1,10 +1,10 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
--- Date        : Wed May 11 15:22:01 2022
+-- Date        : Tue Jun 14 13:22:55 2022
 -- Host        : pop-os running 64-bit Pop!_OS 21.10
--- Command     : write_vhdl -force -mode funcsim
---               /home/gabriele97/Repos/MasterThesis/projects/DFX_TEST3_UBLAZE/DFX_TEST3_UBLAZE.gen/sources_1/bd/design_1/ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top design_1_util_vector_logic_0_0 -prefix
+--               design_1_util_vector_logic_0_0_ design_1_util_vector_logic_0_0_sim_netlist.vhdl
 -- Design      : design_1_util_vector_logic_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.

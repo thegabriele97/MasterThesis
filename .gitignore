@@ -72,4 +72,4 @@ xvlog.*
 ## checkpoint files
 *.dcp
 
-
+# proj2dfx/projects/**
