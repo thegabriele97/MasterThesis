@@ -1,0 +1,49 @@
+Hello World
+Is bcn started? -1
+Is bcn started? 1
+Successfully ran Hello World application
+						Fibonacci current value 1
+						Fibonacci current value 1
+
+DONE_1 DONE_1 DONE_1
+CHECKSUM: 3
+WRONG CHECKSUM!
+Hello World
+Is bcn started? -1
+Is bcn started? 1
+Successfully ran Hello World application
+						Fibonacci current value 1
+						Fibonacci current value 1
+						Fibonacci current value 2
+						Fibonacci current value 3
+						Fibonacci current value 5
+						Fibonacci current value 8
+						Fibonacci current value 13
+						Fibonacci current value 21
+						Fibonacci current value 34
+						Fibonacci current value 55
+						Fibonacci current value 89
+						Fibonacci current value 144
+						Fibonacci current value 233
+						Fibonacci current value 377
+						Fibonacci current value 610
+						Fibonacci current value 987
+						Fibonacci current value 1597
+						Fibonacci current value 2584
+						Fibonacci current value 4181
+						Fibonacci current value 6765
+						Fibonacci current value 10946
+						Fibonacci current value 17711
+						Fibonacci current value 28657
+						Fibonacci current value 46368
+						Fibonacci current value 75025
+						Fibonacci current value 121393
+						Fibonacci current value 196418
+						Fibonacci current value 317811
+						Fibonacci current value 514229
+						Fibonacci current value 832040
+
+DONE_1 DONE_1 DONE_1
+CHECKSUM: 1673873
+DONE_2 DONE_2 DONE_2
+completed
