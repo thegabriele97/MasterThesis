@@ -1,0 +1,4 @@
+!*.bin
+!*.bit
+.vscode
+__pycache__

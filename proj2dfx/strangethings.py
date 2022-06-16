@@ -201,6 +201,10 @@ def strangethings(file, replace_result = False):
         print(f"{emoji_error} ERROR: top.vhd already exists")
         exit(2)
 
+    if replace_result:
+        print(f"{emoji_warning} WARNING: top.vhd already exists, it will be overwritten")
+        os.remove(f'{df}/top.vhd')
+
     for entity in entitylist:
         entitylist[entity].save(f'{df}/top.vhd', append=True)
         print(f'{emoji_ok} Entity {entity} saved in {df}/top.vhd')
