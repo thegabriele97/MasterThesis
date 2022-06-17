@@ -1,135 +1,32 @@
-\chapter{Hello}
-\label{sec:hello}
+\chapter{Introduction}
+\label{sec:Introduction}
 
-% use [][] to prepend/postpone text to the citation
-\cite[Hi][Goofy]{IEEEexample:article_typical}
+In the last past years, the number of missions devoted to the exploration of the universe has increased. Predictions shows that the number of missions in the current decade is expected to be almost three times the number of missions in the previous decade, without considering low-cost and low-weight missions like the one including cubesats. \bigskip
 
-\si{\kilo\gram\per\second}
+Due to this increase in the number of missions, the number of electronic devices on board has increased, and the job complexity assigned to those devices has increased as well. Nowadays, electronic instruments are used not only for navigation purposes, but also for the analysis and manipulation of data. The most advanced spacecrafts are capable of decide autonomously the trajectory to follow, or to apply some complex algorithms to the data collected before sending them back to the ground. \bigskip
 
-% generic figure
-\begin{figure}[h]
-\centering
-\includegraphics[width=.9\linewidth]{images/logo/logoPoliTo_with_name_wrong.png}
-\caption{Hi}
-\label{fig:hi}
-\end{figure}
+Whatever is the purpose of a spacecraft, from the smallest one to a complete rover exploring another planet, electronic devices must be tailored to work in a realiable way, even in a complex environment like the space, where there are many disturbances like big temperature variations or radiations, one of the most common causes of failure in the spacecraft and greatest enemy of electronic instruments. \bigskip
 
-% use [] to set name for ToC
-\section[Extremely long name with manual linebreak which otherwise would not fit the page]{Extremely long name with manual linebreak\\which otherwise would not fit the page} % ok with fontsize=12pt
+To understand better the problem, we can start from a real-world example, a piece of history. On September 22, 2021, the ESA's INTEGRAL spacecraft autonomously entered into emergency safe mode. INTEGRAL is a space telescope for observing gamma rays, and it was launched into Earth orbit in 2002 Something catastrophic was happening for the missions itself: one of the spacecraft's three reaction wheels had switched off without warnings. This caused a ripple effect that brought the satellite to begin to rotate incontrolably. \bigskip
 
-% list
-\begin{enumerate}
-    \item A
-    \item B
-    \item C
-\end{enumerate}
+This episode created a lot of problems for the spacecraft, and the team of engineers responsible for the INTEGRAL spacecraft had to deal with it: due to the fact that the spacecraft was spinning, data from the spacecraft were only reaching ground control in a difficult way, and the batteries were quickly discharging because of the missing orientation of the solar panels towards the Sun. ESA was going to lose a 19-years old space telescope. \bigskip
 
-% minipage to put two images in the same figure
-\begin{figure}[h]
-    \centering
-    \begin{minipage}[t]{.49\linewidth}
-    \begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{images/logo/logoPoliTo_with_name_low_quality.jpg}
-	\caption{HI}
-	\label{fig:c}
-    \end{figure}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{.49\linewidth}
-    \begin{figure}[H]
-	\centering
-	% svg inclusion, requires inkscape
-	\includesvg[width=\linewidth]{images/artificial_neural_network.svg}
-	\caption{SVG}
-	\label{fig:svg}
-    \end{figure}
-    \end{minipage}
-\end{figure}
+With only a few hours of energy left to save the mission, the Integral Flight Control Team, together with Flight Dynamics and Ground Station Teams started working on a solution, and with quick thinking and ingenious ideas, they found the cause of the problem and rescued the spacecraft. The root of the problem was radiations. Charged, ionised particles, from the Van Allen belt, caused a SEU in the control system of the spacecraft, deciding erroneously to shut down the reaction wheel. \bigskip
 
-\begin{table}[]
-    \centering
-    \setcellgapes{3pt}
-    \makegapedcells
-    \begin{tabular}{|c|c|c}
-    \hline
-    ReLU & $f(x) = \begin{cases}
-	0 & \text{for } x \le 0\\
-	x & \text{for } x > 0\end{cases}$ \\ \hline
-    Softmax & $f_i(\vec{x}) = \dfrac{e^{x_i}}{\sum_{j=1}^J e^{x_j}} i = 1, ..., J$ \\ \hline
-    tanh & $f(x)=\tanh(x)=\dfrac{(e^{x} - e^{-x})}{(e^{x} + e^{-x})}$ \\ \hline
-    \end{tabular}
-    \caption{Examples of activation functions, operating either element-wise or vector-wise, depending on the function}
-    \label{tab:activation_functions}
-\end{table}
+This story is an example of the problems that can happen during space missions due to radiations affecting the on board electronics. From this example, we can understand how crucial is the fault tolerant analysis during all the stages of development of a new space component, in order to produce a dependable system. The concept of dependable system is a complex one, and in space missions there are mainly three factors that can affect the dependability of a system:
 
-\begin{equation}
-    \label{eq:fully_connected}
-    output = f_{activation}\left(\displaystyle\sum_{\#neurons} input_i + bias\right)
-\end{equation}
-
-\begin{table}
-    \centering
-    \begin{adjustbox}{width={0.9\textwidth},totalheight={\textheight},keepaspectratio} % needed if the table overflows the margins, requires adjustbox package
-    \setcellgapes{3pt}
-    \makegapedcells
-    \begin{tabular}{|c|c|}
-    \hline
-    MSE / L2 Loss / Quadratic Loss & $\dfrac{\sum_{i=1}^{N} \left(y_i - \hat{y}_i\right)^2}{N}$ \\ \hline
-    \makecell{(Binary) Cross Entropy \\ (average reduction on higher dimensions)} & $\dfrac{\sum_{i=1}^{N} \sum_{j=1}^{C} \hat{y}_i \log\left(y_{i,j}\right)}{N}$ \\ \hline
-    \makecell{Categorical Cross Entropy \\ (sum reduction on higher dimensions)} & $- \sum_{i=1}^{N} \hat{y}_i +  \log\left(\sum_{i=1}^{N} \sum_{j=1}^{C} y_{i,j}\right)$ \\ \hline
-    \end{tabular}
-    \end{adjustbox} % must be closed before label and caption
-    \caption{$y$ is the output of the network, $N$ is the batch size multiplied by the number of outputs (e.g. pixels), $C$ is the number of classes and $\hat{y}$ is the correct output.}
-    \label{tab:loss_functions}
-\end{table}
-
-
-\begin{algorithm}
-\caption{Adam optimizer algorithm. All operations are element-wise, even powers. Good values for the constants are $\alpha=0.001, \beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}$. $\epsilon$ is needed to guarantee numerical stability.}
-\label{alg:adam_optimizer}
-\begin{algorithmic}[1]
-\Procedure{Adam}{$\alpha, \beta_1, \beta_2, f, \theta_0$}
-\LineComment{$\alpha$ is the stepsize}
-\LineComment{$\beta_1, \beta_2 \in \left[0, 1\right)$ are the exponential decay rates for the moment estimates}
-\LineComment{$f\left(\theta\right)$ is the objective function to optimize}
-\LineComment{$\theta_0$ is the initial vector of parameters which will be optimized}
-\LineComment{Initialization}
-\State $m_0 \gets 0$
-\Comment{First moment estimate vector set to 0}
-\State $v_0 \gets 0$
-\Comment{Second moment estimate vector set to 0}
-\State $t \gets 0$
-\Comment{Timestep set to 0}
-\LineComment{Execution}
-\While{$\theta_t$ not converged}
-\State $t \gets t + 1$
-\Comment{Update timestep}
-\LineComment{Gradients are computed w.r.t the parameters to optimize}
-\LineComment{using the value of the objective function}
-\LineComment{at the previous timestep}
-\State $g_t \gets \nabla_\theta f\left(\theta_{t - 1}\right)$
-\LineComment{Update of first-moment and second-moment estimates using}
-\LineComment{previous value and new gradients, biased}
-\State $m_t \gets \beta_1 \cdot m_{t - 1} + \left( 1 - \beta_1 \right) \cdot g_t$
-\State $v_t \gets \beta_2 \cdot v_{t - 1} + \left(1 - \beta_2 \right) \cdot g_t^2$
-\LineComment{Bias-correction of estimates}
-\State $\hat{m}_t \gets \dfrac{m_t}{1 - \beta_1^t}$
-\State $\hat{v}_t \gets \dfrac{v_t}{1 - \beta_2^t}$
-\State $\theta_t \gets \theta_{t - 1} - \alpha \cdot \dfrac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$
-\Comment{Update parameters}
-\EndWhile
-\State \textbf{return} $\theta_t$
-\Comment{Optimized parameters are returned}
-\EndProcedure
-%\end{small}
-\end{algorithmic}
-\end{algorithm}
-
-% bullet points
 \begin{itemize}
-    \item A
-    \item B
-    \item C
+    \item \textit{Reliability}: the probability of a system to work as expected, continuously, in a given period of time (usually it coincides with the period of time of the mission itself).
+    \item \textit{Availability}: the probability of a system to work as expected at a generic moment in time, in the future.
+    \item \textit{Safety}: the ability of a system to work in a given environment, without any risk of serious damage.
 \end{itemize}
+
+With the increasing need for protection against unwanted effects caused by radiations, since the first interplanetary mission in the 60s with the Mariner 2 mission, there have been an increasing number of studies and techniques developed to deal with the problem. At the hardware level, there are \textit{hardware mitigation techniques}, where usage of radiation-tolerant hardware components are used and hardware created with those components is called \textit{radiation-hard} or \textit{rad-hard} for simplicity. In most of the cases, \textit{COTS} (Commercial Off-The-Shelf) hardware is used, which is a hardware meant to be used in a generic environment, and on top of that logical mitigation techniques are used to protect the system from the effects of radiation. The latter solution is easier to implement, and it is more efficient than the former one.
+
+\section{Thesis Motivation}
+The main motivation for the development of this thesis is to develop some techniques to deal with the problem of radiation in the space. In particular, the main goal is investigating the outcome that can occur when a SEU faults affects the CPU of a system (like the navigation system of a spacecraft), and how to deal with them by applying some innovative ideas to enhance the system's robustness and so the global fault tolerance of the system. \bigskip
+
+The hardware model on which the techniques are developed is the FPGA. FPGAs are used on a lot more space missions nowadays than in the past, for all the reasons that make FPGAs better than ASICs, mainly due to their flexibility. Because of the complexity of space missions, flexibility is a key factor in the success of a mission, both during the development and during the operational phases. \bigskip
+
+For this thesis, the usage of FPGAs has one big advantage, among other things: randomly generated SEU faults can be injected easily without using any strange and sophisticated instruments, a PC is enough. This is crucial in the study of radiation effects: it's possible to develop a systematic way to inject faults, and they can be repeated over time in order to be able to study the effect of the same SEU with different solutions.
 

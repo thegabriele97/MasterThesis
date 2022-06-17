@@ -1,0 +1,135 @@
+\chapter{Hello}
+\label{sec:hello}
+
+% use [][] to prepend/postpone text to the citation
+\cite[Hi][Goofy]{IEEEexample:article_typical}
+
+\si{\kilo\gram\per\second}
+
+% generic figure
+\begin{figure}[h]
+\centering
+\includegraphics[width=.9\linewidth]{images/logo/logoPoliTo_with_name_wrong.png}
+\caption{Hi}
+\label{fig:hi}
+\end{figure}
+
+% use [] to set name for ToC
+\section[Extremely long name with manual linebreak which otherwise would not fit the page]{Extremely long name with manual linebreak\\which otherwise would not fit the page} % ok with fontsize=12pt
+
+% list
+\begin{enumerate}
+    \item A
+    \item B
+    \item C
+\end{enumerate}
+
+% minipage to put two images in the same figure
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[t]{.49\linewidth}
+    \begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/logo/logoPoliTo_with_name_low_quality.jpg}
+	\caption{HI}
+	\label{fig:c}
+    \end{figure}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{.49\linewidth}
+    \begin{figure}[H]
+	\centering
+	% svg inclusion, requires inkscape
+	\includesvg[width=\linewidth]{images/artificial_neural_network.svg}
+	\caption{SVG}
+	\label{fig:svg}
+    \end{figure}
+    \end{minipage}
+\end{figure}
+
+\begin{table}[]
+    \centering
+    \setcellgapes{3pt}
+    \makegapedcells
+    \begin{tabular}{|c|c|c}
+    \hline
+    ReLU & $f(x) = \begin{cases}
+	0 & \text{for } x \le 0\\
+	x & \text{for } x > 0\end{cases}$ \\ \hline
+    Softmax & $f_i(\vec{x}) = \dfrac{e^{x_i}}{\sum_{j=1}^J e^{x_j}} i = 1, ..., J$ \\ \hline
+    tanh & $f(x)=\tanh(x)=\dfrac{(e^{x} - e^{-x})}{(e^{x} + e^{-x})}$ \\ \hline
+    \end{tabular}
+    \caption{Examples of activation functions, operating either element-wise or vector-wise, depending on the function}
+    \label{tab:activation_functions}
+\end{table}
+
+\begin{equation}
+    \label{eq:fully_connected}
+    output = f_{activation}\left(\displaystyle\sum_{\#neurons} input_i + bias\right)
+\end{equation}
+
+\begin{table}
+    \centering
+    \begin{adjustbox}{width={0.9\textwidth},totalheight={\textheight},keepaspectratio} % needed if the table overflows the margins, requires adjustbox package
+    \setcellgapes{3pt}
+    \makegapedcells
+    \begin{tabular}{|c|c|}
+    \hline
+    MSE / L2 Loss / Quadratic Loss & $\dfrac{\sum_{i=1}^{N} \left(y_i - \hat{y}_i\right)^2}{N}$ \\ \hline
+    \makecell{(Binary) Cross Entropy \\ (average reduction on higher dimensions)} & $\dfrac{\sum_{i=1}^{N} \sum_{j=1}^{C} \hat{y}_i \log\left(y_{i,j}\right)}{N}$ \\ \hline
+    \makecell{Categorical Cross Entropy \\ (sum reduction on higher dimensions)} & $- \sum_{i=1}^{N} \hat{y}_i +  \log\left(\sum_{i=1}^{N} \sum_{j=1}^{C} y_{i,j}\right)$ \\ \hline
+    \end{tabular}
+    \end{adjustbox} % must be closed before label and caption
+    \caption{$y$ is the output of the network, $N$ is the batch size multiplied by the number of outputs (e.g. pixels), $C$ is the number of classes and $\hat{y}$ is the correct output.}
+    \label{tab:loss_functions}
+\end{table}
+
+
+\begin{algorithm}
+\caption{Adam optimizer algorithm. All operations are element-wise, even powers. Good values for the constants are $\alpha=0.001, \beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}$. $\epsilon$ is needed to guarantee numerical stability.}
+\label{alg:adam_optimizer}
+\begin{algorithmic}[1]
+\Procedure{Adam}{$\alpha, \beta_1, \beta_2, f, \theta_0$}
+\LineComment{$\alpha$ is the stepsize}
+\LineComment{$\beta_1, \beta_2 \in \left[0, 1\right)$ are the exponential decay rates for the moment estimates}
+\LineComment{$f\left(\theta\right)$ is the objective function to optimize}
+\LineComment{$\theta_0$ is the initial vector of parameters which will be optimized}
+\LineComment{Initialization}
+\State $m_0 \gets 0$
+\Comment{First moment estimate vector set to 0}
+\State $v_0 \gets 0$
+\Comment{Second moment estimate vector set to 0}
+\State $t \gets 0$
+\Comment{Timestep set to 0}
+\LineComment{Execution}
+\While{$\theta_t$ not converged}
+\State $t \gets t + 1$
+\Comment{Update timestep}
+\LineComment{Gradients are computed w.r.t the parameters to optimize}
+\LineComment{using the value of the objective function}
+\LineComment{at the previous timestep}
+\State $g_t \gets \nabla_\theta f\left(\theta_{t - 1}\right)$
+\LineComment{Update of first-moment and second-moment estimates using}
+\LineComment{previous value and new gradients, biased}
+\State $m_t \gets \beta_1 \cdot m_{t - 1} + \left( 1 - \beta_1 \right) \cdot g_t$
+\State $v_t \gets \beta_2 \cdot v_{t - 1} + \left(1 - \beta_2 \right) \cdot g_t^2$
+\LineComment{Bias-correction of estimates}
+\State $\hat{m}_t \gets \dfrac{m_t}{1 - \beta_1^t}$
+\State $\hat{v}_t \gets \dfrac{v_t}{1 - \beta_2^t}$
+\State $\theta_t \gets \theta_{t - 1} - \alpha \cdot \dfrac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$
+\Comment{Update parameters}
+\EndWhile
+\State \textbf{return} $\theta_t$
+\Comment{Optimized parameters are returned}
+\EndProcedure
+%\end{small}
+\end{algorithmic}
+\end{algorithm}
+
+% bullet points
+\begin{itemize}
+    \item A
+    \item B
+    \item C
+\end{itemize}
+
