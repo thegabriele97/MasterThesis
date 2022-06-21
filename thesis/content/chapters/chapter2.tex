@@ -6,6 +6,7 @@ Before going further in the implemented solutions, it's better to introduce a fe
 \section{Hardware Technology}
 
 \subsection{FPGA Architecture}
+\label{sec:fpgaarchitecture}
 \textit{FPGAs} (Field Programmable Gate Arrays) are used in a wide range of applications, from signal processing to machine learning applications. In particular, it is an integrated circuit designed to be general purpose: after manufacturing, it has no funcionalities. It is a hardware that can be programmed to perform specific tasks. \bigskip
 
 It differs from a CPU. A CPU is an already designed hardware that is designed to do only one thing in a very optimized way: execute code, from a pre-defined Instruction Set. In this case, the action of \textit{programming} is referred to the process of writing a series of instructions that the CPU will eventually execute. This is done by exploiting Programming Languges. A FPGA, instead, is like LEGO bricks. Each LEGO brick alone does not have any function or purpose, but when assembled (so put together with other bricks), it can be used to perform a specific task. Here, the action of \textit{programming} is referred to the process of writing a \textit{description} on how all the bricks will be assembled to perform the specific task we want. The description is done exploiting Hardware Description Languages (HDL) like VHDL or Verilog. \bigskip
@@ -68,7 +69,7 @@ On the radiation tolerant side, vendors offer radiation-tolerant FPGAs. On top o
 
 \section{Radiations}
 
-We are going to understand better why radiation effects regardin electronic devices are one of the primary concerns for the aerospace industry.\bigskip
+We are going to understand better why radiation effects regarding electronic devices are one of the primary concerns for the aerospace industry.\bigskip
 
 \subsection{Radiation sources}
 Where does the radiation originate from? Unfortunately, the Universe and in particular the Solar System are full of radiations. The natural space radiation environment can damage electronic devices in different ways, ranging from a degradation in performances to a complete functional failure. More and more a space system goes deeper in the space, less and less it is protected by the Earth's atmosphere.\bigskip
@@ -78,10 +79,66 @@ Close to the Earth, there are two three sources of radiation: the Van Allen Belt
 
 \subsection{Radiation problems on Earth: the Nintendo's Super Mario 64 glitch}
 
-Here on Earth, electronic devices are ofter not protected by radiations. Only safety-critical systems undergo the same kind of radiation-tolerant techniques as the ones used in the space system, like Aviation and Nuclear Power Plants, for instance.\bigskip
+Here on Earth, electronic devices are often not shielded or design to tolerate radiations. Usually, only safety-critical systems undergo the same kind of radiation-tolerant techniques as the ones used in the space system, like Aviation and Nuclear Power Plants, for instance.\bigskip
 
 Even if there is a big magnetosphere protecting the planet's surface, some charged particles still escape and travel until they reach the ground and some everyday device. In 2013, a player was challenging another player in Nintendo's Super Mario 64 game. Suddenly, Mario was teleported into the air, saving crucial time and providing an incredible advantage in the game. The glitch caused the attention of a lot of players, and a \$1000 reweard was offered to anynone who could replicate the glitch. Users tried in vain to recreate the scenario, but no-one was able to emulate that giant leap. In the end, after eight years, user concluded that the glitch was not replicable because it was caused by a charged particle coming from the outer space that caused a bit-flip in the value that defines the player's height. \bigskip
 
 Another curious case was the one related to the electronic voting machine in Belgium in 2003. A bit-flip here caused an adding of 4096 extra votes to a candidate. The error was only detected because there were more preferential votes than the candidate's own list, which is impossible in the voting system. The official explanation was ``the spontaneous creation of a bit at the position 13 in the memory of the computer''. It's not a coincidence that the value added was exactly 4096, in hexadecimal \texttt{0x1000}, that is $2^{12}$.
 
-\subsection{What is a radiation?}
+\subsection{Types of radiation}
+The most common way to classify radiations is based on their effects on electronic devices. If the effect is the result of a cumulative damage (i.e. passage of many charged particles in different moments in time, and each particle has a relative low energy) then it can be a \textit{total ionizing dose} or a \textit{displacement ionizing dose}. If the effect is the result of a single charged particle (with a high energy) then it can be \textit{destructive} or \textit{non-destructive}, and they are usually referred as SEE (Single Event Effects). \bigskip
+
+\subsubsection{Total ionizing dose}
+Most electronic devices are based on MOS transistors, forming the basis for digital logic. The common way to use those transistors is as \textit{electronic switches}: there are two isolated contacts, the source and the drain (i.e. the switch is off, no current). When a positive charge is applied to the gate (in the case of a NMOS transistor), electrons (that are negative charges) are allowed to pass from the two isolated contacts (i.e. the switch is on). \bigskip
+
+When ionizing radiations passes through the device, electrons are moved away from the material leaving 
+``holes'' of missing charge, acting as positive charge carriers. These holes can find their way to the gate oxide and become trapped: this phenomenon is called \textit{total ionizing dose}. The effect of this phenomenon is the same as applying some positive voltage to the gate. With enough accumulated charges, the effect is to have the transistor always on, or better, in the \textit{stuck-on state}. \bigskip
+
+\subsubsection{Displacement ionizing dose}
+Another form of cumulative damage is the \textit{displacement ionizing dose}. This is the effect of a single charged particle passing through the device. What happens is that an atom is displaced from the material, modifying the crystal structure of the material itself. These microscopic effects create traps and recombination centers, eventually leading to the modification of the free flow of the current. This will ultimately impact the device's performance. \bigskip
+
+\subsection{Single Event Effects}
+When a single high-energy charged particle passes through the device, it can cause a \textit{destructive} or \textit{non-destructive} effect. The particle creates a momentary change of charge in the device, creating an unexpected current that can affect the device in various ways. Some effects may be completely destructive, while others may degrade performance to the point that the device doesn't work anymore in the limits required by the circuit or the system itself. Other effects cause the device to momentarily work in a wrong way, causing a functional failure (so it's not destructive from the point of view of the device but can cause an functional error, for example a wrong value in the memory from \textit{0xe} to \textit{0xf}). \bigskip
+
+Within the destructive effect, the most common are Single Event Latchup (SEL), Single Event Burnout (SEB) and Single Event Gate Rupture (SEGR).
+
+\subsubsection{Single Event Latchup}
+In CMOS technology, there are a lot of intrinsic BJT (Bipolar Junction Transistor). When a special arrangement of PMOS and NMOS transistors is used, resulting in a n-p-n-p structures (corresponding to a NPN and a PNP transistor stucked next to each other), a CMOS Latchup structure is created. If one of these two transistor is activated (accidentally by a high-energy charged particle), the other one will be activated too, creating a feedback loop. They will both keep each other activated for a long as some current flows through them. This phenomenon will increase the current draw and can bring to the destrupution of the device. Usually, the only way to correct this situation is to make a \textit{power cycle}, so completely shutting down the device and then restarting it. However, latent damage may exists that may not appear until later. \bigskip
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\linewidth]{images/chapter2/Latchup.png}
+\caption{The intrisic BJTs in the CMOS Technology that can cause a Latchup. Deepon, CC BY-SA 3.0, via Wikimedia Commons}
+\label{fig:latchup}
+\end{figure}
+
+\subsubsection{Single Event Burnout}
+Can happen when an incident particle initiates an avalanche charge multiplication effect. This leads to an increasing current, leading to a thermal runaway of the device, causing local melting or ejection of molten material in a small-scale explosion. Obviously, the result is a complete destruction of the device. \bigskip
+
+\subsubsection{Single Event Gate Rupture}
+SEGR is the destructive rupture of a gate oxide (or any dielectric layer in a transistor). The effects can be observed in power MOSFETs with an increase of current flow when turned on, or in digital circuits with stuck bits. 
+
+\subsubsection{Single Event Upset}
+This is the most common non-destructive effect. As known as \textit{bit-flip}, it's caused by a particle that forces a digital signal to an opposite value momentarily. It can lean in a temporary modification of the digital output in a combinatory circuit, and the modified value can be memorized in a flip-flop or any other memory element if sampled at the same time a radiation arrives. In more complex circuits, it can cause other malfunctions like resets and memory values modifications. \bigskip
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.2\linewidth]{images/chapter2/SEU_EXAMPLE.pdf}
+\caption{Example of a Single Event Upset in a memory element.}
+\label{fig:seu_example}
+\end{figure}
+
+What is shown in Figure \ref{fig:seu_example} can for example happen in a SRAM memory. Each cell is made of a cross-coupled transistors. Each side couple are connected forming an inverter (NOT logic function), and the output of the inverter is connected to the gates of the second couple.  
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.4\linewidth]{images/chapter2/SRAM_CELL.pdf}
+\caption{Simple SRAM Cell layout. Inductiveload, Public domain, via Wikimedia Commons.}
+\label{fig:sram_cell_layout}
+\end{figure}
+
+In Figure \ref{fig:sram_cell_layout}, a simple layout is proposed. In order to have a logic 0 as output (\textit{BL = 0}), M3 is active (thus M4 is not active). So M2 is active (thus M3 is not active). If a radiation strikes one of those transistor, can happen that the M3's gate voltage goes low, causing a flip of the configuration thus a flip of the stored bit. \bigskip
+
+As explained in Section \ref{sec:fpgaarchitecture}, most FPGAs' memory configuration are based on SRAM technology. If a bitflip occurs, the FPGA configuration itself is modified, leading to a malfunction of a module or to a routing modification.\bigskip
+
+% Explain why the trends (smaller transistors) cause SEU to be more common than accumulation effects.
