@@ -263,5 +263,42 @@ Address specified in the configuration packets are mapped to variable-width regi
 
 
 \subsection{Software Development}
-% talk about Vitis and xsct
+
+Xilinx provides some tools to help software developers to develop applications for hard ARM cores (such as in the ZYNQ7020) or for soft-cores such as Microblaze (one or multiple instances of the core). The most important one is Xilinx Software Command-Line Tool (XSCT). XSCT is a tool that allows developers to easily manage the FPGA via a command line interface and to write scripts, based on TCL, to automate some steps. \bigskip
+
+XSCT allows mainly two things: creating and managing projects, and accessing the FGPA's JTAG interface to program the FPGA itself or to debug applications. For what concerns the JTAG access, XSCT offers functions like upload of a bitstream to program the FPGA, upload of .ELF executable files to be run by a specific core (it can be either an ARM core or a Microblaze), the ability to control a core (start, stop, reset, etc.), the ability to read and write registers and access the memory space of a core and ultimately to debug an application. \bigskip
+
+A more high level tool is available, called Vitis. Vitis is a software development environment for FPGA development. It is a tool that allows developers, through an eclipse-based environment, to easily manage projects and applications. Vitis is a wrapper around XSCT. \bigskip
+
+A Xilinx Software project is made of a platform project. A platform project is a description of the hardware architecture on which the software will run. To create a platform project, the starting point is to extract a hardware description from a hardware design. The hardware description contains informations like the available cores, the memory space for each core, the available peripherals (and relative software drivers, if not standalone) and the bitstream to program the FPGA. Vivado is able to generate such a description only for Block Design-based projects, via the \texttt{export\_hardware} TCL command or via the GUI itself, which produces the \textit{.xsa} file. \bigskip
+
+Vitis, or XSCT, take the .xsa file as input to create a platform project. Once it is created, it is possible to create a system project. A system project is a software project that contains multiple applications, each one based on a specific core. An application project can be standalone (so a bare-metal firmware), or FreeRTOS based or petaLinux based (if available). 
+
 \section{Fault Injection Tool}
+
+Fault injection is a widely used technique for fault tolerance evaluation. A common architecture for this kind of tools is presented in Figure \ref{fig:fi_example}:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{images/chapter3/fi_env.pdf}
+\caption{Basic scheme of a fault injection tool \cite{Ruano2021-wy}}
+\label{fig:fi_example}
+\end{figure}
+
+In the general scheme, the following elements are present:
+
+\begin{itemize}
+    \item \textit{Controller}: it is the main application and the orchestrator of all the other components of the tools.
+    \item \textit{Fault Injection}: it is where faults are injected in the system, according to a specific error campaign.
+    \item \textit{Execution}: the output of the fault injection is executed.
+    \item \textit{Monitor}: the behaviour of the system is monitored and logs are generated.
+\end{itemize}
+
+A widely accepted classification of the different injection strategies is summarized as follows:
+
+\begin{itemize}
+    \item \textit{Hardware-Based fault injection}: consists in the generation of physical errors into the integrated circuits. They can be divided into fault injections with contact and fault injections without contact. The one with contact consists in perturbating the integrated circuits via perturbation introduced at the pins (for example a rapid and minimal change of the power supply voltage) while in the case of the without contact there is an external source that produces physical phenomenal such as a heavy ion radiation that produces a faults in the integrated circuits.
+    \item \textit{Software-Based fault injection}: consists in the generation of software errors. They can be artificially inserted into a software system, both at compile time or at run time. The ones at compile time \cite{fithesisdrizz} are inserted into the source code of the software or at the assembly level after the compilation of the original source code. The ones at run time are inserted through a trigger (for example a timeout or a software trap) that executes the fault injection module, altering the behaviour of the software.
+    \item \textit{Simulation-Based fault injection}: simulation-based fault injection is a technique that allows to simulate the system and to inject faults in it. The faults are injected in the simulation environment, and it can be done by modifying directly the high-level description of the design with a faulty model or by using built-in commands in the simulator that force error in the simulation of the design, not in the hardware description of the hardware itself.
+    \item \textit{Emulation-Based fault injection}: emulation-based fault injection is a technique that allows to emulate the system and to inject faults in it. 
+\end{itemize}

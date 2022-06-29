@@ -48,6 +48,72 @@ eprint = {
 }
 }
 
+@inproceedings{10.1145/1046192.1046212,
+author = {Asadi, Ghazanfar and Tahoori, Mehdi B.},
+title = {Soft Error Rate Estimation and Mitigation for SRAM-Based FPGAs},
+year = {2005},
+isbn = {1595930299},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1046192.1046212},
+doi = {10.1145/1046192.1046212},
+abstract = {FPGA-based designs are more susceptible to single-event upsets (SEUs) compared to ASIC designs. Soft error rate (SER) estimation is a crucial step in the design of soft error tolerant schemes to balance reliability, performance, and cost of the system. Previous techniques on FPGA SER estimation are based on time-consuming fault injection and simulation methods.In this paper, we present an analytical approach to estimate the failure rate of designs mapped into FPGAs. Experimental results show that this technique is orders of magnitude faster than fault injection method while is very accurate. We also present a high-reliable low-cost mitigation technique which can significantly improve the availability of FPGA-based designs. This technique is able to tolerate SEUs in both user and configuration bits of mapped designs.},
+booktitle = {Proceedings of the 2005 ACM/SIGDA 13th International Symposium on Field-Programmable Gate Arrays},
+pages = {149–160},
+numpages = {12},
+keywords = {SRAM-based FPGA, error recovery, soft error rate estimation},
+location = {Monterey, California, USA},
+series = {FPGA '05}
+}
+
+@ARTICLE{Ruano2021-wy,
+  title    = "Fault Injection Emulation for Systems in {FPGAs}: Tools,
+              Techniques and Methodology, a Tutorial",
+  author   = "Ruano, Oscar and Garcia-Herrero, Francisco and Aranda,
+              Luis Alberto and Sanchez-Macian, Alfonso and Rodriguez,
+              Laura and Maestro, Juan Antonio",
+  abstract = "Communication systems that work in jeopardized environments such
+              as space are affected by soft errors that can cause malfunctions
+              in the behavior of the circuits such as, for example, single
+              event upsets (SEUs) or multiple bit upsets (MBUs). In order to
+              avoid this erroneous functioning, this kind of systems are
+              usually protected using redundant logic such as triple modular
+              redundancy (TMR) or error correction codes (ECCs). After the
+              implementation of the protected modules, the communication
+              modules must be tested to assess the achieved reliability. These
+              tests could be driven into accelerator facilities through
+              ionization processes or they can be performed using fault
+              injection tools based on software simulation such as the SEUs
+              simulation tool (SST), or based on field-programmable gate array
+              (FPGA) emulation like the one described in this work. In this
+              paper, a tutorial for the setup of a fault injection emulation
+              platform based on the Xilinx soft error mitigation (SEM)
+              intellectual property (IP) controller is depicted step by step,
+              showing a complete cycle. To illustrate this procedure, an online
+              repository with a complete project and a step-by-step guide is
+              provided, using as device under test a classical communication
+              component such as a finite impulse response (FIR) filter.
+              Finally, the integration of the automatic configuration memory
+              error-injection (ACME) tool to speed up the fault injection
+              process is explained in detail at the end of the paper.",
+  journal  = "Sensors (Basel)",
+  volume   =  21,
+  number   =  4,
+  month    =  feb,
+  year     =  2021,
+  keywords = "FIR filter; SEM IP; SEU; Xilinx; communication modules;
+              emulation; fault injection debugger",
+  language = "en"
+}
+
+@mastersthesis{fithesisdrizz,
+  author        = "Daniele Rizzieri",
+  title         = "Software-Based Radiation Effects Analysis on AP-SoC Embedded Processor",
+  school        = "Politecnico di Torino",
+  type          = " Corso di laurea magistrale in Mechatronic Engineering (Ingegneria Meccatronica)",
+  address       = "Torino, Italy",
+  year          = "2021"
+};
 
 % % The three most common and typical types of references used in
 % % IEEE publications:

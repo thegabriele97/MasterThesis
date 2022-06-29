@@ -1,5 +1,58 @@
 \chapter{Analysis and Hardening of a FPGA Design with a soft core}
 
+A SRAM-based FPGA is sensitive to SEUs, as explained in Chapter \ref{sec:background}. To understand the effects of radiation on the FPGA, it is better to see a design as an abstraction of two layers. The two main layers are:
+
+\begin{itemize}
+    \item \textit{Application layer}: includes the logic and memory elements as described by the user.
+    \item \textit{Configuration layer}: includes the logic and memory elements that are used to implement physically the user's design in the FPGA.
+\end{itemize}
+
+From the logical point of view, a particle causing a SEU can affects one of the two layers, producing different consequences:
+
+\begin{itemize}
+    \item SEUs in the Application Layer manifest as transient errors that could affect the stored data or the state of the user logic memory elements such as BRAMs or Flip-Flops. 
+    \item SEUs affecting the Configuration Layer manifest as persistent errors, that could be reverted using a reconfiguration process. 
+\end{itemize}
+
+The first one are transients because they are in the user logic and are directly controlled by the user. Because of that, they may be detected or corrected, it depends on how the logic has been designed. The second one are persistent because they directly affects how the bottom hardware works: from the point of view of the user, it is like a real hardware fault that cannot be corrected. \bigskip
+
+Persistent errors can have two main consequences:
+
+\begin{itemize}
+    \item They can change a routing element connection or can complete disconnect internal wires.
+    \item They can change the behaviour of a LUT.
+\end{itemize}
+
+SEUs in the configuration layer are the most common type of errors in SRAM-based FPGAs because the application layer virtually uses less area than the configuration layer. A summary of the different causes of SEUs is presented in the following table:
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{|cc|cp{6.2cm}|}
+        \hline
+        \textbf{Layer} & & \textbf{Element} & \textbf{SEU Consequence} \\
+        \hline
+        \multirow{12}{*}{Configuration}
+        & & Muxes & Wrong input selection, open net, wrongly driven or left open\\
+        \cline{3-4}
+        & Routing & PIP & Wrong connection or disconnection between nets\\
+        \cline{3-4}
+        & & Buffers & Output net wrongly driven or left open\\
+        \cline{2-4}
+        & & LUT & Wrong function inputs and outputs \\
+        \cline{3-4}
+        & Logic & Control Bits & Wrong function inputs and outputs\\
+        \cline{3-4}
+        & & Tie Offs & Wrong function initialization\\
+        \hline
+        \multirow{2}{*}{Application}
+        & & RAM Blocks & Wrong application data\\
+        \cline{3-4}
+        & & CLB Flip-Flops & Wrong application data or state\\
+        \hline
+    \end{tabular}
+\caption{SEU consequences in SRAM-based FPGAs \cite{10.1145/1046192.1046212}}
+\label{tab:conseq_fpgas_seu}
+\end{table}
 
 \section{How SEUs affect the Microblaze?}
 
