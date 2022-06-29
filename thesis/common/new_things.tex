@@ -1,0 +1,43 @@
+
+% facilitates the creation of memory maps. Start address at the bottom,
+% end address at the top.
+% syntax:
+% \memsection{end address}{start address}{height in lines}{text in box}
+\newcommand{\memsection}[4]{%
+% define the height of the memsection
+\bytefieldsetup{bitheight=#3\baselineskip}%
+\bitbox[]{10}{%
+\texttt{#1}% print end address
+\\
+% do some spacing
+\vspace{#3\baselineskip}
+\vspace{-2\baselineskip}
+\vspace{-#3pt}
+\texttt{#2}% print start address
+}%
+\bitbox{16}{#4}% print box with caption
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{preformatted}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}

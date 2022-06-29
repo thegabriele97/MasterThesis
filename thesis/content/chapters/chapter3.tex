@@ -126,17 +126,142 @@ One of the key features of the Vivado Design Suite is the choiche given to the u
 
 \subsection{Steps towards the Bitstream Generation}
 
-In the end, a design can be a combination of IPs and manual HDL code or it can be a full IP-centric design, where the user instantiate the IPs he/she wants to use and interconnect them (usually via AXI Interface but also via other interfaces or custom interfaces, it depends on the IP). For the IP-centric design flow, Vivado offers the \textit{Block Design} tool, which allows the user to visually instantiate e move and connect IPs visually, where each IP corresponds to a block, and to connect them by drawing connections similar to a schematic or using connection automation features provided with a set of DRCs (to ensure proper IP configuration and connectivity), as shown in Figure \ref{fig:block_design_example}. \bigskip
+The starting point of the design design flow is the description of the system. The description can be made of a set of HDL files (Vivado supports Verilog, VHDL and SystemVerilog), a set of design constraints (XDXC) and a set of IP instantiations. \bigskip 
+
+Thus, a design can be a combination of IPs and hand-written HDL code or it can be a full IP-centric design, where the user instantiates IPs he/she wants to use and interconnects them (usually via AXI Interface but also via other interfaces or custom interfaces, it depends on the IP). For the IP-centric design flow, Vivado offers the \textit{Block Design} tool, which allows the user to visually instantiate e move and connect IPs visually, where each IP corresponds to a block, and to connect them by drawing connections similar to a schematic or using connection automation features provided with a set of DRCs (to ensure proper IP configuration and connectivity), as shown in Figure \ref{fig:block_design_example}. \bigskip
 
 % include image
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{images/chapter3/design_example-cropped.pdf}
+\includegraphics[width=0.75\linewidth]{images/chapter3/design_example-cropped.pdf}
 \caption{Example of Block Design}
 \label{fig:block_design_example}
 \end{figure}
 
+Moreover, the Block Design Tool allows the user to define the memory mapping of the AXI peripherals with respect to the AXI masters. In the example above there are two masters , the ZYNQ7 Processing System and a Microblaze, and both of them are connected to the same AXI Interconnect IP. All the other peripherals are connected to the same AXI Interconnect IP, so in the end there are two memory address spaces (one for each master) and each master will be able to access all the peripherals as the other master. The Block Design tool then allows to validate the design, the memory map correctness, and will package the design into a single design source. \bigskip
+
+Now that the design is defined, the user can proceed with a logic simulation or with the Synthesis of the design. Of course, in order to test the design, the user needs to write its own testbench. The testbench is usually a HDL file where the DUT (Device-Under-Test, that is the module the user wants to simulate) is instantiated and proper stimuli are applied. The simulator is then able to run simulate and let the user see all the waveforms. \bigskip
+
+Before going ahead with the Synthesis step, it possible to assign some constraints. Those constraints, defined in a XDC file, regards for example the PIN assignment (it is possible to assign a \textit{port} of the design to a physical pin of the FPGA) or the placement of some modules in a particular region of the FPGA. \bigskip
+
+Once the constraints are defined, the Synthesis can be performed. The Synthesis is the process of transforming a HDL description into a gate-level representation. The output is a netlist of the whole design. Vivado performs the Synthesis in a bottom-up approach, that is, the lower modules are synthesized first, and then the higher modules are synthesized. If the design containts IPs, these are synthesized first. The user can decide the Synthesis approach adopted by the tool, as for example if the synthesis must follow a timing optimization strategy or an area optimization approach. \bigskip
+
+The next step is the Implementation. The Implementation is the final step, where the gate netlist, produced as output of the synthesis step, is mapped to the FPGA specific resources and the design is routed. The implementation step is the most complex one and is made of different steps:
+
+\begin{itemize}
+    \item \textit{Design Optimization}: the netlist is optimized to reduce the number of required resources and to fit the target FPGA device.
+    \item \textit{Placement}: each block required by the design is mapped into a physical resource of the FPGA. There are many resources available with the same behaviour where the block can be mapped. The choiche may be driven by the need to minimize or to balance the wiring accross to FPGA and/or to minimize the circuit delay (i.e. maximize the speed). The placement tries to follow the constraints defined in the XDC file. If it is not possible to fullfill the constraints, the placement will fail and the user will be notified.
+    \item \textit{Post-Placement Physical Optimization}: the placement is further optimized.
+    \item \textit{Route Design}: the design is routed, meaning that the physical resources are connected to each other as needed. 
+\end{itemize}
+
+Once the design has been implemented, the final step of the bitstream generation can be performed. The default generated bitsteram is a binary bitstream (.bit), that can be used to program the FPGA. However, the user can also generate bitstreams in different formats.
+
 \subsection{Fundamentals of the Xilinx's Bitstream structure}
+
+The bitstream is a file that is usually given as input to some tools that programs the FPGA, via some defined interface. Because of the different tools and interfaces used for different scenarios, the bitstream format is not always the same. The most common formats are:
+
+\begin{itemize}
+    \item \textit{.bit}: a binary file that contains initially a header, followed by the raw bitsteam.
+    \item \textit{.rbt}: same structure as .bit, but it is ASCII encoded, meaning that the header is human-readable and the raw bitstream is written as literal '0' and '1' characters for each bit.
+    \item \textit{.bin}: a binary file that contains only the raw bitstream.
+    \item \textit{.mcs}: a file that can be used to program a PROM (includes addresses and checksum info).
+\end{itemize}
+
+Even tho the .bin file contains all the necessary data for programming a FPGA, the .bit file is the default format generated by Vivado.
+
+\subsubsection{Bitstream Header}
+The header containts some informations like the design name, build date, target name and are totally ignored by the FPGA. The main reason for this format to exist is that the header is required by tools like Vivado, to better analyze it before starting the programming. \bigskip
+
+The hex dump of a .bit file header looks like the following:
+
+\begin{lstlisting}[style=preformatted]
+00000000:  00090ff0 0ff00ff0  0ff00000 0161002a |.............a.*|
+00000010:  64657369 676e5f31  3b557365 7249443d |design_1;UserID=|
+00000020:  30584646 46464646  46463b56 65727369 |0XFFFFFFFF;Versi|
+00000030:  6f6e3d32 3032312e  31006200 0c377a30 |on=2021.1.b..7z0|
+00000040:  3230636c 67343030  0063000b 32303232 |20clg400.c..2022|
+00000050:  2f30362f 31360064  00093133 3a34363a |/06/16.d..13:46:|
+00000060:  30340065 003dbafc  ffffffff ffffffff |04.e.=..........|
+00000070:  ffffffff ffffffff  ffffffff ffffffff |................|
+00000080:  ffffffff ffffffff  000000bb 11220044 |.............".D|
+00000090:  ffffffff ffffffff  aa995566 20000000 |..........Uf ...|
+\end{lstlisting}
+
+There are several fields in the header, each one is indicapted by a letter (\textit{a}, \textit{b}, \textit{c}, \textit{d}, \textit{e}). The first one containts the design name \textit{design\_1}, the UserID and the Vivado version used to generate the bitsteam. The second one contains the FPGA part on which the bitstream has been generated for \textit{7z020clg400}. The \textit{c} and \textit{d} are the date and time, respectively. The \textit{e} field contains some additional information. Each letter is followed by the length of the field (including a trailing 0x00). After the header, there are few bytes that are used only to add some padding (\texttt{0xffffffff}) to the bitstream. 
+
+\subsubsection{Raw Bitstream}
+Here the configuration logic starts its job. The configuration logic is part of the FPGA that can be accessed via a configuration port, and acts as a State Machine. Each value written in the bitstream is like a command to the configuration logic, that may or may not change the state machine's state. \bigskip
+
+In ZYNQ system, that are mainly two configuration ports: the \textit{ICAP} and the \textit{PCAP}. Both are used to program the FPGA, but the first one can be used only by the hard-cores in the SoC, while the second one can be used by the FPGA to program itself. The ICAP and PCAP are mutually exclusive, so only one of them can be used at a time. They are connected with a 2:1 mux, and the selection pin is connected to a bit in one of the configuration registers of the ARM cores. \bigskip
+
+At startup, the PCAP is enabled by default, and the ICAP can be enabled if requested. The processeor may steal the PCAP back (and stop the ICAP) at any time. This choice has been made in order to insure that the ARM TrustZone remains in control of the security of the system all the times. ICAP is a potential backdoor, and would compromise security if the processor did not have the ability to prevent and regulate its use.\bigskip
+
+The raw bitstream in a Xilinx's 7 series FPGA consists of three sections:
+\begin{itemize}
+    \item Bus Width Auto Detection
+    \item Sync Word
+    \item FPGA Configuration
+\end{itemize}
+
+The bus width auto detection section is a byte pattern inserted at the beginning of every bitstream. The pattern is made of \texttt{0x999999bb} and \texttt{0x11220044} and they may be surrounded by some padding bytes. The configuration width detection logic always checks the low eight bits, For the x8 bus, the configuration bus width detection logic first finds \texttt{0xBB} on the D[0:7] pins, followed by \texttt{0x11}. For the x16 bus, the logic first finds \texttt{0xBB} on D[0:7] followed by \texttt{0x22}. For the x32 bus, the logic first finds \texttt{0xBB}, on D[0:7], followed by \texttt{0x44}. If the byte after \texttt{0xbb} is not correct, the bus width detection logic's state machine is reset, until a valid sequence is found. \bigskip
+
+When it is found, it switches to the appropriate external bus width state and starts looking for the Sync Word. The sync word is \texttt{0xaa995566}. When the sync word is found, the configuration logic switches to the FPGA configuration state, and starts processing configuration packets in the bitstream. Configuration data can be sent both in serial or in parallel mode, where the bus width is fixed thanks to the previous step. Once the Sync Word is detected, the communication mode is fixed and the configuration logic will only work on 32-bit, big-endian words. Thus, the Sync Word is used to esablish a 32-bit alignment, too. \bigskip
+
+Each configuration packet begins with a one-word header. The header is composed of the following fields:
+
+\begin{center}
+    \begin{bytefield}[endianness=big]{32}
+        \bytefieldsetup{bitwidth=2.4ex}%
+        \bitheader{31, 29, 28, 27, 26, 13, 10, 0} \\
+        \bytefieldsetup{bitwidth=2.4ex}%
+        \bitbox{3}{Type} & 
+        \bitbox{2}{OP} &
+        \bitbox{14}{Address} 
+        \bitbox{2}{} &
+        \bitbox{11}{Payload Length} \\
+    \end{bytefield}
+\end{center}
+
+The content of the header changes according to the \textit{Type} field. The Type 1 header is the showed one. Type 2 packets are used when the payload length exceeds the 11 bits available in a type 1 packet. Type 0 should exists, even if it is not documented. \bigskip
+
+The \textit{OP} field is used to specify the operation to be performed. The following values are possible:
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{p{4cm}|p{6cm}}
+        \textbf{OP} & \textbf{Description} \\
+        \hline
+        \texttt{00} & NOP \\
+        \texttt{01} & Read \\
+        \texttt{10} & Write \\
+    \end{tabular}
+\caption{7 Series Configuration Packet: Type 1 Header OP Field}
+\label{tab:type1_header}
+\end{table}
+
+For NOP operations, that usualy are found as \texttt{0x20000000} in the bitstream, the address and payload length are ignored. The address field can be useful in one case: the type 2 packets does not contain any address field, to extend the payload length maximum value. Thus, the configuration logic will use the address field of the previous type 1 packet to determine the address of the type 2 packet. The flow would be a NOP packet with a valid address field followed by a type 2 packet. \bigskip
+
+Address specified in the configuration packets are mapped to variable-width registers. Some of the registers are:
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{p{2cm}|p{2cm}|p{1.5cm}|p{7cm}}
+        \textbf{Register} & \textbf{Address} & \textbf{Length} & \textbf{Description} \\
+        \hline
+        \texttt{CRC} & \texttt{00000} & Fixed & Automatical updated register: when a packet is received, the configuration logic computer the CRC incrementally and updates the register. \\
+        \hline
+        \texttt{FAR} & \texttt{00001} & Fixed & Start address for the next read or write operation for the configuration memory\\
+        \hline
+        \texttt{FDRI} & \texttt{00010} & Variable & Register where configuration data are wrote. This is the real content of the configuration memory of the FPGA, the one indicating how the physical cells are used and the interconnections\\
+        \hline
+        \texttt{CMD} & \texttt{00100} & Fixed & Used to perform one-shot actions. For example the \textit{RCRC} resets the CRC register or the \textit{START} command begins the startup sequence of the FPGA when the configuration is done.\\
+    \end{tabular}
+\caption{7 Series Configuration Registers}
+\label{tab:conf_regs}
+\end{table}
+
+
 \subsection{Software Development}
 % talk about Vitis and xsct
 \section{Fault Injection Tool}
