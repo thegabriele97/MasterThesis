@@ -1,6 +1,6 @@
-\chapter{Analysis and Hardening of a FPGA Design with a soft core}
+\chapter{Analysis and hardening of a FPGA Design with a MicroBlaze}
 
-A SRAM-based FPGA is sensitive to SEUs, as explained in Chapter \ref{sec:background}. To understand the effects of radiation on the FPGA, it is better to see a design as an abstraction of two layers. The two main layers are:
+A SRAM-based FPGA is sensitive to SEUs, as explained in Chapter \ref{sec:background}. To better understand the effects of radiation on the FPGA, it is better to see a design as an abstraction of two layers. The two main layers are:
 
 \begin{itemize}
     \item \textit{Application layer}: includes the logic and memory elements as described by the user.
@@ -54,11 +54,25 @@ SEUs in the configuration layer are the most common type of errors in SRAM-based
 \label{tab:conseq_fpgas_seu}
 \end{table}
 
-\section{How SEUs affect the Microblaze?}
+The following analyzes are focused on SEUs affecting the configuration layer, as they are the most common type of errors in SRAM-based FPGAs. However, the proposed techniques allows designeers to detect and correct SEUs in the application layer, too.
 
-Explain here what are the effects of SEUs in the Microblaze.
+\section{How SEUs affect the MicroBlaze?}
+
+As anticipated in the previous sections, the object of interest of this thesis work is the analysis of the MicroBlaze behaviour when affected by SEUs and how those effects can be mitigated by constructing a series of ad-hoc hardening technique. \bigskip
+
+First, in order to understand how the MicroBlaze reacts to SEUs affecting itself, a series of fault injection campaign must be executed. As explained in Chapter \ref{sec:fitollo}, the MicroBlaze instance has been forced to be implemented in a specific portion of the design. This is possible with Vivado by defining a PBLOCK, that is a group of physical and adjacent cells 
+
+
+% Explain here what are the effects of SEUs in the MicroBlaze.
 
 \section{Strategies and adopted solutions}
+
+% This section is focused on SEUs affecting the configuration layer, as they are more likely to occur. To overcome their effects, some techniques that exploit the particular reconfigurable capabilities of the FPGAs to detect and correct persistent errors in the configuration memory are detailed next:
+
+% Scrubbing is a technique used to correct and prevent errors in the information stored in memory. In FPGAs, scrubbing can be used to mitigate both persistent errors in SRAM cells (i.e., the configuration memory) and transient errors in user-memory elements such as BRAMs. To perform configuration memory scrubbing, the configuration memory data must be read sequentially from the start to the end and compared to the original configuration bitstream or an error check code such as a cyclic redundancy check (CRC) [43].
+% Dynamic partial reconfiguration allows run-time reconfiguration without application layer interruption. This technique cannot detect errors by itself, so it must be combined with other error detection techniques such as those based on redundancy. These correction techniques take advantage of the subdivision of the configuration memory into frames, which contain information related to the configuration of specific parts of the design.
+
+
 Watchdog + DFX because..
 
 \section{Development of a watchdog}
@@ -83,7 +97,7 @@ TMR.
 \subsection{What is and how useful is a partial reconfiguration?}
 \subsection{Xilinx DFX Controller}
 \subsection{Prepare a design for partial reconfiguration}
-\subsection{Prepare a design with a Microblaze for partial reconfiguration}
+\subsection{Prepare a design with a MicroBlaze for partial reconfiguration}
 
 \section{Integration of the watchdog and the DFX}
 \subsection{The needed hardware}

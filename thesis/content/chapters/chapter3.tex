@@ -125,6 +125,7 @@ Together with the HDL description, Vivado offers an IP catalog. IP stands for In
 One of the key features of the Vivado Design Suite is the choiche given to the user to perform the design flow by means of the Graphical User Interface (GUI) or by TCL commands. The GUI, known as as \textit{Vivado Integrated Design Environment} (IDE), allows the user to follow the evolution of the design visually from the HDL and IP instantiation up to its implementation on physical resources. The TCL commands allow the user to control the design flow by means of scripts. The interesting thing is that each action performed by the user in the GUI corresponds to an exact TCL command that can be seen from the TCL Console available in the IDE. This allow the user to understand what is the TCL command for that specific action and to script the design flow easily. 
 
 \subsection{Steps towards the Bitstream Generation}
+\label{sec:bitstreamgen}
 
 The starting point of the design design flow is the description of the system. The description can be made of a set of HDL files (Vivado supports Verilog, VHDL and SystemVerilog), a set of design constraints (XDXC) and a set of IP instantiations. \bigskip 
 
@@ -256,6 +257,7 @@ Address specified in the configuration packets are mapped to variable-width regi
         \texttt{FDRI} & \texttt{00010} & Variable & Register where configuration data are wrote. This is the real content of the configuration memory of the FPGA, the one indicating how the physical cells are used and the interconnections\\
         \hline
         \texttt{CMD} & \texttt{00100} & Fixed & Used to perform one-shot actions. For example the \textit{RCRC} resets the CRC register or the \textit{START} command begins the startup sequence of the FPGA when the configuration is done.\\
+        \texttt{STAT} & \texttt{00111} & Fixed & The Status Register (STAT) indicates the value of numerous global signals in the FPGA.\\
     \end{tabular}
 \caption{7 Series Configuration Registers}
 \label{tab:conf_regs}
@@ -272,9 +274,12 @@ A more high level tool is available, called Vitis. Vitis is a software developme
 
 A Xilinx Software project is made of a platform project. A platform project is a description of the hardware architecture on which the software will run. To create a platform project, the starting point is to extract a hardware description from a hardware design. The hardware description contains informations like the available cores, the memory space for each core, the available peripherals (and relative software drivers, if not standalone) and the bitstream to program the FPGA. Vivado is able to generate such a description only for Block Design-based projects, via the \texttt{export\_hardware} TCL command or via the GUI itself, which produces the \textit{.xsa} file. \bigskip
 
-Vitis, or XSCT, take the .xsa file as input to create a platform project. Once it is created, it is possible to create a system project. A system project is a software project that contains multiple applications, each one based on a specific core. An application project can be standalone (so a bare-metal firmware), or FreeRTOS based or petaLinux based (if available). 
+Vitis, or XSCT, take the .xsa file as input to create a platform project. Once it is created, it is possible to create a system project. A system project is a software project that contains multiple applications, each one based on a specific core. An application project can be standalone (so a bare-metal firmware), or FreeRTOS based or petaLinux based (if available). \bigskip
+
+Once a project is created, software developers can start writing their own code (usually in C) and to customize the Board-Support Package (BSP) that allows to change basic things like the \textit{stdout} and \textit{stdin} used peripherals to print or read some text, respectively.
 
 \section{Fault Injection Tool}
+\label{sec:fitollo}
 
 Fault injection is a widely used technique for fault tolerance evaluation. A common architecture for this kind of tools is presented in Figure \ref{fig:fi_example}:
 
@@ -299,6 +304,24 @@ A widely accepted classification of the different injection strategies is summar
 \begin{itemize}
     \item \textit{Hardware-Based fault injection}: consists in the generation of physical errors into the integrated circuits. They can be divided into fault injections with contact and fault injections without contact. The one with contact consists in perturbating the integrated circuits via perturbation introduced at the pins (for example a rapid and minimal change of the power supply voltage) while in the case of the without contact there is an external source that produces physical phenomenal such as a heavy ion radiation that produces a faults in the integrated circuits.
     \item \textit{Software-Based fault injection}: consists in the generation of software errors. They can be artificially inserted into a software system, both at compile time or at run time. The ones at compile time \cite{fithesisdrizz} are inserted into the source code of the software or at the assembly level after the compilation of the original source code. The ones at run time are inserted through a trigger (for example a timeout or a software trap) that executes the fault injection module, altering the behaviour of the software.
-    \item \textit{Simulation-Based fault injection}: simulation-based fault injection is a technique that allows to simulate the system and to inject faults in it. The faults are injected in the simulation environment, and it can be done by modifying directly the high-level description of the design with a faulty model or by using built-in commands in the simulator that force error in the simulation of the design, not in the hardware description of the hardware itself.
-    \item \textit{Emulation-Based fault injection}: emulation-based fault injection is a technique that allows to emulate the system and to inject faults in it. 
+    \item \textit{Simulation-Based fault injection}: simulation-based fault injection is a technique that allows to simulate the system and to inject faults in it. The faults are injected in the simulation environment, and it can be done by modifying directly the high-level description of the design with a faulty model or by using built-in commands in the simulator that force error in the simulation of the design, not in the hardware description of the hardware itself. An example of simulation-based fault injection is SST \cite{4375147}.
+    \item \textit{Emulation-Based fault injection}: emulation-based fault injection is a technique consisting in real implementation in a FPGA. For these platforms, the development board is connected to a PC that acts as a Controller by defining the fault injection campaign, controls the execution of the faulty design and monitors the behaviour of the system under test.
 \end{itemize}
+
+The Fault Injection tool used is a kind of Emulation-Based fault injection. Its goal is to create a faulty bitstream starting from the base one. Consequently, the faulty bitstream simulates a fault by forcing a random bit-flip, like a SEUs does. The tool offers the possibility to target a specific portion of the FPGA, in order to test the fault tolerance of a subpart of the design, instead of the whole one. This allows designers to execute a targeted fault campaign of the design under consideration. \bigskip
+
+Thanks to tools like PyXEL \cite{8632000} it is possible to obtain a visual low-level representation of the bitstream. This allows to understand how and where design's modules are mapped into the bitstream and consequently how each bit in the bitstream is connected to the design. Hence, by forcing some modules to stay in a specific portion of the FPGA, using some constraints as explained in chapter \ref{sec:bitstreamgen}, it is possible to understand the position of the modules in the bistream. \bigskip
+
+As a result, it is finally possible to have a targeted fault campaign. The Controller part of the tool can start producing $n$-faulty bitstreams, where  $n$ is given as input by the user. Once all the faulty bitstreams are generated, the Controller starts the Execution part: the first execution only is related to the golden bitstream and the Monitor will capture the golder result (i.e. the correct and expected result). All the remaining Execution's outputs are compared against the golden, thus each run is classified as correct or faulty. \bigskip
+
+When the campaign ends, a summary is produced, as shown in the following example:
+
+\begin{lstlisting}[style=preformatted]
+    Total injected bitflips = 17
+
+        --- FUNCTIONAL ANALYSIS ---
+    Correct results -> 14 [82.35%]
+    Faulty results(SDE) -> 0 [0.0%]
+    MicroBlaze halted -> 3 [17.65%]
+    Total exceptions -> 0 [0.0%]
+\end{lstlisting}
