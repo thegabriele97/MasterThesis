@@ -21,7 +21,10 @@
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codered}{rgb}{0.8,0,0}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{NavyBlue}{rgb}{0,0,0.5}
+\definecolor{orange}{rgb}{1,0.5,0}
 
 \lstdefinestyle{preformatted}{
     backgroundcolor=\color{backcolour},   
@@ -40,4 +43,31 @@
     showstringspaces=false,
     showtabs=false,                  
     tabsize=2
+}
+
+\lstdefinestyle{tcl}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    % keywordstyle=\color{red},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    language=tcl,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    morekeywords={*, create_pblock, get_pblocks, add_cells_to_pblock, get_cells, resize_pblock, set_property, open_run, write_bitstream, get_designs},
+    literate=*{\{}{{\textcolor{red}{\{}}}{1}
+        {\}}{{\textcolor{red}{\}}}}{1}
+        {[}{{\textcolor{red}{[}}}{1}
+        {]}{{\textcolor{red}{]}}}{1}
+        {(}{{\textcolor{red}{(}}}{1}
+        {)}{{\textcolor{red}{)}}}{1}%
 }

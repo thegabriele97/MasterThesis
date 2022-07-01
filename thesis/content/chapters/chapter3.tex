@@ -4,6 +4,7 @@
 This chapter is about the background of the thesis, in order to understand better further chapters and as a help and reference to reproduce the results of this thesis in the future. 
 
 \section{PYNQ-Z2 Development Board}
+\label{sec:pynq}
 The \textit{PYNQ-Z2} is a development board designed for the Xilinx University Program. It is equipped with a Xilinx ZYNQ 7020 SoC (XC7Z020-1CLG400C), 512 MB of DDR3 RAM and 16 MB of QSPI Flash Storage. The board provides a clock reference thanks to a crystal oscillator with a frequency of 50 MHz. The reference clock is used by the PS and can be provided to the PL too. 
 
 \begin{figure}[H]
@@ -312,16 +313,26 @@ The Fault Injection tool used is a kind of Emulation-Based fault injection. Its 
 
 Thanks to tools like PyXEL \cite{8632000} it is possible to obtain a visual low-level representation of the bitstream. This allows to understand how and where design's modules are mapped into the bitstream and consequently how each bit in the bitstream is connected to the design. Hence, by forcing some modules to stay in a specific portion of the FPGA, using some constraints as explained in chapter \ref{sec:bitstreamgen}, it is possible to understand the position of the modules in the bistream. \bigskip
 
-As a result, it is finally possible to have a targeted fault campaign. The Controller part of the tool can start producing $n$-faulty bitstreams, where  $n$ is given as input by the user. Once all the faulty bitstreams are generated, the Controller starts the Execution part: the first execution only is related to the golden bitstream and the Monitor will capture the golder result (i.e. the correct and expected result). All the remaining Execution's outputs are compared against the golden, thus each run is classified as correct or faulty. \bigskip
+As a result, it is finally possible to have a targeted fault campaign. The Controller, part of the tool, can start producing $n$-faulty bitstreams, where $n$ is given as input by the user. Once all the faulty bitstreams are generated, the Controller starts the Execution part.\bigskip
 
-When the campaign ends, a summary is produced, as shown in the following example:
+As an important note, because of the bit-flips introduced into the bitstream, is necessary to remove any CRC checksum that may be present, that is checked during the upload in the FPGA, as explained in chapter \ref{sec:bitstreamgen}. To overcome this problem, Vivado must be instructed to generate a bitstream without CRC. It can be done with the following TCL commands:
+
+\begin{lstlisting}[style=tcl]
+open_run impl_1
+set_property BITSTREAM.GENERAL.CRC DISABLE [get_designs impl_1]
+write_bitstream
+\end{lstlisting}
+
+The first execution only is related to the golden bitstream and the Monitor will capture the golden result, i.e. the correct and expected result. The result is intended as the \textit{stdout} output of a testbench firmware, over the UART. The firmware an implement, for example, a simple algorithm like matrix multiplication or bit count. Obviously, the more the algorithm is varied, in terms of used instructions and hardware, the more is the chance to detect an injected fault, because of the higher probability to stimulate that fault. \bigskip
+
+All the remaining Execution's outputs are compared against the golden, thus each run is classified as correct or faulty. When the campaign ends, a summary is produced, as shown in the following example, extracted from a very small fault injection campaign:
 
 \begin{lstlisting}[style=preformatted]
-    Total injected bitflips = 17
+Total injected bitflips = 17
 
-        --- FUNCTIONAL ANALYSIS ---
-    Correct results -> 14 [82.35%]
-    Faulty results(SDE) -> 0 [0.0%]
-    MicroBlaze halted -> 3 [17.65%]
-    Total exceptions -> 0 [0.0%]
+    --- FUNCTIONAL ANALYSIS ---
+Correct results -> 14 [82.35%]
+Faulty results(SDE) -> 0 [0.0%]
+MicroBlaze halted -> 3 [17.65%]
+Total exceptions -> 0 [0.0%]
 \end{lstlisting}
