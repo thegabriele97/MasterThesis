@@ -1,4 +1,3 @@
-\nocite{ESA:INTEGRAL}
 \nocite{doi:10.1063/1.5127719}
 
 \chapter{General Background}
@@ -135,13 +134,22 @@ What is shown in Figure \ref{fig:seu_example} can for example happen in a SRAM m
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.4\linewidth]{images/chapter2/SRAM_CELL.pdf}
+\includegraphics[height=0.5\linewidth]{images/chapter2/SRAM_CELL.pdf}
 \caption{Simple SRAM Cell layout. Inductiveload, Public domain, via Wikimedia Commons.}
 \label{fig:sram_cell_layout}
 \end{figure}
 
 In Figure \ref{fig:sram_cell_layout}, a simple layout is proposed. In order to have a logic 0 as output (\textit{BL = 0}), M3 is active (thus M4 is not active). So M2 is active (thus M3 is not active). If a radiation strikes one of those transistor, can happen that the M3's gate voltage goes low, causing a flip of the configuration thus a flip of the stored bit. \bigskip
 
-As explained in Section \ref{sec:fpgaarchitecture}, most FPGAs' memory configuration are based on SRAM technology. If a bitflip occurs, the FPGA configuration itself is modified, leading to a malfunction of a module or to a routing modification.\bigskip
+As explained in Section \ref{sec:fpgaarchitecture}, most FPGAs' memory configuration are based on SRAM technology. A fault that occurs in a configuration SRAM of a FPGA can lead to completely disastrous failures compared to traditional SRAM used purely for memory storage. This is because upsets have no effect until an address pointing to a word affected by an upset is read out of SRAM. Luckily, error detection and correction circuits can be used to detect and correct the fault, without causing a failure in the undergoing operations. Those are based on the usage of redundant bits for each word. As an example, Hamming codes to detect and correct single bit error, SEC-DED (Single Error Correction - Double Error Detection) to correct single error and detect one or double errors, or SEC-DED-DAEC \cite{9418432} (Single Error Correction-Double Error Detection-Double Adjacent Error Correction) to correct adjacent errors in multiple words. An example of error detection circuitry is shown in Figure \ref{fig:sram_det}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\linewidth]{images/chapter2/sram_detect.pdf}
+\caption{Example of error-detection circuitry in SRAM.}
+\label{fig:sram_det}
+\end{figure}
+
+In a FPGA, the configuration SRAM is not utilized the same way as traditional SRAM. Indeed, a direct (logic) connections from the configuration to the user logic exists. If a upset occurs in a used configuration bit, then upset occurs in logic. Because of this difference in the SRAM usage (not dealing with data words anymore but every bit is meaningful at any moment), traditional SRAM detection and corrections schemes can't be applied to FPGAs anymore. If a bitflip occurs, the FPGA configuration itself is modified, leading to a malfunction of a module or to a routing modification.\bigskip
 
 The actual technology trend see a scaling down to smaller sizes, trying to pack more transistors in less area. This scaling affects how radiations modify the behavior of the devices. Those devices are generally less affected by cumulative damage, it means that total ionizing dose or displacement damages are less likely to occur due to the smaller area of each transistor so less area where charges can accumulate or material displacement. On the other hand, Single Event Effects are more likely to occur, because a single particle can hit more than one transistor, causing a more complex damage like multiple bit-flips at once. 

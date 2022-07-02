@@ -1,2 +1,24 @@
 \chapter{Conclusions}
+
+Ok there are few caveauts like: 
+
+single point of failure in the error/trigger signal (what if the routing of the error/trigger signal is affected by a seu?)
+
+single point of failure in the TMR output (what if the OR gate is affected by a seu?)
+
+The watching channel (beacon version) is not a single point of failure, because if it is affected by a seu it may be stuck (unconnected net) so watchdog expires and reconf is triggered. However, the stuck remains because the watchdog is not reconfigured.
+
+the DFX is a single point of failure too.
+
+
+the watchdog protects the microblaze from hangs. It can protect from application layer faults only if the firmware running on the microblaze proper signals errors to the watchdog. For example, does checksum controls on the running algorithm, does some self-tests. For example, maybe the algorithm is computing correctly but the UART output is wrong: the firmware, during self-test mode can redirect the output of the UART to the input of the UART, read back what is outputing and see if the output is correct. 
+
+Another thing is to put one more beacon signals to a memory read/write signal. If we expect that every tot ms the system must read from the memory, the watchdog can look at it. if the processor stops working, means that no more transactions are performed and the watchdog expires.
+
+
 \section{Future Work}
+
+Extension of the watchdog to other types of checks from other sources like direct trigger (signal at 1 => trigger)
+Extension of the watchdog to other beacon-based activities.
+
+DFX+Watchdog+Microblaze all in a reconfigurable area so they are reconfigured in case of error.
