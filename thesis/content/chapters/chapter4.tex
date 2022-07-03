@@ -379,9 +379,7 @@ To overcome this problem, a more sophisticated signaling mechanism is used. To k
 
 Formally speaking, this FSM is a Moore machine. In the theory of computation, it means that the current output values are determined only by its current state \cite{Church1958EdwardFM}. Inputs only affect the next state, and state transitions happens only at each rising edge of the clock signal. \bigskip
 
-The idea behind the logic of this FSM is that at the reset, the FSM waits for the START signal. Once it is detected, it goes in a loop between two states complementary states. They are implemented in such a way to be able to detect signal transitions. The FSM stays in this loop until the count reaches the input value, and if this happens and the kick signal still doesn't toggle, the FSM goes in a final state asserting the timeout signal. The FSM will stay in this state until it is resetted again. \bigskip
-
-The following, is a description of the states in the FSM:
+The idea behind the logic of this FSM is that at the reset, the FSM waits for the START signal. Once it is detected, it goes in a loop between two states complementary states. They are implemented in such a way to be able to detect signal transitions. The FSM stays in this loop until the count reaches the input value, and if this happens and the kick signal still doesn't toggle, the FSM goes in a final state asserting the timeout signal. The FSM will stay in this state until it is resetted again. If the input timeout value changes, it is captured only when a transition is detected. The following, is a description of the states in the FSM:
 
 \begin{table}[H]
 \centering
@@ -566,6 +564,128 @@ Finally, the design is implemented. All the inputs that go to the watchdog are t
 
 \subsection{Integration of the watchdog in the design}
 
+The watchdog is finally created but it is still not well usable. The goal is to have a watchdog that can be easily inserted in any design. To achieve this, the watchdog can be packaged as an IP to allow the user to easy integrate it with the Block Design tool. Vivado offers an easy-to-use IP creation wizard, through which a design can be packed and distributed, together with a C library for a high level interaction with the hardware via software drivers.\bigskip
+
+Unfortunately, this is not enough. The idea is to connect the watchdog to the MicroBlaze, in this way it would be able to control it (for example the kicking action) and to check its status. The problem is that the watchdog uses discrete signals as interface and there is no direct way to access these signals from the CPU. There are two possible ways to overcome this situation:
+
+\begin{itemize}
+    \item The MicroBlaze controls the watchdog via a GPIO peripheral. This is the most simple way to do it, but it is not very flexible. The various GPIO channels are connected to the watchdog signals and the CPU can control the GPIO channels via the AXI interface.
+    \item The MicroBlaze direct interfaces with the watchdog through a dedicated AXI interface. This is the most flexible way to do it, but increases the implementation complexity of the watchdog IP.
+\end{itemize}
+
+For what concerns this thesis work, the second option is the most convenient because there are less actors in the overall fault tolerance chain that can be affected by faults. Luckily, the Vivado IP creation wizard provides an automatic way to create a AXI wrapper on top of which the watchdog can be inserted. Hence, the watchdog will be controlled and monitored by the MicroBlaze via registers. \bigskip
+
+By design choice, there are 4 registers, one for each of the 3 watchdog instances. The second nibble in the lowest byte of the address is the index of the corresponding watchdog. They follow the Full TMR design as explained in the previous section, internally coded with no-tmr and tmr matrices. Read only fields are taken from the no-tmr matrix, in this way the CPU or any other AXI master can check if there are faulty modules. \bigskip
+
+The registers are:
+
+\begin{center}
+\begin{register}{H}{Control Register}{0x00 - 0x10 - 0x20}% name=example
+\regfieldb{}{30}{2}% READ_ONLY
+\regfieldb{Kick}{1}{1}%
+\regfieldb{Start}{1}{0}%
+\begin{regdesc}\begin{reglist}[Request~Depth]
+\item [start]Setting this bit activates the Watchdog. If already activated, this bit has no effects.
+\item [kick]The kick bit is directly connected to the kick signal of the watchdog. The MicroBlaze is in charge of writing the right value in this field (i.e. do the right transitions).
+\end{reglist}\end{regdesc}
+\end{register}
+\begin{register}{H}{Status Register}{0x04 - 0x14 - 0x24}% name=example
+\regfieldb{}{30}{2}% READ_ONLY
+\regfieldb{Error}{1}{1}%
+\regfieldb{Started}{1}{0}%
+\begin{regdesc}\begin{reglist}[Request~Depth]
+\item [started]The bit is set if the watchdog is started.
+\item [error]The bit is set if the watchdog timed out.
+\end{reglist}\end{regdesc}
+\end{register}
+\begin{register}{H}{Timeout Register}{0x08 - 0x18 - 0x28}% name=example
+\regfieldb{Timeout}{32}{0}% READ_ONLY
+\begin{regdesc}\begin{reglist}[Request~Depth]
+\item [Timeout]32 bit value that represents the number of cycles required before the watchdog times out.
+\end{reglist}\end{regdesc}\
+\end{register}
+\begin{register}{H}{Toggle Rate Register}{0x0C - 0x1C - 0x2C}% name=example
+\regfieldb{Toggle Rate}{32}{0}% READ_ONLY
+\begin{regdesc}\begin{reglist}[Request~Depth]
+\item [Toggle Rate]32 bit value that represents the actual toggling rate of the watchdog, in clock cycles. The CPU can use it to estimate, for example, if there are differences between the expected toggling rate and the real one.
+\end{reglist}\end{regdesc}\
+\end{register}
+\end{center}
+
+Once the Watchdog IP repository han been added to the list of IP repositories in Vivado ($Vivado \rightarrow IP \rightarrow Repository \rightarrow +$), it can be instantiated in the design and connected to a AXI Interconnect to make it accessible to masters like the MicroBlaze:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{images/chapter4/wd_ip_inst_cropped2.pdf}
+\caption{Instantiation of the Watchdog IP.}
+\label{fig:wd_ip_inst}
+\end{figure}
+
+The IP presents two interfaces:
+\begin{itemize}
+    \item \textit{S00\_AXI}: The AXI interface is used to communicate with the watchdog from a AXI master. It includes the s00\_clk and s00\_rstn signals.
+    \item \textit{Custom Interface}: The custom interface is meant to expose some signals towards other peripherals thay may or may not need it. Each of those signals are vectors of 3 positions, one for each watchdog module. In particular the \textit{CONTROL\_START} and \textit{CONTROL\_STB} are directly connected to the register's bits Start and Kick without any TMR transformation. The \textit{STATUS\_STARTED} and \textit{STATUS\_ERROR} are instead the TMR version of the watchdog's started and timeout signals, respectively.
+\end{itemize}
+
+The IP can be easily customized via a custom IP wizard or via TCL commands. The following is the GUI wizard:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{images/chapter4/wizard_ip.png}
+\caption{Watchdog IP configuration wizard.}
+\label{fig:wd_ip_wizard}
+\end{figure}
+
+It is possible to set a custom initial value for the timeout register and the default start condition of the watchdog: if it is checked, at each reset the watchdog is immediately started without waiting for the \textit{Start} bit to be set. This can be useful for different purposes, but in particular for fault injection testing.\bigskip
+
+Finally, when the IP is instantiated in a Block Design and the final .xsa file is generated, watchdog drivers are automatically inserted and ready to be used from Vitis.\bigskip
+
+The following is an example of usage of the drivers to control the watchdog. It demonstrates the usability of the final design, with a set of very high level functions. The example demonstrates a possible way to organize the kicking act accross the code to cover not only CPU hangs but also other faults (computational errors, etc.).
+
+\begin{lstlisting}[language=C]
+#include "beacon_watchdog.h"
+
+/* header file for the hardware parameters, 
+like peripheral addresses */
+#include "xparameters.h" 
+int main() {
+  GBcnCtrl hBcn; //Handle to the watchdog
+  uint32_t value;
+
+  value = XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR;
+  GBcnCtrl_Initialize(&hBcn, value);
+
+  // Timeout set to 2 seconds (double of the watchdog's clock freq)
+  GBcnCtrl_SetTimeoutValue(&hBcn, XPAR_CPU_CORE_CLOCK_FREQ_HZ << 1);
+  GBcnCtrl_Start(&hBcn);
+
+  value = hBcn.modules->module0.DATAREG;
+  printf("Module 0 Timeout Value: %d\r\n", value);
+
+  value = hBcn.modules->module1.DATAREG;
+  printf("Module 1 Timeout Value: %d\r\n", value);
+
+  value = hBcn.modules->module2.DATAREG;
+  printf("Module 2 Timeout Value: %d\r\n", value);
+
+  while(1) {
+    checksum ^= (res += 2);
+
+    // Example of self test check on checksum
+    if(checksum & 0x3 == 0x0) {
+      // FAULT!! Stop kicking, hardware needs to be reset!
+      while(1); // Waiting for timeout expiration
+    }
+
+    // Kicking (automatic transition detection)
+    GBcnCtrl_Toggle(&hBcn); 
+  }
+
+}
+\end{lstlisting}
+
+% add AXI testbench in appendix 
+
 % IP, AXI interface, AXI registers and how they are connected to the FSM. How TMR is managed from the point of view of the registers.
 
 \section{How to partial reconfigure a design?}
@@ -583,3 +703,4 @@ Then error fix.
 \subsection{DFX Decoupler: why?}
 
 \section{A script to automatize the process}
+\subsection{Script for partial bitstream to C header generation}
