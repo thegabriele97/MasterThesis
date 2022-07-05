@@ -1,26 +1,42 @@
 \chapter{Conclusions}
 
-Ok there are few caveauts like: 
+This thesis finally reaches its end, It sees the development of a complete fault tolerance system able to increase the dependability of the system itself and to protect in most of the cases the MicroBlaze from possible SEUs that can cause faults and errors. It has been achieved by a combination of a fault tolerant watchdog, completely designed from scratch to be tailored to the needs of the project, and the enabling of partial reconfiguration of a complex IP like the MicroBlaze, by exploiting a little hack that leads to a complete automation script able to convert a normal project designed with normal tools, like the Block Design Tool, in a project with a fully working reconfigurable MicroBlaze.\bigskip
 
-single point of failure in the error/trigger signal (what if the routing of the error/trigger signal is affected by a seu?)
+After the development, the fault campaigns took place. Unfortunately, the bitstream manipulation is a lot tricky and fault injection campaigns of the choosen types are not well supported yet, and the tools are limited. Several corrections have been applied to
+make the output data more readable and useful for further analysis. Moreover, as a main objective, an in-deep evaluation of the fault injection campaign data has been performed, in order to better understand the effects of the injected faults on the system
+and the way they can be used to improve the dependability of the system itself.\bigskip
 
-single point of failure in the TMR output (what if the OR gate is affected by a seu?)
+The developed system has been engineered with the idea to be implemented in a more complex one, where almost everything is triplicated, at least for what concers the most critical parts like single point of failures in the reconfiguration system. These can be the DFX Controller, the ICAPE2, even the timeout signal itself can be a SPoF because of a possible fault in the routing configuration. \bigskip
 
-The watching channel (beacon version) is not a single point of failure, because if it is affected by a seu it may be stuck (unconnected net) so watchdog expires and reconf is triggered. However, the stuck remains because the watchdog is not reconfigured.
+The developed mitigation technique is unique in its genre, permitting to comprehend which types of faults can be mitigated and which not, without the need of a radiation test conducted in a dedicated facility, using real highly energetic particles beams. Regarding this type of tests, another main application of the developed system is to understand how the system can reacts to different faults prior the radiation test itself, and thus to predict which parts of the system are likely to be more vulnerable than others and which instead are probably going to appear as more robust.  
 
-the DFX is a single point of failure too.
+% Ok there are few caveauts like: 
+
+% single point of failure in the error/trigger signal (what if the routing of the error/trigger signal is affected by a seu?)
+
+% single point of failure in the TMR output (what if the OR gate is affected by a seu?)
+
+% The watching channel (beacon version) is not a single point of failure, because if it is affected by a seu it may be stuck (unconnected net) so watchdog expires and reconf is triggered. However, the stuck remains because the watchdog is not reconfigured.
+
+% the DFX is a single point of failure too.
 
 
-the watchdog protects the microblaze from hangs. It can protect from application layer faults only if the firmware running on the microblaze proper signals errors to the watchdog. For example, does checksum controls on the running algorithm, does some self-tests. For example, maybe the algorithm is computing correctly but the UART output is wrong: the firmware, during self-test mode can redirect the output of the UART to the input of the UART, read back what is outputing and see if the output is correct. 
+% the watchdog protects the microblaze from hangs. It can protect from application layer faults only if the firmware running on the microblaze proper signals errors to the watchdog. For example, does checksum controls on the running algorithm, does some self-tests. For example, maybe the algorithm is computing correctly but the UART output is wrong: the firmware, during self-test mode can redirect the output of the UART to the input of the UART, read back what is outputing and see if the output is correct. 
 
-Another thing is to put one more beacon signals to a memory read/write signal. If we expect that every tot ms the system must read from the memory, the watchdog can look at it. if the processor stops working, means that no more transactions are performed and the watchdog expires.
+% Another thing is to put one more beacon signals to a memory read/write signal. If we expect that every tot ms the system must read from the memory, the watchdog can look at it. if the processor stops working, means that no more transactions are performed and the watchdog expires.
 
 
 \section{Future Work}
 
-Extension of the watchdog to other types of checks from other sources like direct trigger (signal at 1 => trigger)
-Extension of the watchdog to other beacon-based activities.
+The thesis has been developed with the idea of being implemented in a more complex system, so it can be easily extended for future works. In particular, the watchdog can be extend to monitor multiple kicking acts from different sources like multiple MicroBlaze instances or adding other types of checks like bus activity-detection. An example for this could be the monitoring of a read/write signal in a memory BUS (like the AXI one). If the system is designed to execute a period read or write operation from the memory, this can be monitored and if the processor or any other master that reads from the memory stops working, the watchdog can be let to expire and trigger a reconfiguration. \bigskip
 
-DFX+Watchdog+Microblaze all in a reconfigurable area so they are reconfigured in case of error.
+Moreover, other modules can be marked as reconfigurable, by extending the presented workflow and the related scripts. And with an extended watchdog, it is possible to partial reconfigure only specific partitions of the system or the whole system. \bigskip
 
-Extension of the script to reconfigure other modules too.
+Speaking of which, the watchdog is protected against single faults but not against fault accumulation. If a difference among the voters is detected, the watchdog itself can be reconfigured.  
+
+% Extension of the watchdog to other types of checks from other sources like direct trigger (signal at 1 => trigger)
+% Extension of the watchdog to other beacon-based activities.
+
+% DFX+Watchdog+Microblaze all in a reconfigurable area so they are reconfigured in case of error.
+
+% Extension of the script to reconfigure other modules too.

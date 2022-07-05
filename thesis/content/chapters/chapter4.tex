@@ -225,10 +225,10 @@ Because of the problems raised in the previous section, different approaches nee
 
 To overcome those persistent errors, there are some techniques able to exploit the particular reconfigurable capabilities of the FPGAs. The following are some of the techniques taken into account:
 
-\begin{itemize}
-    \item \textit{Data Scrubbing} is a general technique based on the concept of a virtual background task that periodically checks memory content for errors, then corrects detected errors using redundant data in the form of different checksums or copies of data. It is useful to correct and prevent (accumulation) errors in the information stored in memory. In FPGAs, scrubbing can be used to mitigate both persistent errors in SRAM cells (i.e., the configuration memory) and transient errors in user-memory elements such as BRAMs. To perform configuration memory scrubbing, the configuration memory data must be read sequentially from the start to the end and compared to the original configuration bitstream or an error check code such as a cyclic redundancy check (CRC). Scrubbing can be performed (both check and correction) without interrupting the device's functionalities. In aerospace applications, scrubbing is a common technique to mitigate the effects of SEUs. However, there are a few aspects to overcome like often the scrub operation must be performed, because of the very limited area and power constraints. Hence, scrubbing alone is a weak mitigation strategy without any other technique applied \cite{nasa_scrubbing}. This is mainly because if a configuration bit is hit while the circuit is active, the error propagates in the design and can lead to a failure and the scrubber has no time to fix the error. An example of good design would be having a scrubber joined by a design with a triple modular redundancy check. The TMR design is able itself to detect and mask the error, without causing a failure and meanwhile the scrubber can be notified of the error and fix it. In this sense, scrubbing can be useful against error accumulation too.
-    \item \textit{Dynamic partial reconfiguration} \cite{10.1007/978-3-030-44534-8_7} allows run-time reconfiguration without application layer interruption. This technique cannot detect errors by itself, so it must be combined with other error detection techniques such as those based on redundancy. These correction techniques take advantage of the subdivision of the configuration memory into frames, which contain information related to the configuration of specific parts of the design. 
-\end{itemize}
+\begin{description}
+    \item[Data Scrubbing] is a general technique based on the concept of a virtual background task that periodically checks memory content for errors, then corrects detected errors using redundant data in the form of different checksums or copies of data. It is useful to correct and prevent (accumulation) errors in the information stored in memory. In FPGAs, scrubbing can be used to mitigate both persistent errors in SRAM cells (i.e., the configuration memory) and transient errors in user-memory elements such as BRAMs. To perform configuration memory scrubbing, the configuration memory data must be read sequentially from the start to the end and compared to the original configuration bitstream or an error check code such as a cyclic redundancy check (CRC). Scrubbing can be performed (both check and correction) without interrupting the device's functionalities. In aerospace applications, scrubbing is a common technique to mitigate the effects of SEUs. However, there are a few aspects to overcome like often the scrub operation must be performed, because of the very limited area and power constraints. Hence, scrubbing alone is a weak mitigation strategy without any other technique applied \cite{nasa_scrubbing}. This is mainly because if a configuration bit is hit while the circuit is active, the error propagates in the design and can lead to a failure and the scrubber has no time to fix the error. An example of good design would be having a scrubber joined by a design with a triple modular redundancy check. The TMR design is able itself to detect and mask the error, without causing a failure and meanwhile the scrubber can be notified of the error and fix it. In this sense, scrubbing can be useful against error accumulation too.
+    \item[Dynamic partial reconfiguration] \cite{10.1007/978-3-030-44534-8_7} allows run-time reconfiguration without application layer interruption. This technique cannot detect errors by itself, so it must be combined with other error detection techniques such as those based on redundancy. These correction techniques take advantage of the subdivision of the configuration memory into frames, which contain information related to the configuration of specific parts of the design. 
+\end{description}
 
 The choosen strategy is to use the Dynamic Partial Reconfiguration technique. For this thesis work, only the MicroBlaze area is configured as dynamic reconfigurable. As said, this is useful only to fix errors in the configuration area related to the FPGA, but something that detects the error is needed. Hence, a self-made watchdog is developed to detect the error and trigger the reconfiguration. The reconfiguration is handled by a dedicated controller. A high level scheme of the design is presented in the following figure:
 % Watchdog + DFX because..
@@ -241,11 +241,11 @@ The choosen strategy is to use the Dynamic Partial Reconfiguration technique. Fo
 \end{figure}
 
 In figure \ref{fig:reconf_scheme}, the following parts are highlighted:
-\begin{itemize}
-    \item \textit{MicroBlaze}: it is intended both as the instance of the MicroBlaze itself and as the physical area of the FPGA where the MicroBlaze is mapped and configured as dynamic reconfigurable.
-    \item Watchdog: its job is to continuously check the MicroBlaze's status via a \textit{watching channel} (that is, a channel that is used to monitor the MicroBlaze's status) and if the MicroBlaze is halted, it triggers the reconfiguration via a dedicated signal \textit{Error/Trigger}.
-    \item \textit{Reconfiguration Controller}: it is the controller that handles the partial reconfiguration when it is signaled to do so by the watchdog. It is responsible for the reconfiguration of the MicroBlaze's area.
-\end{itemize}
+\begin{description}
+    \item[MicroBlaze] it is intended both as the instance of the MicroBlaze itself and as the physical area of the FPGA where the MicroBlaze is mapped and configured as dynamic reconfigurable.
+    \item[Watchdog] its job is to continuously check the MicroBlaze's status via a \textit{watching channel} (that is, a channel that is used to monitor the MicroBlaze's status) and if the MicroBlaze is halted, it triggers the reconfiguration via a dedicated signal \textit{Error/Trigger}.
+    \item[Reconfiguration Controller] it is the controller that handles the partial reconfiguration when it is signaled to do so by the watchdog. It is responsible for the reconfiguration of the MicroBlaze's area.
+\end{description}
 
 \section{Development of a watchdog}
 
@@ -262,6 +262,7 @@ Both generally speaking or strictly related to this case of study, a watchdog ti
 % TODO: add wdctl linux output taken from a raspberry pi
 
 \subsection{How to implement a watchdog?}
+\label{sec:wd_impl}
 
 Once understood the principles of a watchdog, it is possible to implement it and tailor its funcionalities to the needs of having a fault tolerant system on FPGA. From a high level perspective, the watchdog is basically a timer. This means that it must have some form of timing, so it needs clock and reset signals. Moreover, the timer must restart every time the kicking action is performed. If the timer elapses, it generates a timeout signal. The following is a timing diagram of this basic watchdog:
 
@@ -526,7 +527,7 @@ The main problem with this solution is that all the three voters are doing exact
 
 To overcome this problem, the synthesizer must be notified about what it can optimize and what it can not. The following is an example of instantiation of the two matrices of signals and voters in Verilog, telling the synthesizer that they must not be optimized out:
 
-\begin{lstlisting}[language=Verilog]
+\begin{lstlisting}[style=Verilog]
 (* dont_touch = "true" *) wire notmr[3:0][2:0];
 (* dont_touch = "true" *) wire tmr[3:0][2:0];
 
@@ -642,7 +643,7 @@ Finally, when the IP is instantiated in a Block Design and the final .xsa file i
 
 The following is an example of usage of the drivers to control the watchdog. It demonstrates the usability of the final design, with a set of very high level functions. The example demonstrates a possible way to organize the kicking act accross the code to cover not only CPU hangs but also other faults (computational errors, self-test code, etc.).
 
-\begin{lstlisting}[language=C]
+\begin{lstlisting}[style=C]
 #include "beacon_watchdog.h"
 
 /* header file for the hardware parameters, 
@@ -655,8 +656,8 @@ int main() {
   value = XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR;
   GBcnCtrl_Initialize(&hBcn, value);
 
-  // Timeout set to 2 seconds (double of the watchdog's clock freq)
-  GBcnCtrl_SetTimeoutValue(&hBcn, XPAR_CPU_CORE_CLOCK_FREQ_HZ << 1);
+  // Timeout set to 2 seconds (double of the watchdog's clk freq)
+  GBcnCtrl_SetTimeoutValue(&hBcn, XPAR_CPU_CORE_CLOCK_FREQ_HZ<<1);
   GBcnCtrl_Start(&hBcn);
 
   value = hBcn.modules->module0.DATAREG;
@@ -688,7 +689,7 @@ int main() {
 
 % IP, AXI interface, AXI registers and how they are connected to the FSM. How TMR is managed from the point of view of the registers.
 
-\section{Design Partial Reconfiguration}
+\section{Design with Partial Reconfiguration}
 
 Partial reconfiguration is a way to change or update a FPGA design without the need to re-program the whole FPGA. Hence, it is possible to reprogram only a portion of the design without interrupting the rest of the design. In Xilinx's world, this is called \textit{Dynamic Function Exchange} (DFX).\bigskip 
 
@@ -821,6 +822,7 @@ The second problem still remains. From a purely HDL description of the design, V
 \centering
 \includegraphics[width=1.0\linewidth]{images/chapter4/mystic_flow.pdf}
 \caption{Flow used to generate a fully working Reconfigurable MicroBlaze design.}
+\label{fig:mystic_flow}
 \end{figure}
 
 \subsection{Xilinx DFX Controller}
@@ -847,11 +849,12 @@ Last but not least, the DFX Controller allows to trigger a reconfiguration via:
 \end{itemize}
 
 \section{Integration of the watchdog and the DFX}
-It is finally time to put everything together. The scheme to apply is shown if Figure \ref{fig:reconf_scheme}, where the watchdog is a simple IP that can be used to trigger the MicroBlaze reconfiguration when an error occurs. The DFX Controller is used to manage the reconfiguration process. \bigskip
+It is finally time to put everything together. The scheme to apply is shown if Figure \ref{fig:reconf_scheme}, where the watchdog is a simple IP that can be used to trigger the MicroBlaze reconfiguration when an error occurs. The DFX Controller is used to manage the reconfiguration process. 
 
+\subsection{Partial bitstream storage}
 The first problem to solve is the storage of the partial bitstream. As an example, the generated partial bitstream for the MicroBlaze RM measures 389928 bytes (around 380 KB). A possible storage solution would be the usage of the BRAMs available inside the FPGA and connect them to the AXI bus via the AXI Interconnect using a Local Memory Controller IP. Unluckily, the used FPGA does not have so many BRAMs available (and a few are used as Instruction and Data memory for the MicroBlaze itself), thus this solution is unfeasible. The proposed solution is to use the on-board DDR memory, which offers 512 MB of storage easily accessible via the AXI bus by enabling the Slave interface \textit{S\_AXI\_HPO} in the PS's IP (ZYNQ7 Processing System IP). This interface can be connected to the AXI Interconnect as other slaves, like the peripherals. Once connected, all the masters in the AXI Bus can access the PS's internal address space from \texttt{0x00000000} to \texttt{0x1FFFFFFF}. As shown in Table \ref{tab:zynq_memory_map}, at address \texttt{0x00000000} there is the On-Chip Memory (OCM) where usually the ARM cores executes the code from. To avoid conflicts, only the second half of the DDR is used (so from \texttt{0x10000000} to \texttt{0x1FFFFFFF}). \bigskip
 
-To make things easier, the partial bitstream is statically inserted in the .elf file executed by one of the two ARM cores. To achieve this, the partial bitstream is first converted to a C array of 32 bit items, via a script explained in Section \ref{sec:script_header}. This is not enough because by doing this, the array would be allocated in the \texttt{.text} section of the .elf file, that is placed at low memory addresses (below the \texttt{0x10000000} target). To solve this, in the linker script generated by Vitis (regarding the ARM0 project), a new memory definition is created pointing to the second half of the DDR memory, then a new section called \texttt{.partialbs} is created. The following is an extract of the linker script:\bigskip
+To make things easier, the partial bitstream is statically inserted in the .elf file executed by one of the two ARM cores. To achieve this, the partial bitstream is first converted to a C array of 32 bit items, via a script explained in Section \ref{sec:script_header}. However, this is not enough because the array would be allocated in the \texttt{.text} section of the .elf file, that is placed at low memory addresses (below the \texttt{0x10000000} target). To solve this, in the linker script generated by Vitis (regarding the ARM0 project), a new memory portion is defined: it points to the second half of the DDR memory. Then, a new section called \texttt{.partialbs} is created. The following is an extract of the linker script:\bigskip
 
 \begin{lstlisting}[style=preformatted]
 /* Define Memories in the system */
@@ -862,76 +865,74 @@ MEMORY
    /*2nd DDR half*/
    2ndhalf	 : ORIGIN = 0x10000000, LENGTH = 0x10000000 
 }
-
 /* Define the sections, and where they are mapped in memory */
 SECTIONS
 {
-.text : {
-   KEEP (*(.vectors))
-   *(.boot)
-   *(.text)
-   /*-------*/
-   *(.vfp11_veneer)
-   *(.ARM.extab)
-   *(.gnu.linkonce.armextab.*)
-} > ps7_ddr_0
-
+  .text : {
+    KEEP (*(.vectors))
+    *(.boot)
+    *(.text)
+    /*-------*/
+    *(.vfp11_veneer)
+    *(.ARM.extab)
+    *(.gnu.linkonce.armextab.*)
+  } > ps7_ddr_0
 /** other sections **/
-.partialbs : {
- *(.partialbs)
-} > 2ndhalf
+  .partialbs : {
+    *(.partialbs)
+  } > 2ndhalf
 }
 \end{lstlisting}
 
-GCC (the C compiler used by Vitis) allows to define the linker script like the showed one. It allows to force the placement of a certain variable in a certain section. This can be done as follows:
+GCC (the C compiler used by Vitis) allows to map memory regions as preferred as well as to force the placement of a certain variable in a certain place in memory. This can be achieved as follows:
 
-\begin{lstlisting}[language=C]
+\begin{lstlisting}[style=C]
 u32 __attribute__((section(".partialbs"))) data[] = {
-	 0xFFFFFFFF,
-	 0xFFFFFFFF,
-	 0xFFFFFFFF,
-	 0xFFFFFFFF,
-	 0xFFFFFFFF,
-	 0xFFFFFFFF,
-     /**....**/
-     0xAA995566, // SYNC WORD
-     /**....**/
+  0xFFFFFFFF,
+  0xFFFFFFFF,
+  0xFFFFFFFF,
+  0xFFFFFFFF,
+  0xFFFFFFFF,
+  0xFFFFFFFF,
+  /**....**/
+  0xAA995566, // SYNC WORD
+  /**....**/
 };
 \end{lstlisting}
 
-For this work, the ARM core is not only used to load the partial bitstream in memory. As explained previously, the ARM cores holds the full control of the two configuration ports (ICAP and PCAP) for security purposes. Before executing the partial configuration, the ARM core must release the hold on the ICAP and this is done in two steps:
-\begin{itemize}
+\subsection{How to enable the ICAP port}
+For this work, the ARM core is not only used to load the partial bitstream in memory. As explained previously, the ARM cores holds the full control of the two configuration ports (ICAP and PCAP) for security purposes. Before executing the partial configuration, the ARM core must release the hold on the ICAP and this is done in two consecutive steps:
+\begin{enumerate}
     \item The ARM core disables the PCAP (because they are mutually exclusive).
     \item The ARM core enables the ICAP.
-\end{itemize}
+\end{enumerate}
 
 This can be done easily with the XDevCfg driver offered by Xilinx:
 
-\begin{lstlisting}[language=C]
+\begin{lstlisting}[style=C]
 #include "platform.h"
 #include "data.h" // Contains the partial bitstream array
 #include "xdevcfg.h"
-#include <stdlib.h> // For malloc()
 
 int main() {
-	XDcfg *XDcfg_0;
+  XDcfg XDcfg_0;
 
-	XDcfg_0 = malloc(sizeof *XDcfg_0);
-	XDcfg_Config *conf = XDcfg_LookupConfig(XPAR_XDCFG_0_DEVICE_ID);
-	XDcfg_CfgInitialize(XDcfg_0, conf, conf->BaseAddr);
+  XDcfg_Config *conf = XDcfg_LookupConfig(XPAR_XDCFG_0_DEVICE_ID);
+  XDcfg_CfgInitialize(&XDcfg_0, conf, conf->BaseAddr);
+  XDcfg_DisablePCAP(&XDcfg_0);
+  XDcfg_SelectIcapInterface(&XDcfg_0);
 
-	XDcfg_DisablePCAP(XDcfg_0);
-	XDcfg_SelectIcapInterface(XDcfg_0);
-
-    /*other code*/
-    return 0;
+  while(1);
 }
 
 \end{lstlisting}
 
 % Explain bitstream storage. DDR in this case, protected, blah blah. Linker script. Firmware to disable the PCAP in the ARM core.
 
-The second last step is to connect the DFX Controller to the ICAP port. For security reasons, it is not directly available to the user. It is a HDL primitive that needs to be manually instantiated in the design so it needs to be manually inserted in the HDL code generated by the Block Design Tool and to be connect to the ICAP interface of the DFX Controller.
+\subsection{ICAP instantiation}
+The second last step is to connect the DFX Controller to the ICAP port. For security reasons, it is not directly available to the user. It is a HDL primitive that needs to be manually instantiated in the design so it needs to be manually inserted in the HDL code generated by the Block Design Tool and to be connect to the ICAP interface of the DFX Controller. \bigskip
+
+The ICAP port can be accessed via different blocks, but the most simple is the ICAPE2. It offers different input and outputs port, as shown below:
 
 \begin{figure}[H]
 \centering
@@ -939,17 +940,215 @@ The second last step is to connect the DFX Controller to the ICAP port. For secu
 \caption{ICAP Interface.}
 \end{figure}
 
+The following is a short description of the ports:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ c|r|p{8 cm} }
+    \textbf{Port}&\textbf{Data Width}&\textbf{Description}\\
+    \hline
+    \texttt{CLK}&\texttt{1 bit}&The clock signal (max 100 MHz $\rightarrow$ 32 bit data bus $= 3.2 GB/s$).\\
+    \texttt{CSIB}&\texttt{1 bit}&The chip select signal (active low).\\
+    \texttt{RDWRB}&\texttt{1 bit}&The read/write signal.\\
+    \texttt{I}&\texttt{32 bit}&The input data.\\
+    \texttt{O}&\texttt{32 bit}&The output data.\\
+\end{tabular}
+\caption{Output signal matrix for the no-tmr version.}
+\end{table}
+
+
+
+% \begin{itemize}
+%     \item \textit{CLK}: the clock signal (max 100 MHz $\rightarrow$ 32 bit data bus $= 3.2 GB/s$).
+%     \item \textit{CSIB}: the chip select signal (active low).
+%     \item \textit{RDWRB}: the read/write signal.
+%     \item \textit{I[31:0]}: the input data.
+%     \item \textit{O[31:0]}: the output data. 
+% \end{itemize}
+
+The ICAP interface can be use used to monitor (for example via a Integrated Logic Analyzer IP, as explained in Section \ref{sec:ila}) the configuration process when it is used as port for delivering bitstreams. The \texttt{O} port of the ICAPE2 block is a 32-bit bus, but only the lowest byte is used. The mapping of the lower byte is as follows:
+
+\begin{center}
+\begin{register}{H}{ICAP}{\texttt{O} port}% name=example
+\regfieldb{}{24}{8}% READ_ONLY
+\regfieldb{CFGERR\_B}{1}{7}%
+\regfieldb{DALIGN}{1}{6}%
+\regfieldb{RIP}{1}{5}%
+\regfieldb{IN\_ABORT\_B}{1}{4}%
+\regfieldb{}{4}{0}%
+\begin{regdesc}\begin{reglist}[Request~Depth]
+\item [CFGERR\_B]Configuration Error:\\0 = A configuration error has occurred.\\1 = No configuration error.
+\item [DALIGN]Sync word (\texttt{0xAA995566}) received:\\0 = No sync word received.\\1 = Sync word received.
+\item [RIP]Readback in Progress:\\0 = No readback in progress.\\1 = A readback is in progress.
+\item [IN\_ABORT\_B]ABORT in progress.\\0 = Abort is in progress.\\1 = No abort in progress.
+\end{reglist}\end{regdesc}
+\end{register}
+\end{center}
+
 The following is the VHDL code for instantiate the ICAP port in a design:
 
-\begin{lstlisting}[language=VHDL]
-
+\begin{lstlisting}[style=VHDL]
+ICAPE2_inst : ICAPE2 generic map (
+   DEVICE_ID => X"3651093",     -- Simulation only.
+   ICAP_WIDTH => "X32",         -- Input/Output data width.
+   SIM_CFG_FILE_NAME => "NONE"  -- Simulation only.
+) port map (
+   O => O,         -- 32-bit output: Configuration data output bus
+   CLK => CLK,     -- 1-bit input: Clock Input
+   CSIB => CSIB,   -- 1-bit input: Active-Low ICAP Enable
+   I => I,         -- 32-bit input: Configuration data input bus
+   RDWRB => RDWRB  -- 1-bit input: Read/Write Select input
+);
 \end{lstlisting}
 
-DFX connected to the watchdog via the hw trigger.
-ICAPE2. DFX Decoupler.
+An example of the ICAPE2 during the initial phases of the configuration process is shown in Figure \ref{fig:icap_ila}. When the trigger is asserted (\texttt{vsm\_VS\_0\_hw\_triggers\_1}), the DFX Controller starts sending the configuration data taken from the partial bitstream uploaded in the memory. The ICAP's \texttt{O} port initially is at \texttt{0x9B} that means \textit{no cfg error}, \textit{no sync word}, \textit{no readback in progress}, \textit{no abort in progress}. When the SYNC WORD is received, the ICAP's \texttt{O} port is updated to \texttt{0xDB}: only 1 bit changed, indicating that the sync word was received.
 
-% \subsection{DFX Decoupler: why?}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{images/chapter4/ila_icap.png}
+\caption{ICAP Interface as seen by an ILA core.}
+\label{fig:icap_ila}
+\end{figure}
 
-\section{A script to automatize the process}
+\subsection{Connection of the Watchdog and the DFX Controller}
+All the actors are now ready to be integrated. In particular, the \textit{timeout} signal of the watchdog should be used as a trigger for the DLX to start the reconfiguration. Moreover, when the DFX finishes the reconfiguration, both the MicroBlaze and the Watchdog must be reset to avoid any unexpected behavior and to restart the watchdog's timer itself (as explained in Section \ref{sec:wd_impl}, the watchdog is designed to remains in the \textit{DOOMED} state until a reset arrives). \bigskip
+
+First, the DFX Controller is configured to allow hardware triggers. This means setting up a signal width of 1 bit for the \texttt{vsm\_VS\_0\_hw\_triggers} signal and to assign the MicroBlaze RM previously configured as the RM to load when the triggers arrives. The problem is that the watchdog outputs a 3-bit wide signal as timeout signal, due to the TMR design. This can be used to fed a final voter to convert a 3-bit wide signal to a 1-bit wide signal. At this point the voter represents a single point of failure, but as explained the probability of its failure is low. However, if its probability is not sufficiently low, it is possible to use a different voter implementation like the following one:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.40\linewidth]{images/chapter4/voter_enh.pdf}
+\caption{Enhanced majority voter design.}
+\end{figure}
+
+The above scheme \cite{al} is made of a 1-bit OR gate, three 2-bit AND gates and 3-bit OR gate. This design allows to reach a higher Fault Masking Ratio (FMR), specified as the ratio of total number of correct voter output states in the presence of internal and/or external faults, which are masked, divided by the total number of potential internal and/or external fault occurrences. From the definition given, it may be understood that FMR has to be high (ideally 1) to achieve good (absolute) fault tolerance. A normal majority voter has a FMR of $42.86\%$ while the enhanced majority voter has a FMR of $75.00\%$.\bigskip
+
+Secondly, when the DFX Controller ends the reconfiguration process, the signal \texttt{vsm\_VS\_0\_rm\_reset} is asserted for 1 clock cycle, as specified in the RM's configuration. This is conncted to the \texttt{Reset} signal of the MicroBlaze that is active high, feeding an OR gate together with the active-high \texttt{mb\_reset} signal arriving from the \textit{Processor System Reset} IP. In this way, both the DFX Controller and the PSR are able to reset the CPU when required. \bigskip
+
+To reset the watcdog, the reset signal needs to be negated because the Watchdog's reset signal is active low, as other AXI IPs are. Because the Watchdog can be reset both by the DFX Controller and the PSR, as for the MicroBlaze, an NOR gate is fed with the one coming from the DFX Controller and the one coming from the PSR in the active-high form, that is \texttt{peripheral\_reset}.\bigskip
+
+Finally, the DFX Controller's ICAP port is connected to the ICAPE2's instance. The DFX Controller ICAP's \texttt{I} port is connected to the ICAPE2's \texttt{O} port, and the DFX Controller ICAP's \texttt{O} port is connected to the ICAPE2's \texttt{I} port.
+
+% connection of the DFX to the watchdog and to the ICAP. Reset logic from the DFX controller to the ublaze and to the watchdog
+
+% DFX connected to the watchdog via the hw trigger. How? Final voter.
+% ICAPE2. DFX Decoupler.
+
+\subsection{DFX Decoupler: what is it?}
+There is one important aspect that was not mentioned in the previous sections. During the Partial Reconfiguration of a partition, unpredictable signal activity can happen between the Reconfigurable Partition and the remaining part of the system. To overcome to this problem, Xilinx provides the Dynamic Function eXchange (DFX) Decoupler IP, for a complete logical isolation capabilities for DFX designs. \bigskip
+
+During the reconfiguration process, the DFX Controller assert a decouple signal that remains high for the entire duration of the process. This signal is used decouple the system from the logic under reconfiguration and avoid strange signal activities. For example, can happen that an AXI write request signal is asserted wrongly, leading to a modification of a random memory location with an unexpected value. By decoupling the AXI interface from the rest of the system, this can be avoided. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{images/chapter4/dfx_dec.pdf}
+\caption{DFX Decoupler scheme.}
+\end{figure}
+
+In a complex system, like the case under study, there are a lot of signals that need to be decoupled. Luckily, the DFX Decoupler IP's Configuration Wizard offers the ability to create decoupler interfaces for each standard interfaces like AXI or LMB. For what concerns a simple MicroBlaze architecture, the following is the adopted solution:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{images/chapter4/dec_mb-cropped.pdf}
+\caption{Decoupling of a Reconfigurable MicroBlaze region.}
+\end{figure}
+
+\section{From a manual workflow to a fully automated one}
+
+The presented workflow allows to enable partial reconfiguration of a MicroBlaze, even on a old version of Vivado. The workflow is presented in Figure \ref{fig:mystic_flow} and is made of 5 major steps, summarized as follows:
+
+\begin{enumerate}
+    \item Starting from a working project based on Block Design, with a MicroBlaze core, a DFX Controller and a Watchdog, the HDL description from the BD is extracted.
+    \item A new project is created and the previous HDL description is copied into it. The MicroBlaze instance is replaced with its own wrapper and the wrapper instantiates the MicroBlaze. All the .xci files from the base project are copied into the new project.
+    \item The new project is converted into a DFX-based project and the MicroBlaze wrapper is added in a new reconfigurable partition as Reconfigurable Module (RM). Finally, a PBLOCK is defined for the MicroBlaze wrapper.
+    \item The new project is implemented and bitstreams are generated.
+    \item From the base project, the XSA is generated, files within it are extracted and the bitstream is substituted with the one generated in the previous step. Then, all the files are inserted in a new .xsa archive to generate the new .xsa.
+\end{enumerate}
+
+Thus, the workflow is made of five simple steps that require a certain amount of time to be completed. The desginer needs to execute all of them everytime he wants to change something in the original project. Hence, the workflow is not suitable for a continuous integration process and some sort of automation is required. \bigskip
+
+\subsection{The automatation script}
+
+Luckily, all the flow can be almost easily scripted. In the following, all the developed script is presented by dividing it into different subparts and each subpart is described by a dedicated pseudo-code algorithm. The overall flow is divided into five main blocks:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{images/chapter4/script_flow2.pdf}
+\caption{Scheme of the script flow.}
+\end{figure}
+
+\subsubsection{Pre-processing block}
+The pre-processing block is the first block to be executed in the automatic workflow script. It takes as input the original project path and checks if the project is a valid candidate for the workflow:
+
+\begin{enumerate}
+    \item Given the project path, the project name \texttt{\$pn} is extracted.
+    \item The script checks for the existence of the \texttt{\$pn.gen} folder. This is a required folder that contains the generated HDL description of the Block Design. The script recursively checks for a path matching \texttt{*/bd/*/synth/\$dn.vhd}. If the path is found, means that the script knows the block design name \texttt{\$dn} and found its VHDL description file.
+    \item The script searches any .xdc file that may contains the PBLOCK definition in the \texttt{\$pn.srcs} folder. However, the designer can supply its own .xdc file. The PBLOCK is not checked at this time.
+    \item The script searches for the .xsa file. If not found, the scripts terminates asking to the user to create it from withing Vivado before running the script.
+\end{enumerate}
+
+\subsubsection{VHDL Manipulation block}
+If the Pre-processing block runs successfully, the HDL Manipulation block can be executed. This is the most compilcated one. It takes as input the previous VHDL description file \texttt{\$dn.vhd} and a secondary VHDL file named \texttt{adding.vhd} that contains partial definitions of some hardware that the designer wants to add to the system outside the Block Design, like for example the ICAPE2. 
+
+\begin{enumerate}
+    \item The whole \texttt{\$dn.vhd} file is parsed. Each entity is extracted and stored separately in a list of entities. Each entity is made of libraries, entity definition and an architecture. The same is done for the \texttt{adding.vhd} file.
+    \item Each entity is analyzed, looking for a MicroBlaze instance in its architecture. If found, the entity is marked as the top level entity. The user can decide to indicate another entity as top level one, if the found entity is not the one he wants to use or if it is wrong. Each of the next steps is performed on the top level entity.
+    \item The script looks for the MicroBlaze's component declaration. 
+    \item The script looks for the MicroBlaze instance, given the previous component name.
+    \item The script creates a new entity, named \texttt{ublaze\_wrapper} and:
+        \begin{enumerate}
+        \item Extracts the ports declaration from the MicroBlaze component and adds them to the new entity ports definition. The entity part of the whole wrapper is created.
+        \item The architecture is defined. First the original MicroBlaze component is appended as it is, then it is instantiated and each port is connected to the ports of the entity wrapper under creation.
+        \item The newly created entity is saved in a new file \texttt{ublaze\_wrapper.vhd}.
+        \end{enumerate}
+    \item The original microblaze component is replaced by the new wrapper component. The instance is left as it is, only the instance name is changed and referred to the new wrapper component.
+    \item Some synthesizer attribute referred to the older MicroBlaze instance are now referred to the new wrapper instance.
+    \item If in the base project, the DLX Controller's ICAP interface is made external through a port, Vivado automatically creates some attributes and entity ports to let them connect outside. They are removed.
+    \item The definitions from the \texttt{adding.vhd} file are now merged. For each component in the architecture defined in the \texttt{adding.vhd} file, the script adds both the component and the relative instance to the top entity. It looks for the ICAPE2 instance too and adds it to the top entity (it is trated as special, becuase in this case there is no component declaration as other components).
+    \item All the entities are appended in a new file \texttt{top.vhd}.
+\end{enumerate}
+
+\subsubsection{Post-manipulation block}
+This is the third last block to be executed. At this point in time, if everything succeded, the script knows the top level name, the MicroBlaze instance name and other informations about the design. It proceeds with the following steps:
+
+\begin{enumerate}
+    \item The script knows the MicroBlaze wrapper instance name and now looks for the PBLOCK where it is assigned in the previous found .xdc file. If this is not found, the script terminates with an error.
+    \item The script prepares a list of all the .xci files in the base project. It searches for possible .xci file related to the \texttt{adding.vhd} file in the \texttt{adding_xci} folder and appends them too.
+\end{enumerate}
+
+\subsubsection{Implementation block}
+Now the scripts created all the files and informations to create a new project and implement it. Vivado is launched in command-line mode and a TCL script is sourced to perform the following steps:
+
+\begin{enumerate}
+    \item The script creates a new project and VHDL is set as the active language.
+    \item Imports the \texttt{top.vhd}, \texttt{ublaze\_wrapper.vhd} and the .xdc file into the new project.
+    \item Takes the .xci list previously prepared and add import each file into the new project. They are references to the original files, not a copy.
+    \item Enables the project as a DFX-based project. Creates a definition partition and a reconfigurable module. The wrapper is added to the partition. The single reconfigurable configuration is created.
+    \item The project is synthesized and implemented. The bitstreams are generated both in .bit and .bin formats.
+\end{enumerate}
+
+\subsubsection{Post-implementation block}
+This is the last block to be executed. It takes as input the generated full bitstream and the previously found .xsa file. The scripts unzip the .xsa file, substitutes the old bitstream with the new one and re-zip the .xsa file.
+
+
 \subsection{Script for partial bitstream to C header generation}
 \label{sec:script_header}
+
+Because of the choice to store the partial bitstream in memory by using the same .elf file executed by the ARM core to configure the PS, a script is needed to generate the C header file that contains the partial bitstream. \bigskip
+
+An error to avoid is the usage of the bitstream in the .bit format instead of the .bin one to perform a partial reconfiguration via the ICAP interface. As explained in Section \ref{sec:bitstream_struct}, the difference between the two is that the .bit format contains an header while the .bin format does not. Hence, the header can have a different length, depending for example on the design name choosen by the user, thus can create an offset inside the bitstream. As an example, it can shift the SYNC WORD by 8 bits. The ICAP interface is not able to evaluate the header nor is capable of evaluating a shifted bitstream. Hence, the ICAP remains in the \textit{NOSYNC} state or it goes in the \textit{CFGERR} state. The .bit file is only useful to Vivado and XSCT becuase of the header, otherwise it is only a waste of memory and must be not used outside Vivado tools.\bigskip
+
+The script's job is to prepare a \texttt{u32} C array and fill it with the content of the partial .bin bitstream. The script allows to create an array of a specific size. It accomplish to this by adding some \texttt{NOP} instructions to the array at the end if the size of the bistream is less than the required one. This can be useful if the DFX Controller is configured with a specific size for the partial bitstream to be loaded but at the end the generated partial bitstream is smaller then the configured one. In this way, is possible to avoid to change the DFX Controller's settings and to perform the implementation again. \bigskip
+
+Moreover, the script allows to write the content in little-endian or big-endian format. This is useful because if the bitstream is saved in memory with the wrong format and the ICAP reads it, it does not recognize the SYNC WORD hence does not do the partial reconfiguration.\bigskip
+
+The following is an example of the script's usage:
+\begin{lstlisting}[style=preformatted]
+format=big
+required_size=389928
+align=0 # do not touch!
+output=data.h
+
+./to_header path/to/partial.bin $format $required_size $align > $output
+\end{lstlisting}
+

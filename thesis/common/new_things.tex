@@ -65,7 +65,7 @@
     showstringspaces=false,
     showtabs=false,                  
     tabsize=2,
-    morekeywords={*, create_pblock, get_pblocks, add_cells_to_pblock, get_cells, resize_pblock, set_property, open_run, write_bitstream, get_designs, create_ip, generate_target, get_ips, get_files},
+    morekeywords={*, create_pblock, get_pblocks, add_cells_to_pblock, get_cells, resize_pblock, set_property, open_run, write_bitstream, get_designs, create_ip, generate_target, get_ips, get_files, targets, connect, mrd},
     literate=*{\{}{{\textcolor{red}{\{}}}{1}
         {\}}{{\textcolor{red}{\}}}}{1}
         {[}{{\textcolor{red}{[}}}{1}
@@ -75,7 +75,10 @@
 }
 
 \lstdefinestyle{vhdl}{
+    backgroundcolor=\color{backcolour},   
     language=vhdl,
+    basicstyle=\ttfamily\footnotesize,
+    columns=fixed,
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -85,7 +88,21 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=2,
+    tabsize=2
+}
+
+\lstdefinestyle{C}{
+    backgroundcolor=\color{backcolour},   
+    language=C,
+    basicstyle=\ttfamily\footnotesize,
+    columns=fixed
+}
+
+\lstdefinestyle{Verilog}{
+    backgroundcolor=\color{backcolour},   
+    language=Verilog,
+    basicstyle=\ttfamily\footnotesize,
+    columns=fixed
 }
 
 \NewDocumentCommand{\busref}{som}{\texttt{%
