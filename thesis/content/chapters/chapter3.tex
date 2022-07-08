@@ -18,7 +18,7 @@ The \textit{PYNQ-Z2} is a development board designed for the Xilinx University P
 \label{fig:pynqz2}
 \end{figure}
 
-The SoC is made of two subparts: a Processing System (PS) and a Programmable Logic (PL). The PS is the main part of the SoC, containing two 650 MHz ARM Cortex-A9 processor, 512 KB L2 Cache, 256 KB On-Chip Memory and other modules like FPUs, Flash Controller, DRAM Controller, GPIOs and so on.
+The SoC is made of two subparts: a Processing System (PS) and a Programmable Logic (PL). The PS is the main part of the SoC, containing two 650 MHz ARM Cortex-A9 processors, 512 KB L2 Cache, 256 KB On-Chip Memory and other modules like FPUs, Flash Controller, DRAM Controller, GPIOs and so on.
 
 \begin{figure}[H]
 \centering
@@ -36,7 +36,7 @@ A schematic is shown in Figure \ref{fig:zynq7020}. The second part is the PL, wh
     \item On-chip Xilinx analog-to-digital converter (XADC)
 \end{itemize}
 
-The PL can access the Processing System's memory space, as shown in Table \ref{tab:zynq_memory_map}, through a High Performance and/or General Purpose AXI Ports. This enables the usage, for example, of the DDR3 RAM and of the On-Chip memory (OCM) from the PL. The board can be programmed through a JTAG interface, which allows to upload a firmware to be executed from the PS or to program the PL via a bitstream. Moreover, it provides a virtual UART interface that can be used as input/output both for the PS and the PL.\bigskip
+The PL can access the Processing System's memory space, as shown in Table \ref{tab:zynq_memory_map}, through High Performance and/or General Purpose AXI Ports. This enables the usage, for example, of the DDR3 RAM and the On-Chip Memory (OCM) from the PL. The board can be programmed through a JTAG interface, which allows uploading firmware to be executed from the PS or to program the PL via a bitstream. Moreover, it provides a virtual UART interface that can be used as input/output both for the PS and the PL.\bigskip
 
 \begin{table}[ht]
 \centering
@@ -106,7 +106,7 @@ The PL can access the Processing System's memory space, as shown in Table \ref{t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Xilinx's Microblaze soft-core}
+\section{Xilinx soft-core: the MicroBlaze}
 
 The Microblaze is a soft-core (or soft-microprocessor) designed for Xilinx's FPGAs. Introduced in 2002, it is based on a RISC architecture, with an ISA (Instruction Set Architecture) similar to the DLX architecture. It is a pipelined processor and, with few exceptions, the MicroBlaze can issue a new instruction every cycle, maintaining single-cycle throughput under most circumstances.\bigskip
 
@@ -119,22 +119,22 @@ The Microblaze has an interface to the AXI Interconnect, used to connect to othe
 \label{fig:ublaze}
 \end{figure}
 
-A general overview of the Microblaze architecture is shown in Figure \ref{fig:ublaze}. Because it is meant for FPGAs, and FPGAs are flexible by construction, a Microblaze instance can be personalized in many ways to fit the user's needs. Example of configurations are the cache size (or the cache can be enabled or disabled at all), pipeline depth (3-stage, 5-stage, or 8-stage) and bus-interfaces. There are some presets, like the area-optimized one which uses a 3-stage pipeline and sacrifices clock frequency for reduced logic area. The performance-optimized preset expands the execution pipeline to 5 stages. One of the most important configuration is related to the supported ISA: key processor instructions which are rarely used but more expensive to implement in hardware can be selectively added/removed (e.g. multiply, divide, and floating point operations).
+A general overview of the Microblaze architecture is shown in Figure \ref{fig:ublaze}. Because it is meant for FPGAs, and FPGAs are flexible by construction, a Microblaze instance can be personalized in many ways to fit the user's needs. Examples of configurations are the cache size (or the cache can be enabled or disabled at all), pipeline depth (3-stage, 5-stage, or 8-stage) and bus interfaces. There are some presets, like the area-optimized one which uses a 3-stage pipeline and sacrifices clock frequency for the reduced logic area. The performance-optimized preset expands the execution pipeline to 5 stages. One of the most important configuration is related to the supported ISA: key processor instructions which are rarely used but more expensive to implement in hardware can be selectively added/removed (e.g. multiply, divide, and floating-point operations).
 
 \section{Xilinx FPGA Standard Design Flow}
 
-Xilinx offers a software suite for Xilinx's FPGAs. The provided software suite is \textit{Vivado Design Suite}, and this thesis has been developed using version 2021.1. The suite supports designers in all the steps of the design process, from the initial HDL design to the final FPGA bistream generation. At each stage of the design flow, the design can perform analysis and verification, by performing logical simulations of the design, estimation of power consumption, constraints definition, I/O and clock planning, design rule checks (DRC) and modification of implementation results.\bigskip
+Xilinx offers a software suite for Xilinx's FPGAs. The provided software suite is \textit{Vivado Design Suite}, and this thesis has been developed using version 2021.1. The suite supports designers in all the steps of the design process, from the initial HDL design to the final FPGA bitstream generation. At each stage of the design flow, the design can perform analysis and verification, by performing logical simulations of the design, estimation of power consumption, constraints definition, I/O and clock planning, design rule checks (DRC) and modification of implementation results.\bigskip
 
-Together with the HDL description, Vivado offers an IP catalog. IP stands for Intellectual Property, and each IP is an already developed and tested design ready to be integrated into the user's own design. An example of IP offered by default is the Microblaze IP, that containts the Microblaze core. The Vivado's Catalog is a comprehensive list of all the IP offered by different repositories: Xilinx's IP, IP obtained from third parties, and end-user designs targeted for reuse as IP into a single environment. \bigskip
+Together with the HDL description, Vivado offers an IP catalog. IP stands for Intellectual Property, and each IP is an already developed and tested design ready to be integrated into the user's own design. An example of IP offered by default is the Microblaze IP, which contains the Microblaze core. The Vivado's Catalog is a comprehensive list of all the IP offered by different repositories: Xilinx's IP, IP obtained from third parties, and end-user designs targeted for reuse as IP in a single environment. \bigskip
 
-One of the key features of the Vivado Design Suite is the choiche given to the user to perform the design flow by means of the Graphical User Interface (GUI) or by TCL commands. The GUI, known as as \textit{Vivado Integrated Design Environment} (IDE), allows the user to follow the evolution of the design visually from the HDL and IP instantiation up to its implementation on physical resources. The TCL commands allow the user to control the design flow by means of scripts. The interesting thing is that each action performed by the user in the GUI corresponds to an exact TCL command that can be seen from the TCL Console available in the IDE. This allow the user to understand what is the TCL command for that specific action and to script the design flow easily. 
+One of the key features of the Vivado Design Suite is the choice given to the user to perform the design flow through the Graphical User Interface (GUI) or by TCL commands. The GUI, known as \textit{Vivado Integrated Design Environment} (IDE), allows the user to follow the evolution of the design visually from the HDL and IP instantiation up to its implementation on physical resources. The TCL commands allow the user to control the design flow by employing scripts. The interesting thing is that each action performed by the user in the GUI corresponds to an exact TCL command that can be seen from the TCL Console available in the IDE. This allows the user to understand what is the TCL command for that specific action and to script the design flow easily. 
 
 \subsection{Steps towards the Bitstream Generation}
 \label{sec:bitstreamgen}
 
-The starting point of the design design flow is the description of the system. The description can be made of a set of HDL files (Vivado supports Verilog, VHDL and SystemVerilog), a set of design constraints (XDXC) and a set of IP instantiations. \bigskip 
+The starting point of the design flow is the description of the system. The description can be made of a set of HDL files (Vivado supports Verilog, VHDL and SystemVerilog), a set of design constraints (XDXC) and a set of IP instantiations. \bigskip 
 
-Thus, a design can be a combination of IPs and hand-written HDL code or it can be a full IP-centric design, where the user instantiates IPs he/she wants to use and interconnects them (usually via AXI Interface but also via other interfaces or custom interfaces, it depends on the IP). For the IP-centric design flow, Vivado offers the \textit{Block Design} tool, which allows the user to visually instantiate e move and connect IPs visually, where each IP corresponds to a block, and to connect them by drawing connections similar to a schematic or using connection automation features provided with a set of DRCs (to ensure proper IP configuration and connectivity), as shown in Figure \ref{fig:block_design_example}. \bigskip
+Thus, a design can be a combination of IPs and hand-written HDL code or it can be a full IP-centric design, where the user instantiates IPs he/she wants to use and interconnects them (usually via AXI Interface but also other interfaces or custom interfaces, it depends on the IP). For the IP-centric design flow, Vivado offers the \textit{Block Design} tool, which allows the user to visually instantiate e move and connect IPs visually, where each IP corresponds to a block, and to connect them by drawing connections similar to a schematic or using connection automation features provided with a set of DRCs (to ensure proper IP configuration and connectivity), as shown in Figure \ref{fig:block_design_example}. \bigskip
 
 % include image
 \begin{figure}[H]
@@ -144,24 +144,24 @@ Thus, a design can be a combination of IPs and hand-written HDL code or it can b
 \label{fig:block_design_example}
 \end{figure}
 
-Moreover, the Block Design Tool allows the user to define the memory mapping of the AXI peripherals with respect to the AXI masters. In the example above there are two masters , the ZYNQ7 Processing System and a Microblaze, and both of them are connected to the same AXI Interconnect IP. All the other peripherals are connected to the same AXI Interconnect IP, so in the end there are two memory address spaces (one for each master) and each master will be able to access all the peripherals as the other master. The Block Design tool then allows to validate the design, the memory map correctness, and will package the design into a single design source. \bigskip
+Moreover, the Block Design Tool allows the user to define the memory mapping of the AXI peripherals concerning the AXI masters. In the example above there are two masters, the ZYNQ7 Processing System and a Microblaze, and both of them are connected to the same AXI Interconnect IP. All the other peripherals are connected to the same AXI Interconnect IP. So, in the end, there are two separated memory address spaces (one for each master) and each master will be able to access all the peripherals as the other master. The Block Design tool then allows validating the design, as the memory map correctness, and will package the design into a single design source. \bigskip
 
-Now that the design is defined, the user can proceed with a logic simulation or with the Synthesis of the design. Of course, in order to test the design, the user needs to write its own testbench. The testbench is usually a HDL file where the DUT (Device-Under-Test, that is the module the user wants to simulate) is instantiated and proper stimuli are applied. The simulator is then able to run simulate and let the user see all the waveforms. \bigskip
+Now that the design is defined, the user can proceed with a logic simulation or with the Synthesis of the design. Of course, in order to test the design, the user needs to write its testbench. The testbench is usually an HDL file where the DUT (Device-Under-Test, that is the module the user wants to simulate) is instantiated and proper stimuli are applied. The simulator is then able to run simulate and let the user see all the waveforms. \bigskip
 
-Before going ahead with the Synthesis step, it possible to assign some constraints. Those constraints, defined in a XDC file, regards for example the PIN assignment (it is possible to assign a \textit{port} of the design to a physical pin of the FPGA) or the placement of some modules in a particular region of the FPGA. \bigskip
+Before going ahead with the Synthesis step, it is possible to assign some constraints. Those constraints, defined in an XDC file, regard for example the PIN assignment (it is possible to assign a \textit{port} of the design to a physical pin of the FPGA) or the placement of some modules in a particular region of the FPGA. \bigskip
 
-Once the constraints are defined, the Synthesis can be performed. The Synthesis is the process of transforming a HDL description into a gate-level representation. The output is a netlist of the whole design. Vivado performs the Synthesis in a bottom-up approach, that is, the lower modules are synthesized first, and then the higher modules are synthesized. If the design containts IPs, these are synthesized first. The user can decide the Synthesis approach adopted by the tool, as for example if the synthesis must follow a timing optimization strategy or an area optimization approach. \bigskip
+Once the constraints are defined, the Synthesis can be performed. The Synthesis is the process of transforming an HDL description into a gate-level representation. The output is a netlist of the whole design. Vivado performs the Synthesis in a bottom-up approach, that is, the lower modules are synthesized first, and then the higher modules are synthesized. If the design contains IPs, these are synthesized first. The user can decide the Synthesis approach adopted by the tool, for example, if the synthesis must follow a timing optimization strategy or an area optimization approach. \bigskip
 
-The next step is the Implementation. The Implementation is the final step, where the gate netlist, produced as output of the synthesis step, is mapped to the FPGA specific resources and the design is routed. The implementation step is the most complex one and is made of different steps:
+The next step is Implementation. The Implementation is the final step, where the gate netlist, produced as an output of the synthesis step, is mapped to the FPGA-specific resources and the design is routed. The implementation step is the most complex one and is made of different steps:
 
 \begin{itemize}
     \item \textit{Design Optimization}: the netlist is optimized to reduce the number of required resources and to fit the target FPGA device.
-    \item \textit{Placement}: each block required by the design is mapped into a physical resource of the FPGA. There are many resources available with the same behaviour where the block can be mapped. The choiche may be driven by the need to minimize or to balance the wiring accross to FPGA and/or to minimize the circuit delay (i.e. maximize the speed). The placement tries to follow the constraints defined in the XDC file. If it is not possible to fullfill the constraints, the placement will fail and the user will be notified.
+    \item \textit{Placement}: each block required by the design is mapped into a physical resource of the FPGA. There are many resources available with the same behavior where the block can be mapped. The choice may be driven by the need to minimize or balance the wiring across the FPGA and/or to minimize the circuit delay (i.e. maximize the speed). The placement tries to follow the constraints defined in the XDC file. If it is not possible to fulfill the constraints, the placement will fail and the user will be notified.
     \item \textit{Post-Placement Physical Optimization}: the placement is further optimized.
-    \item \textit{Route Design}: the design is routed, meaning that the physical resources are connected to each other as needed. 
+    \item \textit{Route Design}: the design is routed, meaning that the physical resources are connected among them as needed. 
 \end{itemize}
 
-Once the design has been implemented, the final step of the bitstream generation can be performed. The default generated bitsteram is a binary bitstream (.bit), that can be used to program the FPGA. However, the user can also generate bitstreams in different formats.
+Once the design has been implemented, the final step of the bitstream generation can be performed. The default generated bitstream is a binary bitstream (.bit), that can be used to program the FPGA. However, the user can also generate bitstreams in different formats.
 
 \subsection{Fundamentals of the Xilinx's Bitstream structure}
 \label{sec:bitstream_struct}
@@ -169,7 +169,7 @@ Once the design has been implemented, the final step of the bitstream generation
 The bitstream is a file that is usually given as input to some tools that programs the FPGA, via some defined interface. Because of the different tools and interfaces used for different scenarios, the bitstream format is not always the same. The most common formats are:
 
 \begin{itemize}
-    \item \textit{.bit}: a binary file that contains initially a header, followed by the raw bitsteam.
+    \item \textit{.bit}: a binary file that contains initially a header, followed by the raw bitstream.
     \item \textit{.rbt}: same structure as .bit, but it is ASCII encoded, meaning that the header is human-readable and the raw bitstream is written as literal '0' and '1' characters for each bit.
     \item \textit{.bin}: a binary file that contains only the raw bitstream.
     \item \textit{.mcs}: a file that can be used to program a PROM (includes addresses and checksum info).
@@ -178,7 +178,7 @@ The bitstream is a file that is usually given as input to some tools that progra
 Even tho the .bin file contains all the necessary data for programming an FPGA, the .bit file is the default format generated by Vivado.
 
 \subsubsection{Bitstream Header}
-The header containts some informations like the design name, build date, target name and are totally ignored by the FPGA. The main reason for this format to exist is that the header is required by tools like Vivado, to better analyze it before starting the programming. \bigskip
+The header contains some information like the design name, build date, and FPGA target name. Those pieces of data are ignored by the FPGA. The main reason for this format to exist is that the header is required by tools like Vivado, to better analyze it before starting the programming. \bigskip
 
 The hex dump of a .bit file header looks like the following:
 
@@ -199,13 +199,13 @@ There are several fields in the header, each one is indicapted by a letter (\tex
 
 \subsubsection{Raw Bitstream}
 \label{sec:raw_bitstream}
-Here the configuration logic starts its job. The configuration logic is part of the FPGA that can be accessed via a configuration port, and acts as a State Machine. Each value written in the bitstream is like a command to the configuration logic, that may or may not change the state machine's state. \bigskip
+Here the configuration logic starts its job. The configuration logic is part of the FPGA that can be accessed via a configuration port and acts as a State Machine. Each value written in the bitstream is like a command to the configuration logic, that may or may not change the state machine's state. \bigskip
 
-In ZYNQ system, that are mainly two configuration ports: the \textit{ICAP} and the \textit{PCAP}. Both are used to program the FPGA, but the first one can be used only by the hard-cores in the SoC, while the second one can be used by the FPGA to program itself. The ICAP and PCAP are mutually exclusive, so only one of them can be used at a time. They are connected with a 2:1 mux, and the selection pin is connected to a bit in one of the configuration registers of the ARM cores. \bigskip
+In the ZYNQ system, that are mainly two configuration ports: the \textit{ICAP} and the \textit{PCAP}. Both are used to program the FPGA, but the first one can be used only by the hard-cores in the SoC, while the second one can be used by the FPGA to program itself. The ICAP and PCAP are mutually exclusive, so only one of them can be used at a time. They are connected with a 2:1 mux, and the selection pin is connected to a bit in one of the configuration registers of the ARM cores. \bigskip
 
-At startup, the PCAP is enabled by default, and the ICAP can be enabled if requested. The processeor may steal the PCAP back (and stop the ICAP) at any time. This choice has been made in order to insure that the ARM TrustZone remains in control of the security of the system all the times. ICAP is a potential backdoor, and would compromise security if the processor did not have the ability to prevent and regulate its use.\bigskip
+At startup, the PCAP is enabled by default, and the ICAP can be enabled if requested. The processor may steal the PCAP back (and stop the ICAP) at any time. This choice has been made in order to ensure that the ARM TrustZone remains in control of the security of the system all the time. ICAP is a potential backdoor, and would compromise security if the processor could not prevent and regulate its use.\bigskip
 
-The raw bitstream in a Xilinx's 7 series FPGA consists of three sections:
+The raw bitstream in Xilinx's 7 series FPGA consists of three sections:
 \begin{itemize}
     \item Bus Width Auto Detection
     \item Sync Word
@@ -214,7 +214,7 @@ The raw bitstream in a Xilinx's 7 series FPGA consists of three sections:
 
 The bus width auto detection section is a byte pattern inserted at the beginning of every bitstream. The pattern is made of \texttt{0x999999bb} and \texttt{0x11220044} and they may be surrounded by some padding bytes. The configuration width detection logic always checks the low eight bits, For the x8 bus, the configuration bus width detection logic first finds \texttt{0xBB} on the D[0:7] pins, followed by \texttt{0x11}. For the x16 bus, the logic first finds \texttt{0xBB} on D[0:7] followed by \texttt{0x22}. For the x32 bus, the logic first finds \texttt{0xBB}, on D[0:7], followed by \texttt{0x44}. If the byte after \texttt{0xbb} is not correct, the bus width detection logic's state machine is reset, until a valid sequence is found. \bigskip
 
-When it is found, it switches to the appropriate external bus width state and starts looking for the Sync Word. The sync word is \texttt{0xaa995566}. When the sync word is found, the configuration logic switches to the FPGA configuration state, and starts processing configuration packets in the bitstream. Configuration data can be sent both in serial or in parallel mode, where the bus width is fixed thanks to the previous step. Once the Sync Word is detected, the communication mode is fixed and the configuration logic will only work on 32-bit, big-endian words. Thus, the Sync Word is used to esablish a 32-bit alignment, too. \bigskip
+When it is found, it switches to the appropriate external bus width state and starts looking for the Sync Word. The sync word is \texttt{0xaa995566}. When the sync word is found, the configuration logic switches to the FPGA configuration state and starts processing configuration packets in the bitstream. Configuration data can be sent both in serial or in parallel mode, where the bus width is fixed thanks to the previous step. Once the Sync Word is detected, the communication mode is fixed and the configuration logic will only work on 32-bit, big-endian words. Thus, the Sync Word is used to establish a 32-bit alignment, too. \bigskip
 
 Each configuration packet begins with a one-word header. The header is composed of the following fields:
 
@@ -231,7 +231,7 @@ Each configuration packet begins with a one-word header. The header is composed 
     \end{bytefield}
 \end{center}
 
-The content of the header changes according to the \textit{Type} field. The Type 1 header is the showed one. Type 2 packets are used when the payload length exceeds the 11 bits available in a type 1 packet. Type 0 should exists, even if it is not documented. \bigskip
+The content of the header changes according to the \textit{Type} field. The Type 1 header is the shown one. Type 2 packets are used when the payload length exceeds the 11 bits available in a type 1 packet. Type 0 should exist, even if it is not documented. \bigskip
 
 The \textit{OP} field is used to specify the operation to be performed. The following values are possible:
 
@@ -248,7 +248,7 @@ The \textit{OP} field is used to specify the operation to be performed. The foll
 \label{tab:type1_header}
 \end{table}
 
-For NOP operations, that usualy are found as \texttt{0x20000000} in the bitstream, the address and payload length are ignored. The address field can be useful in one case: the type 2 packets does not contain any address field, to extend the payload length maximum value. Thus, the configuration logic will use the address field of the previous type 1 packet to determine the address of the type 2 packet. The flow would be a NOP packet with a valid address field followed by a type 2 packet. \bigskip
+For NOP operations, which usually are found as \texttt{0x20000000} in the bitstream, the address and payload length are ignored. The address field can be useful in one case: the type 2 packets do not contain any address field, to extend the payload length maximum value. Thus, the configuration logic will use the address field of the previous type 1 packet to determine the address of the type 2 packet. The flow would be a NOP packet with a valid address field followed by a type 2 packet. \bigskip
 
 Address specified in the configuration packets are mapped to variable-width registers. Some of the registers are:
 
@@ -273,17 +273,17 @@ Address specified in the configuration packets are mapped to variable-width regi
 
 \subsection{Software Development}
 
-Xilinx provides some tools to help software developers to develop applications for hard ARM cores (such as in the ZYNQ7020) or for soft-cores such as Microblaze (one or multiple instances of the core). The most important one is Xilinx Software Command-Line Tool (XSCT). XSCT is a tool that allows developers to easily manage the FPGA via a command line interface and to write scripts, based on TCL, to automate some steps. \bigskip
+Xilinx provides some tools to help software developers to develop applications for hard ARM cores (such as in the ZYNQ7020) or soft-cores such as Microblaze (one or multiple instances of the core). The most important one is Xilinx Software Command-Line Tool (XSCT). XSCT is a tool that allows developers to easily manage the FPGA via a command-line interface and to write scripts, based on TCL, to automate some steps. \bigskip
 
-XSCT allows mainly two things: creating and managing projects, and accessing the FGPA's JTAG interface to program the FPGA itself or to debug applications. For what concerns the JTAG access, XSCT offers functions like upload of a bitstream to program the FPGA, upload of .ELF executable files to be run by a specific core (it can be either an ARM core or a Microblaze), the ability to control a core (start, stop, reset, etc.), the ability to read and write registers and access the memory space of a core and ultimately to debug an application. \bigskip
+XSCT allows mainly two things: creating and managing projects and accessing the FGPA's JTAG interface to program the FPGA itself or to debug applications. For what concerns the JTAG access, XSCT offers functions like the upload of a bitstream to program the FPGA, upload of .ELF executable files to be run by a specific core (it can be either an ARM core or a Microblaze), the ability to control a core (start, stop, reset, etc.), the ability to read and write registers and access the memory space of a core and ultimately to debug an application. \bigskip
 
-A more high level tool is available, called Vitis. Vitis is a software development environment for FPGA development. It is a tool that allows developers, through an eclipse-based environment, to easily manage projects and applications. Vitis is a wrapper around XSCT. \bigskip
+A more high-level tool is available, called Vitis. Vitis is a software development environment for FPGA development. It is a tool that allows developers, through an eclipse-based environment, to easily manage projects and applications. Vitis is a wrapper around XSCT. \bigskip
 
-A Xilinx Software project is made of a platform project. A platform project is a description of the hardware architecture on which the software will run. To create a platform project, the starting point is to extract a hardware description from a hardware design. The hardware description contains informations like the available cores, the memory space for each core, the available peripherals (and relative software drivers, if not standalone) and the bitstream to program the FPGA. Vivado is able to generate such a description only for Block Design-based projects, via the \texttt{export\_hardware} TCL command or via the GUI itself, which produces the \textit{.xsa} file. \bigskip
+A Xilinx Software project is made of a platform project. A platform project is a description of the hardware architecture on which the software will run. To create a platform project, the starting point is to extract a hardware description from a hardware design. The hardware description contains information like the available cores, the memory space for each core, the available peripherals (and relative software drivers, if not standalone) and the bitstream to program the FPGA. Vivado can generate such a description only for Block Design-based projects, via the \texttt{export\_hardware} TCL command or via the GUI itself, which produces the \textit{.xsa} file. \bigskip
 
-Vitis, or XSCT, take the .xsa file as input to create a platform project. Once it is created, it is possible to create a system project. A system project is a software project that contains multiple applications, each one based on a specific core. An application project can be standalone (so a bare-metal firmware), or FreeRTOS based or petaLinux based (if available). \bigskip
+Vitis, or XSCT, take the .xsa file as input to create a platform project. Once it is created, it is possible to create a system project. A system project is a software project that contains multiple applications, each one based on a specific core. An application project can be standalone (so a bare-metal firmware), FreeRTOS based or petaLinux based (if available). \bigskip
 
-Once a project is created, software developers can start writing their own code (usually in C) and to customize the Board-Support Package (BSP) that allows to change basic things like the \textit{stdout} and \textit{stdin} used peripherals to print or read some text, respectively.
+Once a project is created, software developers can start writing their code (usually in C) and customize the Board-Support Package (BSP) that allows changing basic things like the \textit{stdout} and \textit{stdin} used peripherals to print or read some text, respectively.
 
 \section{Fault Injection Tool}
 \label{sec:fitollo}
