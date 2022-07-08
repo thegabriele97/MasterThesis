@@ -1,4 +1,5 @@
 \chapter{Conclusions}
+\label{sec:concl}
 
 This thesis finally reaches its end, It sees the development of a complete fault tolerance system able to increase the dependability of the system itself and to protect in most of the cases the MicroBlaze from possible SEUs that can cause faults and errors. It has been achieved by a combination of a fault tolerant watchdog, completely designed from scratch to be tailored to the needs of the project, and the enabling of partial reconfiguration of a complex IP like the MicroBlaze, by exploiting a little hack that leads to a complete automation script able to convert a normal project designed with normal tools, like the Block Design Tool, in a project with a fully working reconfigurable MicroBlaze.\bigskip
 
@@ -28,7 +29,7 @@ The developed mitigation technique is unique in its genre, permitting to compreh
 
 \section{Future Work}
 
-The thesis has been developed with the idea of being implemented in a more complex system, so it can be easily extended for future works. In particular, the watchdog can be extend to monitor multiple kicking acts from different sources like multiple MicroBlaze instances or adding other types of checks like bus activity-detection. An example for this could be the monitoring of a read/write signal in a memory BUS (like the AXI one). If the system is designed to execute a period read or write operation from the memory, this can be monitored and if the processor or any other master that reads from the memory stops working, the watchdog can be let to expire and trigger a reconfiguration. \bigskip
+The thesis has been developed with the idea of being implemented in a more complex system, so it can be easily extended for future works. In particular, the watchdog can be developed further to monitor multiple kicking acts from different sources like multiple MicroBlaze instances or adding other types of checks like bus activity-detection. An example for this could be the monitoring of a read/write signal in a memory BUS (like the AXI one). If the system is designed to periodically execute read or write operations from the memory, this can be monitored and if the processor or any other master that reads from the memory stops working, the watchdog can be let to expire and trigger a reconfiguration. \bigskip
 
 Moreover, other modules can be marked as reconfigurable, by extending the presented workflow and the related scripts. And with an extended watchdog, it is possible to partial reconfigure only specific partitions of the system or the whole system. \bigskip
 

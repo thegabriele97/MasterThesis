@@ -1,115 +1,89 @@
 % appendix
 \chapter{Watchdog FSM - VHDL Code}
 \label{sec:watchdog_fsm}
-\begin{lstlisting}[style=vhdl]
+
+\begin{lstlisting}[style=vhdl, caption={Watchdog FSM - VHDL Code (Entity)}]
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
 
 entity top_beacon_watchdog is
-  generic (
-    DATA_WIDTH: integer := 32
-  );
+  generic ( DW: integer := 32 );
   port (
     CLK:    in std_logic;
     RST:    in std_logic;
-
-    DATAIN: in std_logic_vector(DATA_WIDTH-1 downto 0);
+    DATAIN: in std_logic_vector(DW-1 downto 0);
     START:  in std_logic;
     STB:    in std_logic;
-    TOGRATE:out std_logic_vector(DATA_WIDTH-1 downto 0);
+    TOGRATE:out std_logic_vector(DW-1 downto 0);
     WORKING:out std_logic;
     ERR:    out std_logic
    );
 end top_beacon_watchdog;
+\end{lstlisting}
 
+
+\begin{lstlisting}[style=vhdl, caption={Watchdog FSM - VHDL Code (Architecture Header)}]
 architecture arch of top_beacon_watchdog is
-    
   type fsm_state is (S_START, S_CHECK_0, S_CHECK_1, S_DOOMED);
   signal curr_state, next_state: fsm_state;
-  signal curr_timeout, next_timeout: 
-        std_logic_vector(DATA_WIDTH-1 downto 0);
-  signal curr_cnt, next_cnt: std_logic_vector(DATA_WIDTH-1 downto 0);
-  signal curr_toggle_rate: std_logic_vector(DATA_WIDTH-1 downto 0);
-
+  signal curr_timeout: std_logic_vector(DW-1 downto 0);
+  signal next_timeout:std_logic_vector(DW-1 downto 0);
+  signal curr_cnt, next_cnt: std_logic_vector(DW-1 downto 0);
+  signal curr_toggle_rate: std_logic_vector(DW-1 downto 0);
 begin
+\end{lstlisting}
 
- TOGRATE <= curr_toggle_rate;
+\begin{lstlisting}[style=vhdl, caption={Watchdog FSM - VHDL Code (Combinational process)}]
+  TOGRATE <= curr_toggle_rate;
 
   process(curr_state, curr_timeout, curr_cnt, DATAIN, STB, START)
   begin
-  
-    next_state <= curr_state;
-    next_timeout <= curr_timeout;
+    next_state <= curr_state; next_timeout <= curr_timeout;
     next_cnt <= std_logic_vector(unsigned(curr_cnt) + 1);
-  
-    ERR <= '0';
-    WORKING <= '1';
-  
+    ERR <= '0'; WORKING <= '1';
+
     case(curr_state) is
-  
       when S_START =>
-        next_timeout <= DATAIN;
-        next_cnt <= (others => '0');
+        next_timeout <= DATAIN; next_cnt <= (others => '0');
         WORKING <= '0';
-  
         if START = '1' then
-          if STB = '0' then
-            next_state <= S_CHECK_1;
-          elsif STB = '1' then
-            next_state <= S_CHECK_0;
-          else
-            next_state <= S_DOOMED;
+          if STB = '0' then next_state <= S_CHECK_1;
+          elsif STB = '1' then next_state <= S_CHECK_0;
+          else next_state <= S_DOOMED;
           end if;
         end if;
-  
         when S_CHECK_0 =>
-  
           if unsigned(curr_cnt) < unsigned(curr_timeout) then
             if STB = '0' then
               next_cnt <= (others => '0');
-              next_timeout <= DATAIN;
-              next_state <= S_CHECK_1;
+              next_timeout <= DATAIN; next_state <= S_CHECK_1;
             end if;
           else
-            next_cnt <= (others => '0') ;
+            next_cnt <= (others => '0'); next_timeout <= DATAIN;
             next_state <= S_CHECK_1;
-            next_timeout <= DATAIN;
-            if STB /= '0' then
-              next_state <= S_DOOMED;
-            end if;
+            if STB /= '0' then next_state <= S_DOOMED; end if;
           end if;
-          
-  
         when S_CHECK_1 =>
-  
           if unsigned(curr_cnt) < unsigned(curr_timeout) then
             if STB = '1' then
               next_cnt <= (others => '0');
-              next_state <= S_CHECK_0;
-              next_timeout <= DATAIN;
+              next_state <= S_CHECK_0; next_timeout <= DATAIN;
             end if;
           else
             next_cnt <= (others => '0');
-            next_state <= S_CHECK_0;
-            next_timeout <= DATAIN;
-            if STB /= '1' then
-              next_state <= S_DOOMED;
-            end if;
+            next_state <= S_CHECK_0; next_timeout <= DATAIN;
+            if STB /= '1' then next_state <= S_DOOMED; end if;
           end if;
-  
         when S_DOOMED =>
-          next_cnt <= (others => '0');
-          ERR <= '1';
-  
+          next_cnt <= (others => '0'); ERR <= '1';
         when others =>
-          WORKING <= '0';
-          next_state <= S_START;
-  
+          WORKING <= '0'; next_state <= S_START;
     end case;
-  
   end process;
+\end{lstlisting}
 
+\begin{lstlisting}[style=vhdl, caption={Watchdog FSM - VHDL Code (Sequential process)}]
   process(clk)
   begin
 
@@ -139,19 +113,78 @@ end arch;
 
 \end{lstlisting}
 
-\chapter{Galileo}
-\label{sec:appendix_galileo}
+\chapter{Fault Injection - SDE output with correction}
 
-%\lstinputlisting[]{} % for source code files directly
-% lstlisting environment for direct inclusion
-\begin{lstlisting}[language=Python]
-    import os
-    os.system("echo 1")
+\begin{lstlisting}[style=preformatted, caption={SDE output - before correction}]
+Hi
+Is bcn started? 1
+timeout: 200000000
+Is bcn started? 1
+timeout: 200000000
+Successfully ran Hello World application
+						Fibonacci current value 1
+						Fibonacci current value 1
+						Fibonacci current value 2
+						Fibonacci current value 3
+						Fibonacci current value 5
+						Fibonacci current value 8
+            Finbonacci current value 13
+            Finbonacci current value 21
+            Finbonacci current value 34
+            Finbonacci current value 55
+						..........................................
+            Fibonacci current value 46368
+            Fibonacci current value 75025
+						Fibonacci current value 121393
+						Fibonacci current value 196418
+						Fibonacci current value 317811
+
+DONE_1 DONE_1 DONE_1
+CHECKSUM: 852044
+WRONG CHECKSUM!
+\end{lstlisting}
+\newpage
+\begin{lstlisting}[style=preformatted, caption={SDE output - after correction}]
+Hi
+Is bcn started? 1
+timeout: 200000000
+Is bcn started? 1
+timeout: 200000000
+Successfully ran Hello World application
+						Fibonacci current value 1
+						Fibonacci current value 1
+						Fibonacci current value 2
+						Fibonacci current value 3
+						Fibonacci current value 5
+						Fibonacci current value 8
+            Finbonacci current value 13
+            Finbonacci current value 21
+            Finbonacci current value 34
+            Finbonacci current value 55
+						..........................................
+            Fibonacci current value 46368
+            Fibonacci current value 75025
+						Fibonacci current value 121393
+						Fibonacci current value 196418
+						Fibonacci current value 317811
+DONE_1 DONE_1 DONE_1
+CHECKSUM: 1673873
+DONE_2 DONE_2 DONE_2
 \end{lstlisting}
 
-% for computational complexity
-$\mathcal{O}\left(n\log{n}\right)$
+% \chapter{Galileo}
+% \label{sec:appendix_galileo}
 
-% verbatim
-\verb+numpy+
+% %\lstinputlisting[]{} % for source code files directly
+% % lstlisting environment for direct inclusion
+% \begin{lstlisting}[language=Python]
+%     import os
+%     os.system("echo 1")
+% \end{lstlisting}
+
+% % for computational complexity
+% $\mathcal{O}\left(n\log{n}\right)$
+
+% % verbatim
+% \verb+numpy+
 

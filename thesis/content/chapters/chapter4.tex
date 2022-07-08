@@ -1,4 +1,7 @@
-\chapter{Analysis and hardening of a FPGA Design with a MicroBlaze}
+\nocite{book}
+
+\chapter{Analysis and hardening of an FPGA Design with a MicroBlaze}
+\label{sec:main}
 
 A SRAM-based FPGA is sensitive to SEUs, as explained in Chapter \ref{sec:background}. To better understand the effects of radiation on the FPGA, it is better to see a design as an abstraction of two layers. The two main layers are:
 
@@ -103,7 +106,7 @@ Finally, the design definition is ready and it can be synthesized and implemente
 
 A PBLOCK is a collection of cells, grouped in one rectangular area or region that specify the device resources contained by the PBLOCK. PBLOCKs are used during floorplanning. A design floorplan is broadly defined as a set of physical constraints used to control how the logic is placed into the FPGA. A good floorplan can help reduce routing congestion and improve the quality of timing results. On the other hand, a bad floorplan can reduce performances as well as unmet constraints if the required placement is unfeasible. \bigskip
 
-As an example, the above design is implemented with the following constraints:
+As an example, the above design is implemented with the following constraints:\smallskip
 
 \begin{lstlisting}[style=tcl]
 create_pblock pblock_1
@@ -227,7 +230,7 @@ To overcome those persistent errors, there are some techniques able to exploit t
 
 \begin{description}
     \item[Data Scrubbing] is a general technique based on the concept of a virtual background task that periodically checks memory content for errors, then corrects detected errors using redundant data in the form of different checksums or copies of data. It is useful to correct and prevent (accumulation) errors in the information stored in memory. In FPGAs, scrubbing can be used to mitigate both persistent errors in SRAM cells (i.e., the configuration memory) and transient errors in user-memory elements such as BRAMs. To perform configuration memory scrubbing, the configuration memory data must be read sequentially from the start to the end and compared to the original configuration bitstream or an error check code such as a cyclic redundancy check (CRC). Scrubbing can be performed (both check and correction) without interrupting the device's functionalities. In aerospace applications, scrubbing is a common technique to mitigate the effects of SEUs. However, there are a few aspects to overcome like often the scrub operation must be performed, because of the very limited area and power constraints. Hence, scrubbing alone is a weak mitigation strategy without any other technique applied \cite{nasa_scrubbing}. This is mainly because if a configuration bit is hit while the circuit is active, the error propagates in the design and can lead to a failure and the scrubber has no time to fix the error. An example of good design would be having a scrubber joined by a design with a triple modular redundancy check. The TMR design is able itself to detect and mask the error, without causing a failure and meanwhile the scrubber can be notified of the error and fix it. In this sense, scrubbing can be useful against error accumulation too.
-    \item[Dynamic partial reconfiguration] \cite{10.1007/978-3-030-44534-8_7} allows run-time reconfiguration without application layer interruption. This technique cannot detect errors by itself, so it must be combined with other error detection techniques such as those based on redundancy. These correction techniques take advantage of the subdivision of the configuration memory into frames, which contain information related to the configuration of specific parts of the design. 
+    \item[Dynamic partial reconfiguration] \cite{10.1007/978-3-030-44534-8_7} allows run-time reconfiguration without application layer interruption. This technique cannot detect errors by itself, so it must be combined with other error detection techniques such as those based on redundancy. These correction techniques take advantage of the subdivision of the configuration memory into frames, which contain information related to the configuration of specific parts of the design. While these techniques allow to increase the protection capability against radiation effects, they introduce several penalties to the design particularly in terms of performances. In literature some techniques are proposed, like innovative placement algorithms able to improve the running frequency up to the 44\% by reducing the interconnection delays between resources \cite{10.1145/1366224.1366228}.
 \end{description}
 
 The choosen strategy is to use the Dynamic Partial Reconfiguration technique. For this thesis work, only the MicroBlaze area is configured as dynamic reconfigurable. As said, this is useful only to fix errors in the configuration area related to the FPGA, but something that detects the error is needed. Hence, a self-made watchdog is developed to detect the error and trigger the reconfiguration. The reconfiguration is handled by a dedicated controller. A high level scheme of the design is presented in the following figure:
@@ -294,7 +297,7 @@ Once understood the principles of a watchdog, it is possible to implement it and
 
 In figure \ref{fig:basic_watchdog}, the system initially is in an unknown state. Once the reset signal \textit{RST} arrives, synchronously the watchdog is reseted and starts counting down. When the timer reaches 1, luckily a \textit{KICK} signal arrives (green line), signaling that the CPU is correctly working, and the timer is restarted from the initial value of 3. 4 clock cycles later, the timer reaches 0, and the \textit{TIMEOUT} signal is generated (red line) because no \textit{KICK} signal has arrived. \bigskip
 
-A more sophisticated implementation of a watchdog could be based on a up-count timer, an input data containing the maximum number of clock cycles the timer can count before it generates a timeout signal, and a start signal that is used to start the timer. The following is a timing diagram of this more sophisticated implementation:
+A more sophisticated implementation of a watchdog could be based on a up-count timer, an input data containing the maximum number of clock cycles the timer can count before it generates a timeout signal, and a start signal that is used to start the timer. The following is a timing diagram of this implementation:
 
 \begin{figure}[H]
 \begin{tikztimingtable}[%
@@ -691,7 +694,7 @@ int main() {
 
 \section{Design with Partial Reconfiguration}
 
-Partial reconfiguration is a way to change or update a FPGA design without the need to re-program the whole FPGA. Hence, it is possible to reprogram only a portion of the design without interrupting the rest of the design. In Xilinx's world, this is called \textit{Dynamic Function Exchange} (DFX).\bigskip 
+Partial reconfiguration is a way to change or update an FPGA design without the need to re-program the whole FPGA. Hence, it is possible to reprogram only a portion of the design without interrupting the rest of the design. In Xilinx's world, this is called \textit{Dynamic Function Exchange} (DFX).\bigskip 
 
 There are different reasons why people do this. The main reason is \textit{area}: perhaps the FPGA is already full but more functions needs to be pushed to the FPGA, and a way to achieve this is to partial reconfigure the design. Hence, the whole system is analyzed and blocks that are not used at the same time are grouped together. Each of the identified groups is assigned to a piece of FPGA fabric and that portion is marked as reconfigurable. 
 
@@ -757,7 +760,7 @@ At this point, everything is defined and ready to be implemented onto the FPGA. 
     Partial&Count 2 Module&\texttt{640 KB}\\
     Partial&Count 4 Module&\texttt{640 KB}\\
 \end{tabular}
-\caption{Output signal matrix for the no-tmr version.}
+\caption{Comparison between full bitstream and partial bitstreams sizes.}
 \end{table}
 
 As shown in the table above, the two partial bitstreams have the same size. This is because both of them reconfigure the same PBLOCK, thus the same area. It is possible to test the partial reconfiguration with XSCT using the following script, as an example:\bigskip
@@ -953,7 +956,7 @@ The following is a short description of the ports:
     \texttt{I}&\texttt{32 bit}&The input data.\\
     \texttt{O}&\texttt{32 bit}&The output data.\\
 \end{tabular}
-\caption{Output signal matrix for the no-tmr version.}
+\caption{ICAPE2 Interface description.}
 \end{table}
 
 
