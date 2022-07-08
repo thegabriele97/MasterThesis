@@ -1,7 +1,7 @@
 --Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
---Date        : Thu Jun 16 13:27:03 2022
+--Date        : Wed Jul  6 20:17:38 2022
 --Host        : pop-os running 64-bit Pop!_OS 21.10
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -39,6 +39,8 @@ entity design_1_wrapper is
     ICAP_o : in STD_LOGIC_VECTOR ( 31 downto 0 );
     ICAP_rdwrb : out STD_LOGIC;
     gpio_rtl_0_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    inhib_status : out STD_LOGIC;
+    inhibit_rec : in STD_LOGIC;
     uart_rtl_0_rxd : in STD_LOGIC;
     uart_rtl_0_txd : out STD_LOGIC;
     vsm_VS_0_hw_triggers : in STD_LOGIC_VECTOR ( 0 to 0 )
@@ -49,9 +51,11 @@ architecture STRUCTURE of design_1_wrapper is
   component design_1 is
   port (
     vsm_VS_0_hw_triggers : in STD_LOGIC_VECTOR ( 0 to 0 );
-    gpio_rtl_0_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     uart_rtl_0_rxd : in STD_LOGIC;
     uart_rtl_0_txd : out STD_LOGIC;
+    inhibit_rec : in STD_LOGIC;
+    inhib_status : out STD_LOGIC;
+    gpio_rtl_0_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     ICAP_csib : out STD_LOGIC;
     ICAP_i : out STD_LOGIC_VECTOR ( 31 downto 0 );
     ICAP_o : in STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -108,6 +112,8 @@ design_1_i: component design_1
       ICAP_o(31 downto 0) => ICAP_o(31 downto 0),
       ICAP_rdwrb => ICAP_rdwrb,
       gpio_rtl_0_tri_o(0) => gpio_rtl_0_tri_o(0),
+      inhib_status => inhib_status,
+      inhibit_rec => inhibit_rec,
       uart_rtl_0_rxd => uart_rtl_0_rxd,
       uart_rtl_0_txd => uart_rtl_0_txd,
       vsm_VS_0_hw_triggers(0) => vsm_VS_0_hw_triggers(0)

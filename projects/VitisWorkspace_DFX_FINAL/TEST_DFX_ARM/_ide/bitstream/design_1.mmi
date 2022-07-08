@@ -10,18 +10,30 @@
 
 <MemInfo Version="1" Minor="8">
   <Processor Endianness="Little" InstPath="microblaze_0_instance">
-    <AddressSpace Name="microblaze_0_instance.microblaze_0_local_memory_dlmb_bram_if_cntlr" Begin="0" End="8191">
-      <AddressSpaceRange Name="microblaze_0_instance.microblaze_0_local_memory_dlmb_bram_if_cntlr" Begin="0" End="8191" CoreMemory_Width="0" MemoryType="RAM_SP" MemoryConfiguration="">
+    <AddressSpace Name="microblaze_0_instance.microblaze_0_local_memory_dlmb_bram_if_cntlr" Begin="0" End="16383">
+      <AddressSpaceRange Name="microblaze_0_instance.microblaze_0_local_memory_dlmb_bram_if_cntlr" Begin="0" End="16383" CoreMemory_Width="0" MemoryType="RAM_SP" MemoryConfiguration="">
         <BusBlock>
-          <BitLane MemType="RAMB36" Placement="X3Y18" Read_Width="0">
-            <DataWidth MSB="15" LSB="0"/>
-            <AddressRange Begin="0" End="2047"/>
+          <BitLane MemType="RAMB36" Placement="X2Y19" Read_Width="0">
+            <DataWidth MSB="7" LSB="0"/>
+            <AddressRange Begin="0" End="4095"/>
+            <BitLayout pattern=""/>
+            <Parity ON="false" NumBits="0"/>
+          </BitLane>
+          <BitLane MemType="RAMB36" Placement="X2Y20" Read_Width="0">
+            <DataWidth MSB="15" LSB="8"/>
+            <AddressRange Begin="0" End="4095"/>
+            <BitLayout pattern=""/>
+            <Parity ON="false" NumBits="0"/>
+          </BitLane>
+          <BitLane MemType="RAMB36" Placement="X2Y21" Read_Width="0">
+            <DataWidth MSB="23" LSB="16"/>
+            <AddressRange Begin="0" End="4095"/>
             <BitLayout pattern=""/>
             <Parity ON="false" NumBits="0"/>
           </BitLane>
           <BitLane MemType="RAMB36" Placement="X3Y19" Read_Width="0">
-            <DataWidth MSB="31" LSB="16"/>
-            <AddressRange Begin="0" End="2047"/>
+            <DataWidth MSB="31" LSB="24"/>
+            <AddressRange Begin="0" End="4095"/>
             <BitLayout pattern=""/>
             <Parity ON="false" NumBits="0"/>
           </BitLane>

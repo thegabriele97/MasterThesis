@@ -21,3 +21,5 @@ domain active {standalone_microblaze_0}
 platform generate -quick
 platform generate
 platform generate
+platform generate
+platform generate

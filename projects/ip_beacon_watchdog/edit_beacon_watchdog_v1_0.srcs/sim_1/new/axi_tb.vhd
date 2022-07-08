@@ -13,7 +13,7 @@ generic
 end testbench;
 
 architecture Behavioral of testbench is
-    signal LEDs_out		          : std_logic_vector(7 downto 0);
+    signal LEDs_out		          : std_logic_vector(11 downto 0);
     
     signal S_AXI_ACLK                     :  std_logic;
     signal S_AXI_ARESETN                  :  std_logic;
@@ -50,12 +50,14 @@ begin
   DUT: entity work.beacon_watchdog_v1_0
     generic map (
       C_S00_AXI_DATA_WIDTH => C_S_AXI_DATA_WIDTH,
-      C_S00_AXI_ADDR_WIDTH => C_S_AXI_ADDR_WIDTH)
+      C_S00_AXI_ADDR_WIDTH => C_S_AXI_ADDR_WIDTH,
+      WATCHDOG_DEFAULT_STARTED => 0,
+      WATCHDOG_DEFAULT_TIMEOUT => 666)
     port map (
-      STATUS_STARTED => LEDs_OUT(0),
-	  STATUS_ERROR => LEDs_OUT(1),
-	  CONTROL_START => LEDs_OUT(2),
-	  CONTROL_STB => LEDs_OUT(3),
+      STATUS_STARTED => LEDs_OUT(2 downto 0),
+	  STATUS_ERROR => LEDs_OUT(5 downto 3),
+	  CONTROL_START => LEDs_OUT(8 downto 6),
+	  CONTROL_STB => LEDs_OUT(11 downto 9),
       s00_axi_aclk    => S_AXI_ACLK,
       s00_axi_aresetn => S_AXI_ARESETN,
       s00_axi_awaddr  => S_AXI_AWADDR,

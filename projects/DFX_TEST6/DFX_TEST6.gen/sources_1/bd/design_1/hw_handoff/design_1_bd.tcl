@@ -248,24 +248,42 @@ proc create_root_design { parentCell } {
 
   set gpio_rtl_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 gpio_rtl_0 ]
 
-  set uart_rtl_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:uart_rtl:1.0 uart_rtl_0 ]
-
 
   # Create ports
+  set inhib_status [ create_bd_port -dir O -type data inhib_status ]
+  set inhibit_rec [ create_bd_port -dir I -type data inhibit_rec ]
+  set uart_rtl_0_rxd [ create_bd_port -dir I -type data uart_rtl_0_rxd ]
+  set uart_rtl_0_txd [ create_bd_port -dir O -type data uart_rtl_0_txd ]
   set vsm_VS_0_hw_triggers [ create_bd_port -dir I -from 0 -to 0 vsm_VS_0_hw_triggers ]
 
   # Create instance: axi_gpio_0, and set properties
   set axi_gpio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0 ]
   set_property -dict [ list \
+   CONFIG.C_ALL_INPUTS_2 {1} \
    CONFIG.C_ALL_OUTPUTS {1} \
+   CONFIG.C_GPIO2_WIDTH {16} \
    CONFIG.C_GPIO_WIDTH {1} \
+   CONFIG.C_IS_DUAL {1} \
  ] $axi_gpio_0
+
+  # Create instance: axi_intc_0, and set properties
+  set axi_intc_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_intc:4.1 axi_intc_0 ]
 
   # Create instance: axi_uartlite_0, and set properties
   set axi_uartlite_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_uartlite:2.0 axi_uartlite_0 ]
 
   # Create instance: beacon_watchdog_0, and set properties
   set beacon_watchdog_0 [ create_bd_cell -type ip -vlnv gabriele97:gabriele97.polito:beacon_watchdog:1.0 beacon_watchdog_0 ]
+  set_property -dict [ list \
+   CONFIG.WATCHDOG_DEFAULT_STARTED {true} \
+   CONFIG.WATCHDOG_DEFAULT_TIMEOUT {200000000} \
+ ] $beacon_watchdog_0
+
+  # Create instance: c_counter_binary_0, and set properties
+  set c_counter_binary_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:c_counter_binary:12.0 c_counter_binary_0 ]
+  set_property -dict [ list \
+   CONFIG.CE {true} \
+ ] $c_counter_binary_0
 
   # Create instance: design1_ila_0, and set properties
   set design1_ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 design1_ila_0 ]
@@ -274,9 +292,10 @@ proc create_root_design { parentCell } {
    CONFIG.C_DATA_DEPTH {2048} \
    CONFIG.C_ENABLE_ILA_AXI_MON {false} \
    CONFIG.C_MONITOR_TYPE {Native} \
-   CONFIG.C_NUM_OF_PROBES {7} \
+   CONFIG.C_NUM_OF_PROBES {9} \
    CONFIG.C_PROBE5_WIDTH {3} \
    CONFIG.C_PROBE6_WIDTH {3} \
+   CONFIG.C_PROBE8_WIDTH {16} \
  ] $design1_ila_0
 
   # Create instance: dfx_controller_0, and set properties
@@ -309,8 +328,11 @@ WVALID {PRESENT 1 WIDTH 1} WREADY {PRESENT 1 WIDTH 1} BRESP {PRESENT 1 WIDTH 1}\
 BVALID {PRESENT 1 WIDTH 1} BREADY {PRESENT 1 WIDTH 1} ARADDR {PRESENT 1 WIDTH\
 1} ARVALID {PRESENT 1 WIDTH 1} ARREADY {PRESENT 1 WIDTH 1} RDATA {PRESENT 1\
 WIDTH 1} RRESP {PRESENT 1 WIDTH 1} RVALID {PRESENT 1 WIDTH 1} RREADY {PRESENT 1\
-WIDTH 1} DISABLE {PRESENT 1 WIDTH 1}}}} HAS_SIGNAL_STATUS 0 IPI_PROP_COUNT 0}\
-   CONFIG.GUI_HAS_SIGNAL_STATUS {false} \
+WIDTH 1} DISABLE {PRESENT 1 WIDTH 1}}} INTR {ID 1 VLNV\
+xilinx.com:interface:mbinterrupt_rtl:1.0 SIGNALS {INTERRUPT {PRESENT 1 WIDTH 1}\
+ADDRESS {PRESENT 1 WIDTH 1} ACK {PRESENT 1 WIDTH 2}}}} HAS_SIGNAL_STATUS 0\
+IPI_PROP_COUNT 1}\
+   CONFIG.GUI_HAS_SIGNAL_STATUS {0} \
    CONFIG.GUI_INTERFACE_NAME {DBG} \
    CONFIG.GUI_SELECT_INTERFACE {0} \
    CONFIG.GUI_SELECT_VLNV {xilinx.com:interface:mbdebug_rtl:3.0} \
@@ -344,6 +366,8 @@ WIDTH 1} DISABLE {PRESENT 1 WIDTH 1}}}} HAS_SIGNAL_STATUS 0 IPI_PROP_COUNT 0}\
    CONFIG.GUI_SIGNAL_SELECT_7 {RST} \
    CONFIG.GUI_SIGNAL_SELECT_8 {TRIG_IN} \
    CONFIG.GUI_SIGNAL_SELECT_9 {TRIG_ACK_IN} \
+   CONFIG.GUI_SIGNAL_WIDTH_1 {1} \
+   CONFIG.GUI_SIGNAL_WIDTH_2 {1} \
    CONFIG.GUI_SIGNAL_WIDTH_3 {8} \
    CONFIG.GUI_SIGNAL_WIDTH_8 {1} \
    CONFIG.GUI_SIGNAL_WIDTH_9 {1} \
@@ -454,7 +478,7 @@ WIDTH 1} RUSER {PRESENT 0 WIDTH 0}} PROTOCOL axi4lite}} IPI_PROP_COUNT 304}\
   # Create instance: microblaze_0_axi_periph, and set properties
   set microblaze_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_0_axi_periph ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {6} \
+   CONFIG.NUM_MI {7} \
    CONFIG.NUM_SI {3} \
  ] $microblaze_0_axi_periph
 
@@ -620,6 +644,12 @@ WIDTH 1} RUSER {PRESENT 0 WIDTH 0}} PROTOCOL axi4lite}} IPI_PROP_COUNT 304}\
    CONFIG.LOGO_FILE {data/sym_orgate.png} \
  ] $util_vector_logic_5
 
+  # Create instance: util_vector_logic_6, and set properties
+  set util_vector_logic_6 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_6 ]
+  set_property -dict [ list \
+   CONFIG.C_SIZE {1} \
+ ] $util_vector_logic_6
+
   # Create instance: xlslice_0, and set properties
   set xlslice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_0 ]
   set_property -dict [ list \
@@ -647,10 +677,11 @@ WIDTH 1} RUSER {PRESENT 0 WIDTH 0}} PROTOCOL axi4lite}} IPI_PROP_COUNT 304}\
   # Create interface connections
   connect_bd_intf_net -intf_net S01_AXI_1 [get_bd_intf_pins microblaze_0_axi_periph/S01_AXI] [get_bd_intf_pins processing_system7_0/M_AXI_GP0]
   connect_bd_intf_net -intf_net axi_gpio_0_GPIO [get_bd_intf_ports gpio_rtl_0] [get_bd_intf_pins axi_gpio_0/GPIO]
-  connect_bd_intf_net -intf_net axi_uartlite_0_UART [get_bd_intf_ports uart_rtl_0] [get_bd_intf_pins axi_uartlite_0/UART]
+  connect_bd_intf_net -intf_net axi_intc_0_interrupt [get_bd_intf_pins axi_intc_0/interrupt] [get_bd_intf_pins dfx_decoupler_0/rp_INTR]
   connect_bd_intf_net -intf_net dfx_controller_0_ICAP [get_bd_intf_ports ICAP] [get_bd_intf_pins dfx_controller_0/ICAP]
   connect_bd_intf_net -intf_net dfx_controller_0_M_AXI_MEM [get_bd_intf_pins dfx_controller_0/M_AXI_MEM] [get_bd_intf_pins microblaze_0_axi_periph/S02_AXI]
   connect_bd_intf_net -intf_net dfx_decoupler_0_s_DBG [get_bd_intf_pins dfx_decoupler_0/s_DBG] [get_bd_intf_pins microblaze_0/DEBUG]
+  connect_bd_intf_net -intf_net dfx_decoupler_0_s_INTR [get_bd_intf_pins dfx_decoupler_0/s_INTR] [get_bd_intf_pins microblaze_0/INTERRUPT]
   connect_bd_intf_net -intf_net dfx_decoupler_1_s_AXI_DP [get_bd_intf_pins dfx_decoupler_1/s_AXI_DP] [get_bd_intf_pins microblaze_0_axi_periph/S00_AXI]
   connect_bd_intf_net -intf_net dfx_decoupler_1_s_DLMB [get_bd_intf_pins dfx_decoupler_1/s_DLMB] [get_bd_intf_pins microblaze_0_local_memory/DLMB]
   connect_bd_intf_net -intf_net dfx_decoupler_1_s_ILMB [get_bd_intf_pins dfx_decoupler_1/s_ILMB] [get_bd_intf_pins microblaze_0_local_memory/ILMB]
@@ -663,29 +694,35 @@ WIDTH 1} RUSER {PRESENT 0 WIDTH 0}} PROTOCOL axi4lite}} IPI_PROP_COUNT 304}\
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M03_AXI [get_bd_intf_pins microblaze_0_axi_periph/M03_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M04_AXI [get_bd_intf_pins axi_uartlite_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M04_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M05_AXI [get_bd_intf_pins beacon_watchdog_0/S00_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M05_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_axi_periph_M06_AXI [get_bd_intf_pins axi_intc_0/s_axi] [get_bd_intf_pins microblaze_0_axi_periph/M06_AXI]
   connect_bd_intf_net -intf_net microblaze_0_mdm_axi [get_bd_intf_pins mdm_1/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M00_AXI]
   connect_bd_intf_net -intf_net processing_system7_0_DDR [get_bd_intf_ports DDR] [get_bd_intf_pins processing_system7_0/DDR]
   connect_bd_intf_net -intf_net processing_system7_0_FIXED_IO [get_bd_intf_ports FIXED_IO] [get_bd_intf_pins processing_system7_0/FIXED_IO]
 
   # Create port connections
-  connect_bd_net -net Net [get_bd_pins dfx_controller_0/vsm_VS_0_rm_decouple] [get_bd_pins dfx_decoupler_0/decouple] [get_bd_pins dfx_decoupler_1/decouple]
+  connect_bd_net -net Net [get_bd_pins c_counter_binary_0/CLK] [get_bd_pins dfx_controller_0/vsm_VS_0_rm_decouple] [get_bd_pins dfx_decoupler_0/decouple] [get_bd_pins dfx_decoupler_1/decouple]
+  connect_bd_net -net axi_uartlite_0_interrupt [get_bd_pins axi_intc_0/intr] [get_bd_pins axi_uartlite_0/interrupt]
+  connect_bd_net -net axi_uartlite_0_tx [get_bd_ports uart_rtl_0_txd] [get_bd_pins axi_uartlite_0/rx] [get_bd_pins axi_uartlite_0/tx]
   connect_bd_net -net beacon_watchdog_0_STATUS_ERROR [get_bd_pins beacon_watchdog_0/STATUS_ERROR] [get_bd_pins design1_ila_0/probe5] [get_bd_pins xlslice_0/Din] [get_bd_pins xlslice_1/Din] [get_bd_pins xlslice_2/Din]
   connect_bd_net -net beacon_watchdog_0_STATUS_STARTED [get_bd_pins beacon_watchdog_0/STATUS_STARTED] [get_bd_pins design1_ila_0/probe6]
+  connect_bd_net -net c_addsub_0_S [get_bd_pins axi_gpio_0/gpio2_io_i] [get_bd_pins c_counter_binary_0/Q] [get_bd_pins design1_ila_0/probe8]
   connect_bd_net -net dfx_controller_0_vsm_VS_0_rm_reset [get_bd_pins design1_ila_0/probe2] [get_bd_pins dfx_controller_0/vsm_VS_0_rm_reset] [get_bd_pins util_vector_logic_0/Op2] [get_bd_pins util_vector_logic_3/Op1]
   connect_bd_net -net dfx_controller_0_vsm_VS_0_rm_shutdown_req [get_bd_pins dfx_controller_0/vsm_VS_0_rm_shutdown_ack] [get_bd_pins dfx_controller_0/vsm_VS_0_rm_shutdown_req]
+  connect_bd_net -net inhibit_rec_1 [get_bd_ports inhib_status] [get_bd_ports inhibit_rec] [get_bd_pins c_counter_binary_0/CE] [get_bd_pins util_vector_logic_6/Op2]
   connect_bd_net -net mdm_1_debug_sys_rst [get_bd_pins mdm_1/Debug_SYS_Rst] [get_bd_pins rst_ps7_0_50M/mb_debug_sys_rst]
-  connect_bd_net -net microblaze_0_Clk [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins beacon_watchdog_0/s00_axi_aclk] [get_bd_pins design1_ila_0/clk] [get_bd_pins dfx_controller_0/clk] [get_bd_pins dfx_controller_0/icap_clk] [get_bd_pins mdm_1/S_AXI_ACLK] [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_axi_periph/ACLK] [get_bd_pins microblaze_0_axi_periph/M00_ACLK] [get_bd_pins microblaze_0_axi_periph/M01_ACLK] [get_bd_pins microblaze_0_axi_periph/M02_ACLK] [get_bd_pins microblaze_0_axi_periph/M03_ACLK] [get_bd_pins microblaze_0_axi_periph/M04_ACLK] [get_bd_pins microblaze_0_axi_periph/M05_ACLK] [get_bd_pins microblaze_0_axi_periph/S00_ACLK] [get_bd_pins microblaze_0_axi_periph/S01_ACLK] [get_bd_pins microblaze_0_axi_periph/S02_ACLK] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_ps7_0_50M/slowest_sync_clk]
+  connect_bd_net -net microblaze_0_Clk [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins beacon_watchdog_0/s00_axi_aclk] [get_bd_pins design1_ila_0/clk] [get_bd_pins dfx_controller_0/clk] [get_bd_pins dfx_controller_0/icap_clk] [get_bd_pins mdm_1/S_AXI_ACLK] [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_axi_periph/ACLK] [get_bd_pins microblaze_0_axi_periph/M00_ACLK] [get_bd_pins microblaze_0_axi_periph/M01_ACLK] [get_bd_pins microblaze_0_axi_periph/M02_ACLK] [get_bd_pins microblaze_0_axi_periph/M03_ACLK] [get_bd_pins microblaze_0_axi_periph/M04_ACLK] [get_bd_pins microblaze_0_axi_periph/M05_ACLK] [get_bd_pins microblaze_0_axi_periph/M06_ACLK] [get_bd_pins microblaze_0_axi_periph/S00_ACLK] [get_bd_pins microblaze_0_axi_periph/S01_ACLK] [get_bd_pins microblaze_0_axi_periph/S02_ACLK] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_ps7_0_50M/slowest_sync_clk]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_50M/ext_reset_in]
   connect_bd_net -net rst_ps7_0_50M_bus_struct_reset [get_bd_pins microblaze_0_local_memory/SYS_Rst] [get_bd_pins rst_ps7_0_50M/bus_struct_reset]
   connect_bd_net -net rst_ps7_0_50M_mb_reset [get_bd_pins rst_ps7_0_50M/mb_reset] [get_bd_pins util_vector_logic_0/Op1]
-  connect_bd_net -net rst_ps7_0_50M_peripheral_aresetn [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins design1_ila_0/probe1] [get_bd_pins dfx_controller_0/icap_reset] [get_bd_pins dfx_controller_0/reset] [get_bd_pins mdm_1/S_AXI_ARESETN] [get_bd_pins microblaze_0_axi_periph/ARESETN] [get_bd_pins microblaze_0_axi_periph/M00_ARESETN] [get_bd_pins microblaze_0_axi_periph/M01_ARESETN] [get_bd_pins microblaze_0_axi_periph/M02_ARESETN] [get_bd_pins microblaze_0_axi_periph/M03_ARESETN] [get_bd_pins microblaze_0_axi_periph/M04_ARESETN] [get_bd_pins microblaze_0_axi_periph/M05_ARESETN] [get_bd_pins microblaze_0_axi_periph/S00_ARESETN] [get_bd_pins microblaze_0_axi_periph/S01_ARESETN] [get_bd_pins microblaze_0_axi_periph/S02_ARESETN] [get_bd_pins rst_ps7_0_50M/peripheral_aresetn]
+  connect_bd_net -net rst_ps7_0_50M_peripheral_aresetn [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_intc_0/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins design1_ila_0/probe1] [get_bd_pins dfx_controller_0/icap_reset] [get_bd_pins dfx_controller_0/reset] [get_bd_pins mdm_1/S_AXI_ARESETN] [get_bd_pins microblaze_0_axi_periph/ARESETN] [get_bd_pins microblaze_0_axi_periph/M00_ARESETN] [get_bd_pins microblaze_0_axi_periph/M01_ARESETN] [get_bd_pins microblaze_0_axi_periph/M02_ARESETN] [get_bd_pins microblaze_0_axi_periph/M03_ARESETN] [get_bd_pins microblaze_0_axi_periph/M04_ARESETN] [get_bd_pins microblaze_0_axi_periph/M05_ARESETN] [get_bd_pins microblaze_0_axi_periph/M06_ARESETN] [get_bd_pins microblaze_0_axi_periph/S00_ARESETN] [get_bd_pins microblaze_0_axi_periph/S01_ARESETN] [get_bd_pins microblaze_0_axi_periph/S02_ARESETN] [get_bd_pins rst_ps7_0_50M/peripheral_aresetn]
   connect_bd_net -net rst_ps7_0_50M_peripheral_reset [get_bd_pins design1_ila_0/probe0] [get_bd_pins rst_ps7_0_50M/peripheral_reset] [get_bd_pins util_vector_logic_3/Op2]
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins microblaze_0/Reset] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net util_vector_logic_1_Res [get_bd_pins util_vector_logic_1/Res] [get_bd_pins util_vector_logic_5/Op1]
-  connect_bd_net -net util_vector_logic_2_Res [get_bd_pins dfx_controller_0/vsm_VS_0_hw_triggers] [get_bd_pins util_vector_logic_2/Res]
+  connect_bd_net -net util_vector_logic_2_Res [get_bd_pins design1_ila_0/probe7] [get_bd_pins util_vector_logic_2/Res] [get_bd_pins util_vector_logic_6/Op1]
   connect_bd_net -net util_vector_logic_3_Res [get_bd_pins util_vector_logic_3/Res] [get_bd_pins util_vector_logic_4/Op1]
   connect_bd_net -net util_vector_logic_4_Res [get_bd_pins beacon_watchdog_0/s00_axi_aresetn] [get_bd_pins util_vector_logic_4/Res]
   connect_bd_net -net util_vector_logic_5_Res [get_bd_pins design1_ila_0/probe4] [get_bd_pins util_vector_logic_2/Op2] [get_bd_pins util_vector_logic_5/Res]
+  connect_bd_net -net util_vector_logic_6_Res [get_bd_pins dfx_controller_0/vsm_VS_0_hw_triggers] [get_bd_pins util_vector_logic_6/Res]
   connect_bd_net -net vsm_VS_0_hw_triggers_1 [get_bd_ports vsm_VS_0_hw_triggers] [get_bd_pins design1_ila_0/probe3] [get_bd_pins util_vector_logic_2/Op1]
   connect_bd_net -net xlslice_0_Dout [get_bd_pins util_vector_logic_1/Op1] [get_bd_pins xlslice_0/Dout]
   connect_bd_net -net xlslice_1_Dout [get_bd_pins util_vector_logic_1/Op2] [get_bd_pins xlslice_1/Dout]
@@ -699,11 +736,12 @@ WIDTH 1} RUSER {PRESENT 0 WIDTH 0}} PROTOCOL axi4lite}} IPI_PROP_COUNT 304}\
   assign_bd_address -offset 0x41400000 -range 0x00001000 -target_address_space [get_bd_addr_spaces dfx_controller_0/Data] [get_bd_addr_segs mdm_1/S_AXI/Reg] -force
   assign_bd_address -offset 0x10000000 -range 0x10000000 -target_address_space [get_bd_addr_spaces dfx_controller_0/Data] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] -force
   assign_bd_address -offset 0x41200000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] -force
+  assign_bd_address -offset 0x41210000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_intc_0/S_AXI/Reg] -force
   assign_bd_address -offset 0x40600000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_uartlite_0/S_AXI/Reg] -force
   assign_bd_address -offset 0x44A10000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs beacon_watchdog_0/S00_AXI/S00_AXI_reg] -force
   assign_bd_address -offset 0x44A00000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs dfx_controller_0/s_axi_reg/Reg] -force
-  assign_bd_address -offset 0x00000000 -range 0x00002000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] -force
-  assign_bd_address -offset 0x00000000 -range 0x00002000 -target_address_space [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] -force
+  assign_bd_address -offset 0x00000000 -range 0x00004000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] -force
+  assign_bd_address -offset 0x00000000 -range 0x00004000 -target_address_space [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] -force
   assign_bd_address -offset 0x41400000 -range 0x00001000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs mdm_1/S_AXI/Reg] -force
   assign_bd_address -offset 0x10000000 -range 0x10000000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] -force
   assign_bd_address -offset 0x41200000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] -force
@@ -713,6 +751,8 @@ WIDTH 1} RUSER {PRESENT 0 WIDTH 0}} PROTOCOL axi4lite}} IPI_PROP_COUNT 304}\
   assign_bd_address -offset 0x41400000 -range 0x00001000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs mdm_1/S_AXI/Reg] -force
 
   # Exclude Address Segments
+  exclude_bd_addr_seg -offset 0x41210000 -range 0x00010000 -target_address_space [get_bd_addr_spaces dfx_controller_0/Data] [get_bd_addr_segs axi_intc_0/S_AXI/Reg]
+  exclude_bd_addr_seg -offset 0x41210000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_intc_0/S_AXI/Reg]
   exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM]
 
 

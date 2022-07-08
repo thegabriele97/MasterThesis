@@ -1,0 +1,2 @@
+# This file is automatically written.  Do not modify.
+proc gen_USERPARAMETER_WATCHDOG_DEFAULT_TIMEOUT_ENABLEMENT {WATCHDOG_DEFAULT_TIMEOUT } {expr $WATCHDOG_DEFAULT_TIMEOUT > 0}

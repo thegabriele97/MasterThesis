@@ -37,7 +37,9 @@ entity design_1_wrapper is
     gpio_rtl_0_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     uart_rtl_0_rxd : in STD_LOGIC;
     uart_rtl_0_txd : out STD_LOGIC;
-    vsm_VS_0_hw_triggers : in STD_LOGIC_VECTOR ( 0 to 0 )
+    vsm_VS_0_hw_triggers : in STD_LOGIC_VECTOR ( 0 to 0 );
+    inhibit_rec: in std_logic;
+    inhib_status: out std_logic
   );
 end design_1_wrapper;
 
@@ -72,7 +74,9 @@ architecture STRUCTURE of design_1_wrapper is
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
     uart_rtl_0_rxd : in STD_LOGIC;
-    uart_rtl_0_txd : out STD_LOGIC
+    uart_rtl_0_txd : out STD_LOGIC;
+    inhibit_rec: in std_logic;
+    inhib_status: out std_logic
   );
   end component design_1;
 
@@ -115,6 +119,8 @@ design_1_i: component design_1
       gpio_rtl_0_tri_o(0) => gpio_rtl_0_tri_o(0),
       uart_rtl_0_rxd => uart_rtl_0_rxd,
       uart_rtl_0_txd => uart_rtl_0_txd,
-      vsm_VS_0_hw_triggers(0) => vsm_VS_0_hw_triggers(0)
+      vsm_VS_0_hw_triggers(0) => vsm_VS_0_hw_triggers(0),
+      inhibit_rec => inhibit_rec,
+      inhib_status => inhib_status
     );
 end STRUCTURE;

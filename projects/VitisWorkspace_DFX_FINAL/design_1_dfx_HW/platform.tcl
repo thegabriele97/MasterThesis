@@ -119,3 +119,94 @@ bsp reload
 platform generate -domains 
 platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1655379158.2502584/design_1_DFX.xsa}
 platform generate -domains 
+platform active {design_1_dfx_HW}
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1656863276.4032226/design_1_DFX.xsa}
+platform generate
+bsp reload
+bsp reload
+bsp config stdout "mdm_1"
+bsp write
+bsp reload
+catch {bsp regenerate}
+platform generate -domains standalone_microblaze_0 
+platform generate -domains standalone_microblaze_0 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1656872580.1761904/design_1_DFX.xsa}
+bsp reload
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1656874159.6652532/design_1_DFX.xsa}
+platform generate -domains 
+platform active {design_1_dfx_HW}
+bsp reload
+bsp config stdout "axi_uartlite_0"
+bsp write
+bsp reload
+catch {bsp regenerate}
+platform generate -domains standalone_microblaze_0 
+bsp setdriver -ip beacon_watchdog_0 -driver generic -ver 2.0 2.1 3.0
+bsp write
+bsp reload
+catch {bsp regenerate}
+platform generate -domains standalone_microblaze_0 
+catch {bsp regenerate}
+platform generate -domains standalone_microblaze_0 
+platform generate -domains standalone_microblaze_0 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1656926832.2568378/design_1_DFX.xsa}
+platform generate -domains 
+platform generate
+platform active {design_1_dfx_HW}
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657097473.7857776/design_1_DFX.xsa}
+bsp reload
+platform generate -domains 
+platform generate -domains standalone_microblaze_0 
+bsp config stdout "mdm_1"
+bsp write
+bsp reload
+catch {bsp regenerate}
+platform generate -domains standalone_microblaze_0 
+platform generate -domains standalone_microblaze_0 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657115472.4831285/design_1_DFX.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657118549.0504315/design_1_DFX.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST6/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST6/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657122157.8106196/design_1_DFX.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST6/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST6/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST6/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST6/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/projects/DFX_TEST6/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX.xsa}
+platform generate -domains 
+platform active {design_1_dfx_HW}
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX_fault.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX_fault.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX_fault.xsa}
+platform generate -domains 
+platform active {design_1_dfx_HW}
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX_fault.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX_fault.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX_fault.xsa}
+platform generate -domains 
+platform config -updatehw {/home/gabriele97/Repos/MasterThesis/proj2dfx/projects/proj_1657132341.85549/design_1_DFX.xsa}
+platform generate -domains 

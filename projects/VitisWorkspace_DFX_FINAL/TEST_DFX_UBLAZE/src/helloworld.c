@@ -50,13 +50,65 @@
 #include "platform.h"
 #include "xil_printf.h"
 #include "beacon_watchdog.h"
+#include "xuartlite.h"
+#include "xintc.h"
+
+#define xprint(b) _xprint(b, NULL)
+//#define bc
+
+typedef struct {
+	u32 ch0_data;
+	u32 ch0_tri;
+	u32 ch1_data;
+	u32 ch1_tri;
+} mygpio_t;
 
 char str[128];
+
+void _xprint(char *buf, XUartLite *hRef) {
+	static XUartLite *phRef = NULL;
+	char *pbuf;
+	char ch;
+	u32 *pt;
+	int i;
+
+	if (hRef && phRef != hRef) {
+		phRef = hRef;
+		while(XUartLite_Recv(phRef, (u8 *)&ch, 1)); /* resetting buffer */
+	}
+
+	if (!phRef) {
+		print("!NULLPTR!");
+		while(1);
+	}
+
+	for (i = 0; buf[i]; i++);
+
+	pbuf = buf;
+	while(*pbuf) {
+		XUartLite_Send(phRef, (u8 *)pbuf, 1);
+		while(!XUartLite_Recv(phRef, (u8 *)&ch, sizeof ch));
+
+//		/* To test single byte memory access vs 32 bit memory access */
+		pt = (u32 *)((u32)pbuf & 0xfffffffc); /* 32 bit memory aligned address (last two bits at 0) */
+		if (ch != *pbuf || ch != ((*pt >> (((pbuf - (char *)pt)) << 3)) & 0xff)) {
+			XUartLite_Send(phRef, (u8 *)"RECV wrong char. HALT!\r\n", sizeof("RECV wrong char. HALT!\r\n"));
+			while(1);
+		}
+
+		pbuf++;
+		i--;
+	}
+
+	if (i || *pbuf) while(1); // just to be sure
+
+}
 
 int piupiu(int a, char str[128]) {
 	int flag = 0;
 //    char str[128] = { 0 }; // large enough for an int even on 64-bit
     int i = 126;
+    int pmod;
 
     if (a < 0) {
         flag = 1;
@@ -64,7 +116,20 @@ int piupiu(int a, char str[128]) {
     }
 
     while (a != 0) {
-        str[i--] = (a % 10) + '0';
+
+    	/* module operation test */
+    	pmod = a % 10;
+    	if ((a / 10) * 10 + pmod != a || a - (a/10)*10 != pmod) {
+        	xprint("MODULE OP WRONG. HALT!\r\n");
+        	while(1);
+    	}
+
+        str[i--] = pmod + '0';
+        if (str[i + 1] - '0' != pmod) {
+        	xprint("ERROR: int to char conv, error memory readback. HALT!\r\n");
+        	while(1);
+        }
+
         a /= 10;
     }
 
@@ -76,12 +141,13 @@ int piupiu(int a, char str[128]) {
 void printint(char *first, int a) {
 	int j;
 
-	print(first);
+	xprint(first);
 	j = piupiu(a, str);
-	print(str + j + 1);
-	print("\n\r");
+	xprint(str + j + 1);
+	xprint("\n\r");
 }
 
+#ifndef bc
 int main() {
 	int i;
 	uint64_t op1 = 0;
@@ -89,19 +155,33 @@ int main() {
 	uint64_t res = 0;
 	uint64_t checksum = 0;
     GBcnCtrl hBcn;
+    mygpio_t *gpio0;
+	XUartLite hUart;
 
     init_platform();
+
     GBcnCtrl_Initialize(&hBcn, XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR);
+    XUartLite_Initialize(&hUart, XPAR_UARTLITE_0_DEVICE_ID);
+    gpio0 = (mygpio_t *)XPAR_GPIO_0_BASEADDR;
+    _xprint("", &hUart); /* xprint env init */
 
-    print("Hello World\n\r");
+    xprint("Hi\r\n");
+
     printint("Is bcn started? ", GBcnCtrl_IsStarted(&hBcn) ? 1 : -1);
+    printint("timeout: ", hBcn.modules->module0.DATAREG ? hBcn.modules->module0.DATAREG : -1);
 
-    GBcnCtrl_SetTimeoutValue(&hBcn, XPAR_CPU_CORE_CLOCK_FREQ_HZ << 1);
-    GBcnCtrl_Start(&hBcn);
+//    GBcnCtrl_SetTimeoutValue(&hBcn, XPAR_CPU_CORE_CLOCK_FREQ_HZ << 1);
+//    GBcnCtrl_Start(&hBcn);
 
     printint("Is bcn started? ", GBcnCtrl_IsStarted(&hBcn) ? 1 : -1);
+    printint("timeout: ", hBcn.modules->module0.DATAREG ? hBcn.modules->module0.DATAREG : -1);
 
-    print("Successfully ran Hello World application\r\n");
+    if (hBcn.modules->module0.DATAREG != XPAR_CPU_CORE_CLOCK_FREQ_HZ << 2) {
+    	xprint("Wrong timeout!!!!!!\r\n");
+		while (1);
+    }
+
+    xprint("Successfully ran Hello World application\r\n");
 
 	/* Init Fibonacci operands*/
 	op1 = 1;
@@ -117,7 +197,7 @@ int main() {
 		if(res > 0xfffff) {
 			res = 1;
 			op2 = 0;
-			print("\n\rDONE_1 DONE_1 DONE_1\r\n");
+			xprint("\n\rDONE_1 DONE_1 DONE_1\r\n");
 			break;
 		}
 
@@ -125,22 +205,22 @@ int main() {
 
 		op1 = op2;
 		op2 = res;
-		for (i = 0; i < 1e5; i++);
+//		for (i = 0; i < 1e5; i++);
 		GBcnCtrl_Toggle(&hBcn);
 	}
 
 	printint("CHECKSUM: ", checksum);
 	if (checksum == 1673873) {
-		print("DONE_2 DONE_2 DONE_2\r\n");
+		xprint("DONE_2 DONE_2 DONE_2\r\n");
 	} else {
-		print("WRONG CHECKSUM!\r\n");
+		xprint("WRONG CHECKSUM!\r\n");
 		while(1);
 	}
 
 //    j = 0;
     while (1) {
 		for (i = 0; i < 5e6; i++);
-		*((int *)0x41200000) ^= 0x1;
+		gpio0->ch0_data ^= 0x1;
 		GBcnCtrl_Toggle(&hBcn);
 //		XGpio_DiscreteWrite(&gpio0, 1, j ^= 0x1);
     }
@@ -148,3 +228,82 @@ int main() {
     cleanup_platform();
     return 0;
 }
+#else
+
+int main() {
+	int sum1 = 0;
+	int sum2 = 0;
+	int x, i, checksum, num, count;
+	int max = 100;
+    GBcnCtrl hBcn;
+    mygpio_t *gpio0;
+
+	init_platform();
+    gpio0 = (mygpio_t *)XPAR_GPIO_0_BASEADDR;
+    GBcnCtrl_Initialize(&hBcn, XPAR_BEACON_WATCHDOG_0_S00_AXI_BASEADDR);
+
+    printint("s? ", GBcnCtrl_IsStarted(&hBcn) ? 1 : -1);
+    printint("to: ", hBcn.modules->module0.DATAREG ? hBcn.modules->module0.DATAREG : -1);
+
+    GBcnCtrl_SetTimeoutValue(&hBcn, XPAR_CPU_CORE_CLOCK_FREQ_HZ << 1);
+    GBcnCtrl_Start(&hBcn);
+
+    printint("s? ", GBcnCtrl_IsStarted(&hBcn) ? 1 : -1);
+    printint("to: ", hBcn.modules->module0.DATAREG ? hBcn.modules->module0.DATAREG : -1);
+
+	for(i = 0;i < max; i++){
+        if( i % (max / 10) == 0){
+			printint("\tBC", (int)(100*i/max));
+        }
+
+        x = 2147483647-9*i;
+
+        // algorithm 1
+        num = x;
+        num = ((num & 0xAAAAAAAAL) >>  1) + (num & 0x55555555L);
+        num = ((num & 0xCCCCCCCCL) >>  2) + (num & 0x33333333L);
+        num = ((num & 0xF0F0F0F0L) >>  4) + (num & 0x0F0F0F0FL);
+        num = ((num & 0xFF00FF00L) >>  8) + (num & 0x00FF00FFL);
+        num = ((num & 0xFFFF0000L) >> 16) + (num & 0x0000FFFFL);
+        sum1 += num;
+        //xil_printf("\nBITCOUNT_1 %ld contains %d bits set", x, count);
+
+        // algorithm 2
+        num = x;
+        count = 0;
+        if (num) do
+              count++;
+        while (0 != (num = num&(num-1))) ;
+        sum2 += count;
+        //xil_printf("\nBITCOUNT_2 %ld contains %d bits set\n", x, count);
+
+		for (i = 0; i < 1e5; i++);
+		GBcnCtrl_Toggle(&hBcn);
+	}
+
+	print("\n\rDONE_1 DONE_1 DONE_1");
+	printint("BC", (int)(100 * i/max));
+	printint("BC1", sum1);
+	printint("BC2", sum2);
+
+//	printint("CHECKSUM: ", checksum);
+//	if (checksum == 1673873) {
+//		print("DONE_2 DONE_2 DONE_2\r\n");
+//	} else {
+//		print("WRONG CHECKSUM!\r\n");
+//		while(1);
+//	}
+
+    while (1) {
+		for (i = 0; i < 5e6; i++);
+		gpio0->ch0_data ^= 0x1;
+		GBcnCtrl_Toggle(&hBcn);
+    }
+
+	print("\n\rDONE_2 DONE_2 DONE_2");
+
+	cleanup_platform();
+	return 0;
+}
+
+#endif
