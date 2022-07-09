@@ -13,7 +13,7 @@ The watchdog IP, during the design stage, is configured through its customizatio
 Instead, with the chosen fault injection method, the MicroBlaze directly starts with a bit-flip in his configuration, hence it may be not able to start correctly the watchdog or set a valid timeout value. Therefore, the campaign results would not be valid.\bigskip
 
 \subsubsection{Hardware to count the number of timeouts}
-In order to understand if the watchdog is capable of covering a good number of faults by expiring, the design has been equipped with a UP counter. The counter is reseted everytime the FGPA is programmed with a new full bitstream. The counter is incremented everytime the watchdog expires by connecting the CLK port to the timeout signal, and its value is obtained via a AXI GPIO peripheral that is connected to the AXI Interconnect. \bigskip
+In order to understand if the watchdog is capable of covering a good number of faults by expiring, the design has been equipped with a UP counter. The counter is reset once at each FGPA programming with a new full bitstream. The counter is incremented every time the watchdog expires by connecting the CLK port to the timeout signal, and its value is obtained via an AXI GPIO peripheral that is connected to the AXI Interconnect. \bigskip
 
 \begin{figure}[H]
 \centering
@@ -87,7 +87,7 @@ int main() {
 
 \subsubsection{How the fault injection tool access the number of expired times}
 
-The Fault Injection Tool has been enhanced to support the retrieval of the number of times the watchdog expires at each run. It does it via a XSCT script that appends in a file the retrieved number, as follows:\bigskip
+The Fault Injection Tool has been enhanced to support the retrieval of the number of times the watchdog expires at each run. It does it via an XSCT script that appends in a file the retrieved number, as follows:\bigskip
 
 \begin{lstlisting}[style=tcl]
 connect -url tcp:127.0.0.1:3121
@@ -102,7 +102,7 @@ close $outfile1
 \end{lstlisting}
 
 \subsection{Watchdog Inhibition}
-In some cases may be useful to inhibit the watchdog. This allows to detach the timeout signal form the DFX Controller, thus the reconfiguration is not triggered. This is useful for example to debug the firmware. In this case, the firmware stops kicking the watchdog during the interruption of the software and thus the MicroBlaze is automatically reconfigured and restarted. To allows the inhibition by toggling a physical switch on the board, the following is the used hardware scheme:
+In some cases may be useful to inhibit the watchdog. This allows to detach the timeout signal from the DFX Controller, thus the reconfiguration is not triggered. This is useful for example to debug the firmware. In this case, the firmware stops kicking the watchdog during the interruption of the software and thus the MicroBlaze is automatically reconfigured and restarted. To allows the inhibition by toggling a physical switch on the board, the following is the used hardware scheme:
 
 \begin{figure}[H]
 \centering
@@ -118,7 +118,7 @@ In some cases may be useful to inhibit the watchdog. This allows to detach the t
 
 \section{Experimental Results}
 
-In this section, the main obtained results are presented and discussed. During the overall test period, ten campaigns of fault injection have been performed. Each campaign is made of 100 injections. Some of them are aborted, thus the mean number of completed injections per run is 96, leading to a total of 966 injections. \bigskip
+In this section, the main obtained results are presented and discussed. During the overall test period, ten campaigns of fault injection have been performed. Each campaign is made of 100 injections. Some of them are aborted, thus the mean number of completed injections per run is around 96, leading to a total of 966 injections. \bigskip
 
 For each fault, there can be three possible outcomes, and each one can have a different reason behind it:
 \begin{itemize}
@@ -130,7 +130,7 @@ For each fault, there can be three possible outcomes, and each one can have a di
     \item The output is different from the golden one (SDE):
     \begin{enumerate}
         \item The fault has not been detected by the watchdog, thus it is not fixed.
-        \item The MicroBlaze noticed the fault while executing the program and printing messages and it has been fixed. However, the output is different from the golden one, even if the final result is correct. Marked as SDE anyway.
+        \item The MicroBlaze noticed the fault while executing the program and printing messages and it has been fixed. However, the output is different from the golden one, even if the final result is correct. Marked as SDE anyway. An example is shown in Appendix \ref{sec:sde_output}.
         \item The MicroBlaze noticed the fault and tried to fix it, unsuccessfully. The output is different and the result remained incorrect.
     \end{enumerate}
     \item The MicroBlaze is halted:

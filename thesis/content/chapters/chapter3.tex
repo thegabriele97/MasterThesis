@@ -301,27 +301,27 @@ In the general scheme, the following elements are present:
 
 \begin{itemize}
     \item \textit{Controller}: it is the main application and the orchestrator of all the other components of the tools.
-    \item \textit{Fault Injection}: it is where faults are injected in the system, according to a specific error campaign.
+    \item \textit{Fault Injection}: it is the module responsible for injecting faults into the system, according to a specific error campaign.
     \item \textit{Execution}: the output of the fault injection is executed.
-    \item \textit{Monitor}: the behaviour of the system is monitored and logs are generated.
+    \item \textit{Monitor}: the behavior of the system is monitored and logs are generated.
 \end{itemize}
 
 A widely accepted classification of the different injection strategies is summarized as follows:
 
 \begin{description}
-    \item[Hardware-Based fault injection] consists in the generation of physical errors into the integrated circuits. They can be divided into fault injections with contact and fault injections without contact. The one with contact consists in perturbating the integrated circuits via perturbation introduced at the pins (for example a rapid and minimal change of the power supply voltage) while in the case of the without contact there is an external source that produces physical phenomenal such as a heavy ion radiation that produces a faults in the integrated circuits.
-    \item[Software-Based fault injection] consists in the generation of software errors. They can be artificially inserted into a software system, both at compile time or at run time. The ones at compile time \cite{fithesisdrizz} are inserted into the source code of the software or at the assembly level after the compilation of the original source code. The ones at run time are inserted through a trigger (for example a timeout or a software trap) that executes the fault injection module, altering the behaviour of the software.
-    \item[Simulation-Based fault injection] simulation-based fault injection is a technique that allows to simulate the system and to inject faults in it. The faults are injected in the simulation environment, and it can be done by modifying directly the high-level description of the design with a faulty model or by using built-in commands in the simulator that force error in the simulation of the design, not in the hardware description of the hardware itself. Example of simulation-based fault injection systems are SST \cite{4375147} and VERIFY \cite{614074}.
-    \item[Emulation-Based fault injection] emulation-based fault injection is a technique consisting in real implementation in an FPGA. For these platforms, the development board is connected to a PC that acts as a Controller by defining the fault injection campaign, controls the execution of the faulty design and monitors the behaviour of the system under test.
+    \item[Hardware-Based fault injection] consists of the generation of physical errors into the integrated circuits. They can be divided into fault injections with contact and fault injections without contact. The one with contact consists in perturbating the integrated circuits via perturbation introduced at the pins (for example a rapid and minimal change of the power supply voltage) while in the case without contact there is an external source that produces physical phenomena such as heavy-ion radiations that induce faults in the integrated circuits.
+    \item[Software-Based fault injection] consists of the generation of software errors. They can be artificially inserted into a software system, both at compile time or at run time. The ones at compile-time \cite{fithesisdrizz} are inserted into the source code of the software or at the assembly level after the compilation of the original source code itself. The ones at run-time are inserted through a trigger (for example a timeout or a software trap) that executes the fault injection module, altering the behavior of the software.
+    \item[Simulation-Based fault injection] simulation-based fault injection is a technique that allows to simulate of the system and to inject faults into it. The faults are injected from within the simulation environment, and it can be done by modifying directly the high-level description of the design with a faulty model or by using built-in commands in the simulator that force error in the simulation of the design, not in the hardware description of the hardware itself. Example of simulation-based fault injection systems are SST \cite{4375147} and VERIFY \cite{614074}.
+    \item[Emulation-Based fault injection] emulation-based fault injection is a technique consisting of a real implementation in an FPGA. For these platforms, the development board is connected to a PC that acts as a Controller by defining the fault injection campaign, controls the execution of the faulty design and monitors the behavior of the system under test.
 \end{description}
 
-The Fault Injection tool used is a kind of Emulation-Based fault injection \cite{fit}. Its goal is to create a faulty bitstream starting from the base one. Consequently, the faulty bitstream simulates a fault by forcing a random bit-flip, like a SEUs does. The tool offers the possibility to target a specific portion of the FPGA, in order to test the fault tolerance of a subpart of the design, instead of the whole one. This allows designers to execute a targeted fault campaign of the design under consideration. \bigskip
+The Fault Injection tool used is a kind of Emulation-Based fault injection \cite{fit}. Its goal is to create a faulty bitstream starting from the base one. Consequently, the faulty bitstream simulates a fault by forcing a random bit-flip, as a SEUs does. The tool offers the possibility to target a specific portion of the FPGA, in order to test the fault tolerance of a subpart of the design, instead of the whole one. This allows designers to execute a targeted fault campaign of the design under consideration. \bigskip
 
-Thanks to tools like PyXEL \cite{8632000} it is possible to obtain a visual low-level representation of the bitstream. This allows to understand how and where design's modules are mapped into the bitstream and consequently how each bit in the bitstream is connected to the design. Hence, by forcing some modules to stay in a specific portion of the FPGA, using some constraints as explained in chapter \ref{sec:bitstreamgen}, it is possible to understand the position of the modules in the bistream. \bigskip
+Thanks to tools like PyXEL \cite{8632000} it is possible to obtain a visual low-level representation of the bitstream. This allows an understanding of how and where the design's modules are mapped into the bitstream and consequently how each bit in the bitstream is connected to the design. Hence, by forcing some modules to stay in a specific portion of the FPGA, using some constraints as explained in chapter \ref{sec:bitstreamgen}, it is possible to understand the position of the modules in the bistream. \bigskip
 
 As a result, it is finally possible to have a targeted fault campaign. The Controller, part of the tool, can start producing $n$-faulty bitstreams, where $n$ is given as input by the user. Once all the faulty bitstreams are generated, the Controller starts the Execution part.\bigskip
 
-As an important note, because of the bit-flips introduced into the bitstream, is necessary to remove any CRC checksum that may be present, that is checked during the upload in the FPGA, as explained in chapter \ref{sec:bitstreamgen}. To overcome this problem, Vivado must be instructed to generate a bitstream without CRC. It can be done with the following TCL commands:
+As an important note, because of the bit-flips introduced into the bitstream, is necessary to remove any CRC checksum that may be present, that is checked during the upload in the FPGA, as explained in chapter \ref{sec:bitstreamgen}. To overcome this problem, Vivado must be instructed to generate a bitstream without CRC. It can be done with the following TCL commands:\bigskip
 
 \begin{lstlisting}[style=tcl]
 open_run impl_1
@@ -331,34 +331,34 @@ write_bitstream
 
 The first execution only is related to the golden bitstream and the Monitor will capture the golden result, i.e. the correct and expected result. The result is intended as the \textit{stdout} output of a testbench firmware, over the UART. The firmware can implement, for example, a simple algorithm like matrix multiplication or bit count. Obviously, the more the algorithm is varied, in terms of used instructions and hardware, the more the chance to detect an injected fault, because of the higher probability to stimulate that fault. \bigskip
 
-All the remaining Execution's outputs are compared against the golden, thus each run is classified as correct or faulty. When the campaign ends, a summary is produced, as shown in the following example, extracted from a very small fault injection campaign:\bigskip
+All the remaining Execution outputs are compared against the golden, thus each run is classified as correct or faulty. When the campaign ends, a summary is produced, as shown in the following example, extracted from a very small fault injection campaign:\bigskip
 
 \begin{lstlisting}[style=preformatted]
 Total injected bitflips = 17
 
     --- FUNCTIONAL ANALYSIS ---
-Correct results -> 14 [82.35%]
-Faulty results(SDE) -> 0 [0.0%]
-MicroBlaze halted -> 3 [17.65%]
-Total exceptions -> 0 [0.0%]
+Correct results     -> 14 [82.35%]
+Faulty results(SDE) -> 0  [00.00%]
+MicroBlaze halted   -> 3  [17.65%]
+Total exceptions    -> 0  [00.00%]
 \end{lstlisting}
 
 \section{Integrated FPGA Debugger}
 \label{sec:ila}
 
-A powerful tool offered by Xilinx is the Integrated Logic Analyzer (ILA) IP. It is a logic analyzer core that can be used to monitor the internal signals of a design. The ILA core includes many advanced features of modern logic analyzers, including Boolean trigger equations, and edge transition triggers. Thus, it is possible to debug in real time the internal behaviour of the design directly by Vivado, without the need of external tools.\bigskip
+A powerful tool offered by Xilinx is the Integrated Logic Analyzer (ILA) IP. It is a logic analyzer core that can be used to monitor the internal signals of a design. The ILA core includes many advanced features of modern logic analyzers, including Boolean trigger equations, and edge transition triggers. Thus, it is possible to debug in real-time the internal behavior of the design directly by Vivado, without the need for external tools.\bigskip
 
-To bebug a port, the ILA core must be instantiated, for example in a Block Design, and connected to the signals to debug. The configuration wizard allows to easy monitor an entire AXI bus or simple signals. 
+To bebug a port, the ILA core must be instantiated, for example in a Block Design, and connected to the signals to debug. The configuration wizard allows to easily monitor an entire AXI bus or simple signals. 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\linewidth]{images/chapter3/ila_inst_example_cropped_again.pdf}
+\includegraphics[width=0.65\linewidth]{images/chapter3/ila_inst_example_cropped_again_andagain.pdf}
 \caption{Example of a ILA IP instantiation in a Block Design.}
 \end{figure}
 
-When the designer is satisfied with the number of signals to monitor, it is possible to continue with the normal Vivado Design Flow until the Implementation and Write Bitstream phases. The implementation requires a bit more effort due to the creation of the \textit{dbg_hub} core, that is the intermediary between the ILAs inserted into the design (where the signals to debug are connected) and the JTAG interface used to access and debug the design.\bigskip
+When the designer is satisfied with the number of signals to monitor, it is possible to continue with the normal Vivado Design Flow until the Implementation and Write Bitstream phases. The implementation requires a bit more effort due to the creation of the \textit{dbg_hub} core, which is the intermediary between the ILAs inserted into the design (where the signals to debug are connected) and the JTAG interface used to access and debug the design.\bigskip
 
-To access the Debug functionalities, open the Vivado's Hardware Manager and connect to the Hardware Server. If the FPGA is already configured, Vivado automatically opens the GUI to access and visualize all the signals and set various triggers. The GUI is similar to the one used to simulate the design:
+To access the Debug functionalities, open Vivado's Hardware Manager and connect to the Hardware Server. If the FPGA is already configured, Vivado automatically opens the GUI to access and visualize all the signals and set various triggers. The GUI is similar to the one used to simulate the design:
 
 \begin{figure}[H]
 \centering

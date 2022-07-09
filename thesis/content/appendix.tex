@@ -113,7 +113,63 @@ end arch;
 
 \end{lstlisting}
 
+\chapter{Watchdog - C drivers}
+\label{sec:watchdog_drivers}
+
+\begin{lstlisting}[style=C, caption={Watchdog - C drivers - Secondary data types definition}]
+typedef union {
+	u32 U32VALUE;
+	struct f {
+		u32     START : 01;
+		u32       STB : 01;
+		u32 _reserved : 30;
+	} FIELDS;
+} union_ctrlreg_t;
+
+typedef union {
+	u32 U32VALUE;
+	struct {
+		u32   STARTED : 01;
+		u32     ERROR : 01;
+		u32 _reserved : 30;
+	} FIELDS;
+} union_statreg_t;
+
+typedef struct {
+	union_ctrlreg_t CONTROLREG;
+	union_statreg_t STATUSREG;
+	u32       		DATAREG;
+	u32 			TOGGLERATEREG;
+} watchdog_module_t;
+\end{lstlisting}
+
+\newpage
+\begin{lstlisting}[style=C, caption={Watchdog - C drivers - Main data type definition}]
+typedef struct {
+	union {
+		u32 *baseAddress;
+		watchdog_module_t *module;
+		struct {
+			watchdog_module_t module0;
+			watchdog_module_t module1;
+			watchdog_module_t module2;
+		} *modules;
+	};
+} GBcnCtrl;
+\end{lstlisting}
+
+\begin{lstlisting}[style=C, caption={Watchdog - C drivers - Driver function prototypes}]
+int GBcnCtrl_Initialize(GBcnCtrl *InstancePtr, u32 BaseAddr);
+void GBcnCtrl_SetTimeoutValue(GBcnCtrl *InstancePtr, u32 Timeout);
+void GBcnCtrl_Start(GBcnCtrl *InstancePtr);
+void GBcnCtrl_Toggle(GBcnCtrl *InstancePtr);
+u32 GBcnCtrl_GetToggleRate(GBcnCtrl *InstancePtr);
+int GBcnCtrl_IsExpired(GBcnCtrl *InstancePtr);
+int GBcnCtrl_IsStarted(GBcnCtrl *InstancePtr);
+\end{lstlisting}
+
 \chapter{Fault Injection - SDE output with correction}
+\label{sec:sde_output}
 
 \begin{lstlisting}[style=preformatted, caption={SDE output - before correction}]
 Hi

@@ -3,27 +3,27 @@
 \chapter{Analysis and hardening of an FPGA Design with a MicroBlaze}
 \label{sec:main}
 
-A SRAM-based FPGA is sensitive to SEUs, as explained in Chapter \ref{sec:background}. To better understand the effects of radiation on the FPGA, it is better to see a design as an abstraction of two layers. The two main layers are:
+An SRAM-based FPGA is sensitive to SEUs, as explained in Chapter \ref{sec:background}. To better understand the effects of radiation on the FPGA, it is better to see a design as an abstraction of two layers. The two main layers are:
 
 \begin{itemize}
     \item \textit{Application layer}: includes the logic and memory elements as described by the user.
     \item \textit{Configuration layer}: includes the logic and memory elements that are used to implement physically the user's design in the FPGA.
 \end{itemize}
 
-From the logical point of view, a particle causing a SEU can affects one of the two layers, producing different consequences:
+From the logical point of view, a particle causing an SEU can affect one of the two layers, producing different consequences:
 
 \begin{itemize}
     \item SEUs in the Application Layer manifest as transient errors that could affect the stored data or the state of the user logic memory elements such as BRAMs or Flip-Flops. 
     \item SEUs affecting the Configuration Layer manifest as persistent errors, that could be reverted using a reconfiguration process. 
 \end{itemize}
 
-The first one are transients because they are in the user logic and are directly controlled by the user. Because of that, they may be detected or corrected, it depends on how the logic has been designed. The second one are persistent because they directly affects how the bottom hardware works: from the point of view of the user, it is like a real hardware fault that cannot be corrected. \bigskip
+The first ones are transients because they are in the user logic and are directly controlled by the user. Because of that, they may be detected or corrected, it depends on how the logic has been designed. The seconds are persistent because they directly affect how the bottom hardware layer works: from the point of view of the user, it is like a real hardware fault that cannot be corrected. \bigskip
 
 Persistent errors can have two main consequences:
 
 \begin{itemize}
-    \item They can change a routing element connection or can complete disconnect internal wires.
-    \item They can change the behaviour of a LUT.
+    \item They can change a routing element connection or can completely disconnect internal wires.
+    \item They can change the behavior of a LUT.
 \end{itemize}
 
 SEUs in the configuration layer are the most common type of errors in SRAM-based FPGAs because the application layer virtually uses less area than the configuration layer. A summary of the different causes of SEUs is presented in the following table:
@@ -57,13 +57,13 @@ SEUs in the configuration layer are the most common type of errors in SRAM-based
 \label{tab:conseq_fpgas_seu}
 \end{table}
 
-The following analyzes are focused on SEUs affecting the configuration layer, as they are the most common type of errors in SRAM-based FPGAs. However, the proposed techniques allows designeers to detect and correct SEUs in the application layer, too.
+The following analyzes are focused on SEUs affecting the configuration layer, as they are the most common type of errors in SRAM-based FPGAs. However, the proposed techniques allow designers to detect and correct SEUs in the application layer, too.
 
 \section{How SEUs affect the MicroBlaze?}
 
-As anticipated in the previous sections, the object of interest of this thesis work is the analysis of the MicroBlaze behaviour when affected by SEUs and how those effects can be mitigated by constructing a series of ad-hoc hardening technique. \bigskip
+As anticipated in the previous sections, the object of interest of this thesis work is the analysis of the MicroBlaze behavior when affected by SEUs and how those effects can be mitigated by constructing a series of ad-hoc hardening techniques. \bigskip
 
-First, in order to understand how the MicroBlaze reacts to SEUs affecting itself, a series of fault injection campaign must be executed. The idea is to start with a very minimal hardware design that includes a MicroBlaze and a set of minimal peripherals. Thanks to the Block Design tool, the preparation of the design is very simple and straightforward, and the result is shown in Figure \ref{fig:base_mb}:
+First, in order to understand how the MicroBlaze reacts to SEUs affecting itself, a series of fault injection campaigns must be executed. The idea is to start with a very minimal hardware design that includes a MicroBlaze and a set of minimal peripherals. Thanks to the Block Design tool, the preparation of the design is very simple and straightforward, and the result is shown in Figure \ref{fig:base_mb}:
 
 \begin{figure}[H]
 \centering
@@ -75,11 +75,11 @@ First, in order to understand how the MicroBlaze reacts to SEUs affecting itself
 In the schematic, the following blocks are present:
 \begin{itemize}
     \item \textit{ZYNQ7 Processing System}: it represents the ZYNQ7020's Processing System (PS) from the point of view of the Programmable Logic (PL), as explained in Chapter \ref{sec:pynq}. It can offer a wide range of functionalities to the PL. For the moment, it is only used as a clock source and as a reset source. Via the ZYNQ7 PS block's configuration wizard, it is possible to configure a Phase-Locked Loop (PLL) in order to generate a clock for the PL with a specific frequency. For now, the PLL is configured to generate a clock for the PL with a frequency of 50 MHz, the same as the reference one given by the PYNQ-Z2 board.
-    \item \textit{Processor System Reset}: is a soft IP that provides a mechanism to handle the reset conditions for a given system. The core handles numerous reset conditions at the input and generates appropriate resets at the output. For this simple design, the PSR is able to handle reset requests both from the PS and from the \textit{Debug Core}. It generates a active-high reset signal for the MicroBlaze core and for the Local Memory. Moreover, it generates a acthive-low reset signal for the AXI peripherals. 
+    \item \textit{Processor System Reset}: is a soft IP that provides a mechanism to handle the reset conditions for a given system. The core handles numerous reset conditions at the input and generates appropriate resets at the output. For this simple design, the PSR can handle reset requests both from the PS and from the \textit{Debug Core}. It generates an active-high reset signal for the MicroBlaze core and for the Local Memory. Moreover, it generates an acthive-low reset signal for the AXI peripherals. 
     \item  \textit{MicroBlaze}: it represents the MicroBlaze instance under test. It has as inputs some debug signals from the Debug Core, the clock and the reset signal coming from the PSR. It offers as outputs the two memory buses for the Local Memory, one for the data memory (DLMB) and one for the instruction memory (ILMB). The last output is the AXI bus, which is used to access the peripherals through a \textit{AXI Interconnect}.
-    \item \textit{Local Memory}: it is a sub-design (automatically generated by Vivado) that interfaces some BRAMs (a special kind of memory offered by the FPGA) with the Local Memory Bus (LMB). Block RAMs (or BRAMs) stands for Block Random Access Memory. Block RAMs are used for storing large amounts of data inside FPGAs.
+    \item \textit{Local Memory}: it is a sub-design (automatically generated by Vivado) that interfaces some BRAMs (a special kind of memory offered by the FPGA) with the Local Memory Bus (LMB). Block RAMs (or BRAMs) means Block Random Access Memory. Block RAMs are used for storing large amounts of data inside FPGAs.
     \item \textit{AXI Interconnect}: it is a sub-design (automatically generated by Vivado). As the name suggests, it is used to connect one or more AXI memory-mapped master devices to one or more memory-mapped slave devices.
-    \item \textit{MicroBlaze Debug Module}: it is the Debug Core, and its main job is to enable JTAG-based software debugging of the MicroBlaze core. Moreover, it includes a configurable UART via an AXI interface. The UART's \textit{RX} and \textit{TX} signals are transmitted over the device JTAG port and can be accessed via the XSCT tool. With this setup, XSCT offers to designers the possibility to interact with the MicroBlaze core via a UART and to control the MicroBlaze core (status, registers, and software debug in general).
+    \item \textit{MicroBlaze Debug Module}: it is the Debug Core, and its main job is to enable JTAG-based software debugging of the MicroBlaze core. Moreover, it includes a configurable UART via an AXI interface. The UART's \textit{RX} and \textit{TX} signals are transmitted over the device JTAG port and can be accessed via the XSCT tool. With this setup, XSCT offers designers the possibility to interact with the MicroBlaze core via a UART and to control the MicroBlaze core (status, registers, and software debug in general).
 \end{itemize}
 
 \begin{figure}[H]
@@ -123,13 +123,13 @@ resize_pblock [get_pblocks pblock_1] -add {
 set_property IS_SOFT 0 [get_pblocks pblock_1]
 \end{lstlisting}
 
-In the above constraints, a PBLOCK called \textit{pblock\_1} is first defined. Than all the cells belonging to the Microblaze instance (\textit{design\_1\_i/microblaze\_0}) are added to the PBLOCK, and finally the PBLOCK is resized. The resize operation is used to define the physical resources that are included in the PBLOCK. As final operation, the PBLOCK is marked as a \textit{not soft} PBLOCK, which means that each MicroBlaze cell must be placed in that specific PBLOCK, and so it is a hard constraint.\bigskip
+In the above constraints, a PBLOCK called \textit{pblock\_1} is first defined. Then all the cells belonging to the Microblaze instance (\textit{design\_1\_i/microblaze\_0}) are added to the PBLOCK, and finally, the PBLOCK is resized. The resize operation is used to define the physical resources that are included in the PBLOCK. As the final operation, the PBLOCK is marked as a \textit{not soft PBLOCK}, which means that each MicroBlaze cell must be placed obligatorily in that specific PBLOCK, and so it is a hard constraint.\bigskip
 
 Once the constraints are ready, the design can be synthesized and implemented. The resulting floorplan is shown in the following figure:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{images/chapter4/impl.png}
+\includegraphics[width=0.8\linewidth]{images/chapter4/impl.png}
 \caption{Resulting floorplan of the MicroBlaze design, with the PBLOCK on the top side. Microblaze cells are highlighted in red}
 \end{figure}
 
@@ -203,10 +203,10 @@ Finally, it is possible to launch the fault injection tool by providing the bits
 %  - XEXC_ID_STACK_VIOLATION_or_XEXC_ID_MMU  = 0 [0.0%]
 %  - XEXC_ID_FPU  = 0 [0.0%]
 
-From the above results, it is possible to see that in the majority of the cases, the MicroBlaze correctly executes its job. This is because the executed firmware possibly stimules only a sub-part of the core. However, there are a lot of faulty cases ($> 21\%$), and they are divided into three categories:
+From the above results, it is possible to see that in the majority of the cases, the MicroBlaze correctly executes its job. This is because the executed firmware possibly stimulates only a sub-part of the core. However, there are a lot of faulty cases ($> 21\%$), and they are divided into three categories:
 
 \begin{itemize}
-    \item \textit{SDE}: the MicroBlaze executes all the algorithm until the end (the end condition is detected when the MicroBlaze prints a specific string, like \texttt{DONE\_1 DONE\_1 DONE\_1}). However, the output differs in some measure from the golden one.
+    \item \textit{SDE}: the MicroBlaze executes the entire code until the end (the end condition is detected when the MicroBlaze prints a specific string, like \texttt{DONE\_1 DONE\_1 DONE\_1}). However, the output differs in some measures from the golden one.
     \item \textit{Halted}: the MicroBlaze is halted, meaning that the end condition is not detected.
     \item \textit{Exception}: the MicroBlaze raised an exception.
 \end{itemize}
@@ -215,7 +215,7 @@ Even tho SDEs and exceptions can be directly detected by the firmware running on
 
 \begin{enumerate}
     \item Halt conditions are the majority of the cases ($> 19\%$ or about $86\%$ among the faulty conditions). In this case, the firmware is almost not able to run and the fault would not be detected.
-    \item During SDEs or exceptions, the MicroBlaze runs until the end the code, but it is not guaranteed that all the instructions are executed or are executed correctly. 
+    \item During SDEs or exceptions, the MicroBlaze runs until the end of the code, but it is not guaranteed that all the instructions are executed or are executed correctly. 
 \end{enumerate}
 
 Thus, a different approach is needed to detect and correct the fault.
@@ -224,16 +224,16 @@ Thus, a different approach is needed to detect and correct the fault.
 
 \section{Strategies and adopted solutions}
 
-Because of the problems raised in the previous section, different approaches needs to be evalued. This thesis work is focused on SEUs affecting the configuration layer of the FPGA, as they are more likely to occur. The adopted strategy is able to detect and correct those errors, previously defined as persistent errors, and may correct errors in the application layer too, under the condition that the overall design (hardware or software) is engineered in such a way to detect them. \bigskip
+Because of the problems raised in the previous section, different approaches need to be evaluated. This thesis work is focused on SEUs affecting the configuration layer of the FPGA, as they are more likely to occur. The adopted strategy can detect and correct those errors, previously defined as persistent errors, and may correct errors in the application layer too, under the condition that the overall design (hardware or software) is engineered in such a way to detect them. \bigskip
 
 To overcome those persistent errors, there are some techniques able to exploit the particular reconfigurable capabilities of the FPGAs. The following are some of the techniques taken into account:
 
 \begin{description}
-    \item[Data Scrubbing] is a general technique based on the concept of a virtual background task that periodically checks memory content for errors, then corrects detected errors using redundant data in the form of different checksums or copies of data. It is useful to correct and prevent (accumulation) errors in the information stored in memory. In FPGAs, scrubbing can be used to mitigate both persistent errors in SRAM cells (i.e., the configuration memory) and transient errors in user-memory elements such as BRAMs. To perform configuration memory scrubbing, the configuration memory data must be read sequentially from the start to the end and compared to the original configuration bitstream or an error check code such as a cyclic redundancy check (CRC). Scrubbing can be performed (both check and correction) without interrupting the device's functionalities. In aerospace applications, scrubbing is a common technique to mitigate the effects of SEUs. However, there are a few aspects to overcome like often the scrub operation must be performed, because of the very limited area and power constraints. Hence, scrubbing alone is a weak mitigation strategy without any other technique applied \cite{nasa_scrubbing}. This is mainly because if a configuration bit is hit while the circuit is active, the error propagates in the design and can lead to a failure and the scrubber has no time to fix the error. An example of good design would be having a scrubber joined by a design with a triple modular redundancy check. The TMR design is able itself to detect and mask the error, without causing a failure and meanwhile the scrubber can be notified of the error and fix it. In this sense, scrubbing can be useful against error accumulation too.
-    \item[Dynamic partial reconfiguration] \cite{10.1007/978-3-030-44534-8_7} allows run-time reconfiguration without application layer interruption. This technique cannot detect errors by itself, so it must be combined with other error detection techniques such as those based on redundancy. These correction techniques take advantage of the subdivision of the configuration memory into frames, which contain information related to the configuration of specific parts of the design. While these techniques allow to increase the protection capability against radiation effects, they introduce several penalties to the design particularly in terms of performances. In literature some techniques are proposed, like innovative placement algorithms able to improve the running frequency up to the 44\% by reducing the interconnection delays between resources \cite{10.1145/1366224.1366228}.
+    \item[Data Scrubbing] is a general technique based on the concept of a virtual background task that periodically checks memory content for errors, then corrects detected errors using redundant data in the form of different checksums or copies of data. It is useful to correct and prevent (accumulation) errors in the information stored in memory. In FPGAs, scrubbing can be used to mitigate both persistent errors in SRAM cells (i.e., the configuration memory) and transient errors in user-memory elements such as BRAMs. To perform configuration memory scrubbing, the configuration memory data must be read sequentially from the start to the end and compared to the original configuration bitstream or an error check code such as a cyclic redundancy check (CRC). Scrubbing can be performed (both check and correction) without interrupting the device's functionalities. In aerospace applications, scrubbing is a common technique to mitigate the effects of SEUs. However, there are a few aspects to overcome like often the scrub operation must be performed, because of the very limited area and power constraints. Hence, scrubbing alone is a weak mitigation strategy without any other technique applied \cite{nasa_scrubbing}. This is mainly because if a configuration bit is hit while the circuit is active, the error propagates in the design and can lead to a failure and the scrubber has no time to fix the error. An example of good design would be having a scrubber joined by a design with a triple modular redundancy check. The TMR design can detect and mask the error by itself, without causing a failure and meanwhile, the scrubber can be notified of the error and fix it. In this sense, scrubbing can be useful against error accumulation too.
+    \item[Dynamic partial reconfiguration] \cite{10.1007/978-3-030-44534-8_7} allows run-time reconfiguration without application layer interruption. This technique cannot detect errors by itself, so it must be combined with other error detection techniques such as those based on redundancy. These correction techniques take advantage of the subdivision of the configuration memory into frames, which contain information related to the configuration of specific parts of the design. While these techniques allow increasing the protection capability against radiation effects, they introduce several penalties to the design, particularly in terms of performance. In literature, some techniques are proposed, like innovative placement algorithms able to improve the running frequency up to 44\% by reducing the interconnection delays between resources \cite{10.1145/1366224.1366228}.
 \end{description}
 
-The choosen strategy is to use the Dynamic Partial Reconfiguration technique. For this thesis work, only the MicroBlaze area is configured as dynamic reconfigurable. As said, this is useful only to fix errors in the configuration area related to the FPGA, but something that detects the error is needed. Hence, a self-made watchdog is developed to detect the error and trigger the reconfiguration. The reconfiguration is handled by a dedicated controller. A high level scheme of the design is presented in the following figure:
+The chosen strategy is to use the Dynamic Partial Reconfiguration technique. For this thesis work, only the MicroBlaze area is configured as dynamic reconfigurable. As said, this is useful only to fix errors in the configuration area related to the FPGA, but something that detects the error is needed. Hence, a self-made watchdog is developed to detect the error and trigger the reconfiguration. The reconfiguration is handled by a dedicated controller. A high-level scheme of the design is presented in the following figure:
 % Watchdog + DFX because..
 
 \begin{figure}[H]
@@ -252,22 +252,22 @@ In figure \ref{fig:reconf_scheme}, the following parts are highlighted:
 
 \section{Development of a watchdog}
 
-Among the modules to be added to the design in order to achieve a fault tolerant design, the watchdog is the most critical one. If it fails in detecting errors, the overall design doesn't result protected from SEUs afftecting the MicroBlaze. This is because the watchdog would not able to detect the error and trigger the reconfiguration. 
+Among the modules to be added to the design in order to achieve a fault-tolerant design, the watchdog is the most critical one. If it fails in detecting errors, the overall design doesn't result protected from SEUs affecting the MicroBlaze. This is because the watchdog would not able to detect the error and trigger the reconfiguration. 
 
 \subsection{What is a watchdog?}
 
-In computer systems, a watchdog is basically a timer (that may be hardware or software) that is used to detect and recover from computer malfunctions. Watchdog timers are widely used in computers to facilitate automatic correction of temporary hardware faults. Can be though as a down-count timer. When the timer elapses, it generates a timeout signal.\bigskip
+In computer systems, a watchdog is essentially a timer (that may be hardware or software) that is used to detect and recover from computer malfunctions. Watchdog timers are widely used in computers to facilitate the automatic correction of temporary hardware faults. Can be thought of as a down-count timer. When the timer elapses, it generates a timeout signal.\bigskip
 
-During normal operation, the computer regularly restarts the watchdog timer to prevent it from timing out. If, due to a hardware fault or program error, the computer fails to restart the watchdog, the timer will elapse generating a timeout signal. The timeout signal is used to initiate corrective actions. The act of restarting the watchdog timer is usually called \textit{kicking}. \bigskip
+During normal operation, the computer regularly restarts the watchdog timer to prevent it from timing out. If due to a hardware fault or program error, the computer fails to restart the watchdog, the timer will elapse generating a timeout signal. The timeout signal is used to initiate corrective actions. The act of restarting the watchdog timer is usually called \textit{kicking}. \bigskip
 
-Both generally speaking or strictly related to this case of study, a watchdog timer provides automatic detection of catastrophic malfunctions that prevent the computer from kicking it. However, there are often less-severe types of faults which do not interfere with the kicking operation, but still requires watchdog oversight. In the specific case, can be for example a fault affecting the Arithmetic Logic Unit (ALU) of the MicroBlaze or the AXI interface towards peripherals. To support these, the system should be designed so that the watchdog timer is not kicked anymore in these less-severe faults. This can be done by writing some software routines that are able to self-test the CPU and its funcionalities. The CPU will kick the watchdog only if all tests have passed.
+Both generally speaking or strictly related to this case of study, a watchdog timer provides automatic detection of catastrophic malfunctions that prevent the computer from kicking it. However, there are often less severe types of faults that do not interfere with the kicking operation but still require watchdog oversight. In the specific case, can be for example a fault affecting the Arithmetic Logic Unit (ALU) of the MicroBlaze or the AXI interface towards peripherals. To support these, the system should be designed so that the watchdog timer is not kicked anymore in these less-severe faults. This can be done by writing some software routines that can self-test the CPU and its functionalities. The CPU will kick the watchdog only if all tests have passed.
 
 % TODO: add wdctl linux output taken from a raspberry pi
 
 \subsection{How to implement a watchdog?}
 \label{sec:wd_impl}
 
-Once understood the principles of a watchdog, it is possible to implement it and tailor its funcionalities to the needs of having a fault tolerant system on FPGA. From a high level perspective, the watchdog is basically a timer. This means that it must have some form of timing, so it needs clock and reset signals. Moreover, the timer must restart every time the kicking action is performed. If the timer elapses, it generates a timeout signal. The following is a timing diagram of this basic watchdog:
+Once understood the principles of a watchdog, it is possible to implement it and tailor its functionalities to the needs of having a fault-tolerant system on FPGA. From a high-level perspective, the watchdog is at heart a timer. This means that it must have some form of timing, so it needs a clock and reset signals. Moreover, the timer must restart every time the kicking action is performed. If the timer elapses, it generates a timeout signal. The following is a timing diagram of this basic watchdog:
 
 \begin{figure}[H]
 \begin{tikztimingtable}[%
@@ -295,7 +295,7 @@ Once understood the principles of a watchdog, it is possible to implement it and
 \label{fig:basic_watchdog}
 \end{figure}
 
-In figure \ref{fig:basic_watchdog}, the system initially is in an unknown state. Once the reset signal \textit{RST} arrives, synchronously the watchdog is reseted and starts counting down. When the timer reaches 1, luckily a \textit{KICK} signal arrives (green line), signaling that the CPU is correctly working, and the timer is restarted from the initial value of 3. 4 clock cycles later, the timer reaches 0, and the \textit{TIMEOUT} signal is generated (red line) because no \textit{KICK} signal has arrived. \bigskip
+In figure \ref{fig:basic_watchdog}, the system initially is in an unknown state. Once the reset signal \textit{RST} arrives, synchronously the watchdog is reset and starts counting down. When the timer reaches 1, luckily a \textit{KICK} signal arrives (green line), signaling that the CPU is correctly working, and the timer is restarted from the initial value of 3. 4 clock cycles later, the timer reaches 0, and the \textit{TIMEOUT} signal is generated (red line) because no \textit{KICK} signal has arrived. \bigskip
 
 A more sophisticated implementation of a watchdog could be based on a up-count timer, an input data containing the maximum number of clock cycles the timer can count before it generates a timeout signal, and a start signal that is used to start the timer. The following is a timing diagram of this implementation:
 
@@ -328,7 +328,7 @@ A more sophisticated implementation of a watchdog could be based on a up-count t
 \label{fig:basic_watchdog_upcount}
 \end{figure}
 
-In the figure above, we have a different working mechanism compared to the previous one. After the reset signal \textit{RST}, the timer is resetted to its initial value 0 and stays in this state until the \textit{START} signal is received. At this point in time, the input value \textit{VALUE} is set at 7 from the external: 7 is the final value of the timer, if this value is reached, the timer expires. Once the \textit{START} signal is received (blue line), the timer starts counting up. The next clock cycles sees a chaning in the maximum value, from 7 down to 3. The \textit{KICK} signal is generated two times (green line), signaling that the CPU is correctly working, and the timer is restarted from 0. At a certain point in time, the timer reaches 3 but the \textit{KICK} signal is not arriving, thus at the next clock cycles the \textit{TIMEOUT} signal is generated (red line).
+In the figure above, we have a different working mechanism compared to the previous one. After the reset signal \textit{RST}, the timer is reset to its initial value of 0 and stays in this state until the \textit{START} signal is received. At this point, the input value \textit{VALUE} is set at 7 from the external: 7 is the final value of the timer, if this value is reached, the timer expires. Once the \textit{START} signal is received (blue line), the timer starts counting up. The next clock cycle sees a change in the maximum value, from 7 down to 3. The \textit{KICK} signal is generated two times (green line), signaling that the CPU is correctly working, and the timer is restarted from 0. At a certain point in time, the timer reaches 3 but the \textit{KICK} signal is not arriving, thus at the next clock cycle the \textit{TIMEOUT} signal is generated (red line).
 
 \begin{figure}[H]
 \centering
@@ -337,7 +337,7 @@ In the figure above, we have a different working mechanism compared to the previ
 \label{fig:wd_scheme}
 \end{figure}
 
-This implementation can be used as it is and can achieve good results. A possible circuit implementation, even with some timing differences, can be seen in Figure \ref{fig:wd_scheme}. The problem is that the \textit{KICK} signal representsa a single point of failure in terms of fault tolerance. If the CPU is hit by a SEU, it can leave the signal stuck in a high state, and the watchdog will continuously reset the timer, maskin the real CPU's status. \bigskip
+This implementation can be used as it is and can achieve good results. A possible circuit implementation, even with some timing differences, can be seen in Figure \ref{fig:wd_scheme}. The problem is that the \textit{KICK} signal represents a single point of failure in terms of fault tolerance. If the CPU is hit by an SEU, it can leave the signal stuck in a high state, and the watchdog will continuously reset the timer, maskin the real CPU's status. \bigskip
 
 To overcome this problem, a more sophisticated signaling mechanism is used. To keep things simple, the act of kicking is done at every $H\rightarrow L$ or $L\rightarrow H$ transition of the \textit{KICK} signal. This way, if the signal is stuck in a certain state, the watchdog will expire correctly. The final circuit implementation is based on a Finite State Machine, that is, a set of states that are interconnected by transitions. It is faster to implement when things get more complicated, and it is easier to understand than the previous diagram. The following is a diagram of the Finite State Machine that implements the final version of the watchdog:
 
@@ -381,9 +381,9 @@ To overcome this problem, a more sophisticated signaling mechanism is used. To k
     (qd) edge [red, in=30,out=60, loop] node {} ();
 \end{tikzpicture}
 
-Formally speaking, this FSM is a Moore machine. In the theory of computation, it means that the current output values are determined only by its current state \cite{Church1958EdwardFM}. Inputs only affect the next state, and state transitions happens only at each rising edge of the clock signal. \bigskip
+Formally speaking, this FSM is a Moore machine. In the theory of computation, it means that the current output values are determined only by the FSM current state \cite{Church1958EdwardFM}. Inputs only affect the next state, and state transitions may happen only at each rising edge of the clock signal. \bigskip
 
-The idea behind the logic of this FSM is that at the reset, the FSM waits for the START signal. Once it is detected, it goes in a loop between two states complementary states. They are implemented in such a way to be able to detect signal transitions. The FSM stays in this loop until the count reaches the input value, and if this happens and the kick signal still doesn't toggle, the FSM goes in a final state asserting the timeout signal. The FSM will stay in this state until it is resetted again. If the input timeout value changes, it is captured only when a transition is detected. The following, is a description of the states in the FSM:
+The idea behind the logic of this FSM is that at the reset, the FSM waits for the START signal. Once it is detected, it goes into a loop between two complementary states. They are implemented in such a way to be able to detect signal transitions. The FSM stays in this loop until the count reaches the input value, and if this happens and the kick signal still doesn't toggle, the FSM goes into a final state asserting the timeout signal. The FSM will stay in this state until it is reset again. If the input timeout value changes, it is captured only when a transition is detected. The following is a description of the states in the FSM:
 
 \begin{table}[H]
 \centering
@@ -435,11 +435,11 @@ The idea behind the logic of this FSM is that at the reset, the FSM waits for th
 \label{fig:final_wd_wafe}
 \end{figure}
 
-The FSM has been implemented as a High Level State Machine (HLSM). A HLSM is a natural extension of a FSM, used to capture more complex behaviors, including multibit data inputs and outputs rather than just single bits, local storage and supports arithmetic operations like adds and comparisons, rather than just basic boolean operations. It has been implemented in VHDL and the code is available in Appendix \ref{sec:watchdog_fsm}. In figure \ref{fig:final_wd_wafe}, the timing diagram of the final watchdog behaviour is presented.
+The FSM has been implemented as a High-Level State Machine (HLSM). An HLSM is a natural extension of an FSM, used to capture more complex behaviors, including multi-bit data inputs and outputs rather than just single bits, local storage and supports arithmetic operations like adds and comparisons, rather than just basic boolean operations. It has been implemented in VHDL and the code is available in Appendix \ref{sec:watchdog_fsm}. In figure \ref{fig:final_wd_wafe}, the timing diagram of the final watchdog behavior is presented.
 
 \subsection{How to harden the watchdog?}
 
-Once the watchdog is implemented, it needs to be hardened itself. This is needed to prevent the watchdog from being inhibited by a SEU affecting it. The most basic type of fault tolerance technique is the Triple Modular Redundacy (TMR). It basically consists in having three different modules that given the same input, generate the same output in normal conditions. The three outputs are given as input to a voter circuit.
+Once the watchdog is implemented, it needs to be hardened. This is needed to prevent the watchdog from being inhibited by an SEU affecting it. The most basic type of fault tolerance technique is the Triple Modular Redundacy (TMR). It basically consists in having three different modules that, given the same input generate the same output in normal conditions. The three outputs are given as input to a voter circuit.
 
 \begin{figure}[H]
 \centering
@@ -484,7 +484,7 @@ Y ={} & \text{majority}(A, B, C) = AB + AC + BC = \\
 \label{fig:voter_scheme}
 \end{figure}
 
-The majority gate itself could fail, representing a single point of failure. This can be protected against by applying triple redundancy to the voters themselves. Hence, three voters are used, one for each copy of the next stage of TMR logic, as shown in the following figure:
+The majority gate itself could fail, representing a single point of failure. This can be protected by applying triple redundancy to the voters themselves. Hence, three voters are used, one for each copy of the next stage of TMR logic, as shown in the following figure:
 
 \begin{figure}[H]
 \centering
@@ -492,11 +492,11 @@ The majority gate itself could fail, representing a single point of failure. Thi
 \caption{Basic TMR scheme vs. full TMR circuit scheme.}
 \end{figure}
 
-Even tho the second scheme doesn't present any single point of failure, most systems sticks with the simplest scheme. This is because the majority gates are much less complex than the systems that they guard against, so they are much more reliable. In those cases, by using some reliability calculations, it is possible to find the minimum voter realiability required to have a fully functional TMR scheme. \bigskip
+Even tho the second scheme doesn't present any single point of failure, most systems stick with the simplest scheme. This is because the majority of gates are much less complex than the systems that they guard against, so they are much more reliable. In those cases, by using some reliability calculations, it is possible to find the minimum voter realiability required to have a fully functional TMR scheme. \bigskip
 
 However, because this section is about how to harden a watchdog implemented in FPGA, even interconnections can be affected by faults due to SEUs affecting the route part of the configuration layer. Consequently, a full TMR scheme is the most reliable way to protect the watchdog.\bigskip
 
-Hence, the idea is to instantiate the watchdog component three different times and vote each input and output with three different voters. The overall design is implemented in verilog. To simplify the code, two set of matrix of signals have been created: one for the no-tmr version and one for the tmr version. As an example, because of the full TMR scheme, there are three different \textit{START} signals (at this point of the design, the driver of these signals is not yet specified). The idea is to access access these 3 different instantiations of signals by using indexes and not directly the signals themselves with different names (for example \textit{START_0}, \textit{START_1} and \textit{START_2}) to not create a confusional code and to be able to automatize the code generation.
+Hence, the idea is to instantiate the watchdog component three different times and vote each input and output with three different voters. The overall design is implemented in Verilog. To simplify the code, two matrices of signals have been created: one for the no-tmr version and one for the tmr version. As an example, because of the full TMR scheme, there are three different \textit{START} signals (at this point of the design, the driver of these signals is not yet specified). The idea is to access these 3 different instantiations of signals by using indexes and not directly the signals themselves with different names (for example \textit{START_0}, \textit{START_1} and \textit{START_2}) to not create a confusional code and to be able to automatize the code generation.
 
 \begin{figure}[H]
 \centering
@@ -512,7 +512,7 @@ The above scheme can be read as follows:
     \item The START (KICK) signal instance 2 is at row 0 (1), column 2.
 \end{itemize}
 
-The same concept applies for the output signals of the voters. Three voters creates three different output signals and each voter has as input the same triplet of signals as the other ones. Hence, the tmr matrix works as the no-tmr one. The following table shows an example, supposing the notmr matrix is configured as the one showed in Figure \ref{fig:mtx_notmr} for what concerns the \textit{START} signal:
+The same concept applies to the output signals of the voters. Three voters create three different output signals and each voter has as input the same triplet of signals as the other ones. Hence, the tmr matrix works as the no-tmr one. The following table shows an example, supposing the no-tmr matrix is configured as the one shown in Figure \ref{fig:mtx_notmr} for what concerns the \textit{START} signal:
 
 \begin{table}[H]
 \centering
@@ -526,7 +526,7 @@ The same concept applies for the output signals of the voters. Three voters crea
 \caption{Output signal matrix for the no-tmr version.}
 \end{table}
 
-The main problem with this solution is that all the three voters are doing exactly the same things on the same inputs and producing the same outputs. Ideally this is the aim of the design, but once it is synthesized, everything is collapsed in a single voter and a single watchdog. This happens because the synthesizer tries to optimize the design by reusing and sharing the logic between similar components. A situation that must absolutely be avoided, because the aim is exactly to have three different copies of everything: signals, voters and watchdogs.\bigskip
+The main problem with this solution is that all the three voters are doing exactly the same things on the same inputs and producing the same outputs. Ideally, this is the aim of the design, but once it is synthesized, everything is collapsed into a single voter and a single watchdog. This happens because the synthesizer tries to optimize the design by reusing and sharing the logic between similar components. A situation that must absolutely be avoided, because the aim is exactly to have three different copies of everything: signals, voters and watchdogs.\bigskip
 
 To overcome this problem, the synthesizer must be notified about what it can optimize and what it can not. The following is an example of instantiation of the two matrices of signals and voters in Verilog, telling the synthesizer that they must not be optimized out:
 
@@ -551,7 +551,7 @@ generate
 endgenerate
 \end{lstlisting}
 
-Finally, the design is implemented. All the inputs that go to the watchdog are took from the tmr matrix, and all the outputs generated by the watchdogs (for example the three timeout signals) goes to the no-tmr matrix. The latter are automatically voted because of the previous instantiation of the voter components. The final outputs of the overall TMR Watchdog are connected to the respective TMR version of the signals.
+Finally, the design is implemented. All the inputs that go to the watchdog are taken from the tmr matrix, and all the outputs generated by the watchdogs (for example the three timeout signals) go to the no-tmr matrix. The latter are automatically voted because of the previous instantiation of the voter components, as shown above. The final outputs of the overall TMR Watchdog are connected to the respective TMR version of the signals.
 
 \begin{figure}[H]
 \centering
@@ -568,20 +568,28 @@ Finally, the design is implemented. All the inputs that go to the watchdog are t
 
 \subsection{Integration of the watchdog in the design}
 
-The watchdog is finally created but it is still not well usable. The goal is to have a watchdog that can be easily inserted in any design. To achieve this, the watchdog can be packaged as an IP to allow the user to easy integrate it with the Block Design tool. Vivado offers an easy-to-use IP creation wizard, through which a design can be packed and distributed, together with a C library for a high level interaction with the hardware via software drivers.\bigskip
+The watchdog is finally created but it is still not easily usable. The goal is to have a watchdog that can be easily inserted into any design. To achieve this, the watchdog can be packaged as an IP to allow the user to easily integrate it with the Block Design tool. Vivado offers an easy-to-use IP creation wizard, through which a design can be packed and distributed, together with a C library for high-level interaction with the hardware via software drivers.\bigskip
 
-Unfortunately, this is not enough. The idea is to connect the watchdog to the MicroBlaze, in this way it would be able to control it (for example the kicking action) and to check its status. The problem is that the watchdog uses discrete signals as interface and there is no direct way to access these signals from the CPU. There are two possible ways to overcome this situation:
+Unfortunately, this is not enough. The idea is to connect the watchdog to the MicroBlaze, in this way it would be able to control it (for example the kicking action) and check its status. The problem is that the watchdog uses discrete signals as an interface and there is no direct way to access these signals from the CPU. There are two possible ways to overcome this situation:
 
 \begin{itemize}
     \item The MicroBlaze controls the watchdog via a GPIO peripheral. This is the most simple way to do it, but it is not very flexible. The various GPIO channels are connected to the watchdog signals and the CPU can control the GPIO channels via the AXI interface.
-    \item The MicroBlaze direct interfaces with the watchdog through a dedicated AXI interface. This is the most flexible way to do it, but increases the implementation complexity of the watchdog IP.
+    \item The MicroBlaze direct interfaces with the watchdog through a dedicated AXI interface. This is the most flexible way to do it but increases the implementation complexity of the watchdog IP.
 \end{itemize}
 
-For what concerns this thesis work, the second option is the most convenient because there are less actors in the overall fault tolerance chain that can be affected by faults. Luckily, the Vivado IP creation wizard provides an automatic way to create a AXI wrapper on top of which the watchdog can be inserted. Hence, the watchdog will be controlled and monitored by the MicroBlaze via registers. \bigskip
+% For what concerns this thesis work, 
+The second option is the most convenient because there are fewer actors in the overall fault-tolerance chain that can be affected by faults. Luckily, the Vivado IP creation wizard provides an automatic way to create an AXI wrapper on top of which the watchdog can be instantiated and the different signals connected to the various registers. Hence, the watchdog can be controlled and monitored by the MicroBlaze via those, as shown in the following. \bigskip
 
-By design choice, there are 4 registers, one for each of the 3 watchdog instances. The second nibble in the lowest byte of the address is the index of the corresponding watchdog. They follow the Full TMR design as explained in the previous section, internally coded with no-tmr and tmr matrices. Read only fields are taken from the no-tmr matrix, in this way the CPU or any other AXI master can check if there are faulty modules. \bigskip
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\linewidth]{images/chapter4/rs2.pdf}
+\caption{Conceptual representation of the final watchdog IP.}
+\label{fig:rs2}
+\end{figure}
 
-The registers are:
+By design choice, there are 4 registers, one for each of the 3 watchdog instances. The second nibble in the lowest byte of the address is the index of the corresponding watchdog. They follow the Full TMR design as explained in the previous section, internally coded with no-tmr and tmr matrices. Read-only fields are taken from the no-tmr matrix, in this way the CPU or any other AXI master can check if there are faulty modules. \bigskip
+
+The following is a description of how the register space is divided and seen by AXI masters:
 
 \begin{center}
 \begin{register}{H}{Control Register}{0x00 - 0x10 - 0x20}% name=example
@@ -589,8 +597,8 @@ The registers are:
 \regfieldb{Kick}{1}{1}%
 \regfieldb{Start}{1}{0}%
 \begin{regdesc}\begin{reglist}[Request~Depth]
-\item [start]Setting this bit activates the Watchdog. If already activated, this bit has no effects.
-\item [kick]The kick bit is directly connected to the kick signal of the watchdog. The MicroBlaze is in charge of writing the right value in this field (i.e. do the right transitions).
+\item [Start]Setting this bit activates the Watchdog. If already activated, this bit has no effects.
+\item [Kick]The kick bit is directly connected to the kick signal of the watchdog. The MicroBlaze is in charge of writing the right value in this field (i.e. do the right transitions).
 \end{reglist}\end{regdesc}
 \end{register}
 \begin{register}{H}{Status Register}{0x04 - 0x14 - 0x24}% name=example
@@ -598,8 +606,8 @@ The registers are:
 \regfieldb{Error}{1}{1}%
 \regfieldb{Started}{1}{0}%
 \begin{regdesc}\begin{reglist}[Request~Depth]
-\item [started]The bit is set if the watchdog is started.
-\item [error]The bit is set if the watchdog timed out.
+\item [Started]The bit is set if the watchdog is started.
+\item [Error]The bit is set if the watchdog timed out.
 \end{reglist}\end{regdesc}
 \end{register}
 \begin{register}{H}{Timeout Register}{0x08 - 0x18 - 0x28}% name=example
@@ -616,7 +624,23 @@ The registers are:
 \end{register}
 \end{center}
 
-Once the Watchdog IP repository han been added to the list of IP repositories in Vivado ($Vivado \rightarrow IP \rightarrow Repository \rightarrow +$), it can be instantiated in the design and connected to a AXI Interconnect to make it accessible to masters like the MicroBlaze:
+To ease the job of programmers, the Watchdog IP offers a driver with a set of functions to control the watchdog. It is based on a newly defined data type that represents the Watchdog register memory space conveniently, by using C structs, unions and bitfields constructs. The full description is shown in Appendix \ref{sec:watchdog_drivers}.
+
+\begin{lstlisting}[style=C]
+typedef struct {
+	union {
+		u32 *baseAddress;
+		watchdog_module_t *module;
+		struct {
+			watchdog_module_t module0;
+			watchdog_module_t module1;
+			watchdog_module_t module2;
+		} *modules;
+	};
+} GBcnCtrl;
+\end{lstlisting}
+
+Once the Watchdog IP repository han been added to the list of IP repositories in Vivado ($Vivado \rightarrow IP \rightarrow Repository \rightarrow +$), it can be instantiated in the design and connected to a AXI Interconnect to make it accessible to masters, like the MicroBlaze, via an intermediate AXI Interconnect:
 
 \begin{figure}[H]
 \centering
@@ -625,10 +649,10 @@ Once the Watchdog IP repository han been added to the list of IP repositories in
 \label{fig:wd_ip_inst}
 \end{figure}
 
-The IP presents two interfaces:
+As conceptually shown in Figure \ref{fig:rs2}, the IP presents two interfaces:
 \begin{itemize}
-    \item \textit{S00\_AXI}: The AXI interface is used to communicate with the watchdog from a AXI master. It includes the s00\_clk and s00\_rstn signals.
-    \item \textit{Custom Interface}: The custom interface is meant to expose some signals towards other peripherals thay may or may not need it. Each of those signals are vectors of 3 positions, one for each watchdog module. In particular the \textit{CONTROL\_START} and \textit{CONTROL\_STB} are directly connected to the register's bits Start and Kick without any TMR transformation. The \textit{STATUS\_STARTED} and \textit{STATUS\_ERROR} are instead the TMR version of the watchdog's started and timeout signals, respectively.
+    \item \textit{S00\_AXI}: The AXI interface is used to communicate with the watchdog from an AXI master. It includes the s00\_clk and s00\_rstn signals.
+    \item \textit{Custom Interface}: The custom interface is meant to expose some signals towards other peripherals that may or may not need it. Each of those signals is a vector of 3 sub-signal, one for each watchdog module. In particular, the \textit{CONTROL\_START} and \textit{CONTROL\_STB} are directly connected to the register's bits Start and Kick without any TMR transformation. The \textit{STATUS\_STARTED} and \textit{STATUS\_ERROR} are instead the TMR version of the watchdog's started and timeout signals, respectively.
 \end{itemize}
 
 The IP can be easily customized via a custom IP wizard or via TCL commands. The following is the GUI wizard:
@@ -642,10 +666,11 @@ The IP can be easily customized via a custom IP wizard or via TCL commands. The 
 
 It is possible to set a custom initial value for the timeout register and the default start condition of the watchdog: if it is checked, at each reset the watchdog is immediately started without waiting for the \textit{Start} bit to be set. This can be useful for different purposes, but in particular for fault injection testing.\bigskip
 
-Finally, when the IP is instantiated in a Block Design and the final .xsa file is generated, watchdog drivers are automatically inserted and ready to be used from Vitis.\bigskip
+Finally, when the IP is instantiated in a Block Design and the final .xsa file is generated, watchdog drivers are automatically inserted and ready to be used with Vitis. Thus, it is able to generate a Board Support Package (BSP) that contains and defines these new drivers.\bigskip
 
-The following is an example of usage of the drivers to control the watchdog. It demonstrates the usability of the final design, with a set of very high level functions. The example demonstrates a possible way to organize the kicking act accross the code to cover not only CPU hangs but also other faults (computational errors, self-test code, etc.).
+Follows an example of the usage of the drivers to control the watchdog. It demonstrates the usability of the final design, with a set of very high-level functions. The example demonstrates a possible way to organize the kicking act across the code to cover not only CPU hangs but also other faults (computational errors, self-test code, etc.).
 
+\newpage
 \begin{lstlisting}[style=C]
 #include "beacon_watchdog.h"
 
@@ -692,11 +717,12 @@ int main() {
 
 % IP, AXI interface, AXI registers and how they are connected to the FSM. How TMR is managed from the point of view of the registers.
 
+\newpage
 \section{Design with Partial Reconfiguration}
 
 Partial reconfiguration is a way to change or update an FPGA design without the need to re-program the whole FPGA. Hence, it is possible to reprogram only a portion of the design without interrupting the rest of the design. In Xilinx's world, this is called \textit{Dynamic Function Exchange} (DFX).\bigskip 
 
-There are different reasons why people do this. The main reason is \textit{area}: perhaps the FPGA is already full but more functions needs to be pushed to the FPGA, and a way to achieve this is to partial reconfigure the design. Hence, the whole system is analyzed and blocks that are not used at the same time are grouped together. Each of the identified groups is assigned to a piece of FPGA fabric and that portion is marked as reconfigurable. 
+There are different reasons why people do this. The main reason is \textit{area}: perhaps the FPGA is already full but more functions need to be pushed to the FPGA, and a way to achieve this is to partially reconfigure the design. Hence, the whole system is analyzed and blocks that are not used at the same time are grouped together. Each of the identified groups is assigned to a piece of FPGA fabric and that portion is marked as reconfigurable. 
 
 \begin{figure}[H]
 \centering
@@ -705,7 +731,7 @@ There are different reasons why people do this. The main reason is \textit{area}
 \label{fig:partial_why}
 \end{figure}
 
-In the above figure, an example is shown. There is a receiver module that receives data from some source (it can be an Ethernet interface for instance). The system needs to compute a checksum of the received data, but not always in the same manner. Hence, there are two modules that compute the checksum in two different ways. The whole design as it is does not fit in the FPGA, but luckily the two modules are not used at the same time so they can be grouped together. The group is then marked as reconfigurable and the controller, before requesting to compute a checksum to the needed module, it reconfigures the area with the module that the controller designed to compute the checksum. In this way, the system continuous to work in other sub-parts of the design, and meanwhile the partial reconfiguration and the checksum computation is performed. The final design is the following:
+In the above figure, an example is shown. There is a receiver module that receives data from some source (it can be an Ethernet interface for instance). The system needs to compute a checksum of the received data, but not always in the same manner. Hence, two modules compute the checksum in two different ways. The whole design as it is does not fit in the FPGA, but luckily the two modules are not used at the same time so they can be grouped. The group is then marked as reconfigurable and the controller, before requesting to compute a checksum to the needed module, reconfigures the area with the module that the controller designed as the one needed to compute the checksum. In this way, the system continues to work in other sub-parts of the design, and meanwhile, the partial reconfiguration and the checksum computation are performed. The final design is the following:
 
 \begin{figure}[H]
 \centering
@@ -714,30 +740,30 @@ In the above figure, an example is shown. There is a receiver module that receiv
 \label{fig:partial_why_group}
 \end{figure}
 
-Furthemore, partial reconfiguration is not limited only to funcionality exchange. It can be used to implement a \textit{partial scrubbing} of the design, for example when a fault affecting a reconfigurable area is detected. This is the case under study for what concerns this thesis work, as shown in Figure \ref{fig:reconf_scheme}. This allows to reconfigure the area without interrupting the rest of the design and mainly it is faster, reducing the down-time of the system, thus improving the overall availability. Moreover, the bit-flip causing the fault is definetely removed thanks to its reconfiguration.\bigskip
+Furthermore, partial reconfiguration is not limited only to functionality exchange. It can be used to implement a \textit{partial scrubbing} of the design, for example when a fault affecting a reconfigurable area is detected. This is the case under study for what concerns this thesis work, as shown in Figure \ref{fig:reconf_scheme}. This allows to reconfigure the area without interrupting the rest of the design and mainly it is faster, reducing the down-time of the system, thus improving the overall availability. Moreover, the bit-flip causing the fault is definitely removed thanks to its reconfiguration.\bigskip
 
 For what concerns Xilinx, the Dynamic Function Exchange is achieved by downloading a \textit{partial bitstream} into the FPGA via a \textit{Configuration Access Port} (CAP) that can be accessed directly from the FPGA itself. The partial bitstream is generated by adding some steps to the standard Vivado Design Flow. \bigskip
 
-As explained in Section \ref{sec:raw_bitstream}, ZYNQ systems offers two dedicated ports, one for the PS and one for the PL. The PS port is the Processor Configuration Access Port (PCAP) and the PL port is the Internal Configuration Access Port (ICAP). As explained, they are mutual exclusive. 
+As explained in Section \ref{sec:raw_bitstream}, ZYNQ systems offer two dedicated ports, one for the PS and one for the PL. The PS port is the Processor Configuration Access Port (PCAP) and the PL port is the Internal Configuration Access Port (ICAP). As explained, they are mutually exclusive. 
 
 % What is it. Tell about an example: module that can work in some way then it is reconfigured. Useful because maybe all the design doesn't fit in the FPGA but not all the design is needed at the same time so it can be reconfigured to change funcionality when needed. % take from video you followed, where at the beginning it explains how does it work.
 % Then error fix.
 
 \subsection{Vivado Design Flow for Dynamic Function Exchange}
 
-Unluckily, Vivado versions prior to 2021.2 do not support DFX for Block Designs. Hence, for what concerns modules to be grouped under a partial reconfiguration partition, the designer must move the reconfigurable IP instances outside the Block Design and manually instantiate  it in the top level module. \bigskip
+Unluckily, Vivado versions prior to 2021.2 do not support DFX for Block Designs. Hence, for what concerns modules to be grouped under a partial reconfiguration partition, the designer must move the reconfigurable IP instances outside the Block Design and manually instantiate them in the top-level module. \bigskip
 
-As reference, a design with a custom 2 bit counter IP is used. The designer wants to have another counter IP to be used alternatively that is able to count up to 15 (4 bit counter), without using more area. Hence, the two counters are grouped under a partial reconfiguration partition. Each counter is defined as Reconfigurable Module (RM) and withing a partition only one RM at a time can be available. \bigskip
+As a reference, a design with a custom 2-bit counter IP is used. The designer wants to have another counter IP to be used alternatively that is able to count up to 15 (4-bit counter), without using more area. Hence, the two counters are grouped under a partial reconfiguration partition. Each counter is defined as Reconfigurable Module (RM) and within a partition, only one RM at a time can be available. \bigskip
 
-A reconfigurable partition is seen from other modules as the same component: other modules do not need to care about the reconfigurable partition. Hence, a partition is defined by a single HDL wrapper with the same port definitions for all the modules in the partition. Thus, if there are two IP and both of them have a CLK and Reset port and the third port is different (the first IP has a 2 bit port while the second one has a 4 bit port), a common definition needs to be found. In this simple case, the third port in the partition wrapper will have 4 bits and the IP with the 2-bit port is extended to four by fixing the higher bits at 0.\bigskip 
+A reconfigurable partition is seen by other modules as the same component: other modules do not need to care about the reconfigurable module. Hence, a partition is defined by a single HDL wrapper with the same port definitions for all the modules in the partition. Thus, if there are two IPs and both of them have a CLK and Reset port and the third port is different (the first IP has a 2-bit port while the second one has a 4-bit port), a common definition needs to be found. In this simple case, the third port in the partition wrapper will have 4 bits and the IP with the 2-bit port is extended to four by fixing the higher bits at 0.\bigskip 
 
-Through the Vivado's IP Catalog, first a \textit{Binary Counter} IP is instantiated with a 2 bit counter. Then a \textit{Binary Counter} IP is instantiated with a 4 bit counter. Once a IP is instantiated, a .xci file is generated. A .xci file is a XML file that records the values of project options, customization parameters, and port parameters used to create the IP. Once this is done, one wrapper for each IP must be created with the same port definition. The wrapper related to the 2-bit counter is instantiated in the top level module. This means that the 2-bit counter is designed as the default module and it is inserted in the full bitstream, leading to a normal bitstream and design generated until now. Furthemore, there is a high chance that the reconfigurable modules (RMs) need something from the Block Design part. In that case, the designer must make avaiable to the outside the needed signals to connect the reconfigurable modules, through the usages of Block Design's port definition both for input and output signals. \bigskip
+Through Vivado's IP Catalog, first, a \textit{Binary Counter} IP is instantiated with a 2-bit counter. Then a \textit{Binary Counter} IP is instantiated with a 4-bit counter. Once an IP is instantiated, a .xci file is generated. A .xci file is an XML file that records the values of project options, customization parameters, and port parameters used to create the IP. Once this is done, one wrapper for each IP must be created with the same port definition. The wrapper related to the 2-bit counter is instantiated in the top-level module. This means that the 2-bit counter is designed as the default module and it is inserted in the full bitstream, leading to a normal bitstream and design generated until now. Furthermore, there is a high chance that the reconfigurable modules (RMs) need something from the Block Design part. In that case, the designer must make available to the outside the needed signals to connect the reconfigurable modules, through the usages of Block Design's port definition both for input and output signals. \bigskip
 
 % If the port definition among the two IPs differs in some way, the designer needs to define a new wrapper for the IP that differs. Inside the wrapper, the IP is instantiated and the additional glue logic is added. The hierarchy becomes:
 
 % In the above example, \texttt{Counter_Wrapper} instantiatese the 2-bit counter by its own wrapper. This means that the 2-bit counter is designed as the default module that is inserted in the full bitstream. This means that during the first configuration, the 2-bit counter is loaded up by default.\bigskip
 
-Once the sources are defined, the Vivado Project must be converted in a DFX-capable Project. This can be done via Tools $\rightarrow$ Enable Dynamic Function Exchange. This is an irreversible process. It is possible now to define a new partition with a right-click on the main wrapper and select \textit{Create Partition Definition}. Once the partition is created, it is possible to see it inside the \textit{Partition Definitions} tab. Here, a default reconfigurable module is created with the wrapper and the .xci file previously selected. It is possible to create a new reconfigurable module inside the partition where the .xci and wrapper of the second IP must me added (via manual selection of the files).
+Once the sources are defined, the Vivado Project must be converted into a DFX-capable Project. This can be done via Tools $\rightarrow$ Enable Dynamic Function Exchange. This is an irreversible process. It is possible now to define a new partition with a right-click on the main wrapper and select \textit{Create Partition Definition}. Once the partition is created, it is possible to see it inside the \textit{Partition Definitions} tab. Here, a default reconfigurable module is created with the wrapper and the .xci file previously selected. It is possible to create a new reconfigurable module inside the partition where the .xci and wrapper of the second IP must be added (via a manual selection of the files).
 
 \begin{figure}[H]
 \centering
@@ -745,11 +771,11 @@ Once the sources are defined, the Vivado Project must be converted in a DFX-capa
 \caption{Partition definition with two reconfigurable modules, each one with its own wrapper and .xci file.}
 \end{figure}
 
-After the partition definition is completed, it is time to tell to Vivado how the possible configurations for the various partitions are defined. Consequently, Vivado will be able to create bitstreams for each of the configurations indicated. To achieve this, on the left sidebar click on \textit{Dynamic Function Exchange Wizard}. For this simple example, there are two configurations: one with the 2-bit counter and the other with the 4-bit counter. \bigskip
+After the partition definition is completed, it is time to tell Vivado how the possible configurations for the various partitions are defined. Consequently, Vivado will be able to create bitstreams for each of the configurations indicated. To achieve this, on the left sidebar click on \textit{Dynamic Function Exchange Wizard}. For this simple example, there are two configurations: one with the 2-bit counter and the other with the 4-bit counter. \bigskip
 
-Finally, it is possible to start the Synthesis process. After it has finished, a new set of contrainsts must be defined. In particular, the default wrapper instantiation (the one indicated in the top level module) must be inserted in a PBLOCK. Once created, the PBLOCK is automatically set as \texttt{IS_SOFT = 0}. This represents the area of the FPGA marked as reconfigurable for the partition the instance belongs to.\bigskip
+Finally, it is possible to start the Synthesis process. After it has finished, a new set of contrainsts must be defined. In particular, the default wrapper instantiation (the one indicated in the top-level module) must be inserted in a PBLOCK. Once created, the PBLOCK is automatically set as \texttt{IS_SOFT = 0}. This represents the area of the FPGA marked as reconfigurable for the partition the instance belongs to.\bigskip
 
-At this point, everything is defined and ready to be implemented onto the FPGA. If the Flow is executed until the final \textit{write_bitstream} step, the full bitstream is generated (as usual) and one partial bitstream for each of the configurations is generated. In particular, for each configuration a different run is executed, thus for each configuration the implementation and write_bitstreams steps must be performed. Of course, partial bitstreams have has a lower size, where the size is logically direct proportional to the area of the PBLOCK:
+At this point, everything is defined and ready to be implemented onto the FPGA. If the Flow is executed until the final \textit{write_bitstream} step, the full bitstream is generated (as usual) and one partial bitstream for each of the configurations is generated. In particular, for each configuration a different run is executed, thus for each of them, the implementation and write_bitstreams steps must be performed. Of course, partial bitstreams have a lower size, where the size is logically direct proportional to the area of the PBLOCK:
 
 \begin{table}[H]
 \centering
@@ -806,20 +832,20 @@ fpga -partial design_1_inst_counter4bit_wrapper_partial.bit
 
 In the previous section, an example of Dynamic Function Exchange is presented. As explained, with versions of Vivado older than 2021.1, the DFX flow requires a manual instantiation and management of the various IPs involved in the reconfigurable part. With newer versions, indeed, a new feature called Block Design Containers (BDC) allows users to segment designs into multiple block designs, enabling modular and team-based design flows, including DFX flows. \bigskip
 
-A BDC can be set as reconfigurable, turning it into a Reconfigurable Partition (RP) and enabling each design source within it to be considered a RM. The DFX Wizard populates each RP with all possible RMs for each RP before defining Configuration and Configuration Runs, similar to the RTL project flow for DFX. \bigskip
+A BDC can be set as reconfigurable, turning it into a Reconfigurable Partition (RP) and enabling each design source within it to be considered an RM. The DFX Wizard populates each RP with all possible RMs for each RP before defining Configuration and Configuration Runs, similar to the RTL project flow for DFX. \bigskip
 
 However, using simple IPs or simple HDL designs, the manual flow outside the Block Design tool is feasible. Unfortunately, when a designer wants to partial reconfigure a MicroBlaze, two problems arise, where the second one is a direct consequence of the first:
 
 \begin{enumerate}
     \item deciding to partial reconfigure a MicroBlaze with the flow described previously becomes immediately unfeasible due to the high number of ports and signals to manually manage outside the Block Design environment. 
-    \item software like Vitis are based on the description included in the .xsa file. This file is generated, as explained previously, using Vivado. This decription file is exclusively based on the Block Design tool part of the project, because Vivado has no way to understand how the designer is connecting and configuring IPs outside the Block Design. Thus, working with Vitis becomes impossible because Vitis will tell to the user that there is no MicroBlaze available in the design. 
+    \item softwares like Vitis are based on the description included in the .xsa file. This file is generated, as explained previously, using Vivado. This description file is exclusively based on the Block Design tool part of the project, because Vivado has no way to understand how the designer is connecting and configuring IPs outside the Block Design. Thus, working with Vitis becomes impossible because Vitis will tell the user that there is no MicroBlaze available in the design. 
 \end{enumerate}
 
-For what concerns this thesis work, a \textit{hack} is necessary to solve those problems. When the Block Design tool is used, internally Vivado creates a single HDL file (VHDL or Verilog, it depends on the settings of the project itself). This HDL file contains the whole description of the Block Design, and all the necessary signal connections. This file can be copy-pasted in a completely different project and set as top level module. This is the choosen way to overcome the first problem: avoid to manually instantiate the MicroBlaze IPs. This creates a new problem: all the IPs definitions (.xci files) used in the Block Design are not available in the project, so it is not synthesizable basically. This problem can be easily solved by importing the IPs definitions from the original project to the new one. \bigskip
+For what concerns this thesis work, a \textit{hack} is necessary to solve those problems. When the Block Design tool is used, internally Vivado creates a single HDL file (VHDL or Verilog, it depends on the settings of the project itself). This HDL file contains the whole description of the Block Design and all the necessary signal connections. This file can be copy-pasted in a completely different project and set as a top-level module. This is the chosen way to overcome the first problem: avoid manually instantiating the MicroBlaze IPs. This creates a new problem: all the IPs definitions (.xci files) used in the Block Design are not available in the new project, so it is not synthesizable basically. This problem can be easily solved by importing the IPs definitions from the original project to the new one. \bigskip
 
 This new project is now ready to be configured and make the MicroBlaze a Reconfigurable Module inside its own reconfigurable partition. Hence, it is possible to follow the steps described in the previous section. The only operation to do \textit{manually} is to substitute the MicroBlaze instance with its own wrapper, that can be generated easily. Only a configuration is possible (in the most basic scenario as this one), thus Vivado generates only a partial bitstream together with the full bitstream as usual.\bigskip
 
-The second problem still remains. From a purely HDL description of the design, Vivado is not able to generate a .xsa description. However, the two projects are pratically the same, so the .xsa file originated from the base project can be extracted (it is basically a .zip file) that contains a .xml description of the peripherals and memories, available CPUs, software drivers and the full bitstream to use to let Vitis program the FPGA. Basically, the bitstream can be substituted with the one generated by the second project (containing the Reconfigurable MicroBlaze) and the game is done.
+The second problem is still there. From a purely HDL description of the design, Vivado is not able to generate a .xsa description. However, the two projects are practically the same, so the .xsa file originated from the base project can be extracted (it is essentially a .zip file) that contains a .xml description of the peripherals and memories, available CPUs, software drivers and the full bitstream to use to let Vitis program the FPGA. Basically, the bitstream can be substituted with the one generated by the second project (containing the Reconfigurable MicroBlaze) and the game is done.
 
 \begin{figure}[H]
 \centering
@@ -829,9 +855,9 @@ The second problem still remains. From a purely HDL description of the design, V
 \end{figure}
 
 \subsection{Xilinx DFX Controller}
-During the previous sections, DFX has been successfully achieved both for simple modules or for more complex one like a full MicroBlaze. However, there is still no way to perform the partial reconfiguration from withing the FPGA itself. \bigskip
+During the previous sections, DFX has been successfully achieved both for simple modules or for more complex one like a full MicroBlaze. However, there is still no way to perform the partial reconfiguration from within the FPGA itself. \bigskip
 
-Luckily, Xilinx provides an IP that is able to manage the partial reconfigurations from within the FPGA and to ease the process to designers and developers. It is the Xilinx Dynamic Function eXchange Controller (DFX Controller) IP core, that provides management functions for self-controlling partially reconfigurable designs. \bigskip
+Luckily, Xilinx provides an IP that is able to manage the partial reconfigurations from within the FPGA and ease the process for designers and developers. It is the Xilinx Dynamic Function eXchange Controller (DFX Controller) IP core, that provides management functions for self-controlling partially reconfigurable designs. \bigskip
 
 \begin{figure}[H]
 \centering
@@ -839,11 +865,11 @@ Luckily, Xilinx provides an IP that is able to manage the partial reconfiguratio
 \caption{Basic scheme of the DFX Controller flow.}
 \end{figure}
 
-As shown in the figure above, the DFX Controller's main job is to fetch the partial bitstream data from a AXI memory peripheral and to send it to the ICAP. This action is performed under certain commands (or triggers) sent from another actor in the system.\bigskip
+As shown in the figure above, the DFX Controller's main job is to fetch the partial bitstream data from an AXI memory peripheral and send it to the ICAP. This action is performed under certain commands (or triggers) sent from another actor in the system.\bigskip
 
-The DFX Controller can be managed both statically via a GUI Wizard (or TCL) during the IP definition or dynamically from a CPU (like the MicroBlaze) or any other master in the system using a dedicated AXI interface. Internally it is organized as a series of Virtual Sockets. It supports up to 32 Virutal Sockets and each Virtual Socket can manage up to 128 Reconfigurable Modules. A Virtual Socket allow to manage all the RMs inside it as a group: it means that reset signals and other signals are shared between all the RMs inside it. \bigskip
+The DFX Controller can be managed both statically via a GUI Wizard (or TCL) during the IP definition or dynamically from a CPU (like the MicroBlaze) or any other master in the system using a dedicated AXI interface. Internally it is organized as a series of Virtual Sockets. It supports up to 32 Virutal Sockets and each Virtual Socket can manage up to 128 Reconfigurable Modules. A Virtual Socket allows to manage all the RMs inside it as a group: it means that reset signals and other signals are shared between all the RMs inside it. \bigskip
 
-For what concerns this thesis work, a Virtual Socket with a single Reconfigurable Module is enough to manage the MicroBlaze reconfiguration. For each Reconfigurable Module, the DFX Controller allows to define the memory address where the partial bitstream can be found and the size in bytes. Moreover it allows to set up the type of reset required. In fact, when a module is reconfigured, it should be resetted to be sure that it starts from a clean state. \bigskip
+For what concerns this thesis work, a Virtual Socket with a single Reconfigurable Module is enough to manage the MicroBlaze reconfiguration. For each Reconfigurable Module, the DFX Controller allows defining the memory address where the partial bitstream can be found and the size in bytes. Moreover, it allows to set up the type of reset required. In fact, when a module is reconfigured, it should be reset to be sure that it starts from a clean state. \bigskip
 
 Last but not least, the DFX Controller allows to trigger a reconfiguration via:
 \begin{itemize}
@@ -855,9 +881,9 @@ Last but not least, the DFX Controller allows to trigger a reconfiguration via:
 It is finally time to put everything together. The scheme to apply is shown if Figure \ref{fig:reconf_scheme}, where the watchdog is a simple IP that can be used to trigger the MicroBlaze reconfiguration when an error occurs. The DFX Controller is used to manage the reconfiguration process. 
 
 \subsection{Partial bitstream storage}
-The first problem to solve is the storage of the partial bitstream. As an example, the generated partial bitstream for the MicroBlaze RM measures 389928 bytes (around 380 KB). A possible storage solution would be the usage of the BRAMs available inside the FPGA and connect them to the AXI bus via the AXI Interconnect using a Local Memory Controller IP. Unluckily, the used FPGA does not have so many BRAMs available (and a few are used as Instruction and Data memory for the MicroBlaze itself), thus this solution is unfeasible. The proposed solution is to use the on-board DDR memory, which offers 512 MB of storage easily accessible via the AXI bus by enabling the Slave interface \textit{S\_AXI\_HPO} in the PS's IP (ZYNQ7 Processing System IP). This interface can be connected to the AXI Interconnect as other slaves, like the peripherals. Once connected, all the masters in the AXI Bus can access the PS's internal address space from \texttt{0x00000000} to \texttt{0x1FFFFFFF}. As shown in Table \ref{tab:zynq_memory_map}, at address \texttt{0x00000000} there is the On-Chip Memory (OCM) where usually the ARM cores executes the code from. To avoid conflicts, only the second half of the DDR is used (so from \texttt{0x10000000} to \texttt{0x1FFFFFFF}). \bigskip
+The first problem to solve is the storage of the partial bitstream. As an example, the generated partial bitstream for the MicroBlaze RM measures 389928 bytes (around 380 KB). A possible storage solution would be the usage of the BRAMs available inside the FPGA and connecting them to the AXI bus via the AXI Interconnect using a Local Memory Controller IP. Unluckily, the used FPGA does not have so many BRAMs available (and a few are used as Instruction and Data memory for the MicroBlaze itself), thus this solution is unfeasible. The proposed solution is to use the on-board DDR memory, which offers 512 MB of storage easily accessible via the AXI bus by enabling the Slave interface \textit{S\_AXI\_HPO} in the PS's IP (ZYNQ7 Processing System IP). This interface can be connected to the AXI Interconnect as other slaves, like the peripherals. Once connected, all the masters in the AXI Bus can access the PS's internal address space from \texttt{0x00000000} to \texttt{0x1FFFFFFF}. As shown in Table \ref{tab:zynq_memory_map}, at address \texttt{0x00000000} there is the On-Chip Memory (OCM) where usually the ARM cores executes the code from. To avoid conflicts, only the second half of the DDR is used (so from \texttt{0x10000000} to \texttt{0x1FFFFFFF}). \bigskip
 
-To make things easier, the partial bitstream is statically inserted in the .elf file executed by one of the two ARM cores. To achieve this, the partial bitstream is first converted to a C array of 32 bit items, via a script explained in Section \ref{sec:script_header}. However, this is not enough because the array would be allocated in the \texttt{.text} section of the .elf file, that is placed at low memory addresses (below the \texttt{0x10000000} target). To solve this, in the linker script generated by Vitis (regarding the ARM0 project), a new memory portion is defined: it points to the second half of the DDR memory. Then, a new section called \texttt{.partialbs} is created. The following is an extract of the linker script:\bigskip
+To make things easier, the partial bitstream is statically inserted in the .elf file executed by one of the two ARM cores. To achieve this, the partial bitstream is first converted to a C array of 32-bit items, via a script explained in Section \ref{sec:script_header}. However, this is not enough because the array would be allocated in the \texttt{.text} section of the .elf file, that is placed at low memory addresses (below the \texttt{0x10000000} target). To solve this, in the linker script generated by Vitis (regarding the ARM0 project), a new memory portion is defined: it points to the second half of the DDR memory. Then, a new section called \texttt{.partialbs} is created. The following is an extract of the linker script:\bigskip
 
 \begin{lstlisting}[style=preformatted]
 /* Define Memories in the system */
@@ -904,7 +930,7 @@ u32 __attribute__((section(".partialbs"))) data[] = {
 \end{lstlisting}
 
 \subsection{How to enable the ICAP port}
-For this work, the ARM core is not only used to load the partial bitstream in memory. As explained previously, the ARM cores holds the full control of the two configuration ports (ICAP and PCAP) for security purposes. Before executing the partial configuration, the ARM core must release the hold on the ICAP and this is done in two consecutive steps:
+For this work, the ARM core is not only used to load the partial bitstream in memory. As explained previously, the ARM cores hold full control of the two configuration ports (ICAP and PCAP) for security purposes. Before executing the partial configuration, the ARM core must release the hold on the ICAP and this is done in two consecutive steps:
 \begin{enumerate}
     \item The ARM core disables the PCAP (because they are mutually exclusive).
     \item The ARM core enables the ICAP.
@@ -933,7 +959,7 @@ int main() {
 % Explain bitstream storage. DDR in this case, protected, blah blah. Linker script. Firmware to disable the PCAP in the ARM core.
 
 \subsection{ICAP instantiation}
-The second last step is to connect the DFX Controller to the ICAP port. For security reasons, it is not directly available to the user. It is a HDL primitive that needs to be manually instantiated in the design so it needs to be manually inserted in the HDL code generated by the Block Design Tool and to be connect to the ICAP interface of the DFX Controller. \bigskip
+The second last step is to connect the DFX Controller to the ICAP port. For security reasons, it is not directly available to the user. It is an HDL primitive that needs to be manually instantiated in the design so it needs to be manually inserted in the HDL code generated by the Block Design Tool and connected to the ICAP interface of the DFX Controller. \bigskip
 
 The ICAP port can be accessed via different blocks, but the most simple is the ICAPE2. It offers different input and outputs port, as shown below:
 
@@ -988,7 +1014,7 @@ The ICAP interface can be use used to monitor (for example via a Integrated Logi
 \end{register}
 \end{center}
 
-The following is the VHDL code for instantiate the ICAP port in a design:
+The following is the VHDL code for instantiating the ICAP port in a design:
 
 \begin{lstlisting}[style=VHDL]
 ICAPE2_inst : ICAPE2 generic map (
@@ -1016,7 +1042,7 @@ An example of the ICAPE2 during the initial phases of the configuration process 
 \subsection{Connection of the Watchdog and the DFX Controller}
 All the actors are now ready to be integrated. In particular, the \textit{timeout} signal of the watchdog should be used as a trigger for the DLX to start the reconfiguration. Moreover, when the DFX finishes the reconfiguration, both the MicroBlaze and the Watchdog must be reset to avoid any unexpected behavior and to restart the watchdog's timer itself (as explained in Section \ref{sec:wd_impl}, the watchdog is designed to remains in the \textit{DOOMED} state until a reset arrives). \bigskip
 
-First, the DFX Controller is configured to allow hardware triggers. This means setting up a signal width of 1 bit for the \texttt{vsm\_VS\_0\_hw\_triggers} signal and to assign the MicroBlaze RM previously configured as the RM to load when the triggers arrives. The problem is that the watchdog outputs a 3-bit wide signal as timeout signal, due to the TMR design. This can be used to fed a final voter to convert a 3-bit wide signal to a 1-bit wide signal. At this point the voter represents a single point of failure, but as explained the probability of its failure is low. However, if its probability is not sufficiently low, it is possible to use a different voter implementation like the following one:
+First, the DFX Controller is configured to allow hardware triggers. This means setting up a signal width of 1 bit for the \texttt{vsm\_VS\_0\_hw\_triggers} signal and to assign the MicroBlaze RM previously configured as the RM to load when the triggers arrive. The problem is that the watchdog outputs a 3-bit wide signal as a timeout signal, due to the TMR design. This can be used to feed a final voter to convert a 3-bit wide signal to a 1-bit wide signal. At this point the voter represents a single point of failure, but as explained the probability of its failure is low. However, if its probability is not sufficiently low, it is possible to use a different voter implementation like the following one:
 
 \begin{figure}[H]
 \centering
@@ -1024,11 +1050,11 @@ First, the DFX Controller is configured to allow hardware triggers. This means s
 \caption{Enhanced majority voter design.}
 \end{figure}
 
-The above scheme \cite{al} is made of a 1-bit OR gate, three 2-bit AND gates and 3-bit OR gate. This design allows to reach a higher Fault Masking Ratio (FMR), specified as the ratio of total number of correct voter output states in the presence of internal and/or external faults, which are masked, divided by the total number of potential internal and/or external fault occurrences. From the definition given, it may be understood that FMR has to be high (ideally 1) to achieve good (absolute) fault tolerance. A normal majority voter has a FMR of $42.86\%$ while the enhanced majority voter has a FMR of $75.00\%$.\bigskip
+The above scheme \cite{al} is made of a 1-bit OR gate, three 2-bit AND gates and a 3-bit OR gate. This design allows reaching a higher Fault Masking Ratio (FMR), specified as the ratio of the total number of correct voter output states in the presence of internal and/or external faults, which are masked, divided by the total number of potential internal and/or external fault occurrences. From the given definition, it may be understood that FMR has to be high (ideally 1) to achieve good (absolute) fault tolerance. A normal majority voter has an FMR of 42.86 \% while the enhanced majority voter has an FMR of 75.00 \%.\bigskip
 
 Secondly, when the DFX Controller ends the reconfiguration process, the signal \texttt{vsm\_VS\_0\_rm\_reset} is asserted for 1 clock cycle, as specified in the RM's configuration. This is conncted to the \texttt{Reset} signal of the MicroBlaze that is active high, feeding an OR gate together with the active-high \texttt{mb\_reset} signal arriving from the \textit{Processor System Reset} IP. In this way, both the DFX Controller and the PSR are able to reset the CPU when required. \bigskip
 
-To reset the watcdog, the reset signal needs to be negated because the Watchdog's reset signal is active low, as other AXI IPs are. Because the Watchdog can be reset both by the DFX Controller and the PSR, as for the MicroBlaze, an NOR gate is fed with the one coming from the DFX Controller and the one coming from the PSR in the active-high form, that is \texttt{peripheral\_reset}.\bigskip
+To reset the watcdog, the reset signal needs to be negated because the Watchdog's reset signal is active low, as other AXI IPs are. Because the Watchdog can be reset both by the DFX Controller and the PSR, as for the MicroBlaze, a NOR gate is fed with the one coming from the DFX Controller and the one coming from the PSR in the active-high form, that is \texttt{peripheral\_reset}.\bigskip
 
 Finally, the DFX Controller's ICAP port is connected to the ICAPE2's instance. The DFX Controller ICAP's \texttt{I} port is connected to the ICAPE2's \texttt{O} port, and the DFX Controller ICAP's \texttt{O} port is connected to the ICAPE2's \texttt{I} port.
 
@@ -1038,9 +1064,9 @@ Finally, the DFX Controller's ICAP port is connected to the ICAPE2's instance. T
 % ICAPE2. DFX Decoupler.
 
 \subsection{DFX Decoupler: what is it?}
-There is one important aspect that was not mentioned in the previous sections. During the Partial Reconfiguration of a partition, unpredictable signal activity can happen between the Reconfigurable Partition and the remaining part of the system. To overcome to this problem, Xilinx provides the Dynamic Function eXchange (DFX) Decoupler IP, for a complete logical isolation capabilities for DFX designs. \bigskip
+There is one important aspect that was not mentioned in the previous sections. During the Partial Reconfiguration of a partition, unpredictable signal activity can happen between the Reconfigurable Partition and the remaining part of the system. To overcome this problem, Xilinx provides the Dynamic Function eXchange (DFX) Decoupler IP, for a complete logical isolation capability for DFX designs. \bigskip
 
-During the reconfiguration process, the DFX Controller assert a decouple signal that remains high for the entire duration of the process. This signal is used decouple the system from the logic under reconfiguration and avoid strange signal activities. For example, can happen that an AXI write request signal is asserted wrongly, leading to a modification of a random memory location with an unexpected value. By decoupling the AXI interface from the rest of the system, this can be avoided. 
+During the reconfiguration process, the DFX Controller asserts a decouple signal that remains high for the entire duration of the process. This signal is used to decouple the system from the logic under reconfiguration and avoid strange signal activities. For example, can happen that an AXI write request signal is asserted wrongly, leading to a modification of a random memory location with an unexpected value. By decoupling the AXI interface from the rest of the system, this can be avoided. 
 
 \begin{figure}[H]
 \centering
@@ -1048,7 +1074,7 @@ During the reconfiguration process, the DFX Controller assert a decouple signal 
 \caption{DFX Decoupler scheme.}
 \end{figure}
 
-In a complex system, like the case under study, there are a lot of signals that need to be decoupled. Luckily, the DFX Decoupler IP's Configuration Wizard offers the ability to create decoupler interfaces for each standard interfaces like AXI or LMB. For what concerns a simple MicroBlaze architecture, the following is the adopted solution:
+In a complex system, like the case under study, there are a lot of signals that need to be decoupled. Luckily, the DFX Decoupler IP's Configuration Wizard offers the ability to create decoupler interfaces for each standard interconnection like AXI or LMB. For what concerns a simple MicroBlaze architecture, the following is the adopted solution:
 
 \begin{figure}[H]
 \centering
@@ -1058,7 +1084,7 @@ In a complex system, like the case under study, there are a lot of signals that 
 
 \section{From a manual workflow to a fully automated one}
 
-The presented workflow allows to enable partial reconfiguration of a MicroBlaze, even on a old version of Vivado. The workflow is presented in Figure \ref{fig:mystic_flow} and is made of 5 major steps, summarized as follows:
+The presented workflow allows enabling partial reconfiguration of a MicroBlaze, even on an old version of Vivado. The workflow is presented in Figure \ref{fig:mystic_flow} and is made of 5 major steps, summarized as follows:
 
 \begin{enumerate}
     \item Starting from a working project based on Block Design, with a MicroBlaze core, a DFX Controller and a Watchdog, the HDL description from the BD is extracted.
@@ -1068,11 +1094,11 @@ The presented workflow allows to enable partial reconfiguration of a MicroBlaze,
     \item From the base project, the XSA is generated, files within it are extracted and the bitstream is substituted with the one generated in the previous step. Then, all the files are inserted in a new .xsa archive to generate the new .xsa.
 \end{enumerate}
 
-Thus, the workflow is made of five simple steps that require a certain amount of time to be completed. The desginer needs to execute all of them everytime he wants to change something in the original project. Hence, the workflow is not suitable for a continuous integration process and some sort of automation is required. \bigskip
+Thus, the workflow is made of five simple steps that require a certain amount of time to be completed. The designer needs to execute all of them every time she/he wants to change something in the original project. Hence, the workflow is not suitable for a continuous integration process and some sort of automation is required. \bigskip
 
 \subsection{The automatation script}
 
-Luckily, all the flow can be almost easily scripted. In the following, all the developed script is presented by dividing it into different subparts and each subpart is described by a dedicated pseudo-code algorithm. The overall flow is divided into five main blocks:
+Luckily, all the flow can be almost easily scripted. In the following, the developed script is presented by dividing it into different subparts and each subpart is described by a dedicated pseudo-code algorithm. The overall flow is divided into five main blocks:
 
 \begin{figure}[H]
 \centering
@@ -1087,32 +1113,32 @@ The pre-processing block is the first block to be executed in the automatic work
     \item Given the project path, the project name \texttt{\$pn} is extracted.
     \item The script checks for the existence of the \texttt{\$pn.gen} folder. This is a required folder that contains the generated HDL description of the Block Design. The script recursively checks for a path matching \texttt{*/bd/*/synth/\$dn.vhd}. If the path is found, means that the script knows the block design name \texttt{\$dn} and found its VHDL description file.
     \item The script searches any .xdc file that may contains the PBLOCK definition in the \texttt{\$pn.srcs} folder. However, the designer can supply its own .xdc file. The PBLOCK is not checked at this time.
-    \item The script searches for the .xsa file. If not found, the scripts terminates asking to the user to create it from withing Vivado before running the script.
+    \item The script searches for the .xsa file. If not found, the script terminates asking the user to create it from within Vivado before running the script.
 \end{enumerate}
 
 \subsubsection{VHDL Manipulation block}
 If the Pre-processing block runs successfully, the HDL Manipulation block can be executed. This is the most compilcated one. It takes as input the previous VHDL description file \texttt{\$dn.vhd} and a secondary VHDL file named \texttt{adding.vhd} that contains partial definitions of some hardware that the designer wants to add to the system outside the Block Design, like for example the ICAPE2. 
 
 \begin{enumerate}
-    \item The whole \texttt{\$dn.vhd} file is parsed. Each entity is extracted and stored separately in a list of entities. Each entity is made of libraries, entity definition and an architecture. The same is done for the \texttt{adding.vhd} file.
-    \item Each entity is analyzed, looking for a MicroBlaze instance in its architecture. If found, the entity is marked as the top level entity. The user can decide to indicate another entity as top level one, if the found entity is not the one he wants to use or if it is wrong. Each of the next steps is performed on the top level entity.
+    \item The whole \texttt{\$dn.vhd} file is parsed. Each entity is extracted and stored separately in a list of entities. Each entity is made of libraries, entity definition and architecture content. The same is done for the \texttt{adding.vhd} file.
+    \item Each entity is analyzed, looking for a MicroBlaze instance in its architecture. If found, the entity is marked as the top-level entity. The user can decide to indicate another entity as top level one, if the found entity is not the one he wants to use or if it is wrong. Each of the next steps is performed on the top-level entity.
     \item The script looks for the MicroBlaze's component declaration. 
     \item The script looks for the MicroBlaze instance, given the previous component name.
     \item The script creates a new entity, named \texttt{ublaze\_wrapper} and:
         \begin{enumerate}
         \item Extracts the ports declaration from the MicroBlaze component and adds them to the new entity ports definition. The entity part of the whole wrapper is created.
-        \item The architecture is defined. First the original MicroBlaze component is appended as it is, then it is instantiated and each port is connected to the ports of the entity wrapper under creation.
+        \item The architecture is defined. First, the original MicroBlaze component is appended as it is, then it is instantiated and each port is connected to the ports of the entity wrapper under creation.
         \item The newly created entity is saved in a new file \texttt{ublaze\_wrapper.vhd}.
         \end{enumerate}
-    \item The original microblaze component is replaced by the new wrapper component. The instance is left as it is, only the instance name is changed and referred to the new wrapper component.
-    \item Some synthesizer attribute referred to the older MicroBlaze instance are now referred to the new wrapper instance.
+    \item The original microblaze component is replaced by the new wrapper component. The instance is left as it is, only the instance name is changed, referencing the new wrapper component.
+    \item Some synthesizer attributes referenced to the older MicroBlaze instance are now referenced to the new wrapper instance.
     \item If in the base project, the DLX Controller's ICAP interface is made external through a port, Vivado automatically creates some attributes and entity ports to let them connect outside. They are removed.
     \item The definitions from the \texttt{adding.vhd} file are now merged. For each component in the architecture defined in the \texttt{adding.vhd} file, the script adds both the component and the relative instance to the top entity. It looks for the ICAPE2 instance too and adds it to the top entity (it is trated as special, becuase in this case there is no component declaration as other components).
     \item All the entities are appended in a new file \texttt{top.vhd}.
 \end{enumerate}
 
 \subsubsection{Post-manipulation block}
-This is the third last block to be executed. At this point in time, if everything succeded, the script knows the top level name, the MicroBlaze instance name and other informations about the design. It proceeds with the following steps:
+This is the third last block to be executed. At this point in time, if everything succeeded, the script knows the top-level name, the MicroBlaze instance name and any other useful information about the design. It proceeds with the following steps:
 
 \begin{enumerate}
     \item The script knows the MicroBlaze wrapper instance name and now looks for the PBLOCK where it is assigned in the previous found .xdc file. If this is not found, the script terminates with an error.
@@ -1120,18 +1146,18 @@ This is the third last block to be executed. At this point in time, if everythin
 \end{enumerate}
 
 \subsubsection{Implementation block}
-Now the scripts created all the files and informations to create a new project and implement it. Vivado is launched in command-line mode and a TCL script is sourced to perform the following steps:
+Now the scripts created all the files and information to create a new project and implement it. Vivado is launched in command-line mode and a TCL script is sourced to perform the following steps:
 
 \begin{enumerate}
     \item The script creates a new project and VHDL is set as the active language.
     \item Imports the \texttt{top.vhd}, \texttt{ublaze\_wrapper.vhd} and the .xdc file into the new project.
-    \item Takes the .xci list previously prepared and add import each file into the new project. They are references to the original files, not a copy.
-    \item Enables the project as a DFX-based project. Creates a definition partition and a reconfigurable module. The wrapper is added to the partition. The single reconfigurable configuration is created.
+    \item Takes the .xci list previously prepared and adds each file to the new project. They are references to the original files, not a copy.
+    \item Enables the project as a DFX-based project. Creates a definition partition and a reconfigurable module. The wrapper is added to the partition. A single reconfigurable configuration is created.
     \item The project is synthesized and implemented. The bitstreams are generated both in .bit and .bin formats.
 \end{enumerate}
 
 \subsubsection{Post-implementation block}
-This is the last block to be executed. It takes as input the generated full bitstream and the previously found .xsa file. The scripts unzip the .xsa file, substitutes the old bitstream with the new one and re-zip the .xsa file.
+This is the last block to be executed. It takes as input the generated full bitstream and the previously found .xsa file. The scripts unzip the .xsa file, substitute the old bitstream with the new one and re-zip the .xsa file.
 
 
 \subsection{Script for partial bitstream to C header generation}
@@ -1139,11 +1165,11 @@ This is the last block to be executed. It takes as input the generated full bits
 
 Because of the choice to store the partial bitstream in memory by using the same .elf file executed by the ARM core to configure the PS, a script is needed to generate the C header file that contains the partial bitstream. \bigskip
 
-An error to avoid is the usage of the bitstream in the .bit format instead of the .bin one to perform a partial reconfiguration via the ICAP interface. As explained in Section \ref{sec:bitstream_struct}, the difference between the two is that the .bit format contains an header while the .bin format does not. Hence, the header can have a different length, depending for example on the design name choosen by the user, thus can create an offset inside the bitstream. As an example, it can shift the SYNC WORD by 8 bits. The ICAP interface is not able to evaluate the header nor is capable of evaluating a shifted bitstream. Hence, the ICAP remains in the \textit{NOSYNC} state or it goes in the \textit{CFGERR} state. The .bit file is only useful to Vivado and XSCT becuase of the header, otherwise it is only a waste of memory and must be not used outside Vivado tools.\bigskip
+An error to avoid is the usage of the bitstream in the .bit format instead of the .bin one to perform a partial reconfiguration via the ICAP interface. As explained in Section \ref{sec:bitstream_struct}, the difference between the two is that the .bit format contains a header while the .bin format does not. Hence, the header can have a different length, depending for example on the design name chosen by the user, thus can create an offset inside the bitstream. As an example, it can shift the SYNC WORD by 8 bits. The ICAP interface is not able to evaluate the header nor is capable of evaluating a shifted bitstream. Hence, the ICAP remains in the \textit{NOSYNC} state or it goes in the \textit{CFGERR} state. The .bit file is only useful to Vivado and XSCT because of the header, otherwise, it is only a waste of memory and must be not used outside Vivado tools.\bigskip
 
-The script's job is to prepare a \texttt{u32} C array and fill it with the content of the partial .bin bitstream. The script allows to create an array of a specific size. It accomplish to this by adding some \texttt{NOP} instructions to the array at the end if the size of the bistream is less than the required one. This can be useful if the DFX Controller is configured with a specific size for the partial bitstream to be loaded but at the end the generated partial bitstream is smaller then the configured one. In this way, is possible to avoid to change the DFX Controller's settings and to perform the implementation again. \bigskip
+The script's job is to prepare a \texttt{u32} C array and fill it with the content of the partial .bin bitstream. The script allows the creation of an array with a specific size. It accomplishes this by adding some \texttt{NOP} instructions to the array at the end, only if the size of the bitstream is less than the required one. This can be useful if the DFX Controller is configured with a specific size for the partial bitstream to be loaded, and the designer discovers only at the end that the generated partial bitstream is smaller than the configured one. In this way, is possible to avoid changing the DFX Controller's settings and to perform the implementation again. \bigskip
 
-Moreover, the script allows to write the content in little-endian or big-endian format. This is useful because if the bitstream is saved in memory with the wrong format and the ICAP reads it, it does not recognize the SYNC WORD hence does not do the partial reconfiguration.\bigskip
+Moreover, the script allows writing the content in little-endian or big-endian format. This is useful because if the bitstream is saved in memory with the wrong format and the ICAP reads it, it does not recognize the SYNC WORD and hence does not performs the partial reconfiguration.\bigskip
 
 The following is an example of the script's usage:
 \begin{lstlisting}[style=preformatted]
