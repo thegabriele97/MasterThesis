@@ -195,7 +195,7 @@ The hex dump of a .bit file header looks like the following:
 00000090:  ffffffff ffffffff  aa995566 20000000 |..........Uf ...|
 \end{lstlisting}
 
-There are several fields in the header, each one is indicapted by a letter (\textit{a}, \textit{b}, \textit{c}, \textit{d}, \textit{e}). The first one containts the design name \textit{design\_1}, the UserID and the Vivado version used to generate the bitsteam. The second one contains the FPGA part on which the bitstream has been generated for \textit{7z020clg400}. The \textit{c} and \textit{d} are the date and time, respectively. The \textit{e} field contains some additional information. Each letter is followed by the length of the field (including a trailing 0x00). After the header, there are few bytes that are used only to add some padding (\texttt{0xffffffff}) to the bitstream. 
+There are several fields in the header, each one is indicapted by a letter (\textit{a}, \textit{b}, \textit{c}, \textit{d}, \textit{e}). The first one containts the design name \textit{design\_1}, the UserID and the Vivado version used to generate the bitsteam. The second one contains the FPGA part on which the bitstream has been generated for (i.e. \textit{7z020clg400}). The \textit{c} and \textit{d} fields are the date and time, respectively. The \textit{e} field contains some additional information. Each letter is followed by the length of the field (including a trailing 0x00). After the header, there are few bytes that are used only to add some padding (\texttt{0xffffffff}) to the bitstream. 
 
 \subsubsection{Raw Bitstream}
 \label{sec:raw_bitstream}
