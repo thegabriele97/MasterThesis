@@ -102,7 +102,7 @@ close $outfile1
 \end{lstlisting}
 
 \subsection{Watchdog Inhibition}
-In some cases may be useful to inhibit the watchdog. This allows to detach the timeout signal from the DFX Controller, thus the reconfiguration is not triggered. This is useful for example to debug the firmware. In this case, the firmware stops kicking the watchdog during the interruption of the software and thus the MicroBlaze is automatically reconfigured and restarted. To allows the inhibition by toggling a physical switch on the board, the following is the used hardware scheme:
+In some cases may be useful to inhibit the watchdog. This allows to detach the timeout signal from the DFX Controller, thus the reconfiguration is not triggered. This is useful for example to debug the firmware. In this case, the firmware stops kicking the watchdog during the interruption of the software and thus the MicroBlaze is automatically reconfigured and restarted. To allows the inhibition by toggling a physical switch on the board, the following hardware scheme is adopted:
 
 \begin{figure}[H]
 \centering
@@ -188,7 +188,7 @@ By improving the quality of the self-test routines, the fault tolerance system m
 while (a != 0) {
   /* module operation test */
   pmod = a % 10;
-  if ((a / 10) * 10 + pmod != a || a - (a/10)*10 != pmod) 
+  if ((a/10)*10 + pmod != a || a - (a/10)*10 != pmod) 
     while(1); // HALT. Triggers the watchdog.
   
   str[i--] = pmod + '0';
@@ -203,7 +203,7 @@ In addition, the firmware checks that each character sent over the UART is the s
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\linewidth]{images/chapter5/sch.pdf}
+\includegraphics[width=0.85\linewidth]{images/chapter5/sch.pdf}
 \caption{UART loopback schematic.}
 \end{figure}
 
@@ -211,18 +211,20 @@ The firmware implements a custom \textit{print} routine that checks the received
 
 \begin{lstlisting}[style=C]
 void print(char *buf) {
-  int i; char *pbuf = buf; char ch, tst;
+  int i; char *pbuf = buf; char ch, tst; u32 *pt;
 
   for (i = 0; buf[i]; i++); // length computation
   while(*pbuf) {
     XUartLite_Send(phRef, (u8 *)pbuf, 1); // Send the character
-    while(!XUartLite_Recv(phRef, (u8 *)&ch, sizeof ch)); // Receive the character
+
+    // Receive the character
+    while(!XUartLite_Recv(phRef, (u8 *)&ch, sizeof ch)); 
 
     /* Tests single byte memory access vs 32 bit memory access */
     pt = (u32 *)((u32)pbuf & 0xfffffffc); /* 32b aligned addr */
     tst = ((*pt >> (((pbuf - (char *)pt)) << 3)) & 0xff); 
     if (ch != *pbuf || ch != tst) while(1); // HALT.
-    pbuf++; i++;
+    pbuf++; i--;
   }
 
   if (i || *pbuf) while(1); // just to be sure
